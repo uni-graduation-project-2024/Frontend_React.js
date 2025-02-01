@@ -1,0 +1,51 @@
+/* Home.css */
+
+/* Full Page Layout */
+.home-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #1a202c; /* Dark Gray */
+    color: white;
+  }
+  
+  /* Main Content Styling */
+  .home-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background-color: #1a202c;
+  }
+  
+  /* Centered Text */
+  .home-text {
+    text-align: center;
+  }
+  
+  /* Title */
+  .home-title {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  /* Login Button */
+  .home-login-button {
+    background-color: #4299e1; /* Blue-500 */
+    padding: 12px 24px;
+    font-size: 1.125rem; /* text-lg */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .home-login-button:hover {
+    background-color: #3182ce; /* Darker Blue */
+  }
+  

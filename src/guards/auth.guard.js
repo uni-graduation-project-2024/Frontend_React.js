@@ -1,16 +1,17 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { getAuthToken } from "../services/auth";
+import { Navigate } from "react-router-dom";
 
-export const AuthGuard = ({ roles }) => {
-  const { token, user } = getAuthToken();
+const AuthGuard = ({ roles, children }) => {
+  const user = JSON.parse(localStorage.getItem("user")); // Or use context/session for auth state
 
-  if (!token) {
-    return <Navigate to="/login" />;
+  if (!user) {
+    return <Navigate to="/login" replace />;
   }
 
-  if (roles.length > 0 && !roles.includes(user.role)) {
-    return <Navigate to={`/${user.role.toLowerCase()}-dashboard`} />;
+  if (roles && !roles.includes(user.role)) {
+    return <Navigate to="/" replace />;
   }
 
-  return <Outlet />;
+  return children;
 };
+
+export default AuthGuard;

@@ -1,0 +1,50 @@
+
+/* Ensure that the sidebar sticks to the left and has full height */
+.sidebar {
+    background-color: #2d2d2d; /* Dark background */
+    color: white;
+    width: 250px; /* Sidebar width */
+    height: 100vh; /* Full viewport height */
+    position: fixed; /* Make it fixed to the left */
+    left: 0;
+    top: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align the items from the top */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional box shadow */
+  }
+  
+  /* Logo styling */
+  .sidebar .logo {
+    margin-bottom: 30px;
+  }
+  
+  .sidebar h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Menu items */
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar-item:hover {
+    background-color: #3c3c3c; /* Darken on hover */
+    color: #1e90ff; /* Change text color on hover */
+  }
+  
+  /* To create a content area next to sidebar */
+  .main-content {
+    margin-left: 250px; /* Push the content to the right, equal to sidebar width */
+    padding: 20px;
+  }
+  

@@ -1,0 +1,92 @@
+/* Library.css */
+
+/* Background and Page Styling */
+.library-container {
+    min-height: 100vh;
+    background-color: #1a202c; /* Dark gray */
+    color: white;
+    padding: 24px;
+  }
+  
+  /* Header Styling */
+  .library-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .library-title {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: bold;
+  }
+  
+  /* Button Group */
+  .library-buttons {
+    display: flex;
+    gap: 16px;
+  }
+  
+  /* General Button Styling */
+  .library-button {
+    background-color: #4299e1; /* Blue-500 */
+    padding: 8px 16px;
+    border-radius: 6px;
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .library-button:hover {
+    background-color: #3182ce; /* Darker Blue */
+  }
+  
+  .library-button-gray {
+    background-color: #4a5568; /* Gray-700 */
+  }
+  
+  .library-button-gray:hover {
+    background-color: #2d3748; /* Darker Gray */
+  }
+  
+  /* Create Menu */
+  .library-create-menu {
+    background-color: #2d3748; /* Gray-800 */
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  
+  /* Folder List */
+  .library-folders {
+    margin-top: 24px;
+  }
+  
+  .library-folders-title {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+  
+  /* Folder Grid */
+  .library-folder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  
+  /* Folder Item */
+  .library-folder {
+    background-color: #4a5568; /* Gray-700 */
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .library-folder:hover {
+    background-color: #2d3748; /* Darker Gray */
+  }
+  

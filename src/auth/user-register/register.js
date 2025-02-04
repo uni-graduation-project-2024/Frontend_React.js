@@ -64,7 +64,7 @@ export const Register = () => {
     }
 
     axios
-      .post("https://localhost:7163/Auth/registeruser", {
+      .post("https://localhost:7078/api/Auth/registeruser", {
         email: form.current.email.value,
         password: form.current.password.value,
         username: form.current.username.value,

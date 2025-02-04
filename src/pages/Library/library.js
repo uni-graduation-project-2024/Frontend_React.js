@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaPlus, FaFolderOpen, FaUpload } from 'react-icons/fa';
+import Sidebar from '../../sidebar';
 import axios from 'axios';
 import './library.css';
 
@@ -42,6 +43,7 @@ const Library = () => {
 
   return (
     <div className="library-container">
+      <Sidebar />
       <div className="library-header">
         <h1 className="library-title">My Library</h1>
         <div className="library-buttons">

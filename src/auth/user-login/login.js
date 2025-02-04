@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import axios from 'axios';
 import { FaRegUserCircle, FaKey, FaUserPlus, FaEye, FaEyeSlash } from "react-icons/fa"; 
 import "./login.css";
+import {setAuthToken} from "../../services/auth"
 
 export const Login = () => {
   const navigate = useNavigate(); 
@@ -46,9 +47,11 @@ export const Login = () => {
     
     setLogin({ ...login, loading: true });
     axios
-      .post("https://localhost:7163/Auth/login", formData)
+      .post("https://localhost:7078/api/Auth/login", formData)
       .then((data) => {
         setLogin({ ...login, loading: false });
+        setAuthToken(data.data.token);
+        navigate("/home");
         // Handle successful login (e.g., navigate based on user role)
       })
       .catch((errors) => {

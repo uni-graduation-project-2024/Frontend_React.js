@@ -3,10 +3,12 @@ import { useState } from "react";
 import axios from "axios";
 import { FaRegUserCircle, FaKey, FaEye, FaEyeSlash } from "react-icons/fa";
 import "./login.css";
+import {setAuthToken, getAuthToken} from "../../../services/auth";
+import {jwtDecode} from "jwt-decode";
 
 export const AdminLogin = () => {
   const navigate = useNavigate();
-
+  const {user} = getAuthToken();
   const [login, setLogin] = useState({
     loading: false,
     err: null,
@@ -38,12 +40,13 @@ export const AdminLogin = () => {
     setLogin({ ...login, loading: true });
 
     axios
-      .post("https://localhost:7163/Auth/adminlogin", { email, password })
+      .post("https://localhost:7078/api/Admin/login", { email, password })
       .then((data) => {
         setLogin({ ...login, loading: false });
         // Assuming backend sends user data or token
-        const userData = data.data;
-        if (userData.role === "admin") {
+        setAuthToken(data.data.token);
+        const user1 = jwtDecode(localStorage.getItem("token"));
+        if (user1.role === "Admin") {
           navigate("/admin/dashboard"); // Redirect to admin dashboard
         } else {
           setLogin({

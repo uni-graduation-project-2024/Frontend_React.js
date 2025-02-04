@@ -15,7 +15,7 @@ export const ShowUser = () => {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7163/api/Admin/GetUserById/${id}`, {
+      .get(`https://localhost:7078/api/Admin/GetUserById/${id}`, {
         // headers: {
         //   Authorization: `Bearer ${token}`,
         // },

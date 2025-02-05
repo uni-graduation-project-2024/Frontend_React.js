@@ -54,7 +54,7 @@ import Login from "./auth/user-login/login";
 import Register from "./auth/user-register/register";
 import AdminLogin from "./pages/admin/login/login";
 import { ShowUser } from "./pages/admin/show-users/show-user";
-import { UpdateUser } from "./pages/admin/update-users/update-user";
+import { DeleteUser } from "./pages/admin/update-users/delete-user";
 import AuthGuard from "./guards/auth.guard";
 import ChangePassword from "./auth/changePassword";
 import Library from "./pages/Library/library";
@@ -74,8 +74,8 @@ function App() {
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/create-folder" element={<CreateFolder />} />
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/show-user/:id" element={<ShowUser />} />
+          <Route path="/admin/delete-user/:id" element={<DeleteUser />} />
+
 
 
           <Route path="/" element={<Home />} />
@@ -91,7 +91,7 @@ function App() {
           <Route element={<AuthGuard roles={["Admin"]} />}>
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/show-user/:id" element={<ShowUser />} />
-            <Route path="/admin/update-user/:id" element={<UpdateUser />} />
+            <Route path="/admin/delete-user/:id" element={<DeleteUser />} />
           </Route>
 
           {/* Unauthorized Route */}

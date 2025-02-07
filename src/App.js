@@ -56,7 +56,7 @@ import AdminLogin from "./pages/admin/login/login";
 import { ShowUser } from "./pages/admin/show-users/show-user";
 import { UpdateUser } from "./pages/admin/update-users/update-user";
 import AuthGuard from "./guards/auth.guard";
-import ChangePassword from "./auth/changePassword";
+import ChangePassword from "./auth/user-changePassword/changePassword";
 import Library from "./pages/Library/library";
 import Home from "./pages/Home/home";
 import CreateFolder from "./pages/Library/CreateFolder";

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { FaKey, FaEye, FaEyeSlash } from "react-icons/fa";
 import "./changePassword.css";
+import {getAuthToken} from "../../services/auth"
 
 export const ChangePassword = () => {
   const [formState, setFormState] = useState({
@@ -39,9 +40,11 @@ export const ChangePassword = () => {
     if (!validateForm()) return;
 
     setFormState({ ...formState, loading: true });
-
+    const {user} = getAuthToken();
+    const userId = user.nameid;
     axios
-      .post("https://localhost:7163/Auth/changePassword", {
+      .post("https://localhost:7078/api/User/change-password", {
+        userId,
         oldPassword,
         newPassword,
       })

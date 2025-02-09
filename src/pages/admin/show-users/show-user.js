@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { getAuthToken } from "../../../services/auth";
 import { useParams } from "react-router-dom";
-export const ShowUser = () => {
+
+const ShowUser = () => {
   const { id } = useParams();
   const { token, user } = getAuthToken();
 
@@ -96,3 +97,5 @@ export const ShowUser = () => {
     </>
   );
 };
+
+export default ShowUser;

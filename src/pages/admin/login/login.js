@@ -1,31 +1,32 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { FaRegUserCircle, FaKey, FaEye, FaEyeSlash } from "react-icons/fa";
 import "./login.css";
 import {setAuthToken, getAuthToken} from "../../../services/auth";
-import {jwtDecode} from "jwt-decode";
+import linkhost from "../../..";
 
 export const AdminLogin = () => {
   const navigate = useNavigate();
-  const {user} = getAuthToken();
+  
   const [login, setLogin] = useState({
     loading: false,
     err: null,
   });
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const email = useRef('');
+  const password = useRef('');
+
   const [formErrors, setFormErrors] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  
 
   const validateForm = () => {
     let errors = "";
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!email || !password) {
+    if (!email.current || !password.current) {
       errors = "Both email and password are required.";
-    } else if (!emailPattern.test(email)) {
+    } else if (!emailPattern.test(email.current)) {
       errors = "Invalid email format.";
     }
 
@@ -40,13 +41,16 @@ export const AdminLogin = () => {
     setLogin({ ...login, loading: true });
 
     axios
-      .post("https://localhost:7078/api/Admin/login", { email, password })
+      .post(linkhost + "/api/Admin/login", {
+        email: email.current,
+        password: password.current
+         })
       .then((data) => {
         setLogin({ ...login, loading: false });
         // Assuming backend sends user data or token
         setAuthToken(data.data.token);
-        const user1 = jwtDecode(localStorage.getItem("token"));
-        if (user1.role === "Admin") {
+        const {user} = getAuthToken();
+        if (user.role === "Admin") {
           navigate("/admin/dashboard"); // Redirect to admin dashboard
         } else {
           setLogin({
@@ -101,14 +105,17 @@ export const AdminLogin = () => {
     );
   };
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
 
   const LoginForm = ({ onSubmit }) => {
+
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const togglePasswordVisibility = () => {
+      setPasswordVisible(!passwordVisible);
+    };
+    
     return (
-      <div className="overlay">
-        <form onSubmit={onSubmit}>
+      <div className="overlay body">
+        <form onSubmit={onSubmit} className="questionGeneration">
           <div className="f6">
             <header>
               <h2>Admin Login</h2>
@@ -123,8 +130,7 @@ export const AdminLogin = () => {
                   className="form-input"
                   type="email"
                   placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => (email.current = e.target.value)}
                   required
                 />
               </div>
@@ -137,8 +143,7 @@ export const AdminLogin = () => {
                     className="form-input"
                     type={passwordVisible ? "text" : "password"}
                     placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => (password.current = e.target.value)}
                     required
                   />
                   <span

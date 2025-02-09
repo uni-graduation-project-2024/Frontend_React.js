@@ -5,7 +5,7 @@ import { getAuthToken } from "../../../services/auth";
 import { useParams, useNavigate } from "react-router-dom";
 import "./delete-user.css";
 
-export const DeleteUser = () => {
+const DeleteUser = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { token } = getAuthToken();
@@ -68,3 +68,5 @@ export const DeleteUser = () => {
     </div>
   );
 };
+
+export default DeleteUser;

@@ -1,6 +1,7 @@
 // Sidebar.js
 import React from 'react';
 import { FaHome, FaBook } from 'react-icons/fa';
+import { RiAiGenerate, RiLockPasswordFill } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import './sidebar.css'; 
 
@@ -17,6 +18,12 @@ const Sidebar = () => {
         </Link>
         <Link to="/library" className="sidebar-item flex items-center text-lg hover:text-blue-500">
           <FaBook className="mr-2" /> My Library
+        </Link>
+        <Link to="/generate-questions" className="sidebar-item flex items-center text-lg hover:text-blue-500">
+          <RiAiGenerate className="mr-2" /> Generate Questions
+        </Link>
+        <Link to="/change-password" className="sidebar-item flex items-center text-lg hover:text-blue-500">
+          <RiLockPasswordFill className="mr-2" /> Change password
         </Link>
       </div>
     </div>

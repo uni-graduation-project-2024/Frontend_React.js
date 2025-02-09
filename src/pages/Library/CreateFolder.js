@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './CreateFolder.css'; 
+import './CreateFolder.css';
+import linkhost from "../../" 
+import { getAuthToken } from '../../services/auth';
 
 const CreateFolder = () => {
   const [folderName, setFolderName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const {user} = getAuthToken();
 
   const handleFolderSubmit = async () => {
     if (!folderName.trim()) return;
     setIsSubmitting(true);
-
-    const newFolder = { name: folderName };
+    
+    const newFolder = { subjectName: folderName };
 
     try {
-      const response = await axios.post('https://localhost:7163/api/folders', newFolder);
+      const response = await axios.post(linkhost +`/api/Subject/${user.nameid}`, newFolder);
 
       if (response.status === 201 || response.status === 200) {
         console.log('Folder created successfully:', response.data);

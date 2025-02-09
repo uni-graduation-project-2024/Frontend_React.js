@@ -47,4 +47,8 @@
     margin-left: 250px; /* Push the content to the right, equal to sidebar width */
     padding: 20px;
   }
+
+  .mr-2 {
+    margin-right: 10px;
+  }
   

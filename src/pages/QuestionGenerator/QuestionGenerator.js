@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './QuestionGenerator.css'; 
+import Sidebar from "../../sidebar";
 
 import axios from "axios";
 
@@ -75,7 +76,8 @@ const QuestionGenerator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4 body">
+      <Sidebar />
       <form
         className="bg-gray-800 shadow-lg rounded-lg p-6 w-full max-w-md questionGeneration"
         onSubmit={handleSubmit}

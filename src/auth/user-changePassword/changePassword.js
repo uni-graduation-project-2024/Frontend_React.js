@@ -3,6 +3,8 @@ import axios from "axios";
 import { FaKey, FaEye, FaEyeSlash } from "react-icons/fa";
 import "./changePassword.css";
 import {getAuthToken} from "../../services/auth"
+import Sidebar from "../../sidebar";
+import linkHost from "../../"
 
 export const ChangePassword = () => {
   const [formState, setFormState] = useState({
@@ -42,8 +44,9 @@ export const ChangePassword = () => {
     setFormState({ ...formState, loading: true });
     const {user} = getAuthToken();
     const userId = user.nameid;
+    const post = linkHost + ((user.role === "Admin")? "/api/Admin/change-password" : "/api/User/change-password");
     axios
-      .post("https://localhost:7078/api/User/change-password", {
+      .post(post, {
         userId,
         oldPassword,
         newPassword,
@@ -107,8 +110,9 @@ export const ChangePassword = () => {
       {formState.loading ? (
         loadingSpinner()
       ) : (
-        <div className="overlay">
-          <form onSubmit={submit}>
+        <div className="overlay body">
+          <Sidebar />
+          <form onSubmit={submit} className="questionGeneration">
             <div className="f6">
               <header>
                 <h2>Change Password</h2>

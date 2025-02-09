@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { getAuthToken } from "../../services/auth";
 
-export const Dashboard = () => {
+const Dashboard = () => {
   const { token } = getAuthToken();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,3 +69,5 @@ export const Dashboard = () => {
     </div>
   );
 };
+
+export default Dashboard;

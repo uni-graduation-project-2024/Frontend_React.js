@@ -4,6 +4,8 @@ import { FaPlus, FaFolderOpen, FaUpload } from 'react-icons/fa';
 import Sidebar from '../../sidebar';
 import axios from 'axios';
 import './library.css';
+import linkhost from '../..';
+import { getAuthToken } from '../../services/auth';
 
 const Library = () => {
   const navigate = useNavigate();
@@ -13,10 +15,11 @@ const Library = () => {
 
   const queryParams = new URLSearchParams(location.search);
   const newFolder = queryParams.get('newFolder');
+  const {user} = getAuthToken();
 
   const fetchFolders = async () => {
     try {
-      const response = await axios.get('https://localhost:7163/api/folders');
+      const response = await axios.get(linkhost +`/api/Subject/all/${user.nameid}`);
       setFolders(response.data);
     } catch (error) {
       console.error('Error fetching folders:', error);
@@ -42,8 +45,9 @@ const Library = () => {
   };
 
   return (
+    <>
+    <Sidebar />
     <div className="library-container">
-      <Sidebar />
       <div className="library-header">
         <h1 className="library-title">My Library</h1>
         <div className="library-buttons">
@@ -75,13 +79,14 @@ const Library = () => {
           ) : (
             folders.map((folder, index) => (
               <div key={index} className="library-folder">
-                {folder.name}
+                {folder.subjectName}
               </div>
             ))
           )}
         </div>
       </div>
     </div>
+    </>
   );
 };
 

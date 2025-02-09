@@ -10,12 +10,12 @@ const Home = () => {
   const {user} = getAuthToken();
 
   const handleLoginClick = () => {
-    navigate("/login"); 
+    navigate("/loginregister"); 
   };
 
   const handleLogOutClick = () => {
     removeAuthToken();
-    navigate("/login"); 
+    navigate("/loginregister"); 
   };
 
   return (

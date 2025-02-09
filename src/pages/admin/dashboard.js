@@ -13,7 +13,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7078/api/Admin/GetAllUsers", {
+      .get("https://localhost:7078/api/Admin/view-users", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

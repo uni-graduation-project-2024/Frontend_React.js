@@ -77,7 +77,7 @@ const QuestionGenerator = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
       <form
-        className="bg-gray-800 shadow-lg rounded-lg p-6 w-full max-w-md"
+        className="bg-gray-800 shadow-lg rounded-lg p-6 w-full max-w-md questionGeneration"
         onSubmit={handleSubmit}
       >
         <div className="flex justify-between mb-4">

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './QuestionGenerator.css'; 
 import Sidebar from "../../sidebar";
-
 import axios from "axios";
 
 const QuestionGenerator = () => {
@@ -13,6 +12,15 @@ const QuestionGenerator = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [uploadMode, setUploadMode] = useState("FILE");
+  const [generatedQuestions, setGeneratedQuestions] = useState([]);
+
+  // Load saved questions from Local Storage
+  useEffect(() => {
+    const savedQuestions = localStorage.getItem("generatedQuestions");
+    if (savedQuestions) {
+      setGeneratedQuestions(JSON.parse(savedQuestions));
+    }
+  }, []);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -48,8 +56,7 @@ const QuestionGenerator = () => {
     }
 
     const formData = new FormData();
-    if (uploadMode === "FILE") formData.append("sourceType", "file");
-    if (uploadMode === "TEXT") formData.append("sourceType", "text");
+    formData.append("sourceType", uploadMode === "FILE" ? "file" : "text");
     formData.append("textInput", text);
     formData.append("fileInput", file);
     formData.append("numOfQuestions", numQuestions);
@@ -59,10 +66,6 @@ const QuestionGenerator = () => {
     setLoading(true);
     setMessage("");
 
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }    
-
     try {
       const response = await axios.post(
         "http://localhost:8000/generateQuestions",
@@ -71,8 +74,11 @@ const QuestionGenerator = () => {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
+
+      setGeneratedQuestions(response.data); // Update state
+      localStorage.setItem("generatedQuestions", JSON.stringify(response.data)); // Save to Local Storage
+
       setMessage("Questions generated successfully!");
-      console.log("Response:", response.data);
     } catch (error) {
       setMessage("Failed to generate questions. Please try again.");
       console.error("Error:", error);
@@ -172,7 +178,7 @@ const QuestionGenerator = () => {
         </div>
 
         <div className="mb-4">
-          <h3 className="text-sm font-medium mb-2">Style Of Questions</h3>
+          <h3 className="text-sm font-medium mb-2">Difficulty Level</h3>
           <div className="flex items-center gap-4">
             <label className="flex items-center">
               <input

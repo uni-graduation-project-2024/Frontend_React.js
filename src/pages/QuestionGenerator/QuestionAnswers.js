@@ -32,12 +32,10 @@ const QuestionAnswers = () => {
     fetchQuestions();
   }, []);
 
-  // Handle loading state
   if (loading) {
     return <p className="loading">Loading questions...</p>;
   }
 
-  // Handle error state
   if (error) {
     return <p className="error">{error}</p>;
   }

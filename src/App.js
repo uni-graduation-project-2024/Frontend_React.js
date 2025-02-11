@@ -38,7 +38,7 @@ function App() {
             <Route path="/library" element={<Library />} />
             <Route path="/generate-questions" element={<QuestionGenerator />} />
             <Route path="/create-folder" element={<CreateFolder />} />
-            <Route path="/QuestionAnswers" element={<QuestionAnswers/>}/>
+            <Route path="/Question-Answers" element={<QuestionAnswers/>}/>
         
           </Route>
 

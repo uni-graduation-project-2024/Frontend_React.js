@@ -14,6 +14,8 @@ import AdminLogin from "./pages/admin/login/login";
 import Dashboard  from "./pages/admin/dashboard";
 import ShowUser from "./pages/admin/show-users/show-user";
 import DeleteUser from "./pages/admin/delete-user/delete-user";
+import QuestionAnswers from "./pages/QuestionGenerator/QuestionAnswers";
+
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route element={<AuthGuard roles={[]} />}>
           <Route path="/loginRegister" element={<LoginRegisterUser/>}/>
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/QuestionAnswers" element={<QuestionAnswers/>}/>
+
           </Route>
           
           {/* User-protected routes */}
@@ -34,6 +38,8 @@ function App() {
             <Route path="/library" element={<Library />} />
             <Route path="/generate-questions" element={<QuestionGenerator />} />
             <Route path="/create-folder" element={<CreateFolder />} />
+            <Route path="/QuestionAnswers" element={<QuestionAnswers/>}/>
+        
           </Route>
 
           {/* Admin-protected routes */}

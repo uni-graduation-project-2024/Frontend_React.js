@@ -48,18 +48,24 @@ const QuestionGenerator = () => {
     }
 
     const formData = new FormData();
-    if (uploadMode === "FILE") formData.append("file", file);
-    if (uploadMode === "TEXT") formData.append("text", text);
-    formData.append("questionType", questionType);
-    formData.append("difficulty", difficulty);
-    formData.append("numQuestions", numQuestions);
+    if (uploadMode === "FILE") formData.append("sourceType", "file");
+    if (uploadMode === "TEXT") formData.append("sourceType", "text");
+    formData.append("textInput", text);
+    formData.append("fileInput", file);
+    formData.append("numOfQuestions", numQuestions);
+    formData.append("difficultyLevel", difficulty);
+    formData.append("typeOfQuestions", questionType);
 
     setLoading(true);
     setMessage("");
 
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }    
+
     try {
       const response = await axios.post(
-        "https://localhost:7163/Auth/QuesGenerator",
+        "http://localhost:8000/generateQuestions",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

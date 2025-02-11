@@ -48,13 +48,15 @@ const QuestionGenerator = () => {
     }
 
     const formData = new FormData();
-    if (uploadMode === "FILE") formData.append("sourceType", "file");
-    if (uploadMode === "TEXT") formData.append("sourceType", "text");
+    formData.append("sourceType", uploadMode);
     formData.append("textInput", text);
-    formData.append("fileInput", file);
     formData.append("numOfQuestions", numQuestions);
     formData.append("difficultyLevel", difficulty);
     formData.append("typeOfQuestions", questionType);
+
+    if (file) {
+      formData.append("fileInput", file); // Only append file if it exists
+    }
 
     setLoading(true);
     setMessage("");

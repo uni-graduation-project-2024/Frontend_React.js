@@ -15,6 +15,7 @@ import Dashboard  from "./pages/admin/dashboard";
 import ShowUser from "./pages/admin/show-users/show-user";
 import DeleteUser from "./pages/admin/delete-user/delete-user";
 import QuestionAnswers from "./pages/QuestionGenerator/QuestionAnswers";
+import Leaderboard from "./pages/Leaderboard";
 
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
           <Route path="/loginRegister" element={<LoginRegisterUser/>}/>
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/QuestionAnswers" element={<QuestionAnswers/>}/>
+          <Route path="/leaderboard" element={<Leaderboard />} />
+
 
           </Route>
           

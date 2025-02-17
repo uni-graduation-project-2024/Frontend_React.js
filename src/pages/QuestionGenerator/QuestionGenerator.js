@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // For navigation
 import "./QuestionGenerator.css";
 import Sidebar from "../../sidebar";
@@ -11,30 +11,27 @@ const QuestionGenerator = () => {
   const [difficulty, setDifficulty] = useState("EASY");
   const [numQuestions, setNumQuestions] = useState(10);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
   const [uploadMode, setUploadMode] = useState("FILE");
-  const [generatedQuestions, setGeneratedQuestions] = useState([]);
+  //const [generatedQuestions, setGeneratedQuestions] = useState([]);
 
   const navigate = useNavigate(); // For navigation
 
   // Load saved questions from Local Storage
-  useEffect(() => {
-    const savedQuestions = localStorage.getItem("generatedQuestions");
-    if (savedQuestions) {
-      setGeneratedQuestions(JSON.parse(savedQuestions));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedQuestions = localStorage.getItem("generatedQuestions");
+  //   if (savedQuestions) {
+  //     setGeneratedQuestions(JSON.parse(savedQuestions));
+  //   }
+  // }, []);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    setMessage("Your file has been successfully loaded");
     setText("");
   };
 
   const handleTextChange = (e) => {
     setText(e.target.value);
     setFile(null);
-    setMessage("Your text has been successfully loaded");
   };
 
   const handleQuestionTypeChange = (type) => {
@@ -48,16 +45,6 @@ const QuestionGenerator = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (uploadMode === "FILE" && !file) {
-      setMessage("Please upload a file.");
-      return;
-    }
-
-    if (uploadMode === "TEXT" && text.trim() === "") {
-      setMessage("Please enter some text.");
-      return;
-    }
-
     const formData = new FormData();
     formData.append("sourceType", uploadMode);
     formData.append("textInput", text);
@@ -70,7 +57,6 @@ const QuestionGenerator = () => {
     }
 
     setLoading(true);
-    setMessage("");
 
     try {
       const response = await axios.post(
@@ -81,16 +67,23 @@ const QuestionGenerator = () => {
         }
       );
 
-      setGeneratedQuestions(response.data); 
+      // setGeneratedQuestions(response.data); 
       localStorage.setItem("generatedQuestions", JSON.stringify(response.data)); 
 
-      setMessage("Questions generated successfully!");
+      const questionTypeString = questionType.join(" & ")
 
       // Navigate to QuestionAnswers page and pass questions
-      navigate("/Question-Answers", { state: { questions: response.data } });
+      navigate("/Question-Answers", { 
+        state: { 
+            generationData: response.data, 
+            options: { 
+                difficulty, 
+                questionType: questionTypeString
+            } 
+        } 
+    });
 
     } catch (error) {
-      setMessage("Failed to generate questions. Please try again.");
       console.error("Error:", error);
     } finally {
       setLoading(false);
@@ -128,7 +121,90 @@ const QuestionGenerator = () => {
           </div>
         )}
 
-        <button type="submit" className={`w-full py-2 px-4 text-white rounded ${loading ? "bg-gray-500" : "bg-blue-500"}`} disabled={loading}>
+        <div className="mb-4">
+          <h3 className="text-sm font-medium mb-2">Type Of Questions</h3>
+          <div className="flex items-center gap-4">
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                value="MCQ"
+                checked={questionType.includes("MCQ")}
+                onChange={() => handleQuestionTypeChange("MCQ")}
+                className="mr-2"
+              />
+              MCQ
+            </label>
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                value="True/False"
+                checked={questionType.includes("True/False")}
+                onChange={() => handleQuestionTypeChange("True/False")}
+                className="mr-2"
+              />
+              True/False
+            </label>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <h3 className="text-sm font-medium mb-2">Difficulty Level</h3>
+          <div className="flex items-center gap-4">
+            <label className="flex items-center">
+              <input
+                type="radio"
+                value="EASY"
+                checked={difficulty === "EASY"}
+                onChange={(e) => setDifficulty(e.target.value)}
+                className="mr-2"
+              />
+              Easy
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                value="MEDIUM"
+                checked={difficulty === "MEDIUM"}
+                onChange={(e) => setDifficulty(e.target.value)}
+                className="mr-2"
+              />
+              Medium
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                value="HARD"
+                checked={difficulty === "HARD"}
+                onChange={(e) => setDifficulty(e.target.value)}
+                className="mr-2"
+              />
+              Hard
+            </label>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium mb-2">Number of Questions</label>
+          <input
+            type="range"
+            min="5"
+            max="20"
+            value={numQuestions}
+            onChange={(e) => setNumQuestions(e.target.value)}
+            className="w-full"
+          />
+          <p className="text-center mt-2">{numQuestions}</p>
+        </div>
+
+        <button
+          type="submit"
+          className={`w-full py-2 px-4 text-white rounded ${
+            loading
+              ? "bg-gray-500 cursor-not-allowed"
+              : "bg-blue-500 hover:bg-blue-400"
+          }`}
+          disabled={loading}
+        >
           {loading ? "Generating..." : "Generate"}
         </button>
       </form>

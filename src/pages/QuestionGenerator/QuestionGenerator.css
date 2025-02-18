@@ -35,13 +35,15 @@ div .body {
   /* Inputs */
   input[type="file"],
   textarea,
-  input[type="range"] {
+  input[type="range"],
+  .input-text-title {
     width: 100%;
     background-color: #4a5568; /* Gray for inputs */
     color: white;
     border: 1px solid #2d3748;
     border-radius: 8px;
     padding: 12px; /* Increased padding for better spacing */
+    margin: 7px;
   }
   
   input[type="file"]::file-selector-button {

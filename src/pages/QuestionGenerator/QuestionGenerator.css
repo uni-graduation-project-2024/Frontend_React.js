@@ -10,7 +10,6 @@ div .body {
     min-height: 100vh;
   }
   
-  /* Form Container */
   form.questionGeneration {
     background-color: #2d3748; /* Darker gray for the form */
     border-radius: 12px;
@@ -20,7 +19,6 @@ div .body {
     max-width: 600px; /* Form width */
   }
   
-  /* Buttons */
   button {
     font-size: 1rem;
     font-weight: bold;
@@ -32,7 +30,6 @@ div .body {
     filter: brightness(1.1);
   }
   
-  /* Inputs */
   input[type="file"],
   textarea,
   input[type="range"] {

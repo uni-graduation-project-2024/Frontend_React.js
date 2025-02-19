@@ -1,94 +1,176 @@
-/* Library.css */
-
-/* Background and Page Styling */
+/* Dark Theme Styling for Library Component */
 .library-container {
-    min-height: 100vh;
-    background-color: #1a202c; /* Dark gray */
-    color: white;
-    padding: 24px;
-    width: 81%;
-    float: right;
+  min-height: 100vh;
+  background-color: #121212; /* Dark background */
+  color: #ffffff;
+  padding: 24px;
+  width: 81%;
+  float: right;
+}
+
+/* Header Styling */
+.library-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.library-title {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: bold;
+}
+
+/* Button Group */
+.library-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+/* General Button Styling */
+.library-button {
+  background-color: #007bff; /* Blue */
+  padding: 8px 16px;
+  border-radius: 6px;
+  color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border: none;
+}
+
+.library-button:hover {
+  background-color: #0056b3; /* Darker Blue */
+}
+
+.library-button-gray {
+  background-color: #4a5568; /* Gray-700 */
+}
+
+.library-button-gray:hover {
+  background-color: #2d3748; /* Darker Gray */
+}
+
+/* Create Menu */
+.library-create-menu {
+  background-color: #2d3748; /* Gray-800 */
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+/* Folders Section */
+.library-folders {
+  margin-top: 24px;
+}
+
+.library-folders-title {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.library-folder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* Folder Item */
+.library-folder {
+  background-color: #1e1e1e; /* Dark Gray */
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+  border: 1px solid #333;
+}
+
+.library-folder:hover {
+  background-color: #292929; /* Slightly lighter */
+  transform: translateY(-3px);
+}
+
+/* Exams Section */
+.library-exams {
+  margin-top: 24px;
+}
+
+.library-exams-title {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+/* Exam Grid */
+.library-exam-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+/* Exam Item */
+.library-exam {
+  background-color: #1e1e1e;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+  border: 1px solid #333;
+}
+
+.library-exam:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.15);
+}
+
+/* Exam Action Buttons */
+.delete-btn, .retry-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 5px;
+}
+
+.delete-btn {
+  background-color: #ff4c4c;
+  color: #ffffff;
+}
+
+.delete-btn:hover {
+  background-color: #d43f3f;
+}
+
+.retry-btn {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.retry-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .library-container {
+      width: 100%;
+      float: none;
   }
-  
-  /* Header Styling */
+
   .library-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+      flex-direction: column;
+      align-items: flex-start;
   }
-  
-  .library-title {
-    font-size: 1.875rem; /* text-3xl */
-    font-weight: bold;
-  }
-  
-  /* Button Group */
+
   .library-buttons {
-    display: flex;
-    gap: 16px;
+      margin-top: 10px;
   }
-  
-  /* General Button Styling */
-  .library-button {
-    background-color: #4299e1; /* Blue-500 */
-    padding: 8px 16px;
-    border-radius: 6px;
-    color: white;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: background 0.3s ease;
+
+  .library-folder-grid, .library-exam-grid {
+      grid-template-columns: 1fr;
   }
-  
-  .library-button:hover {
-    background-color: #3182ce; /* Darker Blue */
-  }
-  
-  .library-button-gray {
-    background-color: #4a5568; /* Gray-700 */
-  }
-  
-  .library-button-gray:hover {
-    background-color: #2d3748; /* Darker Gray */
-  }
-  
-  /* Create Menu */
-  .library-create-menu {
-    background-color: #2d3748; /* Gray-800 */
-    padding: 16px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-  }
-  
-  /* Folder List */
-  .library-folders {
-    margin-top: 24px;
-  }
-  
-  .library-folders-title {
-    font-size: 1.25rem;
-    margin-bottom: 16px;
-  }
-  
-  /* Folder Grid */
-  .library-folder-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 16px;
-  }
-  
-  /* Folder Item */
-  .library-folder {
-    background-color: #4a5568; /* Gray-700 */
-    padding: 16px;
-    border-radius: 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .library-folder:hover {
-    background-color: #2d3748; /* Darker Gray */
-  }
-  
+}

@@ -1,0 +1,29 @@
+.folder-view-container {
+    text-align: center;
+    padding: 20px;
+    color: white;
+  }
+  
+  .folder-buttons {
+    margin-top: 20px;
+  }
+  
+  .folder-button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 10px;
+  }
+  
+  .folder-button.delete {
+    background: red;
+    color: white;
+  }
+  
+  .folder-button.rename {
+    background: blue;
+    color: white;
+  }
+  

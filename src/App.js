@@ -16,6 +16,13 @@ import ShowUser from "./pages/admin/show-users/show-user";
 import DeleteUser from "./pages/admin/delete-user/delete-user";
 import QuestionAnswers from "./pages/QuestionGenerator/QuestionAnswers";
 import Leaderboard from "./pages/Leaderboard";
+import ViewAllExams from "./pages/Library/viewAllExams";
+import ViewExams from "./pages/Library/viewExams";
+import FolderView from "./pages/Library/folderView";
+import ScorePage from "./pages/QuestionGenerator/scorePage";
+
+
+
 
 
 function App() {
@@ -31,6 +38,16 @@ function App() {
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/QuestionAnswers" element={<QuestionAnswers/>}/>
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/library" element={<Library />} />
+          <Route path="/create-folder" element={<CreateFolder />} />
+          <Route path="/view-all-exams" element={<ViewAllExams />} />
+          <Route path="/view-exams" element={<ViewExams />} />
+          <Route path="/folder/:folderId" element={<FolderView />} />
+          <Route path="/score" element={<ScorePage />} />
+
+
+
+
 
 
           </Route>
@@ -42,6 +59,14 @@ function App() {
             <Route path="/generate-questions" element={<QuestionGenerator />} />
             <Route path="/create-folder" element={<CreateFolder />} />
             <Route path="/Question-Answers" element={<QuestionAnswers/>}/>
+            {/* <Route path="/view-all-exams" element={<ViewAllExams />} />
+            <Route path="/view-exams" element={<ViewExams />} /> */}
+            {/* <Route path="/folder/:folderId" element={<FolderView />} /> */}
+            {/* <Route path="/score" element={<ScorePage />} /> */}
+
+
+
+
         
           </Route>
 

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
+import { Trash2 } from "lucide-react";
 import "./viewExams.css";
 
-const ViewExams = () => {
-  const { subjectId } = useParams();
+const ViewExams = ( {subjectId}) => {
   const [exams, setExams] = useState([]);
   const { user } = getAuthToken();
   const navigate = useNavigate(); 
@@ -14,10 +14,15 @@ const ViewExams = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get(
-          `${linkhost}/api/exams?userId=${user.nameid}&subjectId=${subjectId}`
-        );
-        setExams(response.data);
+        let url = `${linkhost}/api/Exam/all/${user.nameid}`;
+
+        // Append subId if not "all"
+        if (subjectId && subjectId !== 0) {
+          url += `?subId=${subjectId}`;
+        }
+
+        const response = await axios.get(url);
+        setExams(response.data);     
       } catch (error) {
         console.error("Error fetching exams:", error);
       }
@@ -27,25 +32,63 @@ const ViewExams = () => {
   }, [subjectId, user.nameid]);
 
   const handleDelete = async (examId) => {
-    try {
-      await axios.delete(`${linkhost}/api/exams/${examId}`);
-      setExams(exams.filter((exam) => exam.id !== examId));
-    } catch (error) {
-      console.error("Error deleting exam:", error);
+    if (window.confirm("Are you sure you want to delete this exam?")) {
+      try {
+        await axios.delete(`${linkhost}/api/Exam/${examId}`);
+        setExams(exams.filter((exam) => exam.examId !== examId));
+      } catch (error) {
+        console.error("Error deleting exam:", error);
+      }
     }
   };
 
-  const handleRetry = (exam) => {
-    localStorage.setItem(
-      "generatedQuestions",
-      JSON.stringify({ questionData: exam.questions })
-    );
-    navigate("/generate-questions", {
-      state: { options: { difficulty: exam.difficulty } },
-    });
+  const handleRetry = async (exam) => {
+    try {
+      const response = await axios.get(`${linkhost}/api/Exam/${exam.examId}`);
+      const fetchedExam = response.data;
+  
+      if (fetchedExam && fetchedExam.mcqQuestionsData) {
+        // ✅ Prepare question data for localStorage
+      const questionData = fetchedExam.mcqQuestionsData.map((q) => ({
+        questionNumber: q.id,
+        question: q.text,
+        options: q.options,
+        correctAnswer: q.correctAnswer,
+        explanation: q.explain,
+      }));
+
+      // ✅ Store in localStorage
+      localStorage.setItem(
+        "generatedQuestions",
+        JSON.stringify({
+          examName: fetchedExam.examName,
+          difficulty: fetchedExam.difficultyLevel,
+          questionType: fetchedExam.questionType,
+          questionData: questionData,
+        })
+      );
+      
+      navigate("/Question-Answers", { 
+        state: {  
+            options: { 
+                difficulty: fetchedExam.difficultyLevel, 
+                questionType: fetchedExam.questionType,
+                examName : fetchedExam.examName
+            } 
+        } 
+      });
+
+      } else {
+        console.error("No questions found in the fetched exam.");
+      }
+    } catch (error) {
+      console.error("Error fetching exam data:", error);
+    }
   };
+  
 
   const timeAgo = (dateString) => {
+    if (!dateString) return "Invalid date is undef";
     const date = new Date(dateString);
     if (isNaN(date)) return "Invalid date";
 
@@ -74,35 +117,26 @@ const ViewExams = () => {
   };
 
   return (
-    <div className="library-container">
-      <h1 className="library-title">Exams for Subject</h1>
+    <div className="library-container2">
       <div className="library-exam-grid">
         {exams.length === 0 ? (
           <p>No exams available for this subject.</p>
         ) : (
           exams.map((exam) => (
-            <div key={exam.id} className="library-exam">
+            <div key={exam.examId} className="library-exam">
               <div className="exam-info">
                 <p className="exam-time">
-                  {timeAgo(exam.createdAt)} • {exam.plays || 0} plays •{" "}
-                  {exam.questionCount} questions
+                  {timeAgo(exam.createdDate)} • {exam.numQuestions} questions
                 </p>
                 {exam.folder && <p className="exam-folder">📂 {exam.folder}</p>}
                 <h3>{exam.title}</h3>
               </div>
-              <div className="exam-actions">
-                <button
-                  onClick={() => handleDelete(exam.id)}
-                  className="delete-button"
-                >
-                  Delete
-                </button>
-                <button
-                  onClick={() => handleRetry(exam)}
-                  className="retry-button"
-                >
-                  Practice Again
-                </button>
+              <div className="exam-content">
+                <p  className="exam-title">{exam.examName}</p>
+                <div className="exam-actions">
+                  <button onClick={() => handleRetry(exam)} className="retry-button">Practice Again</button>
+                  <Trash2 className="delete-icon" onClick={() => handleDelete(exam.examId)} />
+                </div>
               </div>
             </div>
           ))

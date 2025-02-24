@@ -1,4 +1,4 @@
-.library-container {
+.library-container2 {
     padding: 20px;
     color: white;
     background-color: #121826;
@@ -26,15 +26,29 @@
   }
   
   .exam-time {
-    font-size: 14px;
+    font-size: 11px;
     color: #ccc;
   }
   
   .exam-folder {
-    font-size: 14px;
+    font-size: 11px;
     color: #6d87ff;
   }
   
+  .exam-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #edecec;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .exam-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .exam-actions {
     display: flex;
     gap: 10px;

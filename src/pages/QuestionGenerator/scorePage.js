@@ -1,10 +1,15 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./scorePage.css";
 
 const ScorePage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { totalScore, timeTaken, xpCollected } = location.state || {};
+
+  const homeHandle = () =>{
+    navigate("/");
+  }
 
   return (
     <div className="score-container">
@@ -22,7 +27,7 @@ const ScorePage = () => {
 
           <div className="score-box score">
             <p className="label">SCORE</p>
-            <p className="value">{totalScore}/100</p>
+            <p className="value">{totalScore}%</p>
           </div>
 
           <div className="score-box xp">
@@ -30,6 +35,12 @@ const ScorePage = () => {
             <p className="value">{xpCollected}</p>
           </div>
         </div>
+
+        {/* 🏠 Home Button */}
+        <button className="home-button" onClick={homeHandle}>
+          Done
+        </button>
+        
       </div>
     </div>
   );

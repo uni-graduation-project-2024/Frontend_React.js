@@ -258,18 +258,18 @@ const QuestionAnswers = () => {
       userId: user.nameid, // Replace with actual user ID
       subjectId: null // Replace with actual subject ID
     };
-    navigate("/score", {
-      state: {
-        totalScore,
-        timeTaken: formattedTimeTaken,
-        xpCollected,
-      },
-    });
+    
     
 
     try {
       await axios.post(linkhost + "/api/Exam", payload);
-      navigate("/");
+      navigate("/score", {
+        state: {
+          totalScore,
+          timeTaken: formattedTimeTaken,
+          xpCollected,
+        },
+      });
     } catch (error) {
       console.error("Failed to submit data:", error);
     }

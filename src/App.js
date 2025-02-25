@@ -20,6 +20,7 @@ import ViewAllExams from "./pages/Library/viewAllExams";
 import ViewExams from "./pages/Library/viewExams";
 import FolderView from "./pages/Library/folderView";
 import ScorePage from "./pages/QuestionGenerator/scorePage";
+import MoveExam from "./pages/Library/MoveToFolder";
 
 
 

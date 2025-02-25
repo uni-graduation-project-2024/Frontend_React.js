@@ -16,15 +16,10 @@ import ShowUser from "./pages/admin/show-users/show-user";
 import DeleteUser from "./pages/admin/delete-user/delete-user";
 import QuestionAnswers from "./pages/QuestionGenerator/QuestionAnswers";
 import Leaderboard from "./pages/Leaderboard";
-import ViewExams from "./pages/Library/viewExams";
 import FolderView from "./pages/Library/folderView";
 import ScorePage from "./pages/QuestionGenerator/scorePage";
 import MoveExam from "./pages/Library/MoveToFolder";
 import ViewQuestions from "./pages/Library/view_Q&A";
-import NavBar from "./pages/Home/navbar";
-
-
-
 
 function App() {
   return (
@@ -35,27 +30,20 @@ function App() {
           <Route path="/" element={<Home />} />
 
           <Route element={<AuthGuard roles={[]} />}>
-          <Route path="/loginRegister" element={<LoginRegisterUser/>}/>
-          <Route path="/admin/login" element={<AdminLogin />} />
-          {/* <Route path="/QuestionAnswers" element={<QuestionAnswers/>}/>
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/library" element={<Library />} />
-          <Route path="/create-folder" element={<CreateFolder />} /> */}
-          {/* <Route path="/view-all-exams" element={<ViewAllExams />} /> */}
-          {/* <Route path="/view-exams" element={<ViewExams />} />
-          <Route path="/folder/:folderId" element={<FolderView />} />
-          <Route path="/score" element={<ScorePage />} />
-          <Route path="/move-exam" element={<MoveExam />} />
-           <Route path="/view-questions" element={<ViewQuestions />} />  
-           <Route path="/navbar" element={<NavBar />} /> */}
+            <Route path="/loginRegister" element={<LoginRegisterUser/>}/>
+            <Route path="/admin/login" element={<AdminLogin />} />
 
-
-
-
-
-
-
-           </Route>
+            {/* All the below routes must not be in this block it is here for front testing only*/}
+            <Route path="/library" element={<Library />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/library" element={<Library />} />
+            <Route path="/create-folder" element={<CreateFolder />} />
+            <Route path="/folder/:folderName" element={<FolderView />} />
+            <Route path="/score" element={<ScorePage />} />
+            <Route path="/move-exam" element={<MoveExam />} />
+            <Route path="/view-questions" element={<ViewQuestions />} />  
+            {/* All the above routes must not be in this block it is here for front testing only*/}
+          </Route>
           
           {/* User-protected routes */}
           <Route element={<AuthGuard roles={["User"]} />}>
@@ -65,21 +53,10 @@ function App() {
             <Route path="/generate-questions" element={<QuestionGenerator />} />
             <Route path="/create-folder" element={<CreateFolder />} />
             <Route path="/Question-Answers" element={<QuestionAnswers/>}/>
-            <Route path="/view-exams" element={<ViewExams />} /> 
             <Route path="/folder/:folderName" element={<FolderView />} />
             <Route path="/score" element={<ScorePage />} />
             <Route path="/move-exam" element={<MoveExam />} />
             <Route path="/view-questions" element={<ViewQuestions />} />
-            <Route path="/navbar" element={<NavBar />} /> */}
-
-
-
-
-
-
-
-
-        
            </Route>
 
           {/* Admin-protected routes */}

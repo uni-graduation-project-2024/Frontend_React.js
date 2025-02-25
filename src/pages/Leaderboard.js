@@ -6,45 +6,45 @@ import linkhost from "..";
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    axios.get(`${linkhost}/api/Group/GetLeaderboard/1`)
-      .then(response => {
-        setUsers(response.data);
-      })
-      .catch(error => {
-        console.error("Error fetching leaderboard data:", error);
-      });
-  }, []);
-
   // useEffect(() => {
-  //   setUsers([
-  //     {id: 1,
-  //       username: "Rola",
-  //       rank: 1,
-  //       weeklyXP: 1000,
-  //     },
-  //     {id: 1,
-  //       username: "Maha",
-  //       rank: 1,
-  //       weeklyXP: 500,
-  //     },
-  //     {id: 1,
-  //       username: "Nancy",
-  //       rank: 1,
-  //       weeklyXP: 200,
-  //     },
-  //     {id: 1,
-  //       username: "Radwa",
-  //       rank: 1,
-  //       weeklyXP: 100,
-  //     },
-  //     {id: 1,
-  //       username: "Yasmin",
-  //       rank: 1,
-  //       weeklyXP: 50,
-  //     },
-  //   ])
-  // },[])
+  //   axios.get(`${linkhost}/api/Group/GetLeaderboard/1`)
+  //     .then(response => {
+  //       setUsers(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error("Error fetching leaderboard data:", error);
+  //     });
+  // }, []);
+
+  useEffect(() => {
+    setUsers([
+      {id: 1,
+        username: "Rola",
+        rank: 1,
+        weeklyXp: 1000,
+      },
+      {id: 1,
+        username: "Maha",
+        rank: 1,
+        weeklyXp: 500,
+      },
+      {id: 1,
+        username: "Nancy",
+        rank: 1,
+        weeklyXp: 200,
+      },
+      {id: 1,
+        username: "Radwa",
+        rank: 1,
+        weeklyXp: 100,
+      },
+      {id: 1,
+        username: "Yasmin",
+        rank: 1,
+        weeklyXp: 50,
+      },
+    ])
+  },[])
   
 
   return (
@@ -59,7 +59,7 @@ const Leaderboard = () => {
                 <span className="username">{user.username}</span>
               </div>
               <div className="leaderboard-stats">
-                <p className="xp-text">XP: {user.weeklyXp}</p>
+                <p className="xp-text">{user.weeklyXp}</p>
               </div>
             </li>
           ))}

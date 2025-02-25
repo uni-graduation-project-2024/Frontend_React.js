@@ -5,31 +5,49 @@ import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
 import { Trash2 } from "lucide-react";
 import "./viewExams.css";
+import {examsData} from "../../Data/staticDB";
 
 const ViewExams = ( {subjectId}) => {
   const [exams, setExams] = useState([]);
   const { user } = getAuthToken();
-  const navigate = useNavigate(); 
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        let url = `${linkhost}/api/Exam/all/${user.nameid}`;
-
-        // Append subId if not "all"
-        if (subjectId && subjectId !== 0) {
-          url += `?subId=${subjectId}`;
+        if(subjectId === 0){
+          setExams(examsData);
         }
-
-        const response = await axios.get(url);
-        setExams(response.data);     
+        else{
+          setExams(examsData.filter((exam) => exam.subjectId == subjectId));
+        }
       } catch (error) {
         console.error("Error fetching exams:", error);
       }
     };
 
     fetchExams();
-  }, [subjectId, user.nameid]);
+  }, [subjectId]); // Trigger on subjectId change
+
+  // useEffect(() => {
+  //   const fetchExams = async () => {
+  //     try {
+  //       let url = `${linkhost}/api/Exam/all/${user.nameid}`;
+
+  //       // Append subId if not "all"
+  //       if (subjectId && subjectId !== 0) {
+  //         url += `?subId=${subjectId}`;
+  //       }
+
+  //       const response = await axios.get(url);
+  //       setExams(response.data);     
+  //     } catch (error) {
+  //       console.error("Error fetching exams:", error);
+  //     }
+  //   };
+
+  //   fetchExams();
+  // }, [subjectId, user.nameid]);
 
   const handleDelete = async (examId) => {
     if (window.confirm("Are you sure you want to delete this exam?")) {
@@ -42,9 +60,10 @@ const ViewExams = ( {subjectId}) => {
     }
   };
 
-  const handleRetry = async (exam) => {
+  const handleRetry = async (examId) => {
     try {
-      const response = await axios.get(`${linkhost}/api/Exam/${exam.examId}`);
+      //const response = await axios.get(`${linkhost}/api/Exam/${examId}`);
+      const response = examsData.find((exam) => exam.examId === examId);
       const fetchedExam = response.data;
   
       if (fetchedExam && fetchedExam.mcqQuestionsData) {
@@ -134,7 +153,7 @@ const ViewExams = ( {subjectId}) => {
               <div className="exam-content">
                 <p  className="exam-title">{exam.examName}</p>
                 <div className="exam-actions">
-                  <button onClick={() => handleRetry(exam)} className="retry-button">Practice Again</button>
+                  <button onClick={() => handleRetry(exam.examId)} className="retry-button">Practice Again</button>
                   <Trash2 className="delete-icon" onClick={() => handleDelete(exam.examId)} />
                 </div>
               </div>

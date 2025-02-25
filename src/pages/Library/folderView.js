@@ -7,6 +7,7 @@ import Sidebar from "../../sidebar";
 import "./folderView.css";
 import linkhost from "../..";
 import ViewExams from "./viewExams";
+import { subjectData } from "../../Data/staticDB";
 
 const FolderView = () => {
   const { folderName } = useParams();
@@ -18,7 +19,12 @@ const FolderView = () => {
   const handleDeleteFolder = async () => {
     if (window.confirm("Are you sure you want to delete this folder?")) {
       try {
-        await axios.delete(`${linkhost}/api/Subject/${subjectId}`);
+        const index = subjectData.findIndex(subject => subject.subjectId == subjectId);
+
+        if (index !== -1) {
+          subjectData.splice(index, 1); // Removes the subject at the found index
+        }
+        //await axios.delete(`${linkhost}/api/Subject/${subjectId}`);
         navigate("/library"); 
       } catch (error) {
         console.error("Error deleting folder:", error);

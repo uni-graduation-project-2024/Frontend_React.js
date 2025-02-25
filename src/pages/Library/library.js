@@ -7,24 +7,28 @@ import "./library.css";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
 import ViewExams from "./viewExams";
+import { subjectData } from "../../Data/staticDB";
 
 const Library = () => {
   const navigate = useNavigate();
   const [folders, setFolders] = useState([]);
-  const [viewMode, setViewMode] = useState(-1);
+  const [viewMode, setViewMode] = useState(null);
   const { user } = getAuthToken();
 
+  // useEffect(() => {
+  //   const fetchFolders = async () => {
+  //     try {
+  //       const response = await axios.get(linkhost + `/api/Subject/all/${user.nameid}`);
+  //       setFolders(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching folders:", error);
+  //     }
+  //   };
+  //   fetchFolders();
+  // }, [navigate, user.nameid]);
   useEffect(() => {
-    const fetchFolders = async () => {
-      try {
-        const response = await axios.get(linkhost + `/api/Subject/all/${user.nameid}`);
-        setFolders(response.data);
-      } catch (error) {
-        console.error("Error fetching folders:", error);
-      }
-    };
-    fetchFolders();
-  }, [navigate, user.nameid]);
+      setFolders(subjectData);
+    },[]);
 
 
   const handleNewFolderClick = () => {
@@ -36,7 +40,7 @@ const Library = () => {
   }
 
   const handleViewFolder = ()=>{
-    setViewMode(-1);
+    setViewMode(null);
   }
 
   return (
@@ -59,7 +63,7 @@ const Library = () => {
         <button className="sidebar-left" onClick={handleViewFolder}>Folders</button>
         <button className="sidebar-left2" onClick={handleViewAllExamMode}>All Exams</button>
 
-        { viewMode === -1 && (
+        { viewMode === null && (
           <div className="library-folders">
             <h3 className="library-folders-title">Folders</h3>
             <div className="library-folder-grid">

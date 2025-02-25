@@ -4,6 +4,7 @@ import axios from 'axios';
 import './CreateFolder.css';
 import linkhost from "../../" 
 import { getAuthToken } from '../../services/auth';
+import { subjectData } from '../../Data/staticDB';
 
 const CreateFolder = () => {
   const [folderName, setFolderName] = useState('');
@@ -17,15 +18,19 @@ const CreateFolder = () => {
     
     const newFolder = { subjectName: folderName };
 
-    try {
-      const response = await axios.post(linkhost +`/api/Subject/${user.nameid}`, newFolder);
+    const newStaticFolder = { subjectId: Math.floor(Math.random() * 100) + 1, subjectName: folderName}
 
-      if (response.status === 201 || response.status === 200) {
-        console.log('Folder created successfully:', response.data);
-        navigate(`/library?newFolder=${encodeURIComponent(folderName)}`);
-      } else {
-        console.error('Failed to create folder:', response.statusText);
-      }
+    try {
+      subjectData.push(newStaticFolder);
+      navigate(`/library`);
+      // const response = await axios.post(linkhost +`/api/Subject/${user.nameid}`, newFolder);
+
+      // if (response.status === 201 || response.status === 200) {
+      //   console.log('Folder created successfully:', response.data);
+      //   navigate(`/library?newFolder=${encodeURIComponent(folderName)}`);
+      // } else {
+      //   console.error('Failed to create folder:', response.statusText);
+      // }
     } catch (error) {
       console.error('Error creating folder:', error);
     } finally {

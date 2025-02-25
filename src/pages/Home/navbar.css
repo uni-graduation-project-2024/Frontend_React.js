@@ -1,0 +1,59 @@
+/* NavBar Styles */
+.navbar {
+    background-color: #2563eb; /* Tailwind blue-600 */
+    color: white;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Left Side (Logo) */
+  .navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .navbar .logo:hover {
+    opacity: 0.8;
+  }
+  
+  /* Right Side (User Stats) */
+  .navbar .stats {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  /* Streak, Coins, User Section */
+  .navbar .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+  
+  /* Icons Styling */
+  .navbar .stat-item svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Streak Icon */
+  .navbar .streak svg {
+    color: #facc15; /* Tailwind yellow-400 */
+  }
+  
+  /* Coins Icon */
+  .navbar .coins svg {
+    color: #fbbf24; /* Tailwind yellow-300 */
+  }
+  
+  /* User Icon */
+  .navbar .user svg {
+    color: white;
+  }
+  

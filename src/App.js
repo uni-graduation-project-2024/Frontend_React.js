@@ -20,7 +20,8 @@ import ViewExams from "./pages/Library/viewExams";
 import FolderView from "./pages/Library/folderView";
 import ScorePage from "./pages/QuestionGenerator/scorePage";
 import MoveExam from "./pages/Library/MoveToFolder";
-
+import ViewQuestions from "./pages/Library/view_Q&A";
+import NavBar from "./pages/Home/navbar";
 
 
 
@@ -39,18 +40,22 @@ function App() {
           {/* <Route path="/QuestionAnswers" element={<QuestionAnswers/>}/>
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/library" element={<Library />} />
-          <Route path="/create-folder" element={<CreateFolder />} />
-          <Route path="/view-all-exams" element={<ViewAllExams />} />
-          <Route path="/view-exams" element={<ViewExams />} />
+          <Route path="/create-folder" element={<CreateFolder />} /> */}
+          {/* <Route path="/view-all-exams" element={<ViewAllExams />} /> */}
+          {/* <Route path="/view-exams" element={<ViewExams />} />
           <Route path="/folder/:folderId" element={<FolderView />} />
-          <Route path="/score" element={<ScorePage />} /> */}
+          <Route path="/score" element={<ScorePage />} />
+          <Route path="/move-exam" element={<MoveExam />} />
+           <Route path="/view-questions" element={<ViewQuestions />} />  
+           <Route path="/navbar" element={<NavBar />} /> */}
 
 
 
 
 
 
-          </Route>
+
+           </Route>
           
           {/* User-protected routes */}
           <Route element={<AuthGuard roles={["User"]} />}>
@@ -63,12 +68,19 @@ function App() {
             <Route path="/view-exams" element={<ViewExams />} /> 
             <Route path="/folder/:folderName" element={<FolderView />} />
             <Route path="/score" element={<ScorePage />} />
+            <Route path="/move-exam" element={<MoveExam />} />
+            <Route path="/view-questions" element={<ViewQuestions />} />
+            <Route path="/navbar" element={<NavBar />} /> */}
+
+
+
+
 
 
 
 
         
-          </Route>
+           </Route>
 
           {/* Admin-protected routes */}
           <Route element={<AuthGuard roles={["Admin"]} />}>

@@ -169,9 +169,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./QuestionAnswers.css";
 import linkhost from "../..";
+import { getAuthToken } from "../../services/auth";
 
 const QuestionAnswers = () => {
   const navigate = useNavigate();
+  const {user} = getAuthToken();
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -242,31 +244,32 @@ const QuestionAnswers = () => {
     console.log(xpCollected);
 
     const payload = {
-      questionType: options.questionType, // Assuming all questions are MCQs
+      questionType: options.questionType,
+      examName: options.examName,
       numQuestions,
       numCorrectQuestions,
       numWrongQuestions,
-      difficultyLevel: options.difficulty, // Can be dynamic based on user input
+      difficultyLevel: options.difficulty,
       mcqQuestionsData: userAnswers,
       tfQuestionsData: [], // Assuming no True/False questions for now
       timeTaken: formattedTimeTaken,
       totalScore,
       xpCollected,
-      userId: 5, // Replace with actual user ID
-      subjectId: 3 // Replace with actual subject ID
+      userId: user.nameid, // Replace with actual user ID
+      subjectId: null // Replace with actual subject ID
     };
-    navigate("/score", {
-      state: {
-        totalScore,
-        timeTaken: formattedTimeTaken,
-        xpCollected,
-      },
-    });
+    
     
 
     try {
       await axios.post(linkhost + "/api/Exam", payload);
-      navigate("/");
+      navigate("/score", {
+        state: {
+          totalScore,
+          timeTaken: formattedTimeTaken,
+          xpCollected,
+        },
+      });
     } catch (error) {
       console.error("Failed to submit data:", error);
     }

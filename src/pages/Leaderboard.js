@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./leaderboard.css";
+import linkhost from "..";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/leaderboard")
+    axios.get(`${linkhost}/api/Group/GetLeaderboard/1`)
       .then(response => {
         setUsers(response.data);
       })
@@ -14,6 +15,37 @@ const Leaderboard = () => {
         console.error("Error fetching leaderboard data:", error);
       });
   }, []);
+
+  // useEffect(() => {
+  //   setUsers([
+  //     {id: 1,
+  //       username: "Rola",
+  //       rank: 1,
+  //       weeklyXP: 1000,
+  //     },
+  //     {id: 1,
+  //       username: "Maha",
+  //       rank: 1,
+  //       weeklyXP: 500,
+  //     },
+  //     {id: 1,
+  //       username: "Nancy",
+  //       rank: 1,
+  //       weeklyXP: 200,
+  //     },
+  //     {id: 1,
+  //       username: "Radwa",
+  //       rank: 1,
+  //       weeklyXP: 100,
+  //     },
+  //     {id: 1,
+  //       username: "Yasmin",
+  //       rank: 1,
+  //       weeklyXP: 50,
+  //     },
+  //   ])
+  // },[])
+  
 
   return (
     <div className="leaderboard-container">
@@ -27,8 +59,7 @@ const Leaderboard = () => {
                 <span className="username">{user.username}</span>
               </div>
               <div className="leaderboard-stats">
-                <p className="rank-text">Rank: {user.rank}</p>
-                <p className="xp-text">XP: {user.weeklyXP}</p>
+                <p className="xp-text">XP: {user.weeklyXp}</p>
               </div>
             </li>
           ))}

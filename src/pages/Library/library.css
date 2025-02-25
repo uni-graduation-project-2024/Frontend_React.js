@@ -1,7 +1,7 @@
 /* Dark Theme Styling for Library Component */
 .library-container {
   min-height: 100vh;
-  background-color: #121212; /* Dark background */
+  background-color: #121826; /* Dark background */
   color: #ffffff;
   padding: 24px;
   width: 81%;
@@ -114,7 +114,6 @@
   background-color: #1e1e1e;
   padding: 16px;
   border-radius: 8px;
-  text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
   border: 1px solid #333;

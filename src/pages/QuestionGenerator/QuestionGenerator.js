@@ -10,6 +10,7 @@ const QuestionGenerator = () => {
   const [questionType, setQuestionType] = useState([]);
   const [difficulty, setDifficulty] = useState("EASY");
   const [numQuestions, setNumQuestions] = useState(10);
+  const [examName, setExamName] = useState('');
   const [loading, setLoading] = useState(false);
   const [uploadMode, setUploadMode] = useState("FILE");
   //const [generatedQuestions, setGeneratedQuestions] = useState([]);
@@ -78,7 +79,8 @@ const QuestionGenerator = () => {
             generationData: response.data, 
             options: { 
                 difficulty, 
-                questionType: questionTypeString
+                questionType: questionTypeString,
+                examName
             } 
         } 
     });
@@ -194,6 +196,17 @@ const QuestionGenerator = () => {
             className="w-full"
           />
           <p className="text-center mt-2">{numQuestions}</p>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium mb-2">Title for the Exam</label>
+          <input
+            type="text"
+            value={examName}
+            onChange={(e) => setExamName(e.target.value)}
+            className="input-text-title block w-full border rounded-md p-2 bg-gray-700 text-white"
+            required
+          />
         </div>
 
         <button

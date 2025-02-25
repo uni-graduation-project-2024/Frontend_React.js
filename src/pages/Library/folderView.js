@@ -1,22 +1,28 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft, Trash2, Pencil } from "lucide-react";
 import axios from "axios";
 import Sidebar from "../../sidebar";
 import "./folderView.css";
 import linkhost from "../..";
+import ViewExams from "./viewExams";
 
 const FolderView = () => {
-  const { folderId } = useParams();
+  const { folderName } = useParams();
+  const [searchParams] = useSearchParams();
+  const subjectId = searchParams.get("subjectId");
+  const [folderNameHolder, setFolderNameHolder] = useState(folderName);
   const navigate = useNavigate();
 
   const handleDeleteFolder = async () => {
-    try {
-      await axios.delete(`${linkhost}/api/Subject/${folderId}`);
-      alert("Folder deleted successfully");
-      navigate("/library"); 
-    } catch (error) {
-      console.error("Error deleting folder:", error);
+    if (window.confirm("Are you sure you want to delete this folder?")) {
+      try {
+        await axios.delete(`${linkhost}/api/Subject/${subjectId}`);
+        navigate("/library"); 
+      } catch (error) {
+        console.error("Error deleting folder:", error);
+      }
     }
   };
 
@@ -24,9 +30,9 @@ const FolderView = () => {
     const newName = prompt("Enter new folder name:");
     if (newName) {
       axios
-        .put(`${linkhost}/api/Subject/${folderId}`, { subjectName: newName })
+        .put(`${linkhost}/api/Subject/${subjectId}`, { subjectName: newName })
         .then(() => {
-          alert("Folder renamed successfully");
+          setFolderNameHolder(newName);
         })
         .catch((error) => {
           console.error("Error renaming folder:", error);
@@ -34,19 +40,23 @@ const FolderView = () => {
     }
   };
 
+  const handleBackClick = () => {
+    navigate("/library");
+  };
+
   return (
     <>
       <Sidebar />
       <div className="folder-view-container">
-        <h1>Folder Details</h1>
-        <div className="folder-buttons">
-          <button className="folder-button delete" onClick={handleDeleteFolder}>
-            Delete Folder
-          </button>
-          <button className="folder-button rename" onClick={handleRenameFolder}>
-            Rename Folder
-          </button>
+      <div className="folder-header">
+          <ArrowLeft className="back-icon" onClick={handleBackClick} />
+          <div className="folder-title">
+            <h1>{folderNameHolder}</h1>
+            <Pencil className="rename-icon" onClick={handleRenameFolder} />
+            <Trash2 className="delete-icon" onClick={handleDeleteFolder} />
+          </div>
         </div>
+        <ViewExams subjectId={subjectId}/>
       </div>
     </>
   );

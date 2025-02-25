@@ -34,10 +34,12 @@ function App() {
             <Route path="/admin/login" element={<AdminLogin />} />
 
             {/* All the below routes must not be in this block it is here for front testing only*/}
+            <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/library" element={<Library />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/library" element={<Library />} />
+            <Route path="/generate-questions" element={<QuestionGenerator />} />
             <Route path="/create-folder" element={<CreateFolder />} />
+            <Route path="/Question-Answers" element={<QuestionAnswers/>}/>
             <Route path="/folder/:folderName" element={<FolderView />} />
             <Route path="/score" element={<ScorePage />} />
             <Route path="/move-exam" element={<MoveExam />} />

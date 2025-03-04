@@ -3,11 +3,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
-import { Trash2 } from "lucide-react";
+import { Trash2, MoreVertical  } from "lucide-react";
+import { LuFolderSymlink } from "react-icons/lu";
 import "./viewExams.css";
 
-const ViewExams = ( {subjectId}) => {
+const ViewExams = ( 
+  {subjectId,
+  openDropdown,
+  updateDropdown,
+}) => {
   const [exams, setExams] = useState([]);
+  const [openMenu, setOpenMenu] = useState(null);
   const { user } = getAuthToken();
   const navigate = useNavigate(); 
 
@@ -29,7 +35,17 @@ const ViewExams = ( {subjectId}) => {
     };
 
     fetchExams();
-  }, [subjectId, user.nameid]);
+  }, [subjectId]);
+
+  useEffect(()=>{
+    setOpenMenu(null);
+  },[openDropdown]);
+
+  const toggleMenu = async(examId, e) => {
+    e.stopPropagation(); // Prevent triggering other events
+    await updateDropdown(true);
+    setOpenMenu(openMenu === examId ? null : examId);
+  };
 
   const handleDelete = async (examId) => {
     if (window.confirm("Are you sure you want to delete this exam?")) {
@@ -116,14 +132,25 @@ const ViewExams = ( {subjectId}) => {
     return "Just now";
   };
 
+  const handleViewQuestions = (examId) =>{
+    navigate("/view-questions", { 
+      state: {examId} 
+    });
+  }
+
+  const handleMoveToFolder = (examId, subId) =>{
+    navigate('/move-exam', {
+      state: {examId, subId}
+    });
+  }
+
   return (
-    <div className="library-container2">
       <div className="library-exam-grid">
         {exams.length === 0 ? (
           <p>No exams available for this subject.</p>
         ) : (
           exams.map((exam) => (
-            <div key={exam.examId} className="library-exam">
+            <div key={exam.examId} className="library-exam" onClick={()=> handleViewQuestions(exam.examId)}>
               <div className="exam-info">
                 <p className="exam-time">
                   {timeAgo(exam.createdDate)} • {exam.numQuestions} questions
@@ -135,14 +162,33 @@ const ViewExams = ( {subjectId}) => {
                 <p  className="exam-title">{exam.examName}</p>
                 <div className="exam-actions">
                   <button onClick={() => handleRetry(exam)} className="retry-button">Practice Again</button>
-                  <Trash2 className="delete-icon" onClick={() => handleDelete(exam.examId)} />
+                  {/* <Trash2 className="delete-icon" onClick={() => handleDelete(exam.examId)} /> */}
+                  {/* Menu Icon */}
+
+                  <div className="exam-dropdown">
+                    <MoreVertical 
+                      className="exam-menu-icon" 
+                      onClick={(e) => toggleMenu(exam.examId, e)}
+                    />
+
+                    {/* Dropdown Menu */}
+                    {openMenu === exam.examId && openDropdown &&(
+                      <div className={`exam-dropdown-menu ${openDropdown ? "open" : "closed"}`} onClick={(e) => e.stopPropagation()}>
+                        <button className="move-exam-to-folder-btn" onClick={()=> handleMoveToFolder(exam.examId, exam.subjectId)}>
+                          <LuFolderSymlink className="exam-move-icon"/> Move to Folder
+                          </button>
+                        <button className="exam-delete-btn" onClick={() => handleDelete(exam.examId)}>
+                          <Trash2 className="exam-delete-icon" /> Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           ))
         )}
       </div>
-    </div>
   );
 };
 

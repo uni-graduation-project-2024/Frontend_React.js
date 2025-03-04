@@ -1,82 +1,155 @@
-.library-container2 {
-    padding: 20px;
-    color: white;
-    background-color: #121826;
-  }
-  
-  .library-title {
-    font-size: 24px;
-    margin-bottom: 15px;
-  }
-  
-  .library-exam-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .library-exam {
-    background: #1b2330;
-    padding: 15px;
-    border-radius: 8px;
-  }
-  
-  .exam-info {
-    margin-bottom: 10px;
-  }
-  
-  .exam-time {
-    font-size: 11px;
-    color: #ccc;
-  }
-  
-  .exam-folder {
-    font-size: 11px;
-    color: #6d87ff;
-  }
-  
-  .exam-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #edecec;
-    margin: 0;
-    flex-grow: 1;
-  }
 
-  .exam-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.library-title {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
 
-  .exam-actions {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .delete-button {
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .retry-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .delete-button:hover {
-    background-color: #c9302c;
-  }
-  
-  .retry-button:hover {
-    background-color: #218838;
-  }
-  
+.library-exam-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  color: white;
+  background-color: #121826;
+}
+
+.library-exam {
+  /* position: relative; */
+  background: #1b2330;
+  padding: 15px;
+  border-radius: 8px;
+  padding: 16px;
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s, z-index 0s 0.2s; /* Delays z-index change */
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+  border: 1px solid #333;
+}
+
+.library-exam:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.15);
+  z-index: 10;
+}
+
+.exam-info {
+  margin-bottom: 10px;
+}
+
+.exam-time {
+  font-size: 11px;
+  color: #ccc;
+}
+
+.exam-folder {
+  font-size: 11px;
+  color: #6d87ff;
+}
+
+.exam-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #edecec;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.exam-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exam-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.delete-button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.retry-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #c9302c;
+}
+
+.retry-button:hover {
+  background-color: #218838;
+}
+
+.exam-menu-icon {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.exam-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 100;
+}
+
+.exam-dropdown-menu {
+  position: absolute;
+  right: 10px;
+  top: 100%;
+  background: #363030;
+  border-radius: 5px;
+  padding: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none; /* Prevent clicks when hidden */
+  z-index: 100;
+  width: 175px;
+  overflow: auto;
+}
+
+.exam-dropdown-menu.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.exam-dropdown-menu.closed {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.move-exam-to-folder-btn, .exam-delete-btn {
+  background: none;
+  border: none;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color:#d8dee3;
+}
+
+.exam-move-icon{
+  width: 48px;
+  height: 33px;
+  cursor: pointer;
+  color: #dfd1d3;
+  transition: color 0.2s ease;
+}
+
+.exam-delete-icon, .exam-delete-btn{
+  color: rgb(207, 88, 88);
+}

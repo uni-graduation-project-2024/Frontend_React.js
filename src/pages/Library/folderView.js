@@ -13,6 +13,7 @@ const FolderView = () => {
   const [searchParams] = useSearchParams();
   const subjectId = searchParams.get("subjectId");
   const [folderNameHolder, setFolderNameHolder] = useState(folderName);
+  const [openDropdown, setOpenDropdown] = useState(true);
   const navigate = useNavigate();
 
   const handleDeleteFolder = async () => {
@@ -47,8 +48,8 @@ const FolderView = () => {
   return (
     <>
       <Sidebar />
-      <div className="folder-view-container">
-      <div className="folder-header">
+      <div className="folder-view-container" onClick={()=> setOpenDropdown(false)}>
+        <div className="folder-header">
           <ArrowLeft className="back-icon" onClick={handleBackClick} />
           <div className="folder-title">
             <h1>{folderNameHolder}</h1>
@@ -56,7 +57,11 @@ const FolderView = () => {
             <Trash2 className="delete-icon" onClick={handleDeleteFolder} />
           </div>
         </div>
-        <ViewExams subjectId={subjectId}/>
+
+        <ViewExams subjectId={subjectId}
+        openDropdown={openDropdown} 
+        updateDropdown={setOpenDropdown}
+        />
       </div>
     </>
   );

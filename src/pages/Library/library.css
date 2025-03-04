@@ -78,7 +78,7 @@
 
 /* Folder Item */
 .library-folder {
-  background-color: #1e1e1e; /* Dark Gray */
+  background-color: #444;
   padding: 16px;
   border-radius: 8px;
   text-align: center;
@@ -92,65 +92,25 @@
   transform: translateY(-3px);
 }
 
-/* Exams Section */
-.library-exams {
-  margin-top: 24px;
+.bottom-div {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
 }
 
-.library-exams-title {
-  font-size: 1.25rem;
-  margin-bottom: 16px;
-}
-
-/* Exam Grid */
-.library-exam-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 16px;
-}
-
-/* Exam Item */
-.library-exam {
-  background-color: #1e1e1e;
-  padding: 16px;
-  border-radius: 8px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
-  border: 1px solid #333;
-}
-
-.library-exam:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.15);
-}
-
-/* Exam Action Buttons */
-.delete-btn, .retry-btn {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: 0.3s;
+.cancel-move-to-folder-btn{
+  float: right;
+  background-color: rgb(72, 72, 216);
+  padding: 5px;
   margin: 5px;
-}
-
-.delete-btn {
-  background-color: #ff4c4c;
-  color: #ffffff;
-}
-
-.delete-btn:hover {
-  background-color: #d43f3f;
-}
-
-.retry-btn {
-  background-color: #007bff;
-  color: #ffffff;
-}
-
-.retry-btn:hover {
-  background-color: #0056b3;
+  border: none;
+  font-size: 19.7px;
+  border-radius: 7.3px;
 }
 
 /* Responsive Design */

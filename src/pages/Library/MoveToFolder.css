@@ -1,3 +1,10 @@
+.move-exam-frame {
+  height: 100dvh;
+  background-color: #45a0496b;
+  display: flex;
+}
+
+
 .move-exam-container {
     max-width: 400px;
     margin: auto;
@@ -51,4 +58,35 @@
     font-size: 18px;
     color: #555;
   }
+
+  .folder-dropdown {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .cancel-btn, .save-btn {
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cancel-btn {
+    background: #ccc;
+    color: black;
+  }
+  
+  .save-btn {
+    background: #007bff;
+    color: white;
+  }
+  
   

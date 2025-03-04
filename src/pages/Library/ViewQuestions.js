@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import linkhost from "../..";
-import "./view_Q&A.css";
+import "./ViewQuestions.css";
 
 const ViewQuestions = () => {
   const location = useLocation();

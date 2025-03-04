@@ -13,13 +13,13 @@ import QuestionGenerator from "./pages/QuestionGenerator/QuestionGenerator";
 import AdminLogin from "./pages/admin/login/login";
 import Dashboard  from "./pages/admin/dashboard";
 import ShowUser from "./pages/admin/show-users/show-user";
-import DeleteUser from "./pages/admin/delete-user/delete-user";
+
 import QuestionAnswers from "./pages/QuestionGenerator/QuestionAnswers";
 import Leaderboard from "./pages/Leaderboard";
 import FolderView from "./pages/Library/folderView";
 import ScorePage from "./pages/QuestionGenerator/scorePage";
 import MoveExam from "./pages/Library/MoveToFolder";
-import ViewQuestions from "./pages/Library/view_Q&A";
+import ViewQuestions from "./pages/Library/ViewQuestions";
 
 function App() {
   return (
@@ -34,22 +34,7 @@ function App() {
             <Route path="/admin/login" element={<AdminLogin />} />
 
             {/* All the below routes must not be in this block it is here for front testing only*/}
-            <Route path="/change-password" element={<ChangePassword />} />
-            <Route path="/library" element={<Library />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/generate-questions" element={<QuestionGenerator />} />
-            <Route path="/create-folder" element={<CreateFolder />} />
-            <Route path="/Question-Answers" element={<QuestionAnswers/>}/>
-            <Route path="/folder/:folderName" element={<FolderView />} />
-            <Route path="/score" element={<ScorePage />} />
-            <Route path="/move-exam" element={<MoveExam />} />
-            <Route path="/view-questions" element={<ViewQuestions />} />  
-            {/* All the above routes must not be in this block it is here for front testing only*/}
-          </Route>
-          
-          {/* User-protected routes */}
-          <Route element={<AuthGuard roles={["User"]} />}>
-            <Route path="/change-password" element={<ChangePassword />} />
+            {/* <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/library" element={<Library />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/generate-questions" element={<QuestionGenerator />} />
@@ -59,14 +44,32 @@ function App() {
             <Route path="/score" element={<ScorePage />} />
             <Route path="/move-exam" element={<MoveExam />} />
             <Route path="/view-questions" element={<ViewQuestions />} />
+            <Route path="/move-exam" element={<MoveExam />} />   */}
+            {/* All the above routes must not be in this block it is here for front testing only*/}
+          </Route>
+          
+          {/* User-protected routes */}
+          <Route element={<AuthGuard roles={["User"]} />}>
+            <Route path="/library" element={<Library />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/generate-questions" element={<QuestionGenerator />} />
+            <Route path="/create-folder" element={<CreateFolder />} />
+            <Route path="/Question-Answers" element={<QuestionAnswers/>}/>
+            <Route path="/folder/:folderName" element={<FolderView />} />
+            <Route path="/score" element={<ScorePage />} />
+            <Route path="/move-exam" element={<MoveExam />} />
+            <Route path="/view-questions" element={<ViewQuestions />} />
+            <Route path="/move-exam" element={<MoveExam />} />
            </Route>
 
           {/* Admin-protected routes */}
           <Route element={<AuthGuard roles={["Admin"]} />}>
             <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/admin/show-user/:id" element={<ShowUser />} />
-            <Route path="/admin/delete-user/:id" element={<DeleteUser />} />
+          </Route>
+
+          <Route element={<AuthGuard roles={["User", "Admin"]} />}>
+            <Route path="/change-password" element={<ChangePassword />} />
           </Route>
 
           {/* Unauthorized Route */}

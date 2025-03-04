@@ -96,36 +96,47 @@ const QuestionGenerator = () => {
     <div className="p-4 body">
       <Sidebar />
       <form className="md-questionGeneration" onSubmit={handleSubmit}>
-        <div className="flex justify-between mb-4">
-          <button type="button" onClick={() => setUploadMode("FILE")}
-            className={`px-4 py-2 rounded-lg ${uploadMode === "FILE" ? "bg-blue-500" : "bg-gray-700"}`}>
-            FILE
-          </button>
-          <button type="button" onClick={() => setUploadMode("TEXT")}
-            className={`px-4 py-2 rounded-lg ${uploadMode === "TEXT" ? "bg-blue-500" : "bg-gray-700"}`}>
-            TEXT
-          </button>
-        </div>
+        <div className="upload-mode-buttons">
+        <button 
+          type="button" 
+          onClick={() => setUploadMode("FILE")}
+          className={uploadMode === "FILE" ? "active" : "inactive"}
+        >
+          FILE
+        </button>
+        <button 
+          type="button" 
+          onClick={() => setUploadMode("TEXT")}
+          className={uploadMode === "TEXT" ? "active" : "inactive"}
+        >
+          TEXT
+        </button>
+      </div>
 
-        {uploadMode === "FILE" && (
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">Upload Your File</label>
-            <input type="file" accept=".txt, .pdf, .docx" onChange={handleFileChange}
-              className="block w-full border rounded-md p-2 bg-gray-700 text-white"/>
-          </div>
-        )}
+      <div className="mb-4">
+  <button  type="button"   onClick={() => {
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.accept = ".txt, .pdf, .docx";
+      fileInput.onchange = handleFileChange;
+      fileInput.click();
+    }}
+    className="w-full p-2 bg-blue-500 text-white rounded-md">
+    Upload Your File
+  </button>
+</div>
 
         {uploadMode === "TEXT" && (
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">Enter Your Text</label>
             <textarea rows="4" value={text} onChange={handleTextChange}
+            placeholder="Enter your text" 
               className="block w-full border rounded-md p-2 bg-gray-700 text-white"/>
           </div>
         )}
-
-        <div className="mb-4">
+      <div className="inside-form">
+        <div className="mb-44">
           <h3 className="text-sm font-medium mb-2">Type Of Questions</h3>
-          <div className="flex items-center gap-4">
+          <div className="flex2 items-center gap-4">
             <label className="flex items-center">
               <input
                 type="checkbox"
@@ -151,15 +162,17 @@ const QuestionGenerator = () => {
 
         <div className="mb-4">
           <h3 className="text-sm font-medium mb-2">Difficulty Level</h3>
-          <div className="flex items-center gap-4">
+          <div className="flex2 items-center gap-4">
             <label className="flex items-center">
-              <input
-                type="radio"
-                value="EASY"
-                checked={difficulty === "EASY"}
-                onChange={(e) => setDifficulty(e.target.value)}
-                className="mr-2"
-              />
+            <input
+  type="radio"
+  name="difficulty"
+  value="EASY"
+  checked={difficulty === "EASY"}
+  onChange={() => setDifficulty("EASY")}
+  className="mr-2"
+/>
+
               Easy
             </label>
             <label className="flex items-center">
@@ -183,8 +196,7 @@ const QuestionGenerator = () => {
               Hard
             </label>
           </div>
-        </div>
-
+        </div> 
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2">Number of Questions</label>
           <input
@@ -208,6 +220,7 @@ const QuestionGenerator = () => {
             required
           />
         </div>
+      </div>   
 
         <button
           type="submit"
@@ -222,6 +235,8 @@ const QuestionGenerator = () => {
         </button>
       </form>
     </div>
+    
+
   );
 };
 

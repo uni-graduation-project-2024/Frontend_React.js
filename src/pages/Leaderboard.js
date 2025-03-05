@@ -16,7 +16,7 @@ const Leaderboard = () => {
       .catch(error => {
         console.error("Error fetching leaderboard data:", error);
       });
-  }, []);
+  }, [user.nameid]);
 
   // useEffect(() => {
   //   setUsers([

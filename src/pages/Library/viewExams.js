@@ -35,7 +35,7 @@ const ViewExams = (
     };
 
     fetchExams();
-  }, [subjectId]);
+  }, [user.nameid, subjectId]);
 
   useEffect(()=>{
     setOpenMenu(null);

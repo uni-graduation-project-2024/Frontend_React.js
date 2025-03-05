@@ -13,9 +13,7 @@ const Library = () => {
   const [folders, setFolders] = useState([]);
   const [folderMode, setFolderMode] = useState(-1);
   const [openDropdown, setOpenDropdown] = useState(true);
-  const [MoveToFolderMode, setMoveToFolderMode] = useState(false);
   const { user } = getAuthToken();
-  const [ examId, setExamId] = useState(null);
 
   useEffect(() => {
     const fetchFolders = async () => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getAuthToken } from "../../services/auth";
 import linkhost from "../..";
 import "./dashboard.css";
@@ -27,7 +27,7 @@ const Dashboard = () => {
         setError("Failed to load users.");
         setLoading(false);
       });
-  }, []);
+  }, [token]);
 
   const handleDeleteUser = (userId) =>{
     axios

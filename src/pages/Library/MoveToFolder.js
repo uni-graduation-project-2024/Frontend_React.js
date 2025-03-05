@@ -31,7 +31,7 @@ const MoveExam = () => {
     if(subId){
       setExamFolder(subId);
     }
-  }, []);
+  }, [user.nameid, subId]);
 
   const moveExam = (folder) => {
     axios.patch(`${linkhost}/api/Exam/${examId}/${folder}`)

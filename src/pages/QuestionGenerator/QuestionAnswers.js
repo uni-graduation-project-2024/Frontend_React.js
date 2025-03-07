@@ -256,13 +256,20 @@ const QuestionAnswers = () => {
       totalScore,
       xpCollected,
       userId: user.nameid, // Replace with actual user ID
-      subjectId: null // Replace with actual subject ID
+      subjectId: null, // Replace with actual subject ID
+      examId: null
     };
     
     
 
     try {
+      if( options.retry){
+        payload.examId = options.examId;
+        await axios.put(linkhost + "/api/Exam", payload);
+      }
+      else{
       await axios.post(linkhost + "/api/Exam", payload);
+      }
       navigate("/score", {
         state: {
           totalScore,

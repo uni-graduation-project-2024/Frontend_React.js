@@ -89,7 +89,9 @@ const ViewExams = (
             options: { 
                 difficulty: fetchedExam.difficultyLevel, 
                 questionType: fetchedExam.questionType,
-                examName : fetchedExam.examName
+                examName : fetchedExam.examName,
+                examId: fetchedExam.examId,
+                retry: true,
             } 
         } 
       });

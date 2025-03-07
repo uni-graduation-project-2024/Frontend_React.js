@@ -36,7 +36,8 @@ const ShowUser = () => {
           err: [{ msg: `Something went wrong` }],
         });
       });
-  }, [specificUser, id]);
+      // eslint-disable-next-line
+  }, [id]);
 
   const loadingSpinner = () => {
     return (

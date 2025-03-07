@@ -53,7 +53,7 @@ const MoveExam = () => {
           value={selectedFolder || ""} 
           onChange={(e) => setSelectedFolder(e.target.value)}
         >
-          <option value="">Select a folder</option>
+          <option value="-1">No folder</option>
           {folders.length === 0 ? (
             <option disabled>No folders created yet.</option>
           ) : (

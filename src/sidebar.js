@@ -25,7 +25,7 @@ const Sidebar = ({ children }) => {
                 <Link to="/library" className="sidebar-item flex items-center text-lg hover:text-blue-500">
                   <FaBook className="mr-2" /> My Library
                 </Link>
-                <Link to="/generate-questions" className="sidebar-item flex items-center text-lg hover:text-blue-500">
+                <Link to="/GenerationForm" className="sidebar-item flex items-center text-lg hover:text-blue-500">
                   <RiAiGenerate className="mr-2" /> Generate Questions
                 </Link>
               </>

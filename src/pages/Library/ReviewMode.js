@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import linkhost from "../..";
-import "./view_Q&A.css";
+import "./ReviewMode.css";
 
-const ViewQuestions = () => {
+const ReviewMode = () => {
   const location = useLocation();
   const { examId } = location.state || {};
   const [questions, setQuestions] = useState([]);
@@ -61,4 +61,4 @@ const ViewQuestions = () => {
   );
 };
 
-export default ViewQuestions;
+export default ReviewMode;

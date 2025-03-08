@@ -1,12 +1,12 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getAuthToken } from "../../../services/auth";
+//import { getAuthToken } from "../../../services/auth";
 import { useParams } from "react-router-dom";
 
 const ShowUser = () => {
   const { id } = useParams();
-  const { token, user } = getAuthToken();
+  //const { token, user } = getAuthToken();
 
   const [specificUser, setSpecificUser] = useState({
     loading: true,
@@ -36,7 +36,8 @@ const ShowUser = () => {
           err: [{ msg: `Something went wrong` }],
         });
       });
-  }, []);
+      // eslint-disable-next-line
+  }, [id]);
 
   const loadingSpinner = () => {
     return (

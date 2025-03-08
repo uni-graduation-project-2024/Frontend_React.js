@@ -6,12 +6,13 @@ import axios from "axios";
 import "./library.css";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
-import ViewExams from "./viewExams";
+import ExamCard from "./ExamCard";
 
 const Library = () => {
   const navigate = useNavigate();
   const [folders, setFolders] = useState([]);
-  const [viewMode, setViewMode] = useState(-1);
+  const [folderMode, setFolderMode] = useState(-1);
+  const [openDropdown, setOpenDropdown] = useState(true);
   const { user } = getAuthToken();
 
   useEffect(() => {
@@ -32,18 +33,18 @@ const Library = () => {
   };
 
   const handleViewAllExamMode = ()=>{
-    setViewMode(0);
+    setFolderMode(0);
   }
 
   const handleViewFolder = ()=>{
-    setViewMode(-1);
+    setFolderMode(-1);
   }
 
   return (
     <>
     <Sidebar/>
 
-      <div className="library-container">
+      <div className="library-container" onClick={()=> setOpenDropdown(false)}>
         <div className="library-header">
           <h1 className="library-title">My Library</h1>
           <div className="library-buttons">
@@ -56,10 +57,10 @@ const Library = () => {
           </div>
         </div>
 
-        <button className="sidebar-left" onClick={handleViewFolder}>Folders</button>
-        <button className="sidebar-left2" onClick={handleViewAllExamMode}>All Exams</button>
+        <div className="sidebar-left" onClick={handleViewFolder}>Folders</div>
+        <div className="sidebar-left2" onClick={handleViewAllExamMode}>All Exams</div>
 
-        { viewMode === -1 && (
+        { folderMode === -1 && (
           <div className="library-folders">
             <h3 className="library-folders-title">Folders</h3>
             <div className="library-folder-grid">
@@ -71,7 +72,6 @@ const Library = () => {
                     key={folder.subjectId} 
                     className="library-folder" 
                     onClick={() => navigate(`/folder/${folder.subjectName}?subjectId=${folder.subjectId}`)}
-                    style={{ cursor: "pointer", padding: "10px", borderRadius: "5px", background: "#444", color: "white", transition: "background 0.3s" }}
                   >
                     {folder.subjectName}
                   </div>
@@ -80,8 +80,12 @@ const Library = () => {
             </div>
           </div>
         )}
-        <ViewExams subjectId={viewMode}/>
         
+        <ExamCard subjectId={folderMode} 
+        openDropdown={openDropdown} 
+        updateDropdown={setOpenDropdown}
+        />
+
       </div>
     </>
   );

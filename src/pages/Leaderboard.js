@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./leaderboard.css";
 import linkhost from "..";
+import { getAuthToken } from "../services/auth";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);
+  const { user } = getAuthToken();
 
   useEffect(() => {
-    axios.get(`${linkhost}/api/Group/GetLeaderboard/1`)
+    axios.get(`${linkhost}/api/Group?userId=${user.nameid}`)
       .then(response => {
         setUsers(response.data);
       })
       .catch(error => {
         console.error("Error fetching leaderboard data:", error);
       });
-  }, []);
+  }, [user.nameid]);
 
   // useEffect(() => {
   //   setUsers([

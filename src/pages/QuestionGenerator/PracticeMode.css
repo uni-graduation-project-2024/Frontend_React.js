@@ -1,0 +1,129 @@
+.quiz-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .quiz-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .question {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  .answers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .answer-btn {
+    padding: 10px;
+    background: #f1f1f1;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .answer-btn:hover {
+    background: #ddd;
+  }
+  
+  .answer-btn.selected {
+    background: #6a74e8;
+    color: white;
+  }
+  
+  .check-btn,
+  .continue-btn {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .check-btn {
+    background: #007bff;
+    color: white;
+  }
+  
+  .check-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .continue-btn {
+    background: #28a745;
+    color: white;
+  }
+  
+  .feedback {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .correct-feedback {
+    background: #d4edda;
+    color: #155724;
+  }
+  
+  .incorrect-feedback {
+    background: #f8d7da;
+    color: #721c24;
+  }
+  
+  .explanation {
+    font-style: italic;
+    margin-top: 5px;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .progress-bar-fill {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0%; /* Dynamically updated */
+    transition: width 0.5s ease-in-out;
+    border-radius: 10px;
+  }
+  
+  .progress-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .correct {
+    background-color: #4caf50 !important;
+  }
+  
+  .incorrect {
+    background-color: #e74c3c !important;
+  }
+  

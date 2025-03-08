@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // For navigation
-import "./QuestionGenerator.css";
+import "./GenerationForm.css";
 import Sidebar from "../../sidebar";
 import axios from "axios";
 
-const QuestionGenerator = () => {
+const GenerationForm = () => {
   const [file, setFile] = useState(null);
   const [text, setText] = useState("");
   const [questionType, setQuestionType] = useState([]);
@@ -73,8 +73,8 @@ const QuestionGenerator = () => {
 
       const questionTypeString = questionType.join(" & ")
 
-      // Navigate to QuestionAnswers page and pass questions
-      navigate("/Question-Answers", { 
+      // Navigate to PracticeMode page and pass questions
+      navigate("/PracticeMode", { 
         state: { 
             generationData: response.data, 
             options: { 
@@ -225,4 +225,4 @@ const QuestionGenerator = () => {
   );
 };
 
-export default QuestionGenerator;
+export default GenerationForm;

@@ -5,9 +5,9 @@ import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
 import { Trash2, MoreVertical  } from "lucide-react";
 import { LuFolderSymlink } from "react-icons/lu";
-import "./viewExams.css";
+import "./ExamCard.css";
 
-const ViewExams = ( 
+const ExamCard = ( 
   {subjectId,
   openDropdown,
   updateDropdown,
@@ -84,7 +84,7 @@ const ViewExams = (
         })
       );
       
-      navigate("/Question-Answers", { 
+      navigate("/PracticeMode", { 
         state: {  
             options: { 
                 difficulty: fetchedExam.difficultyLevel, 
@@ -134,7 +134,7 @@ const ViewExams = (
     return "Just now";
   };
 
-  const handleViewQuestions = (examId) =>{
+  const handleReviewMode = (examId) =>{
     navigate("/view-questions", { 
       state: {examId} 
     });
@@ -152,7 +152,7 @@ const ViewExams = (
           <p>No exams available for this subject.</p>
         ) : (
           exams.map((exam) => (
-            <div key={exam.examId} className="library-exam" onClick={()=> handleViewQuestions(exam.examId)}>
+            <div key={exam.examId} className="library-exam" onClick={()=> handleReviewMode(exam.examId)}>
               <div className="exam-info">
                 <p className="exam-time">
                   {timeAgo(exam.createdDate)} • {exam.numQuestions} questions
@@ -194,4 +194,4 @@ const ViewExams = (
   );
 };
 
-export default ViewExams;
+export default ExamCard;

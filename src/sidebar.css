@@ -1,7 +1,7 @@
 
 /* Ensure that the sidebar sticks to the left and has full height */
 .sidebar {
-    background-color: #2d2d2d; /* Dark background */
+    background-color: #96b6f3; /* Dark background */
     color: white;
     width: 250px; /* Sidebar width */
     height: 100vh; /* Full viewport height */

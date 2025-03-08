@@ -6,7 +6,7 @@ import axios from "axios";
 import "./library.css";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
-import ViewExams from "./viewExams";
+import ExamCard from "./ExamCard";
 
 const Library = () => {
   const navigate = useNavigate();
@@ -57,8 +57,8 @@ const Library = () => {
           </div>
         </div>
 
-        <button className="sidebar-left" onClick={handleViewFolder}>Folders</button>
-        <button className="sidebar-left2" onClick={handleViewAllExamMode}>All Exams</button>
+        <div className="sidebar-left" onClick={handleViewFolder}>Folders</div>
+        <div className="sidebar-left2" onClick={handleViewAllExamMode}>All Exams</div>
 
         { folderMode === -1 && (
           <div className="library-folders">
@@ -81,7 +81,7 @@ const Library = () => {
           </div>
         )}
         
-        <ViewExams subjectId={folderMode} 
+        <ExamCard subjectId={folderMode} 
         openDropdown={openDropdown} 
         updateDropdown={setOpenDropdown}
         />

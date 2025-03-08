@@ -1,8 +1,8 @@
 /* Dark Theme Styling for Library Component */
 .library-container {
   min-height: 100vh;
-  background-color: #121826; /* Dark background */
-  color: #ffffff;
+  background-color: #fafbff; /* Dark background */
+  color: #87a2d6;
   padding: 24px;
   width: 81%;
   float: right;
@@ -78,13 +78,12 @@
 
 /* Folder Item */
 .library-folder {
-  background-color: #444;
+  background-color: #01186f;
   padding: 16px;
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s;
-  border: 1px solid #333;
 }
 
 .library-folder:hover {

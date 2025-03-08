@@ -48,13 +48,6 @@ function App() {
           <Route path="/move-exam" element={<MoveExam />} />
            <Route path="/view-questions" element={<ViewQuestions />} />  
            <Route path="/navbar" element={<NavBar />} /> */}
-
-
-
-
-
-
-
            </Route>
           
           {/* User-protected routes */}
@@ -70,7 +63,7 @@ function App() {
             <Route path="/score" element={<ScorePage />} />
             <Route path="/move-exam" element={<MoveExam />} />
             <Route path="/view-questions" element={<ViewQuestions />} />
-            <Route path="/navbar" element={<NavBar />} /> */}
+            <Route path="/navbar" element={<NavBar />} /> 
 
 
 

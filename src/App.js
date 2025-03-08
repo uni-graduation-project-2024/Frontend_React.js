@@ -19,7 +19,13 @@ import Leaderboard from "./pages/Leaderboard";
 import FolderView from "./pages/Library/folderView";
 import ScorePage from "./pages/QuestionGenerator/scorePage";
 import MoveExam from "./pages/Library/MoveToFolder";
-import ReviewMode from "./pages/Library/ReviewMode";
+import ReviewMode from "./pages/Library/ReviewMode"; 
+import Sidebar from "./sidebar";
+import ExamCard from "./pages/Library/ExamCard";
+import NavBar from "./pages/Home/navbar";
+import Challenge from "./pages/challenges/Challenge";
+import UserProfile from "./pages/user-profile/userProfile";
+import Market from "./pages/market/market";
 
 function App() {
   return (
@@ -28,28 +34,9 @@ function App() {
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
-
           <Route element={<AuthGuard roles={[]} />}>
           <Route path="/loginRegister" element={<LoginRegisterUser/>}/>
           <Route path="/admin/login" element={<AdminLogin />} />
-          {/* <Route path="/QuestionAnswers" element={<QuestionAnswers/>}/>
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/library" element={<Library />} />
-          <Route path="/create-folder" element={<CreateFolder />} /> */}
-          {/* <Route path="/view-all-exams" element={<ViewAllExams />} /> */}
-          {/* <Route path="/view-exams" element={<ViewExams />} />
-          <Route path="/folder/:folderId" element={<FolderView />} />
-          <Route path="/score" element={<ScorePage />} />
-          <Route path="/move-exam" element={<MoveExam />} />
-           <Route path="/view-questions" element={<ViewQuestions />} />  
-           <Route path="/navbar" element={<NavBar />} /> */}
-
-
-
-
-
-
-
            </Route>
           
           {/* User-protected routes */}
@@ -62,18 +49,16 @@ function App() {
             <Route path="/folder/:folderName" element={<FolderView />} />
             <Route path="/score" element={<ScorePage />} />
             <Route path="/move-exam" element={<MoveExam />} />
-            <Route path="/view-questions" element={<ViewQuestions />} />
-            <Route path="/navbar" element={<NavBar />} /> */}
-
-
-
-
-
-
-
-
-        
+            <Route path="/exam-card" element={<ExamCard />} />
+            <Route path="/sidebar" element={<Sidebar />} /> 
+            <Route path="/navbar" element={<NavBar />} /> 
+            <Route path="/Review-Mode" element={<ReviewMode />} /> 
+            <Route path="/Review-Mode" element={<ReviewMode />} /> 
+            <Route path="/challenges " element={<Challenge />} /> 
+            <Route path="/user-profile " element={<UserProfile />} /> 
+            <Route path="/market " element={<Market />} /> 
            </Route>
+
 
           {/* Admin-protected routes */}
           <Route element={<AuthGuard roles={["Admin"]} />}>

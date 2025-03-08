@@ -1,54 +1,80 @@
-
-/* Ensure that the sidebar sticks to the left and has full height */
 .sidebar {
-    background-color: #96b6f3; /* Dark background */
-    color: white;
-    width: 250px; /* Sidebar width */
-    height: 100vh; /* Full viewport height */
-    position: fixed; /* Make it fixed to the left */
-    left: 0;
-    top: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align the items from the top */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional box shadow */
-  }
-  
-  /* Logo styling */
-  .sidebar .logo {
-    margin-bottom: 30px;
-  }
-  
-  .sidebar h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  /* Menu items */
-  .sidebar-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-    text-decoration: none;
-    color: white;
-    transition: all 0.3s ease;
-  }
-  
-  .sidebar-item:hover {
-    background-color: #3c3c3c; /* Darken on hover */
-    color: #1e90ff; /* Change text color on hover */
-  }
-  
-  /* To create a content area next to sidebar */
-  .main-content {
-    margin-left: 250px; /* Push the content to the right, equal to sidebar width */
-    padding: 20px;
-  }
+  background-color: #96b6f3; /* Dark Navy */
+  color: #e0e0e0;
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
 
-  .mr-2 {
-    margin-right: 10px;
-  }
-  
+.sidebar .logo {
+  margin-bottom: 30px;
+}
+
+.sidebar h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2a2a3c; /* Gold */
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #2a2a3c;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-item:hover {
+  background-color: #2a2a3c; /* Slightly lighter dark */
+  color: #ffcc00; /* Gold */
+  transform: translateX(5px);
+}
+
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+  background-color: #121212; /* Deep Black */
+  color: #ffffff;
+}
+
+.mr-2 {
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #333;
+}
+
+.user-info .icon {
+  color: #facc15; /* Gold */
+  font-size: 1.2rem;
+}
+
+.profile-link {
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s ease, transform 0.3s;
+}
+
+.profile-link:hover {
+  color: #ffcc00; /* Bright Gold */
+  transform: scale(1.1);
+}

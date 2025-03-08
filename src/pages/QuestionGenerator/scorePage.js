@@ -36,7 +36,6 @@ const ScorePage = () => {
           </div>
         </div>
 
-        {/* 🏠 Home Button */}
         <button className="home-button" onClick={homeHandle}>
           Done
         </button>

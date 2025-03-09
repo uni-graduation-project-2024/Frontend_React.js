@@ -62,9 +62,6 @@ const ExamCard = (
       localStorage.setItem(
         "generatedQuestions",
         JSON.stringify({
-          examName: fetchedExam.examName,
-          difficulty: fetchedExam.difficultyLevel,
-          questionType: fetchedExam.questionType,
           questionData: questionData,
         })
       );
@@ -76,6 +73,7 @@ const ExamCard = (
                 questionType: fetchedExam.questionType,
                 examName : fetchedExam.examName,
                 examId: fetchedExam.examId,
+                subjectId: fetchedExam.subjectId,
                 retry: true,
             } 
         } 

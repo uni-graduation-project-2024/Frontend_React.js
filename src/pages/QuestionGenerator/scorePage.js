@@ -8,7 +8,7 @@ const ScorePage = () => {
   const { totalScore, timeTaken, xpCollected } = location.state || {};
 
   const homeHandle = () =>{
-    navigate("/");
+    navigate("/library");
   }
 
   return (

@@ -101,7 +101,7 @@ const PracticeMode = () => {
       totalScore,
       xpCollected,
       userId: user.nameid,
-      subjectId: null,
+      subjectId: options.subjectId || null,
       examId: options.retry ? options.examId : null
     };
 

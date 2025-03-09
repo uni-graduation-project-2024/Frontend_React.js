@@ -33,7 +33,7 @@
     background-color: #4299e1; /* Blue-500 */
     padding: 12px 24px;
     font-size: 1.125rem; /* text-lg */
-    display: flex;
+    display: inline-block;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -41,6 +41,7 @@
     color: white;
     cursor: pointer;
     transition: background 0.3s ease;
+    margin-left: 1rem;
   }
   
   .home-login-button:hover {

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 //import { getAuthToken } from "../../../services/auth";
 import { useParams } from "react-router-dom";
+import linkhost from "../../..";
 
 const ShowUser = () => {
   const { id } = useParams();
@@ -16,7 +17,7 @@ const ShowUser = () => {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7078/api/Admin/GetUserById/${id}`, {
+      .get(`${linkhost}/api/User/user-profile?userId=${id}`, {
         // headers: {
         //   Authorization: `Bearer ${token}`,
         // },

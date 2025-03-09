@@ -20,7 +20,7 @@ const Sidebar = ({ children }) => {
             {user.role === "User" && (
               <>
                 <Link to="/GenerationForm" className="sidebar-item">
-                  <RiAiGenerate className="icon" /> Generate Questions
+                  <RiAiGenerate className="icon" style={{ strokeWidth: 1.6 }}/> Generate
                 </Link>
                 <Link to="/library" className="sidebar-item">
                   <FaBook className="icon" /> My Library

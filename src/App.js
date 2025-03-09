@@ -24,6 +24,7 @@ import ReviewMode from "./pages/Library/ReviewMode";
 import Challenge from "./pages/challenges/Challenge";
 import UserProfile from "./pages/user-profile/userProfile";
 import Market from "./pages/market/market";
+import Badge from "./pages/Badges/badge";
 
 function App() {
   return (
@@ -53,7 +54,8 @@ function App() {
               <Route path="/GenerationForm" element={<GenerationForm />} />
               <Route path="/challenges" element={<Challenge />} /> 
               <Route path="/market" element={<Market />} /> 
-              <Route path="/user-profile" element={<UserProfile />} /> 
+              <Route path="/user-profile" element={<UserProfile />} />
+              <Route path="/badge" element={<Badge />} /> 
 
               <Route path="/folder/:folderName" element={<FolderView />} />
               <Route path="/Review-Mode" element={<ReviewMode />} /> 

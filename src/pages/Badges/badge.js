@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Badge.css";
+
+import "./badge.css";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
 

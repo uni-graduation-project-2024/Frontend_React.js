@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Challenge.css";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
 
 const Challenge = () => {
+  const navigate = useNavigate();
   const [challenges, setChallenges] = useState({
     dailyXp: 0,
     targetdaily: 50,

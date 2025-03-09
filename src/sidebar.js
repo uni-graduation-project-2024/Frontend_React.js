@@ -1,6 +1,7 @@
 import React from 'react';  
-import { FaHome, FaBook, FaTrophy, FaShoppingCart, FaUser } from 'react-icons/fa';
-import { RiAiGenerate, RiLockPasswordFill } from "react-icons/ri";
+import { FaBook, FaTrophy, FaShoppingCart, FaUser } from 'react-icons/fa';
+import { RiAiGenerate } from "react-icons/ri";
+import { MdLeaderboard } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { getAuthToken } from './services/auth';
 import './sidebar.css'; 
@@ -13,20 +14,19 @@ const Sidebar = ({ children }) => {
       <div className="logo">
         <h2>Learntendo</h2>
       </div>
-      <div className="menu">
-        <Link to="/" className="sidebar-item">
-          <FaHome className="icon" /> Home
-        </Link>
-                
+      <div className="menu">               
         {user && (
           <>
             {user.role === "User" && (
               <>
+                <Link to="/GenerationForm" className="sidebar-item">
+                  <RiAiGenerate className="icon" /> Generate Questions
+                </Link>
                 <Link to="/library" className="sidebar-item">
                   <FaBook className="icon" /> My Library
                 </Link>
-                <Link to="/GenerationForm" className="sidebar-item">
-                  <RiAiGenerate className="icon" /> Generate Questions
+                <Link to="/leaderboard" className="sidebar-item">
+                  <MdLeaderboard className="icon" /> Leaderboard
                 </Link>
                 <Link to="/challenges" className="sidebar-item">
                   <FaTrophy className="icon" /> Challenges
@@ -36,9 +36,6 @@ const Sidebar = ({ children }) => {
                 </Link>
               </>
             )}
-            <Link to="/change-password" className="sidebar-item">
-              <RiLockPasswordFill className="icon" /> Change Password
-            </Link>
           </>
         )}
       </div>
@@ -46,7 +43,7 @@ const Sidebar = ({ children }) => {
       {user && (
         <div className="user-info">
           <FaUser className="icon" />
-          <Link to="/user-profile" className="profile-link">{user.username}</Link>
+          <Link to="/user-profile" className="profile-link">{user.unique_name}</Link>
         </div>
       )}
 

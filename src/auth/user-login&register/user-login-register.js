@@ -37,7 +37,7 @@ const LoginRegisterUser = () => {
             })
           .then((data) => {
             setAuthToken(data.data.token);
-            navigate("/home");
+            navigate("/GenerationForm");
             // Handle successful login (e.g., navigate based on user role)
           })
           .catch((errors) => {

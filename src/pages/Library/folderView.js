@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Trash2, Pencil } from "lucide-react";
 import axios from "axios";
-import Sidebar from "../../sidebar";
+
 import "./folderView.css";
 import linkhost from "../..";
 import ExamCard from "./ExamCard";
@@ -47,7 +47,6 @@ const FolderView = () => {
 
   return (
     <>
-      <Sidebar />
       <div className="folder-view-container" onClick={()=> setOpenDropdown(false)}>
         <div className="folder-header">
           <ArrowLeft className="back-icon" onClick={handleBackClick} />

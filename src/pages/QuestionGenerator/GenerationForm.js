@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // For navigation
 import "./GenerationForm.css";
-import Sidebar from "../../sidebar";
 import axios from "axios";
 
 const GenerationForm = () => {
@@ -13,17 +12,8 @@ const GenerationForm = () => {
   const [examName, setExamName] = useState('');
   const [loading, setLoading] = useState(false);
   const [uploadMode, setUploadMode] = useState("FILE");
-  //const [generatedQuestions, setGeneratedQuestions] = useState([]);
 
   const navigate = useNavigate(); // For navigation
-
-  // Load saved questions from Local Storage
-  // useEffect(() => {
-  //   const savedQuestions = localStorage.getItem("generatedQuestions");
-  //   if (savedQuestions) {
-  //     setGeneratedQuestions(JSON.parse(savedQuestions));
-  //   }
-  // }, []);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -94,7 +84,6 @@ const GenerationForm = () => {
 
   return (
     <div className="p-4 body">
-      <Sidebar />
       <form className="md-questionGeneration" onSubmit={handleSubmit}>
         <div className="flex justify-between mb-4">
           <button type="button" onClick={() => setUploadMode("FILE")}

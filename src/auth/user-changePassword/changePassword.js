@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { FaKey, FaEye, FaEyeSlash } from "react-icons/fa";
 import "./changePassword.css";
 import {getAuthToken} from "../../services/auth"
-import Sidebar from "../../sidebar";
 import linkHost from "../../"
 
 export const ChangePassword = () => {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     loading: false,
     err: null,
@@ -111,7 +112,6 @@ export const ChangePassword = () => {
         loadingSpinner()
       ) : (
         <div className="overlay body">
-          <Sidebar />
           <form onSubmit={submit} className="questionGeneration">
             <div className="f6">
               <header>
@@ -181,6 +181,9 @@ export const ChangePassword = () => {
 
                 <button className="log-in" type="submit">
                   Change Password
+                </button>
+                <button onClick={()=> navigate("/user-profile")} className="log-in">
+                  Cancel
                 </button>
               </div>
             </div>

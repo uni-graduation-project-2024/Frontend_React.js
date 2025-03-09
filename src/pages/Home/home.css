@@ -4,8 +4,7 @@
 .home-container {
     display: flex;
     min-height: 100vh;
-    background-color: #1a202c; /* Dark Gray */
-    color: white;
+    color: rgb(23, 96, 129);
   }
   
   /* Main Content Styling */
@@ -15,7 +14,6 @@
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background-color: #1a202c;
   }
   
   /* Centered Text */

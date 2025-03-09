@@ -11,8 +11,9 @@ const Challenge = () => {
     monthlyXp: 7,
     monthtarget: [1000, 2000, 3000]
   });
-  const [ dailyProgress, setDailyProgress] = useState(0);
-  const [ monthlyProgress, setMonthlyProgress] = useState(0);
+  const [dailyProgress, setDailyProgress] = useState(0);
+  const [monthlyProgress, setMonthlyProgress] = useState(0);
+  const [currentLevel, setCurrentLevel] = useState("Bronze"); 
   const { user } = getAuthToken();
 
   useEffect(() => {
@@ -21,6 +22,17 @@ const Challenge = () => {
         setChallenges(response.data);
         setDailyProgress((response.data.dailyXp / response.data.targetdaily) * 100);
         setMonthlyProgress((response.data.monthlyXp / response.data.monthtarget[2]) * 100);
+        
+        const xp = response.data.monthlyXp;
+        if (xp >= response.data.monthtarget[2]) {
+          setCurrentLevel("Gold 🏆");
+        } else if (xp >= response.data.monthtarget[1]) {
+          setCurrentLevel("Silver 🥈");
+        } else if (xp >= response.data.monthtarget[0]) {
+          setCurrentLevel("Bronze 🥉");
+        } else {
+          setCurrentLevel("Beginner ⚪"); 
+        }
       })
       .catch(error => {
         console.error("Error fetching challenges:", error);
@@ -40,13 +52,17 @@ const Challenge = () => {
       </div>
 
       <div className="challenge-card">
-        <h2>Monthly Challenge</h2>
+        <h2>Monthly Challenge - <span className="level">{currentLevel}</span></h2>
         <p>{challenges.monthlyXp} / {challenges.monthtarget[2]}</p>
         <div className="progress-bar">
           <div className="progress-fill" style={{ width: `${monthlyProgress}%` }}></div>
         </div>
       </div>
-    </div>
+
+    <button className="badge-btn" onClick={() => navigate("/badge")}>
+    View Badges 🏅
+   </button>
+ </div>
   );
 };
 

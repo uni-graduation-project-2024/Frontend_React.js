@@ -1,0 +1,62 @@
+.badge-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .badge-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .badge-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .badge-card {
+    width: 120px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+  }
+  
+  .bronze {
+    background-color: #cd7f32;
+  }
+  
+  .silver {
+    background-color: #c0c0c0;
+  }
+  
+  .gold {
+    background-color: #ffd700;
+  }
+  
+  .badge-label {
+    display: block;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .back-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .back-btn:hover {
+    background-color: #0056b3;
+  }
+  

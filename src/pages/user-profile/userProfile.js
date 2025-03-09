@@ -1,79 +1,99 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { RiLockPasswordFill } from "react-icons/ri";
 import axios from "axios";
-import { FaCoins } from "react-icons/fa";
+import { FaSignInAlt } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import "./userProfile.css";
+import { getAuthToken, removeAuthToken } from '../../services/auth';
+import linkhost from "../..";
 
 const UserProfile = () => {
-  const [user, setUser] = useState({
+  const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState({
     username: "UserName",
     email: "user@gmail.com",
     joinedDate: "22-2-2025",
-    totalXP: 3412,
-    questionsSolved: 1000,
+    totalXp: 3412,
+    totalQuestion: 1000,
     finishedTop3: 10,
     maxStreakScore: 82,
     examsCreated: 116,
     currentLeague: "Gold",
-    coins: 82,
+    streakScore: 82,
   });
+  const { user } = getAuthToken();
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/user-profile")
+      .get(`${linkhost}/api/User/user-profile?userId=${user.nameid}`)
       .then((response) => {
-        setUser(response.data);
+        setUserInfo(response.data);
       })
       .catch((error) => {
         console.error("Error fetching user profile:", error);
       });
-  }, []);
+  }, [user.nameid]);
+
+  const handleLogOutClick = () => {
+      removeAuthToken();
+      navigate("/loginregister"); 
+    };
 
   return (
     <div className="profile-container">
       <div className="profile-header">
         <div className="profile-info">
-          <h2>{user.username} <FiEdit className="edit-icon" /></h2>
-          <p>{user.email}</p>
-          <p>Joined Date: {user.joinedDate}</p>
-        </div>
-        <div className="profile-coins">
-          <FaCoins className="coin-icon" /> {user.coins}
+          <h2>{userInfo.username} <FiEdit className="edit-icon" /></h2>
+          <p>{userInfo.email}</p>
+          <p>Joined Date: {userInfo.joinedDate}</p>
         </div>
       </div>
 
       {/* Stats Section */}
       <div className="profile-stats">
-        <div className="stat-box">
-          <h3>Questions Solved</h3>
-          <p>{user.questionsSolved}</p>
-        </div>
+
         <div className="stat-box">
           <h3>Total XP</h3>
-          <p>{user.totalXP}</p>
+          <p>{userInfo.totalXp}</p>
         </div>
+
         <div className="stat-box">
-          <h3>Finished Top 3</h3>
-          <p>{user.finishedTop3}</p>
+          <h3>Current Streak</h3>
+          <p>{userInfo.streakScore}</p> {/*Max Streak Score Need Backend*/}
         </div>
-        <div className="stat-box">
-          <h3>Max Streak Score</h3>
-          <p>{user.maxStreakScore}</p>
-        </div>
+
         <div className="stat-box">
           <h3>Exams Created</h3>
-          <p>{user.examsCreated}</p>
+          <p>{userInfo.examsCreated}</p> {/*Need backend*/}
         </div>
+
+        <div className="stat-box">
+          <h3>Questions Solved</h3>
+          <p>{userInfo.totalQuestion}</p>
+        </div>
+
+        <div className="stat-box">
+          <h3>Finished Top 3</h3>
+          <p>{userInfo.finishedTop3}</p> {/*Need backend*/}
+        </div>
+
         <div className="stat-box">
           <h3>Current League</h3>
-          <p>{user.currentLeague}</p>
+          <p>{userInfo.currentLeague}</p>
         </div>
       </div>
 
       <div className="profile-actions">
-        <button className=" change-password">Change Password</button>
-        <button className="delete-account">Delete Account</button>
-        <button className="logout">Logout</button>
+        <button onClick={() => navigate("/change-password")} className="home-login-button">
+          <RiLockPasswordFill className="icon" /> Change Password
+        </button>
+        <button onClick={() => navigate("/change-password")} className="home-login-button">
+          Delete Account
+        </button>
+        <button onClick={handleLogOutClick} className="home-login-button">
+            <FaSignInAlt /> LogOut
+          </button>
       </div>
     </div>
   );

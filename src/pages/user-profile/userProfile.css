@@ -10,7 +10,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #1f2937;
+    background: #96b6f3;
     padding: 15px;
     border-radius: 10px;
     color: white;
@@ -24,25 +24,12 @@
   .profile-info p {
     margin: 5px 0;
     font-size: 14px;
-    color: #bbb;
   }
   
   .edit-icon {
     font-size: 18px;
     margin-left: 5px;
     cursor: pointer;
-  }
-  
-  .profile-coins {
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-  }
-  
-  .coin-icon {
-    margin-right: 5px;
-    font-size: 22px;
-    color: #facc15;
   }
   
   .profile-stats {
@@ -53,8 +40,8 @@
   }
   
   .stat-box {
-    background: #1f2937;
-    color: white;
+    /* background: #1f2937; */
+    /* color: white; */
     padding: 15px;
     border-radius: 10px;
     text-align: center;

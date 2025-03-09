@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { User, Flame, Coins } from "lucide-react";
+import { Flame } from "lucide-react";
+import { TbCoin } from "react-icons/tb";
+import { BsLightningFill } from "react-icons/bs";
 import axios from "axios";
+
 import linkhost from "../.."; 
 import { getAuthToken } from "../../services/auth"; 
 import "./navbar.css";  
@@ -9,14 +11,16 @@ import "./navbar.css";
 const NavBar = () => {
   const [streak, setStreak] = useState(0);
   const [coins, setCoins] = useState(0);
+  const [generationPower, setGenerationPower] = useState(0);
   const { user } = getAuthToken(); 
 
   useEffect(() => {
     const fetchUserStats = async () => {
       try {
-        const response = await axios.get(`${linkhost}/api/user/stats/${user.nameid}`);
-        setStreak(response.data.streak || 0);
+        const response = await axios.get(`${linkhost}/api/User/user-profile?userId=${user.nameid}`);
+        setStreak(response.data.streakScore || 0);
         setCoins(response.data.coins || 0);
+        setGenerationPower(response.data.generationPower || 0);
       } catch (error) {
         console.error("Error fetching user stats:", error);
       }
@@ -26,26 +30,24 @@ const NavBar = () => {
   }, [user.nameid]);
 
   return (
-    <nav className="bg-blue-600 text-white p-4 flex justify-between items-center shadow-lg">
-      <div className="flex items-center gap-3">
-        <Link to="/" className="text-xl font-bold">🔥Learntendo </Link>
-      </div>
+    <nav className="navbar">
 
-      <div className="flex items-center gap-6">
-        <div className="flex items-center gap-2">
-          <Flame className="text-yellow-400" />
-          <span className="font-medium">{streak} Days Streak</span>
+      <div className="flex items-center gap-6"> {/*gap-6 -> gap-3*/}
+        <div className="stat-item items-center gap-2">
+          <Flame className="streak" />
+          <span className="font-medium">{streak}</span>
         </div>
         
-        <div className="flex items-center gap-2">
-          <Coins className="text-yellow-300" />
-          <span className="font-medium">{coins} Coins</span>
+        <div className="stat-item items-center gap-2">
+          <TbCoin className="coins" />
+          <span className="font-medium">{coins}</span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <User className="text-white" />
-          <span className="font-medium">{user.username || "User"}</span>
+        <div className="stat-item items-center gap-2">
+          <BsLightningFill className="power" />
+          <span className="font-medium">{generationPower}</span>
         </div>
+
       </div>
     </nav>
   );

@@ -52,6 +52,15 @@
   background-color: #2d3748; /* Darker Gray */
 }
 
+.view-mode {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.active {
+  border-bottom-style: solid;
+}
+
 /* Create Menu */
 .library-create-menu {
   background-color: #2d3748; /* Gray-800 */
@@ -84,6 +93,16 @@
   text-align: center;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s;
+  color: aliceblue;
+  height: 5.2rem;
+  padding-left: 0px;
+  padding-right: 45px;
+}
+
+.folder-exams-number {
+  padding-right: 0px;
+  padding-left: 12rem;
+  padding-top: 1rem;
 }
 
 .library-folder:hover {

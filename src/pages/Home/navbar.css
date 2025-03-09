@@ -1,59 +1,47 @@
 /* NavBar Styles */
-.navbar {
-    background-color: #2563eb; /* Tailwind blue-600 */
-    color: white;
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+nav {
+  color: rgb(68, 64, 64);
+  padding: 16px;
+  padding-left: 15rem;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  float: right;
+  width: 81%;
+  border-width: 1px;
+  border-bottom-style: solid;
+}
   
-  /* Left Side (Logo) */
-  .navbar .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
-  }
   
-  .navbar .logo:hover {
-    opacity: 0.8;
-  }
+/* Streak, Coins, User Section */
+.navbar .stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-left: 2rem;
+}
+
+/* Icons Styling */
+.navbar .stat-item svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Streak Icon */
+.navbar .streak {
+  color: #fa4015;
+}
+
+/* Coins Icon */
+.navbar .coins {
+  color: #fbbf24;
+}
+
+/* GenerationPower Icon */
+.navbar .power {
+  color: #e68835;;
+}
   
-  /* Right Side (User Stats) */
-  .navbar .stats {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-  }
-  
-  /* Streak, Coins, User Section */
-  .navbar .stat-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 500;
-  }
-  
-  /* Icons Styling */
-  .navbar .stat-item svg {
-    width: 20px;
-    height: 20px;
-  }
-  
-  /* Streak Icon */
-  .navbar .streak svg {
-    color: #facc15; /* Tailwind yellow-400 */
-  }
-  
-  /* Coins Icon */
-  .navbar .coins svg {
-    color: #fbbf24; /* Tailwind yellow-300 */
-  }
-  
-  /* User Icon */
-  .navbar .user svg {
-    color: white;
-  }
   

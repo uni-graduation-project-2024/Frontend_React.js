@@ -29,10 +29,9 @@ const Library = () => {
     <>
       <div className="library-container" onClick={()=> setOpenDropdown(false)}>
         <div className="library-header">
-          <h1 className="library-title">My Library</h1>
           <div className="library-buttons">
             <button onClick={handleNewFolderClick} className="library-button">
-              <FaPlus className="mr-2" /> Create
+              <FaPlus className="mr-2" /> Create Folder
             </button>
             <button className="library-button library-button-gray">
               <FaUpload className="mr-2" /> My Uploads
@@ -40,12 +39,11 @@ const Library = () => {
           </div>
         </div>
 
-        <div className="sidebar-left" onClick={handleViewFolder}>Folders</div>
-        <div className="sidebar-left2" onClick={handleViewAllExamMode}>All Exams</div>
+        <div className={`view-mode ${folderMode === null? "active": ""}`} onClick={handleViewFolder}>Folders</div>
+        <div className={`view-mode ${folderMode === -1? "active": ""}`} onClick={handleViewAllExamMode}>All Exams</div>
 
         { folderMode === null && (
           <div className="library-folders">
-            <h3 className="library-folders-title">Folders</h3>
             <div className="library-folder-grid">
               {folders.length === 0 ? (
                 <p>No folders created yet.</p>
@@ -56,7 +54,8 @@ const Library = () => {
                     className="library-folder" 
                     onClick={() => navigate(`/folder/${folder.subjectName}?subjectId=${folder.subjectId}`)}
                   >
-                    {folder.subjectName}
+                    <p className="folder-name">{folder.subjectName}</p>
+                    <p className="folder-exams-number">{folder.numExams}</p>
                   </div>
                 ))
               )}

@@ -1,31 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { FaPlus, FaUpload } from "react-icons/fa";
-import Sidebar from "../../sidebar";
-import axios from "axios";
+
 import "./library.css";
-import linkhost from "../..";
-import { getAuthToken } from "../../services/auth";
+import { useFolders } from "../../hooks/useFolders";
 import ExamCard from "./ExamCard";
 
 const Library = () => {
   const navigate = useNavigate();
-  const [folders, setFolders] = useState([]);
-  const [folderMode, setFolderMode] = useState(-1);
+  const { folders } = useFolders();
+  const [folderMode, setFolderMode] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(true);
-  const { user } = getAuthToken();
-
-  useEffect(() => {
-    const fetchFolders = async () => {
-      try {
-        const response = await axios.get(linkhost + `/api/Subject/all/${user.nameid}`);
-        setFolders(response.data);
-      } catch (error) {
-        console.error("Error fetching folders:", error);
-      }
-    };
-    fetchFolders();
-  }, [navigate, user.nameid]);
 
 
   const handleNewFolderClick = () => {
@@ -33,17 +18,15 @@ const Library = () => {
   };
 
   const handleViewAllExamMode = ()=>{
-    setFolderMode(0);
+    setFolderMode(-1);
   }
 
   const handleViewFolder = ()=>{
-    setFolderMode(-1);
+    setFolderMode(null);
   }
 
   return (
     <>
-    <Sidebar/>
-
       <div className="library-container" onClick={()=> setOpenDropdown(false)}>
         <div className="library-header">
           <h1 className="library-title">My Library</h1>
@@ -60,7 +43,7 @@ const Library = () => {
         <div className="sidebar-left" onClick={handleViewFolder}>Folders</div>
         <div className="sidebar-left2" onClick={handleViewAllExamMode}>All Exams</div>
 
-        { folderMode === -1 && (
+        { folderMode === null && (
           <div className="library-folders">
             <h3 className="library-folders-title">Folders</h3>
             <div className="library-folder-grid">

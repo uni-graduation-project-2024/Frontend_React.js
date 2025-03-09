@@ -1,41 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
-import linkhost from "../..";
-import { getAuthToken } from "../../services/auth";
 import { Trash2, MoreVertical  } from "lucide-react";
 import { LuFolderSymlink } from "react-icons/lu";
+
 import "./ExamCard.css";
+import linkhost from "../..";
+import { useExams } from "../../hooks/useExams";
 
 const ExamCard = ( 
   {subjectId,
   openDropdown,
   updateDropdown,
 }) => {
-  const [exams, setExams] = useState([]);
+  const { exams } = useExams(subjectId);
+  const [ fetchedExams, setFetchedExams ] = useState(exams);
   const [openMenu, setOpenMenu] = useState(null);
-  const { user } = getAuthToken();
   const navigate = useNavigate(); 
 
-  useEffect(() => {
-    const fetchExams = async () => {
-      try {
-        let url = `${linkhost}/api/Exam/all/${user.nameid}`;
-
-        // Append subId if not "all"
-        if (subjectId && subjectId !== 0) {
-          url += `?subId=${subjectId}`;
-        }
-
-        const response = await axios.get(url);
-        setExams(response.data);     
-      } catch (error) {
-        console.error("Error fetching exams:", error);
-      }
-    };
-
-    fetchExams();
-  }, [user.nameid, subjectId]);
+  useEffect(()=>{
+    setFetchedExams(exams);
+  },[exams]);
 
   useEffect(()=>{
     setOpenMenu(null);
@@ -51,7 +36,7 @@ const ExamCard = (
     if (window.confirm("Are you sure you want to delete this exam?")) {
       try {
         await axios.delete(`${linkhost}/api/Exam/${examId}`);
-        setExams(exams.filter((exam) => exam.examId !== examId));
+        setFetchedExams(exams.filter((exam) => exam.examId !== examId));
       } catch (error) {
         console.error("Error deleting exam:", error);
       }
@@ -135,7 +120,7 @@ const ExamCard = (
   };
 
   const handleReviewMode = (examId) =>{
-    navigate("/view-questions", { 
+    navigate("/Review-Mode", { 
       state: {examId} 
     });
   }
@@ -148,10 +133,10 @@ const ExamCard = (
 
   return (
       <div className="library-exam-grid">
-        {exams.length === 0 ? (
+        {fetchedExams.length === 0 ? (
           <p>No exams available for this subject.</p>
         ) : (
-          exams.map((exam) => (
+          fetchedExams.map((exam) => (
             <div key={exam.examId} className="library-exam" onClick={()=> handleReviewMode(exam.examId)}>
               <div className="exam-info">
                 <p className="exam-time">

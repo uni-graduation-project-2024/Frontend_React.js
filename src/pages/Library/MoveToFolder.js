@@ -1,37 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+
 import "./MoveToFolder.css";
 import linkhost from "../..";
-import { getAuthToken } from "../../services/auth";
+import { useFolders } from "../../hooks/useFolders";
 
 const MoveExam = () => {
   const location = useLocation();
   const { examId, subId } = location.state || {};
-  const [folders, setFolders] = useState([]);
+  const { folders } = useFolders();
   const [examFolder, setExamFolder] = useState(null);
   const [selectedFolder, setSelectedFolder] = useState(null);
-  const { user } = getAuthToken();
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(linkhost + `/api/Subject/all/${user.nameid}`)
-      .then(response => {
-        setFolders(response.data);
-        setSelectedFolder(subId);
-        if (subId) {
-          const matchedFolder = response.data.find(folder => folder.subjectId === subId);
-          if (matchedFolder) {
-            setExamFolder(matchedFolder.subjectName); // Store the folder name
-          }
-        }
-      })
-      .catch(error => console.error("Error fetching folders:", error));
-
-    if(subId){
-      setExamFolder(subId);
+    if(subId && folders.length > 0){
+      setSelectedFolder(subId);
+      const matchedFolder = folders.find((folder) => folder.subjectId === subId); // this does not find the folder correctly
+      if (matchedFolder) {
+        setExamFolder(matchedFolder.subjectName); // Store the folder name
+      }
     }
-  }, [user.nameid, subId]);
+  }, [subId, folders]);
 
   const moveExam = (folder) => {
     axios.patch(`${linkhost}/api/Exam/${examId}/${folder}`)

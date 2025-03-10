@@ -1,0 +1,25 @@
+.uploads-container {
+    padding: 20px;
+    background-color: #121212;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .uploads-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .upload-item {
+    padding: 10px;
+    background: #1e1e1e;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  .upload-item:hover {
+    background: #2e2e2e;
+  }
+  

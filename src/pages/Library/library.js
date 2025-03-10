@@ -25,6 +25,10 @@ const Library = () => {
     setFolderMode(null);
   }
 
+  const handleMyUploadsClick = () => {
+    navigate("/myuploads");
+  };
+
   return (
     <>
       <div className="library-container" onClick={()=> setOpenDropdown(false)}>
@@ -33,7 +37,7 @@ const Library = () => {
             <button onClick={handleNewFolderClick} className="library-button">
               <FaPlus className="mr-2" /> Create Folder
             </button>
-            <button className="library-button library-button-gray">
+            <button onClick={handleMyUploadsClick} className="library-button library-button-gray">
               <FaUpload className="mr-2" /> My Uploads
             </button>
           </div>

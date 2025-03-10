@@ -25,6 +25,7 @@ import Challenge from "./pages/challenges/Challenge";
 import UserProfile from "./pages/user-profile/userProfile";
 import Market from "./pages/market/market";
 import Badge from "./pages/Badges/badge";
+import MyUploads from "./pages/Library/Uploads/Myuploads";
 
 function App() {
   return (
@@ -59,10 +60,12 @@ function App() {
 
               <Route path="/folder/:folderName" element={<FolderView />} />
               <Route path="/Review-Mode" element={<ReviewMode />} /> 
-              
-            </Route>
+              <Route path="/my-uploads" element={<MyUploads />} /> 
 
+              
            </Route>
+          </Route>
+
 
 
           {/* Admin-protected routes */}

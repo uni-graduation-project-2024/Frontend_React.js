@@ -8,7 +8,11 @@ const MyUploads = () => {
   const [uploads, setUploads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const {user} = getAuthToken();
+  const { user } = getAuthToken();
+
+  const handleGenerateClick = (fileId) => {
+    console.log(`Generate button clicked for file ID: ${fileId}`);
+  };
 
   useEffect(() => {
     const fetchUploads = async () => {
@@ -23,7 +27,7 @@ const MyUploads = () => {
     };
 
     fetchUploads();
-  }, [user.nameid, linkhost]);
+  }, [user.nameid]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -34,7 +38,8 @@ const MyUploads = () => {
       <ul className="uploads-list">
         {uploads.map((upload) => (
           <li key={upload.fileId} className="upload-item">
-            {upload.fileName}
+            <span>{upload.fileName}</span>
+            <button onClick={() => handleGenerateClick(upload.fileId)}>Generate</button>
           </li>
         ))}
       </ul>

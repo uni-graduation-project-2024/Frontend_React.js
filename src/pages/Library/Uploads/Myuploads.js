@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './Myuploads.css';
+import linkhost from '../../..';
+import { getAuthToken } from '../../../services/auth';
 
-const MyUploads = ({ user, linkhost }) => {
+const MyUploads = () => {
   const [uploads, setUploads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const {user} = getAuthToken();
 
   useEffect(() => {
     const fetchUploads = async () => {

@@ -26,7 +26,7 @@ const Library = () => {
   }
 
   const handleMyUploadsClick = () => {
-    navigate("/myuploads");
+    navigate("/my-uploads");
   };
 
   return (

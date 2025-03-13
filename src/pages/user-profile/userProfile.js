@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { RiLockPasswordFill } from "react-icons/ri";
 import axios from "axios";
 import { FaSignInAlt } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
+
 import "./userProfile.css";
 import { getAuthToken, removeAuthToken } from '../../services/auth';
 import linkhost from "../..";
@@ -23,10 +25,11 @@ const UserProfile = () => {
     streakScore: 82,
   });
   const { user } = getAuthToken();
+  const { userId } = useParams();
 
   useEffect(() => {
     axios
-      .get(`${linkhost}/api/User/user-profile?userId=${user.nameid}`)
+      .get(`${linkhost}/api/User/user-profile?userId=${userId}`)
       .then((response) => {
         setUserInfo(response.data);
       })
@@ -44,7 +47,9 @@ const UserProfile = () => {
     <div className="profile-container">
       <div className="profile-header">
         <div className="profile-info">
+          {(userId === user.nameid) &&
           <h2>{userInfo.username} <FiEdit className="edit-icon" /></h2>
+          }
           <p>{userInfo.email}</p>
           <p>Joined Date: {userInfo.joinedDate}</p>
         </div>
@@ -84,6 +89,7 @@ const UserProfile = () => {
         </div>
       </div>
 
+      {(userId === user.nameid) &&
       <div className="profile-actions">
         <button onClick={() => navigate("/change-password")} className="home-login-button">
           <RiLockPasswordFill className="icon" /> Change Password
@@ -95,6 +101,7 @@ const UserProfile = () => {
             <FaSignInAlt /> LogOut
           </button>
       </div>
+      }
     </div>
   );
 };

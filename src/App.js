@@ -55,7 +55,7 @@ function App() {
               <Route path="/GenerationForm" element={<GenerationForm />} />
               <Route path="/challenges" element={<Challenge />} /> 
               <Route path="/market" element={<Market />} /> 
-              <Route path="/user-profile" element={<UserProfile />} />
+              <Route path="/user-profile/:userId" element={<UserProfile />} />
               <Route path="/badge" element={<Badge />} /> 
 
               <Route path="/folder/:folderName" element={<FolderView />} />
@@ -72,6 +72,7 @@ function App() {
           <Route element={<AuthGuard roles={["Admin"]} />}>
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/show-user/:id" element={<ShowUser />} />
+            <Route path="/user-profile/:userId" element={<UserProfile />} />
           </Route>
 
           <Route element={<AuthGuard roles={["User", "Admin"]} />}>

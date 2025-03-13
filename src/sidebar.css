@@ -1,7 +1,7 @@
 .sidebar {
   background-color: #96b6f3; /* Dark Navy */
   color: #e0e0e0;
-  width: 250px;
+  width: 19%;
   height: 100vh;
   position: fixed;
   left: 0;
@@ -78,4 +78,10 @@
 .profile-link:hover {
   color: #ffcc00; /* Bright Gold */
   transform: scale(1.1);
+}
+
+@media (max-width: 860px) {
+  .sidebar{
+    display: none;
+  }
 }

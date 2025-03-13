@@ -1,12 +1,7 @@
-/* Dark Theme Styling for Library Component */
-/* .library-container {
-  min-height: 100vh;
-  background-color: #fafbff;
-  color: #87a2d6;
-  padding: 24px;
-  width: 81%;
-  float: right;
-} */
+
+.library-container {
+  flex: 1;
+}
 
 /* Header Styling */
 .library-header {

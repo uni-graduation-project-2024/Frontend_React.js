@@ -10,7 +10,9 @@ const Layout = () => {
             <Sidebar/>
             <NavBar/>
             <main>
-            <Outlet/>
+                <div className="main-container">
+                    <Outlet/>
+                </div>
             </main>
         </>
     )

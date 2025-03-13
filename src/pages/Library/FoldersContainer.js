@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -6,7 +5,6 @@ import { useFolders } from "../../hooks/useFolders";
 import FolderCard from "./FolderCard"; 
 
 export const FoldersContainer = ({updateRefresh, refresh }) => {
-  //const [refresh, setRefresh] = useState(false);
   const { folders } = useFolders(refresh);
 
     return(

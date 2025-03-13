@@ -29,15 +29,17 @@ const Dashboard = () => {
       });
   }, [token]);
 
-  const handleDeleteUser = (userId) =>{
-    axios
-      .delete(`${linkhost}/api/Admin/delete-user/${userId}`)
-      .then(() => {
-        setUsers(users.filter((user) => user.userId !== userId));
-      })
-      .catch((error) => {
-        setError( error.response?.data || "Something went wrong." );
-      });
+  const handleDeleteUser = (userId, userEmail, e) =>{
+    e.stopPropagation();
+    if (window.confirm(`Are you sure you want to delete this user ${userEmail}?`)) {
+      axios.delete(`${linkhost}/api/Admin/delete-user/${userId}`)
+        .then(() => {
+          setUsers(users.filter((user) => user.userId !== userId));
+        })
+        .catch((error) => {
+          setError( error.response?.data || "Something went wrong." );
+        });
+    }
   }
 
   return (
@@ -61,12 +63,12 @@ const Dashboard = () => {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.userId} onClick={() => navigate(`/admin/show-user/${user.userId}`)}>
+              <tr key={user.userId} onClick={() => navigate(`/user-profile/${user.userId}`)}>
                 <td>{user.userId}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
                 <td>
-                  <button onClick={() =>handleDeleteUser(user.userId)} className="btn btn-warning btn-sm">
+                  <button onClick={(e) =>handleDeleteUser(user.userId, user.email, e)} className="btn btn-warning btn-sm">
                     Delete
                   </button>
                 </td>

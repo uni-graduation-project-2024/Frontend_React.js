@@ -9,12 +9,7 @@ import linkhost from "../..";
 import { useExams } from "../../hooks/useExams";
 import { ExamCard } from "./ExamCard";
 
-const ItemTypes = {
-  EXAM: "exam",
-};
-
 const ExamsContainer = ({ subjectId, openDropdown, updateDropdown, refresh}) => {
-  //const [refresh, setRefresh] = useState(false);
   const { exams } = useExams(subjectId, refresh);
   const [fetchedExams, setFetchedExams] = useState(exams);
   const [openMenu, setOpenMenu] = useState(null);

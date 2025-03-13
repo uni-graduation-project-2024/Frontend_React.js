@@ -2,17 +2,19 @@
 nav {
   color: rgb(68, 64, 64);
   padding: 16px;
-  padding-left: 15rem;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   float: right;
-  width: 81%;
+  width: 100%;
   border-width: 1px;
   border-bottom-style: solid;
 }
   
-  
+.nav-items{
+  display: flex;
+  justify-content: center;
+}
 /* Streak, Coins, User Section */
 .navbar .stat-item {
   display: flex;

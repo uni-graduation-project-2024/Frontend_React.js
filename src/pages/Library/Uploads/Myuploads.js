@@ -34,12 +34,12 @@ const MyUploads = () => {
 
   return (
     <div className="uploads-container">
-      <h2>My Uploads</h2>
+      <h2 className='upload-header' >My Uploads</h2>
       <ul className="uploads-list">
         {uploads.map((upload) => (
           <li key={upload.fileId} className="upload-item">
             <span>{upload.fileName}</span>
-            <button onClick={() => handleGenerateClick(upload.fileId)}>Generate</button>
+            <button className='generate-btn' onClick={() => handleGenerateClick(upload.fileId)}>Generate</button>
           </li>
         ))}
       </ul>

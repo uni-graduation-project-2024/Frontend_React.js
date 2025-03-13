@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import { FaPlus, FaUpload } from "react-icons/fa";
-import axios from "axios";
 
 import "./library.css";
-import { useFolders } from "../../hooks/useFolders";
-import ExamCard from "./ExamsContainer";
-import FolderCard from "./FolderCard";  // Import the updated FolderCard
-import linkhost from "../..";
 import { FoldersContainer } from "./FoldersContainer";
 import ExamsContainer from "./ExamsContainer";
 

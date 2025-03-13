@@ -1,69 +1,69 @@
 .uploads-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
   
-  h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
+.upload-header {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
   
-  .uploads-list {
-    list-style: none;
-    padding: 0;
-  }
+.uploads-list {
+  list-style: none;
+  padding: 0;
+}
+
+.upload-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.upload-item:hover {
+  transform: scale(1.02);
+}
+
+.upload-item span {
+  font-size: 16px;
+  color: #555;
+  font-weight: 500;
+}
   
+.generate-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+  
+.generate-btn:hover {
+  background: #0056b3;
+}
+
+@media (max-width: 600px) {
   .upload-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    margin-bottom: 10px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .upload-item:hover {
-    transform: scale(1.02);
-  }
-  
-  .upload-item span {
-    font-size: 16px;
-    color: #555;
-    font-weight: 500;
+    flex-direction: column;
+    align-items: flex-start;
   }
   
   button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
+    margin-top: 10px;
   }
-  
-  button:hover {
-    background: #0056b3;
-  }
-  
-  @media (max-width: 600px) {
-    .upload-item {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    
-    button {
-      margin-top: 10px;
-    }
-  }
+}
   

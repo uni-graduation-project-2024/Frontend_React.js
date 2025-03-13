@@ -1,7 +1,19 @@
 main {
-    min-height: 100vh;
+    min-height: 100dvh;
     background-color: #fafbff;
     padding: 24px;
     width: 81%;
     float: right;
+  }
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+}
+
+  @media (max-width: 860px) {
+    main{
+      width: 100%;
+    }
   }

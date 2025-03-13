@@ -32,7 +32,7 @@ const NavBar = () => {
   return (
     <nav className="navbar">
 
-      <div className="flex items-center gap-6"> {/*gap-6 -> gap-3*/}
+      <div className="nav-items"> {/*gap-6 -> gap-3*/}
         <div className="stat-item items-center gap-2">
           <Flame className="streak" />
           <span className="font-medium">{streak}</span>

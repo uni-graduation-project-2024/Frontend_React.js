@@ -1,27 +1,27 @@
-import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import linkhost from "..";
-import { getAuthToken } from "../services/auth";
+import { useState, useEffect } from "react";
 
-export const useExams = (subjectId) => {
+import { fetchExams } from "../services/examsService";
+
+export const useExams = (subjectId, refresh) => {
     const [allExams, setAllExams] = useState([]);
     const [exams, setExams] = useState([]); // filtered exams by subjectId
-    const { user } = getAuthToken();
-
-    const fetchExams = useCallback(async () => {
-        try {
-            const response = await axios.get(`${linkhost}/api/Exam/all/${user.nameid}`);
-            if (response && response.data) {
-                setAllExams(response.data);
-            }
-        } catch (error) {
-            console.error("Error fetching exams:", error);
-        }
-    }, [user.nameid])
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchExams();
-    }, [fetchExams]);
+        const getExams = async () => {
+          setLoading(true);
+          try {
+            const data = await fetchExams();
+            setAllExams(data);
+          } catch (error) {
+            console.error("Failed to load exams:", error);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        getExams();
+      }, [refresh]); // Refetch when subjectId or refresh changes;
 
     useEffect(() => {
         if (subjectId === -1) {
@@ -32,5 +32,5 @@ export const useExams = (subjectId) => {
         }
     }, [subjectId, allExams]);
 
-    return { exams };
+    return { exams , loading};
 };

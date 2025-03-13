@@ -3,7 +3,7 @@ import axios from "axios";
 import linkhost from "..";
 import { getAuthToken } from "../services/auth";
 
-export const useFolders = () => {
+export const useFolders = (refresh) => {
     const [folders, setFolders] = useState([]);
     const { user } = getAuthToken();
 
@@ -20,7 +20,7 @@ export const useFolders = () => {
 
     useEffect(() => {
         fetchFolders();
-    }, [fetchFolders]);
+    }, [fetchFolders, refresh]);
 
     return { folders };
 };

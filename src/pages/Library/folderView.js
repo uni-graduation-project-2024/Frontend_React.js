@@ -6,7 +6,7 @@ import axios from "axios";
 
 import "./folderView.css";
 import linkhost from "../..";
-import ExamCard from "./ExamCard";
+import ExamCard from "./ExamsContainer";
 
 const FolderView = () => {
   const { folderName } = useParams();

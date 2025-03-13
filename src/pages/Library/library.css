@@ -99,6 +99,12 @@
   padding-right: 45px;
 }
 
+.folder-highlight {
+  background-color: #d1e7ff; /* Light blue */
+  border: 2px dashed #0056b3;
+  color: #0056b3;
+}
+
 .folder-exams-number {
   padding-right: 0px;
   padding-left: 12rem;

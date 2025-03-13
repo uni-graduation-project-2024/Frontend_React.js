@@ -36,7 +36,7 @@ const UserProfile = () => {
       .catch((error) => {
         console.error("Error fetching user profile:", error);
       });
-  }, [user.nameid]);
+  }, [userId]);
 
   const handleLogOutClick = () => {
       removeAuthToken();

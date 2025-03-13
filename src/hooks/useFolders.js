@@ -1,26 +1,27 @@
-import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import linkhost from "..";
-import { getAuthToken } from "../services/auth";
+import { useState, useEffect} from "react";
+
+import { fetchFolders } from "../services/folderService";
 
 export const useFolders = (refresh) => {
     const [folders, setFolders] = useState([]);
-    const { user } = getAuthToken();
 
-    const fetchFolders = useCallback(async () => {
-        try {
-            const response = await axios.get(`${linkhost}/api/Subject/all/${user.nameid}`);
-            if (response && response.data) {
-                setFolders(response.data);
-            }
-        } catch (error) {
-            console.error("Error fetching folders:", error);
-        }
-    }, [user.nameid]); // Add user.nameid as a dependency
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchFolders();
-    }, [fetchFolders, refresh]);
+        const getExams = async () => {
+          setLoading(true);
+          try {
+            const data = await fetchFolders();
+            setFolders(data);
+          } catch (error) {
+            console.error("Failed to load exams:", error);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        getExams();
+      }, [refresh]); // Refetch when subjectId or refresh changes;
 
-    return { folders };
+    return { folders, loading };
 };

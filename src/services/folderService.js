@@ -1,10 +1,13 @@
 // folderService.js
 import axios from "axios";
+
 import linkhost from "..";
+import { getAuthToken } from "./auth";
 
 export const fetchFolders = async (userId) => {
   try {
-    const response = await axios.get(`${linkhost}/api/Subject/${userId}`);
+    const { user } = getAuthToken();
+    const response = await axios.get(`${linkhost}/api/Subject/all/${user.nameid}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching folders:", error);

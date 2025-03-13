@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "./MoveToFolder.css";
 import linkhost from "../..";
 import { useFolders } from "../../hooks/useFolders";
 
-const MoveExam = () => {
-  const location = useLocation();
-  const { examId, subId } = location.state || {};
+const MoveExam = ({examId, subId, onClose }) => { 
   const { folders } = useFolders();
   const [examFolder, setExamFolder] = useState(null);
   const [selectedFolder, setSelectedFolder] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if(subId && folders.length > 0){
@@ -28,7 +24,7 @@ const MoveExam = () => {
     axios.patch(`${linkhost}/api/Exam/${examId}/${folder}`)
       .then(() => {
         setExamFolder(folder);
-        navigate('/library');
+        onClose();
       })
       .catch(error => console.error("Error moving exam:", error));
   };
@@ -62,7 +58,7 @@ const MoveExam = () => {
 
         {/* Buttons for Action */}
         <div className="action-buttons">
-          <button className="cancel-btn" onClick={() => navigate('/library')}>Cancel</button>
+          <button className="cancel-btn" onClick={onClose}>Cancel</button>
           <button className="save-btn" onClick={() => moveExam(selectedFolder)}>Save</button>
         </div>
       </div>

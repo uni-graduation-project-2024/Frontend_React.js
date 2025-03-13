@@ -1,7 +1,9 @@
-.move-exam-frame {
+/* .move-exam-frame {
   height: 100dvh;
   background-color: #45a0496b;
   display: flex;
+  position: absolute;
+  width: 100%;
 }
 
 
@@ -13,7 +15,7 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-  }
+  } */
   
   h2 {
     color: #333;

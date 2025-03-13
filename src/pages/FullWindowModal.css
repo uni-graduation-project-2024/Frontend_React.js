@@ -1,0 +1,21 @@
+.view-window-frame {
+    height: 100dvh;
+    background-color: #56286782;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+  }
+  
+  
+  .view-window-container {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      background: #f8e28d;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }

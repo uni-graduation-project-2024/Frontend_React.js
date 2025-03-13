@@ -14,7 +14,7 @@ const Library = () => {
   const [folderMode, setFolderMode] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(true);
 
-  const handleRefresh = () => {
+  const handleRefresh = (state) => {
     setRefresh((prev) => !prev); // Toggle refresh to trigger re-fetch
   };
 

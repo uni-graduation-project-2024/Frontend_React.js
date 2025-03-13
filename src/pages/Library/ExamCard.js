@@ -1,9 +1,12 @@
 // 🏗 **Draggable ExamCard Component**
-
 import { useDrag } from "react-dnd";
-import { TimeAgo } from "../../utils/timeAgo";
 import { Trash2, MoreVertical } from "lucide-react";
 import { LuFolderSymlink } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
+
+import { TimeAgo } from "../../utils/timeAgo";
+import MoveExam from "./MoveToFolder";
 
 const ItemTypes = {
     EXAM: "exam",
@@ -11,14 +14,14 @@ const ItemTypes = {
 
 export const ExamCard = ({
     exam,
-    handleReviewMode,
     handleRetry,
     handleDelete,
-    handleMoveToFolder,
     openMenu,
     toggleMenu,
     openDropdown,
   }) => {
+    const navigate = useNavigate();
+    const { openModal } = useOutletContext();
     const [{ isDragging }, drag] = useDrag(() => ({
       type: ItemTypes.EXAM,
       item: { id: exam.examId },
@@ -26,13 +29,18 @@ export const ExamCard = ({
         isDragging: monitor.isDragging(),
       }),
     }));
+
+  const handleMoveToFolder = (examId, subId) => {
+    openModal(<MoveExam examId={examId} subId={subId} onClose={() => openModal(null)}/>);
+  };
   
     return (
+      <>
       <div
         ref={drag}
         className="library-exam"
-        onClick={() => handleReviewMode(exam.examId)}
-        style={{ opacity: isDragging ? 0.5 : 1, cursor: "grab" }}
+        onClick={() => navigate("/Review-Mode", { state: { examId : exam.examId } })}
+        style={{ opacity: isDragging ? 0.7 : 1, cursor: "grab" }}
       >
         <div className="exam-info">
           <p className="exam-time">
@@ -65,5 +73,7 @@ export const ExamCard = ({
           </div>
         </div>
       </div>
+      
+      </>
     );
   };

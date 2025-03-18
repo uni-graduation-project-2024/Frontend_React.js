@@ -1,18 +1,22 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { FaPlus, FaUpload } from "react-icons/fa";
 
 import "./library.css";
 import { FoldersContainer } from "./FoldersContainer";
 import ExamsContainer from "./ExamsContainer";
+import CreateFolder from "./CreateFolder";
 
 const Library = () => {
   const navigate = useNavigate();
+  const { openModal } = useOutletContext();
   const [refresh, setRefresh] = useState(false);
-  //const { folders } = useFolders(refresh);
-  //const { exams } = useExams(null, refresh);
   const [folderMode, setFolderMode] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(true);
+
+  const handleCreateFolder = () => {
+    openModal(<CreateFolder updateRefresh={setRefresh} onClose={() => openModal(null)}/>);
+  };
 
   const handleRefresh = (state) => {
     setRefresh((prev) => !prev); // Toggle refresh to trigger re-fetch
@@ -22,7 +26,7 @@ const Library = () => {
       <div className="library-container" onClick={() => setOpenDropdown(false)}>
         <div className="library-header">
           <div className="library-buttons">
-            <button onClick={() => navigate("/create-folder")} className="library-button">
+            <button onClick={handleCreateFolder} className="library-button">
               <FaPlus className="mr-2" /> Create Folder
             </button>
             <button onClick={() => navigate("/my-uploads")} className="library-button library-button-gray">

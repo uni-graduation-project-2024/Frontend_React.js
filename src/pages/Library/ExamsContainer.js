@@ -6,22 +6,28 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 import "./ExamCard.css";
 import linkhost from "../..";
-import { useExams } from "../../hooks/useExams";
+import { useExamsStore } from "../../hooks/useExams";
 import { ExamCard } from "./ExamCard";
 
 const ExamsContainer = ({ subjectId, openDropdown, updateDropdown, refresh}) => {
-  const { exams } = useExams(subjectId, refresh);
-  const [fetchedExams, setFetchedExams] = useState(exams);
+  const { allExams, loading, fetchExams } = useExamsStore();
+  //const [fetchedExams, setFetchedExams] = useState(exams);
   const [openMenu, setOpenMenu] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setFetchedExams(exams);
-  }, [exams]);
+    fetchExams(); // Fetch exams when component mounts
+  }, [refresh]);
 
-  useEffect(() => {
-    setOpenMenu(null);
-  }, [openDropdown]);
+  const exams = subjectId === -1 ? allExams : allExams.filter(exam => exam.subjectId == subjectId);
+
+  // useEffect(() => {
+  //   setFetchedExams(exams);
+  // }, [exams]);
+
+  // useEffect(() => {
+  //   setOpenMenu(null);
+  // }, [openDropdown]);
 
   const toggleMenu = (examId, e) => {
     e.stopPropagation();
@@ -33,7 +39,7 @@ const ExamsContainer = ({ subjectId, openDropdown, updateDropdown, refresh}) => 
     if (window.confirm("Are you sure you want to delete this exam?")) {
       try {
         await axios.delete(`${linkhost}/api/Exam/${examId}`);
-        setFetchedExams(exams.filter((exam) => exam.examId !== examId));
+        //setFetchedExams(exams.filter((exam) => exam.examId !== examId));
       } catch (error) {
         console.error("Error deleting exam:", error);
       }
@@ -92,25 +98,28 @@ const ExamsContainer = ({ subjectId, openDropdown, updateDropdown, refresh}) => 
 
   return (
     <DndProvider backend={HTML5Backend}>
-    <div className="library-exam-grid">
-      {fetchedExams.length === 0 ? (
-        <p>No exams available for this subject.</p>
-      ) : (
-        fetchedExams.map((exam) => (
-          <ExamCard
-            key={exam.examId}
-            exam={exam}
-            handleReviewMode={handleReviewMode}
-            handleRetry={handleRetry}
-            handleDelete={handleDelete}
-            handleMoveToFolder={handleMoveToFolder}
-            openMenu={openMenu}
-            toggleMenu={toggleMenu}
-            openDropdown={openDropdown}
-          />
-        ))
-      )}
-    </div>
+      {loading ? 
+      <p>Loading Exams...</p> :
+      <div className="library-exam-grid">
+        {exams.length === 0 ? (
+          <p>No exams available.</p>
+        ) : (
+          exams.map((exam) => (
+            <ExamCard
+              key={exam.examId}
+              exam={exam}
+              handleReviewMode={handleReviewMode}
+              handleRetry={handleRetry}
+              handleDelete={handleDelete}
+              handleMoveToFolder={handleMoveToFolder}
+              openMenu={openMenu}
+              toggleMenu={toggleMenu}
+              openDropdown={openDropdown}
+            />
+          ))
+        )}
+      </div>
+      }
     </DndProvider>
   );
 };

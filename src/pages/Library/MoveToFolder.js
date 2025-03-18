@@ -3,12 +3,16 @@ import axios from "axios";
 
 import "./MoveToFolder.css";
 import linkhost from "../..";
-import { useFolders } from "../../hooks/useFolders";
+import { useFoldersStore } from "../../hooks/useFolders";
+import { useExamsStore } from "../../hooks/useExams";
 
 const MoveExam = ({examId, subId, onClose }) => { 
-  const { folders } = useFolders();
+  const { allFolders, fetchFolders } = useFoldersStore();
+  const { allExams, loading, fetchExams } = useExamsStore();
   const [examFolder, setExamFolder] = useState(null);
   const [selectedFolder, setSelectedFolder] = useState(null);
+
+  const folders = allFolders;
 
   useEffect(() => {
     if(subId && folders.length > 0){
@@ -24,6 +28,7 @@ const MoveExam = ({examId, subId, onClose }) => {
     axios.patch(`${linkhost}/api/Exam/${examId}/${folder}`)
       .then(() => {
         setExamFolder(folder);
+        fetchExams();
         onClose();
       })
       .catch(error => console.error("Error moving exam:", error));

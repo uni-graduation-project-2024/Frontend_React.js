@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 import './CreateFolder.css';
 import linkhost from "../../" 
 import { getAuthToken } from '../../services/auth';
 
-const CreateFolder = () => {
+const CreateFolder = ({ updateRefresh, onClose }) => {
   const [folderName, setFolderName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const navigate = useNavigate();
   const {user} = getAuthToken();
 
   const handleFolderSubmit = async () => {
@@ -22,7 +21,8 @@ const CreateFolder = () => {
 
       if (response.status === 201 || response.status === 200) {
         console.log('Folder created successfully:', response.data);
-        navigate(`/library?newFolder=${encodeURIComponent(folderName)}`);
+        updateRefresh();
+        onClose();
       } else {
         console.error('Failed to create folder:', response.statusText);
       }
@@ -37,20 +37,15 @@ const CreateFolder = () => {
     <div className="create-folder-container">
       <h1 className="create-folder-title">Create New Folder</h1>
       <div className="create-folder-box">
-        <h2 className="create-folder-subtitle">Use folders to organize your quizzes</h2>
-        <div className="mb-4">
-          <label className="create-folder-label" htmlFor="folder-name">
-            New Folder Name
-          </label>
           <input
             id="folder-name"
             type="text"
             className="create-folder-input"
+            placeholder='New Folder Name'
             value={folderName}
             onChange={(e) => setFolderName(e.target.value)}
             disabled={isSubmitting}
           />
-        </div>
         <button
           onClick={handleFolderSubmit}
           className="create-folder-button"
@@ -58,6 +53,7 @@ const CreateFolder = () => {
         >
           {isSubmitting ? 'Creating...' : 'Create'}
         </button>
+        <button className="cancel-btn" onClick={onClose}>Cancel</button>
       </div>
     </div>
   );

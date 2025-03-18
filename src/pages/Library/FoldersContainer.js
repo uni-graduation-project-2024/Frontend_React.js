@@ -1,11 +1,18 @@
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { useFolders } from "../../hooks/useFolders";
+import { useFoldersStore } from "../../hooks/useFolders";
 import FolderCard from "./FolderCard"; 
+import { useEffect } from "react";
 
 export const FoldersContainer = ({updateRefresh, refresh }) => {
-  const { folders } = useFolders(refresh);
+  const { allFolders, fetchFolders } = useFoldersStore();
+
+  useEffect(()=>{
+    fetchFolders();
+  }, [refresh])
+
+  const folders = allFolders;
 
     return(
       <DndProvider backend={HTML5Backend}>

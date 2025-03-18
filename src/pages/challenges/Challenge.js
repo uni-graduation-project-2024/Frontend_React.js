@@ -39,7 +39,7 @@ const Challenge = () => {
       .catch(error => {
         console.error("Error fetching challenges:", error);
       });
-  }, []);
+  }, [user.nameid]);
 
   return (
     <div className="challenge-container">

@@ -6,7 +6,7 @@ import axios from "axios";
 
 import "./folderView.css";
 import linkhost from "../..";
-import ExamCard from "./ExamsContainer";
+import ExamsContainer from "./ExamsContainer";
 
 const FolderView = () => {
   const { folderName } = useParams();
@@ -57,10 +57,9 @@ const FolderView = () => {
           </div>
         </div>
 
-        <ExamCard subjectId={subjectId}
-        openDropdown={openDropdown} 
-        updateDropdown={setOpenDropdown}
-        />
+        <ExamsContainer subjectId={subjectId}
+         openDropdown={openDropdown} 
+         updateDropdown={setOpenDropdown}/>
       </div>
     </>
   );

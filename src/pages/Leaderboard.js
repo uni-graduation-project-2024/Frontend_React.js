@@ -55,7 +55,7 @@ const Leaderboard = () => {
         <h2 className="leaderboard-title">Leaderboard</h2>
         <ul>
           {users.map((user, index) => (
-            <li key={user.id} className="leaderboard-item">
+            <li key={user.userId} className="leaderboard-item">
               <div className="leaderboard-rank">
                 <span className="rank-number">{index + 1}.</span>
                 <span className="username">{user.username}</span>

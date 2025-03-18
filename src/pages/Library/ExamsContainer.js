@@ -39,6 +39,7 @@ const ExamsContainer = ({ subjectId, openDropdown, updateDropdown, refresh}) => 
     if (window.confirm("Are you sure you want to delete this exam?")) {
       try {
         await axios.delete(`${linkhost}/api/Exam/${examId}`);
+        fetchExams();
         //setFetchedExams(exams.filter((exam) => exam.examId !== examId));
       } catch (error) {
         console.error("Error deleting exam:", error);

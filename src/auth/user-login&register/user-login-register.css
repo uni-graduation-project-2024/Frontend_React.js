@@ -6,6 +6,30 @@
     box-sizing: border-box;
 }
 
+.error-message {
+  color: red;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.input-input-field {
+  border-radius: 30px;
+}
+
+input:focus {
+  outline: none !important;
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3) !important;
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #f0f0f0 inset; /* override autofill background */
+  -webkit-text-fill-color: #1e293b; /* text color */
+  transition: background-color 5000s ease-in-out 0s; /* trick to keep style */
+}
+
+
 .loginRegister body, input{
     font-family: 'poppins', sans-serif;
 

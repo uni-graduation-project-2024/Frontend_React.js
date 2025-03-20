@@ -134,7 +134,7 @@ const PracticeMode = () => {
           {questionData.options.map((option, index) => (
             <button
               key={index}
-              className={`answer-btn ${selectedAnswer === option ? "selected" : ""} ${
+              className={`answer-btn ${(!submitedAnswer && selectedAnswer === option) ? "selected" : ""} ${
                 submitedAnswer
                   ? option === questionData.correctAnswer
                     ? "correct"
@@ -160,8 +160,8 @@ const PracticeMode = () => {
 
         {checked && (
           <>
-          <div className={`feedback ${selectedAnswer === questionData.correctAnswer ? "correct-feedback" : "incorrect-feedback"}`}>
-            <p>{selectedAnswer === questionData.correctAnswer ? "✅ Correct" : "❌ Incorrect"}</p>
+          <div className={`feedback ${submitedAnswer === questionData.correctAnswer ? "correct-feedback" : "incorrect-feedback"}`}>
+            <p>{submitedAnswer === questionData.correctAnswer ? "✅ Correct" : "❌ Incorrect"}</p>
             <p>{questionData.explanation || "No explanation provided."}</p>
           </div>
 

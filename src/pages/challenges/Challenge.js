@@ -48,16 +48,16 @@ const Challenge = () => {
       <div className="challenge-card">
         <h2>Daily Challenge</h2>
         <p>{challenges.dailyXp} / {challenges.targetdaily}</p>
-        <div className="progress-bar">
-          <div className="progress-fill" style={{ width: `${dailyProgress}%` }}></div>
+        <div className="challenge-progress-bar">
+          <div className="challenge-progress-fill" style={{ width: `${dailyProgress}%` }}></div>
         </div>
       </div>
 
       <div className="challenge-card">
         <h2>Monthly Challenge - <span className="level">{currentLevel}</span></h2>
         <p>{challenges.monthlyXp} / {challenges.monthtarget[2]}</p>
-        <div className="progress-bar">
-          <div className="progress-fill" style={{ width: `${monthlyProgress}%` }}></div>
+        <div className="challenge-progress-bar">
+          <div className="challenge-progress-fill" style={{ width: `${monthlyProgress}%` }}></div>
         </div>
       </div>
 

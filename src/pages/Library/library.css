@@ -92,6 +92,7 @@
   height: 5.2rem;
   padding-left: 0px;
   padding-right: 45px;
+  position: relative;
 }
 
 .folder-highlight {
@@ -101,9 +102,9 @@
 }
 
 .folder-exams-number {
-  padding-right: 0px;
-  padding-left: 12rem;
-  padding-top: 1rem;
+  position: absolute;
+  top: 60%;
+  left: 90%;
 }
 
 .library-folder:hover {

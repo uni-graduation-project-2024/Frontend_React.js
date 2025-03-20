@@ -31,7 +31,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background 0.3s ease-in-out;
+    /* transition: background 0.3s ease-in-out; */
   }
   
   .answer-btn:hover {
@@ -39,8 +39,8 @@
   }
   
   .answer-btn.selected {
-    background: #6a74e8;
-    color: white;
+    border: 1px solid #6a74e8;
+    color: #6a74e8;
   }
   
   .check-btn,
@@ -121,9 +121,11 @@
   
   .correct {
     background-color: #4caf50 !important;
+    color: white !important
   }
   
   .incorrect {
     background-color: #e74c3c !important;
+    color: white !important
   }
   

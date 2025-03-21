@@ -16,7 +16,7 @@
   }
   
   .badge-card {
-    width: 120px;
+    width: 70%;
     padding: 15px;
     border-radius: 10px;
     text-align: center;
@@ -26,7 +26,7 @@
   }
   
   .bronze {
-    background-color: #cd7f32;
+    background-color: #e19c58;
   }
   
   .silver {
@@ -34,7 +34,7 @@
   }
   
   .gold {
-    background-color: #ffd700;
+    background-color: #efd64c;
   }
   
   .badge-label {

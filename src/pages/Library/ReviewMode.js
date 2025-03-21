@@ -47,13 +47,13 @@ const ReviewMode = () => {
                       : ""
                   }`}
                 >
-                  {option}
+                  {option} {option === q.correctAnswer && " ✅ "}
                 </p>
               ))}
             </div>
-            {q.userAnswer !== q.correctAnswer && (
-              <p className="explanation">Explanation: {q.explain}</p>
-            )}
+            {/* <div className="explain-btn">Explain</div> */}
+            <p className="explanation">Explanation: {q.explain}</p>
+            
           </div>
         ))
       )}

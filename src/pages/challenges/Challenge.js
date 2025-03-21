@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { SlBadge } from "react-icons/sl";
+import { IoCheckmarkCircle } from "react-icons/io5";
+
 import "./Challenge.css";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
@@ -56,8 +59,18 @@ const Challenge = () => {
       <div className="challenge-card">
         <h2>Monthly Challenge - <span className="level">{currentLevel}</span></h2>
         <p>{challenges.monthlyXp} / {challenges.monthtarget[2]}</p>
+        <div className="challenge-progress-bar-container">
+        <IoCheckmarkCircle className={`badge-fill ${monthlyProgress>= 25? "bronze-badge-active" : ""}`} style={{left:"30.6301%"}}/>
+          <SlBadge className={`badge-shape ${monthlyProgress>= 25? "bronze-badge-active" : ""}`} style={{left:"30%"}}/>
+
+        <IoCheckmarkCircle className={`badge-fill ${monthlyProgress>= 60? "silver-badge-active" : ""}`} style={{left:"60.6301%"}}/>
+          <SlBadge className={`badge-shape silver-badge ${monthlyProgress>= 60? "silver-badge-active" : ""}`} style={{left:"60%"}}></SlBadge>
+
+        <IoCheckmarkCircle className={`badge-fill ${monthlyProgress>= 100? "gold-badge-active" : ""}`} style={{left:"97.6301%"}}/>
+          <SlBadge className={`badge-shape gold-badge ${monthlyProgress>= 100? "gold-badge-active" : ""}`} style={{left:"97%"}}></SlBadge>
         <div className="challenge-progress-bar">
           <div className="challenge-progress-fill" style={{ width: `${monthlyProgress}%` }}></div>
+        </div>
         </div>
       </div>
 

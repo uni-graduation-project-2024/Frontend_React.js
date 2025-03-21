@@ -26,7 +26,7 @@ const Badge = () => {
     <div className="badge-container">
       <h1 className="badge-title">League History</h1>
       <div className="badge-grid">
-        {Object.entries(leagueHistory).map(([month, rank]) => (
+        {Object.entries(leagueHistory).reverse().map(([month, rank]) => (
           <div key={month} className={`badge-card ${rank.toLowerCase()}`}>
             <h3>{month}</h3>
             <span className="badge-label">{rank}</span>

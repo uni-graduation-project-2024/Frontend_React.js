@@ -1,5 +1,5 @@
 main {
-    min-height: 100dvh;
+    min-height: fit-content;
     background-color: #fafbff;
     padding: 24px;
     width: 81%;

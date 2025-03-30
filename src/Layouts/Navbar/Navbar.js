@@ -6,9 +6,9 @@ import axios from "axios";
 
 import linkhost from "../.."; 
 import { getAuthToken } from "../../services/auth"; 
-import "./navbar.css";  
+import "./Navbar.css";  
 
-const NavBar = () => {
+const Navbar = () => {
   const [streak, setStreak] = useState(0);
   const [coins, setCoins] = useState(0);
   const [generationPower, setGenerationPower] = useState(0);
@@ -53,4 +53,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;

@@ -3,8 +3,8 @@ import { FaBook, FaTrophy, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { RiAiGenerate } from "react-icons/ri";
 import { MdLeaderboard } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
-import { getAuthToken } from './services/auth';
-import './sidebar.css'; 
+import { getAuthToken } from '../../services/auth';
+import './Sidebar.css'; 
 
 const Sidebar = ({ children }) => {
   const { user } = getAuthToken();

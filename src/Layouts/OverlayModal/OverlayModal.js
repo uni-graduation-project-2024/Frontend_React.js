@@ -1,6 +1,6 @@
-import "./FullWindowModal.css";
+import "./OverlayModal.css";
 
-const ViewWindow = ({ children }) => {
+const OverlayModal = ({ children }) => {
     return (
         <div className="view-window-frame">
             <div className="view-window-container">
@@ -10,4 +10,4 @@ const ViewWindow = ({ children }) => {
     );
 };
 
-export default ViewWindow;
+export default OverlayModal;

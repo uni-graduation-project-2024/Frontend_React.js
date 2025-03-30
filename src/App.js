@@ -13,7 +13,7 @@ import AdminLogin from "./pages/admin/login/login";
 import Dashboard  from "./pages/admin/dashboard";
 import ShowUser from "./pages/admin/show-users/show-user";
 
-import Layout from "./pages/Layout";
+import MainLayout from "./Layouts/MainLayout/MainLayout";
 import PracticeMode from "./pages/QuestionGenerator/PracticeMode";
 import Leaderboard from "./pages/Leaderboard";
 import FolderView from "./pages/Library/folderView";
@@ -45,7 +45,7 @@ function App() {
             <Route path="/PracticeMode" element={<PracticeMode/>}/>
             <Route path="/score" element={<ScorePage />} />
 
-            <Route element={<Layout/>}>
+            <Route element={<MainLayout/>}>
               <Route path="/library" element={<Library />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
               <Route path="/GenerationForm" element={<GenerationForm />} />

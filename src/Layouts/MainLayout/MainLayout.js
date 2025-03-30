@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
-import "./Layout.css";
-import Sidebar from "../sidebar";
-import NavBar from "./Home/navbar";
-import FullWindowModal from "./FullWindowModal";
+import "./MainLayout.css";
+import Sidebar from "../Sidebar/Sidebar";
+import Navbar from "../Navbar/Navbar";
+import FullWindowModal from "../OverlayModal/OverlayModal";
 
-const Layout = () => {
+const MainLayout = () => {
     const [ showModal, setShowModal ] = useState(false);
     const [modalContent, setModalContent] = useState(null);
 
@@ -25,7 +25,7 @@ const Layout = () => {
             )}
 
             <Sidebar/>
-            <NavBar/>
+            <Navbar/>
             <main>
                 <div className="main-container">
                     <Outlet context={{openModal}}/>
@@ -36,4 +36,4 @@ const Layout = () => {
     )
 }
 
-export default Layout;
+export default MainLayout;

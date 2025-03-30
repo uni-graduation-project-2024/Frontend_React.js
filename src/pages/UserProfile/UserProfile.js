@@ -6,7 +6,7 @@ import axios from "axios";
 import { FaSignInAlt } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 
-import "./userProfile.css";
+import "./UserProfile.css";
 import { getAuthToken, removeAuthToken } from '../../services/auth';
 import linkhost from "../..";
 

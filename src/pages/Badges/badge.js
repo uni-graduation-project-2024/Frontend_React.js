@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import "./badge.css";
+import "./Badge.css";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
 
@@ -20,7 +20,7 @@ const Badge = () => {
       .catch((error) => {
         console.error("Error fetching league history:", error);
       });
-  }, []);
+  }, [user.nameid]);
 
   return (
     <div className="badge-container">

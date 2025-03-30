@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import './Myuploads.css';
+import './UserUploads.css';
 import linkhost from '../../..';
 import { getAuthToken } from '../../../services/auth';
 

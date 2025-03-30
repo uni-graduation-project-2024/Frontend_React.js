@@ -2,28 +2,29 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import AuthGuard from "./guards/auth.guard";
-import Home from "./pages/Home/home";
+import Home from "./pages/Home/Home";
 
 import LoginRegisterUser from "./auth/user-login&register/user-login-register";
 import ChangePassword from "./auth/user-changePassword/changePassword";
-import Library from "./pages/Library/library";
-import GenerationForm from "./pages/QuestionGenerator/GenerationForm";
+
 
 import AdminLogin from "./pages/admin/login/login";
 import Dashboard  from "./pages/admin/dashboard";
 import ShowUser from "./pages/admin/show-users/show-user";
 
 import MainLayout from "./Layouts/MainLayout/MainLayout";
+import Library from "./pages/Library/Library";
+import GenerationForm from "./pages/QuestionGenerator/GenerationForm";
 import PracticeMode from "./pages/QuestionGenerator/PracticeMode";
-import Leaderboard from "./pages/Leaderboard";
-import FolderView from "./pages/Library/folderView";
+import Leaderboard from "./pages/Leaderboard/Leaderboard";
+import FolderView from "./pages/Library/FolderView";
 import ScorePage from "./pages/QuestionGenerator/scorePage";
 import ReviewMode from "./pages/Library/ReviewMode"; 
-import Challenge from "./pages/challenges/Challenge";
-import UserProfile from "./pages/user-profile/userProfile";
-import Market from "./pages/market/market";
-import Badge from "./pages/Badges/badge";
-import MyUploads from "./pages/Library/Uploads/Myuploads";
+import Challenge from "./pages/Challenges/Challenge";
+import UserProfile from "./pages/UserProfile/UserProfile";
+import Market from "./pages/Market/Market";
+import Badge from "./pages/Badges/Badge";
+import UserUploads from "./pages/Library/UserUploads/UserUploads";
 
 function App() {
   return (
@@ -56,7 +57,7 @@ function App() {
 
               <Route path="/folder/:folderName" element={<FolderView />} />
               <Route path="/Review-Mode" element={<ReviewMode />} /> 
-              <Route path="/my-uploads" element={<MyUploads />} /> 
+              <Route path="/my-uploads" element={<UserUploads />} /> 
 
               
            </Route>

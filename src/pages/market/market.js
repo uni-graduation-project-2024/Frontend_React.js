@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { FaCoins } from "react-icons/fa";
-import "./market.css";
+import "./Market.css";
 
 const Market = () => {
   const [loading, setLoading] = useState(false);

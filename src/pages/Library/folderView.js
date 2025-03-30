@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Trash2, Pencil } from "lucide-react";
 import axios from "axios";
 
-import "./folderView.css";
+import "./FolderView.css";
 import linkhost from "../..";
 import ExamsContainer from "./ExamsContainer";
 

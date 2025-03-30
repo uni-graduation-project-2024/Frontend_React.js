@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { FaPlus, FaUpload } from "react-icons/fa";
 
-import "./library.css";
+import "./Library.css";
 import { FoldersContainer } from "./FoldersContainer";
 import ExamsContainer from "./ExamsContainer";
 import CreateFolder from "./CreateFolder";

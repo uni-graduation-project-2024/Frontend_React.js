@@ -56,7 +56,9 @@ const GenerationForm = () => {
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
-      );
+      ).catch((error) => {
+        console.error("Something went wrong, please try again:", error);
+      });;
 
       // setGeneratedQuestions(response.data); 
       localStorage.setItem("generatedQuestions", JSON.stringify(response.data)); 
@@ -106,7 +108,7 @@ const GenerationForm = () => {
   <button  type="button"   onClick={() => {
       const fileInput = document.createElement("input");
       fileInput.type = "file";
-      fileInput.accept = ".txt, .pdf, .docx";
+      fileInput.accept = ".txt, .pdf, .docx, .pptx";
       fileInput.onchange = handleFileChange;
       fileInput.click();
     }}

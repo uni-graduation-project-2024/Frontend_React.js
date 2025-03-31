@@ -1,0 +1,92 @@
+.folder-view-container {
+  flex: 1;
+  }
+  
+  .folder-buttons {
+    margin-top: 20px;
+  }
+  
+  .folder-button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 10px;
+  }
+  
+  .folder-button.delete {
+    background: red;
+    color: white;
+  }
+  
+  .folder-button.rename {
+    background: blue;
+    color: white;
+  }
+  
+/* Aligns header elements */
+.folder-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Folder Title and Rename Icon */
+.folder-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-grow: 1;
+  margin-left: 15px;
+}
+
+.folder-title h1 {
+  margin: 0;
+  font-size: 35px;
+  text-align: center;
+}
+
+/* Back Icon (Left) */
+.back-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: #605f5f;
+  transition: color 0.2s ease;
+}
+
+.back-icon:hover {
+  color: #007bff;
+}
+
+/* Rename Icon (Right after folder name) */
+.rename-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: #28a745;
+  transition: color 0.2s ease;
+}
+
+.rename-icon:hover {
+  color: #218838;
+}
+
+/* Delete Icon (Top Right) */
+.delete-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: #dc3545;
+  transition: color 0.2s ease;
+  margin-top: 5.7px;
+}
+
+.delete-icon:hover {
+  color: #c82333;
+}
+
+  

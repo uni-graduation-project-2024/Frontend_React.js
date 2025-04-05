@@ -1,8 +1,8 @@
 import {  useState } from "react";
 
 import "./user-login-register.css";
-import loginImage from "../../assets/login.png";
-import registerImage from "../../assets/register.png";
+import loginImage from "../../assets/images/login.png";
+import registerImage from "../../assets/images/register.png";
 import Login from "./login";
 import Register from "./register";
 

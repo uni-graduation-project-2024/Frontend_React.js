@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./scorePage.css";
 
@@ -6,6 +6,15 @@ const ScorePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { totalScore, timeTaken, xpCollected } = location.state || {};
+  const celebrationSound = useRef(null);
+
+  useEffect(()=>{
+    celebrationSound.current = new Audio("/assets/soundEffects/celebration.mp3");
+    celebrationSound.current.preload = "auto";
+
+    celebrationSound.current.currentTime = 0; // Reset sound if already playing
+    celebrationSound.current.play();
+  }, [])
 
   const homeHandle = () =>{
     navigate("/library");

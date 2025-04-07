@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+
 import "./PracticeMode.css";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
+import correctSound from "../../assets/soundEffects/correct.mp3";
 
 const PracticeMode = () => {
   const navigate = useNavigate();
@@ -15,6 +17,29 @@ const PracticeMode = () => {
   const [checked, setChecked] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
   const [startTime, setStartTime] = useState(Date.now());
+
+  const correctBeep = useRef(null);
+  const incorrectBeep = useRef(null);
+
+  // Initialize audio object once on mount
+  useEffect(() => {
+    correctBeep.current = new Audio("/assets/soundEffects/correct.mp3");
+    correctBeep.current.preload = "auto";
+
+    incorrectBeep.current = new Audio("/assets/soundEffects/incorrect.mp3");
+    incorrectBeep.current.preload = "auto";
+  }, []);
+
+  const playSound = (isCorrect) => {
+    if(isCorrect){
+      correctBeep.current.currentTime = 0; // Reset sound if already playing
+      correctBeep.current.play();
+    }
+    else{
+      incorrectBeep.current.currentTime = 0; // Reset sound if already playing
+      incorrectBeep.current.play();
+    }
+  };
 
   const location = useLocation();
   const options = location.state?.options || {};
@@ -52,6 +77,7 @@ const PracticeMode = () => {
   const handleCheckAnswer = () => {
     if (selectedAnswer) {
       const isCorrect = selectedAnswer === questionData.correctAnswer;
+      playSound(isCorrect);
       setUserAnswers((prevAnswers) => [
         ...prevAnswers,
         {
@@ -121,18 +147,14 @@ const PracticeMode = () => {
     <div className="quiz-container">
       <div className="quiz-card">
       <div className="progress-bar">
-    <img src="/path-to-your-image.png" alt="Quiz Icon" className="quiz-icon" />
-    <div className="progress-bar-container">
-        <div 
+          <div 
             className="progress-bar-fill" 
-            style={{ width: `${((currentQuestionIndex ) / questions.length) * 100}%` }}
-        ></div>
-    </div>
-    <span className="progress-text">
-        {currentQuestionIndex} / {questions.length}
-    </span>
-</div>
-
+            style={{ width: `${((currentQuestionIndex) / questions.length) * 100}%` }}
+          ></div>
+          <div className="progress-text">
+            {currentQuestionIndex} of {questions.length}
+          </div>
+        </div>
         <h2 className="question">{questionData.question}</h2>
         <div className="answers">
   {questionData.options.map((option, index) => (
@@ -170,11 +192,13 @@ const PracticeMode = () => {
           <div className={`feedback ${submitedAnswer === questionData.correctAnswer ? "correct-feedback" : "incorrect-feedback"}`}>
             <p>{submitedAnswer === questionData.correctAnswer ? "✅ Correct" : "❌ Incorrect"}</p>
             <p>{questionData.explanation || "No explanation provided."}</p>
+
+            <button className="continue-btn" onClick={handleNextQuestion}>
+            {currentQuestionIndex < questions.length - 1 ? "Continue" : "Finish"}
+            </button>
           </div>
 
-          <button className="continue-btn" onClick={handleNextQuestion}>
-            {currentQuestionIndex < questions.length - 1 ? "Continue" : "Finish"}
-          </button>
+          
           </>
         )}
       </div>

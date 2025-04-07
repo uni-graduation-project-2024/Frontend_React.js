@@ -3,19 +3,18 @@
     margin: auto;
     padding: 20px;
     text-align: center;
-    margin-top: 50px;
   }
   
   .quiz-card {
     background: #ffffff;
-    padding: 30px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0px 6px #bbc0f1;
 
   }
   
   .question {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 15px;
     font-weight: bold;
     justify-content: left;
@@ -36,10 +35,9 @@
     padding-left: 20px;
     padding-right: 20px;
     background: #f1f1f1;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    /* transition: background 0.3s ease-in-out; */
   }
   
   .answer-btn:hover {
@@ -48,18 +46,7 @@
   
   .answer-btn.selected {
     border: 1px solid #6a74e8;
-    color: black;
-    background-color: #d2d4e9;
-  }
-  
-  .answer-letter {
-    font-weight: bold;
-    margin-left: 10px; 
-  }
-  
-  
-  .answer-btn span:last-child {
-    order: 2; 
+    color: #6a74e8;
   }
   
   .check-btn,
@@ -71,11 +58,14 @@
     cursor: pointer;
     font-size: 16px;
     transition: background 0.3s ease-in-out;
+    position: relative;
+    right: -80%;
   }
   
   .check-btn {
     background: #007bff;
     color: white;
+    width: 20%;
   }
   
   .check-btn:disabled {
@@ -93,6 +83,7 @@
     padding: 10px;
     border-radius: 5px;
     font-size: 16px;
+    text-align: left;
   }
   
   .correct-feedback {
@@ -137,11 +128,13 @@
     background-color: #4caf50;
     width: 0%;
     transition: width 0.5s ease-in-out;
-    border-radius: 5px;
-}
-
-.progress-text {
-    font-size: 14px;
+    border-radius: 10px;
+  }
+  
+  .progress-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
     font-weight: bold;
     color: #333;
 }

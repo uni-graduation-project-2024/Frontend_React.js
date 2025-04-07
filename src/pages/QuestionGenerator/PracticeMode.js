@@ -121,34 +121,41 @@ const PracticeMode = () => {
     <div className="quiz-container">
       <div className="quiz-card">
       <div className="progress-bar">
-          <div 
+    <img src="/path-to-your-image.png" alt="Quiz Icon" className="quiz-icon" />
+    <div className="progress-bar-container">
+        <div 
             className="progress-bar-fill" 
-            style={{ width: `${((currentQuestionIndex) / questions.length) * 100}%` }}
-          ></div>
-          <div className="progress-text">
-            {currentQuestionIndex} of {questions.length}
-          </div>
-        </div>
+            style={{ width: `${((currentQuestionIndex ) / questions.length) * 100}%` }}
+        ></div>
+    </div>
+    <span className="progress-text">
+        {currentQuestionIndex} / {questions.length}
+    </span>
+</div>
+
         <h2 className="question">{questionData.question}</h2>
         <div className="answers">
-          {questionData.options.map((option, index) => (
-            <button
-              key={index}
-              className={`answer-btn ${(!submitedAnswer && selectedAnswer === option) ? "selected" : ""} ${
-                submitedAnswer
-                  ? option === questionData.correctAnswer
-                    ? "correct"
-                    : option === submitedAnswer
-                    ? "incorrect"
-                    : "disabled"
-                  : ""
-              }`}
-              onClick={() => handleAnswerClick(option)}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
+  {questionData.options.map((option, index) => (
+    <button
+      key={index}
+      className={`answer-btn ${(!submitedAnswer && selectedAnswer === option) ? "selected" : ""} ${
+        submitedAnswer
+          ? option === questionData.correctAnswer
+            ? "correct"
+            : option === submitedAnswer
+            ? "incorrect"
+            : "disabled"
+          : ""
+      }`}
+      onClick={() => handleAnswerClick(option)}
+    >
+      <span className="answer-letter">{String.fromCharCode(65 + index)}</span>
+      {option}
+    </button>
+  ))}
+</div>
+
+
 
         { !checked && (<button
           className="check-btn"

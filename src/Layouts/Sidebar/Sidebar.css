@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: #96b6f3; /* Dark Navy */
+  background-color: #e2d4ba; 
   color: #e0e0e0;
   width: 19%;
   height: 100vh;
@@ -50,7 +50,7 @@
 }
 
 .mr-2 {
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 
 .user-info {

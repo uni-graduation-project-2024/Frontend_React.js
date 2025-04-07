@@ -126,7 +126,7 @@ const GenerationForm = () => {
         )}
       <div className="inside-form">
         <div className="mb-44">
-          <h3 className="text-sm font-medium mb-2">Type Of Questions</h3>
+          <h3 className="qg">💡 Type Of Questions</h3>
           <div className="flex2 items-center gap-4">
             <label className="flex items-center">
               <input
@@ -152,7 +152,7 @@ const GenerationForm = () => {
         </div>
 
         <div className="mb-4">
-          <h3 className="text-sm font-medium mb-2">Difficulty Level</h3>
+          <h3 className="qg">💡 Difficulty Level</h3>
           <div className="flex2 items-center gap-4">
             <label className="flex items-center">
             <input
@@ -189,7 +189,7 @@ const GenerationForm = () => {
           </div>
         </div> 
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Number of Questions</label>
+          <label className="qg">💡 Number of Questions</label>
           <input
             type="range"
             min="5"
@@ -202,7 +202,7 @@ const GenerationForm = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Title for the Exam</label>
+          <label className="qg1">💡 Title for the Exam</label>
           <input
             type="text"
             value={examName}

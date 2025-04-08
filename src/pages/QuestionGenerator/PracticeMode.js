@@ -178,7 +178,6 @@ const PracticeMode = () => {
 </div>
 
 
-
         { !checked && (<button
           className="check-btn"
           onClick={handleCheckAnswer}

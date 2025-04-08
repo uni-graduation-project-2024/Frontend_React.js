@@ -158,3 +158,39 @@
     color: white !important
   }
   
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .quiz-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .progress-bar {
+    flex: 1;
+    height: 12px;
+    background-color: #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .progress-bar-fill {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  .progress-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+  }
+  

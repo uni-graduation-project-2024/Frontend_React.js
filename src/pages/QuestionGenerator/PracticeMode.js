@@ -144,64 +144,71 @@ const PracticeMode = () => {
   };
 
   return (
-    <div className="quiz-container">
-      <div className="quiz-card">
+<div className="quiz-container">
+  <div className="quiz-card">
+    <div className="top-bar">
+      <img src="/images/logo1.png" alt="Quiz Icon" className="quiz-icon" />
+
       <div className="progress-bar">
-          <div 
-            className="progress-bar-fill" 
-            style={{ width: `${((currentQuestionIndex) / questions.length) * 100}%` }}
-          ></div>
-          <div className="progress-text">
-            {currentQuestionIndex} of {questions.length}
-          </div>
-        </div>
-        <h2 className="question">{questionData.question}</h2>
-        <div className="answers">
-  {questionData.options.map((option, index) => (
-    <button
-      key={index}
-      className={`answer-btn ${(!submitedAnswer && selectedAnswer === option) ? "selected" : ""} ${
-        submitedAnswer
-          ? option === questionData.correctAnswer
-            ? "correct"
-            : option === submitedAnswer
-            ? "incorrect"
-            : "disabled"
-          : ""
-      }`}
-      onClick={() => handleAnswerClick(option)}
-    >
-      <span className="answer-letter">{String.fromCharCode(65 + index)}</span>
-      {option}
-    </button>
-  ))}
-</div>
+        <div 
+          className="progress-bar-fill" 
+          style={{ width: `${((currentQuestionIndex) / questions.length) * 100}%` }}
+        ></div>
+      </div>
 
-
-        { !checked && (<button
-          className="check-btn"
-          onClick={handleCheckAnswer}
-          disabled={!selectedAnswer || checked}
-        >
-          Check
-        </button>)}
-
-        {checked && (
-          <>
-          <div className={`feedback ${submitedAnswer === questionData.correctAnswer ? "correct-feedback" : "incorrect-feedback"}`}>
-            <p>{submitedAnswer === questionData.correctAnswer ? "✅ Correct" : "❌ Incorrect"}</p>
-            <p>{questionData.explanation || "No explanation provided."}</p>
-
-            <button className="continue-btn" onClick={handleNextQuestion}>
-            {currentQuestionIndex < questions.length - 1 ? "Continue" : "Finish"}
-            </button>
-          </div>
-
-          
-          </>
-        )}
+      <div className="progress-text">
+        {currentQuestionIndex } / {questions.length}
       </div>
     </div>
+
+    <h2 className="question">{questionData.question}</h2>
+
+    <div className="answers">
+      {questionData.options.map((option, index) => (
+        <button
+          key={index}
+          className={`answer-btn ${(!submitedAnswer && selectedAnswer === option) ? "selected" : ""} ${
+            submitedAnswer
+              ? option === questionData.correctAnswer
+                ? "correct"
+                : option === submitedAnswer
+                ? "incorrect"
+                : "disabled"
+              : ""
+          }`}
+          onClick={() => handleAnswerClick(option)}
+        >
+          <span className="answer-letter">{String.fromCharCode(65 + index)}</span>
+          {option}
+        </button>
+      ))}
+    </div>
+
+    {!checked && (
+      <button
+        className="check-btn"
+        onClick={handleCheckAnswer}
+        disabled={!selectedAnswer || checked}
+      >
+        Check
+      </button>
+    )}
+
+    {checked && (
+      <>
+        <div className={`feedback ${submitedAnswer === questionData.correctAnswer ? "correct-feedback" : "incorrect-feedback"}`}>
+          <p>{submitedAnswer === questionData.correctAnswer ? "✅ Correct" : "❌ Incorrect"}</p>
+          <p>{questionData.explanation || "No explanation provided."}</p>
+
+          <button className="continue-btn" onClick={handleNextQuestion}>
+            {currentQuestionIndex < questions.length - 1 ? "Continue" : "Finish"}
+          </button>
+        </div>
+      </>
+    )}
+  </div>
+</div>
+
   );
 };
 

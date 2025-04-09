@@ -44,17 +44,26 @@ const ScorePage = () => {
       <div className="score-details">
         <div className="score-box time">
           <p className="label">TIME</p>
-          <p className="value">{timeTaken}</p>
+          <div className="in-box">
+            <span className="icon">⏰</span>
+            <p className="value">{timeTaken}</p>
+          </div>
         </div>
   
         <div className="score-box score">
           <p className="label">SCORE</p>
-          <p className="value">{totalScore}%</p>
+          <div className="in-box">
+            <span className="icon">🏆</span>
+            <p className="value">{totalScore}%</p>
+          </div>
         </div>
   
         <div className="score-box xp">
           <p className="label">XP</p>
-          <p className="value">{xpCollected}</p>
+          <div className="in-box">
+            <span className="icon">⚡</span>
+            <p className="value">{xpCollected}</p>
+          </div>
         </div>
       </div>
   

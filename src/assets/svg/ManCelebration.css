@@ -1,0 +1,63 @@
+
+.man-svg {
+    display: block;
+    margin-left: 40px;
+    margin-bottom: 40px;
+}
+
+.decor-Vector {
+    animation: celebrate 1s ease-in-out infinite alternate forwards;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+#right-arm {
+    animation: waving-right-arm 1s ease-in-out infinite forwards alternate;
+    transform-origin: bottom;
+    transform-box: fill-box;
+}
+
+#left-arm {
+    animation: waving-left-arm 1s ease-in-out infinite forwards alternate;
+    transform-origin: bottom;
+    transform-box: fill-box;
+}
+
+#left-eye, #right-eye{
+    animation: blinking 3s ease infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+#left-eye{
+    animation: blinking 3s ease infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+@keyframes waving-right-arm {
+    100%{
+        transform: rotateZ(-10deg);
+    }
+}
+
+@keyframes waving-left-arm {
+    100%{
+        transform: rotateZ(10deg);
+    }
+}
+
+@keyframes celebrate {
+    100%{
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes blinking {
+    0%, 89%, 95%{
+        transform: scaleY(1);
+    }
+    90%, 100%{
+        transform: scaleY(0);
+    }
+}

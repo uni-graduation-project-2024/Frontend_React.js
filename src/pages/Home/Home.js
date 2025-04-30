@@ -4,6 +4,7 @@ import { FaSignInAlt } from 'react-icons/fa';
 import { RiAiGenerate } from "react-icons/ri";
 
 import './Home.css'; 
+import ManCelebration from '../../assets/svg/ManCelebration';
 import { getAuthToken, removeAuthToken } from '../../services/auth';
 
 const Home = () => {
@@ -25,6 +26,7 @@ const Home = () => {
       <div className="home-main">
         <div className="home-text">
           <h1 className="home-title">Welcome to Learntendo</h1>
+          <ManCelebration/>
           {user && 
           (
           <>

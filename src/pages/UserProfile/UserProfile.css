@@ -1,91 +1,119 @@
 .profile-container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
-  
-  .profile-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #96b6f3;
-    padding: 15px;
-    border-radius: 10px;
-    color: white;
-  }
-  
-  .profile-info h2 {
-    margin: 0;
-    font-size: 22px;
-  }
-  
-  .profile-info p {
-    margin: 5px 0;
-    font-size: 14px;
-  }
-  
-  .edit-icon {
-    font-size: 18px;
-    margin-left: 5px;
-    cursor: pointer;
-  }
-  
-  .profile-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 20px;
-  }
-  
-  .stat-box {
-    /* background: #1f2937; */
-    /* color: white; */
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .stat-box h3 {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  
-  .stat-box p {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  /* Buttons */
-  .profile-actions {
-    margin-top: 20px;
-  }
-  
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .change-password {
-    background-color: #3b82f6;
-    color: white;
-  }
-  
-  .delete-account {
-    background-color: #ef4444;
-    color: white;
-  }
-  
-  .logout {
-    background-color: #6b7280;
-    color: white;
-  }
-  
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  /* text-align: center; */
+  font-family: Arial, sans-serif;
+  margin-top: -20px;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: left; */
+  text-align: left;
+  background: #d7d8d9;
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+}
+
+.profile-info h2 {
+  margin: 0;
+  margin: 5px 0;
+  font-size: 22px;
+  text-align: left;
+  margin-left: 10px;
+}
+.pdate{
+  /* margin-bottom: 50px; */
+  margin-top: 20px;
+  color: #8d8b8b;
+}
+.pemail{
+  color: black;
+}
+
+.profile-info p {
+  /* margin: 5px 0; */
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.edit-icon {
+  font-size: 18px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.stat-box {
+  background: #d7d8d9;
+  /* color: white; */
+  padding: 15px;
+  border-radius: 30px ;
+  text-align: center;
+  /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+}
+
+.stat-box h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.stat-box p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Buttons */
+.profile-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.profile-actions .logout {
+  grid-column: span 2; 
+}
+
+.profile-login-button{
+  background-color: #e1c442; /* Blue-500 */
+  padding: 12px 24px;
+  font-size: 1.125rem; /* text-lg */
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-left: 1rem;
+  border: none;
+  outline: none;
+
+}
+.deletacc{
+  background-color: rgb(233, 64, 64); /* Blue-500 */
+  padding: 12px 24px;
+  font-size: 1.125rem; /* text-lg */
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-left: 1rem;
+  border: none;
+  outline: none;
+}

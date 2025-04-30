@@ -50,8 +50,8 @@ const UserProfile = () => {
           {(userId === user.nameid) &&
           <h2>{userInfo.username} <FiEdit className="edit-icon" /></h2>
           }
-          <p>{userInfo.email}</p>
-          <p>Joined Date: {userInfo.joinedDate}</p>
+          <p className="pemail">{userInfo.email}</p>
+          <p className="pdate">Joined Date: {userInfo.joinedDate}</p>
         </div>
       </div>
 
@@ -60,46 +60,47 @@ const UserProfile = () => {
 
         <div className="stat-box">
           <h3>Total XP</h3>
-          <p>{userInfo.totalXp}</p>
+          <p>{userInfo.totalXp ?? 0}</p>
         </div>
 
         <div className="stat-box">
           <h3>Current Streak</h3>
-          <p>{userInfo.streakScore}</p> {/*Max Streak Score Need Backend*/}
+          <p>{userInfo.streakScore  ?? 0}</p> {/*Max Streak Score Need Backend*/}
         </div>
 
         <div className="stat-box">
           <h3>Exams Created</h3>
-          <p>{userInfo.examsCreated}</p> {/*Need backend*/}
+          <p>{userInfo.examsCreated  ?? 0}</p> {/*Need backend*/}
         </div>
 
         <div className="stat-box">
           <h3>Questions Solved</h3>
-          <p>{userInfo.totalQuestion}</p>
+          <p>{userInfo.totalQuestion  ?? 0}</p>
         </div>
 
         <div className="stat-box">
           <h3>Finished Top 3</h3>
-          <p>{userInfo.finishedTop3}</p> {/*Need backend*/}
+          <p>{userInfo.finishedTop3  ?? 0}</p> {/*Need backend*/}
         </div>
 
         <div className="stat-box">
           <h3>Current League</h3>
-          <p>{userInfo.currentLeague}</p>
+          <p>{userInfo.currentLeague  ?? 0}</p>
         </div>
       </div>
 
       {(userId === user.nameid) &&
       <div className="profile-actions">
-        <button onClick={() => navigate("/change-password")} className="home-login-button">
+        <button onClick={() => navigate("/change-password")} className="profile-login-button">
           <RiLockPasswordFill className="icon" /> Change Password
         </button>
-        <button onClick={() => navigate("/change-password")} className="home-login-button">
-          Delete Account
-        </button>
-        <button onClick={handleLogOutClick} className="home-login-button">
+        <button onClick={handleLogOutClick} className="profile-login-button">
             <FaSignInAlt /> LogOut
           </button>
+        <button onClick={() => navigate("/change-password")} className="deletacc">
+          Delete Account
+        </button>
+        
       </div>
       }
     </div>

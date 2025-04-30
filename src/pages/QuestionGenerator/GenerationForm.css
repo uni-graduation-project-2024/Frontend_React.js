@@ -1,12 +1,12 @@
 div .body {
   font-family: 'Arial', sans-serif;
   margin: 0;
-  margin-top: -110px;
+  /* margin-top: -110px; */
   padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f8f9fa;
+  /* background-color: #f8f9fa; */
   width: 100%;
 }
 form.md-questionGeneration {
@@ -72,9 +72,14 @@ button:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.mb-4{
-margin-top: 50px;
+.mb-44{
+  margin-top: 50px;
+  width: 100%;
+}
 
+.mb-4{
+  width: 100%;
+  text-align: center;
 }
 /* *************************************************** */
 input[type="file"],
@@ -117,7 +122,7 @@ font-size: 25px; /* Slightly larger font for labels */
 font-weight: bold;
 text-align: center;
 display: flex;
-justify-content: center;
+justify-content: start;
 align-items: center;
 gap: 70px;
 margin-top: 30px;
@@ -133,6 +138,7 @@ color: #1a202c;
   font-size: 25px; /* Larger font for section headers */
   margin-bottom: 12px;
   color: #ffb300;
+  width: fit-content;
 }
 .qg1{
   margin-left: -145px;
@@ -162,32 +168,6 @@ color: #1a202c;
   color: #f87171; /* Tailwind's red-500 color */
 }
 
-
-/* Range Slider */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 10px; /* Slightly thicker slider */
-  border-radius: 5px;
-  background: #f0d28d; /* Blue for the slider */
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-/* input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 18px; 
-  height: 18px;
-  border-radius: 50%;
-  background: #f0d28d;
-  cursor: pointer;
-  transition: all 0.3s ease;
-} */
-
-/* input[type="range"]::-webkit-slider-thumb:hover {
-  background: #63b3ed;
-} */
 /* Button styles */
 button {
   transition: background-color 0.3s, transform 0.2s;
@@ -219,7 +199,6 @@ button[type="button"]:hover {
 
 button[type="button"].bg-blue-500 {
   background: linear-gradient(to right, #e68900, #ffb300);
-  margin-top: -300px;
   height: 40px;
 }
 
@@ -258,22 +237,6 @@ button[type="submit"]:disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
-
-/* Range input */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 8px;
-  background: #4b5563;
-  border-radius: 8px;
-  outline: none;
-  /* transition: background 0.3s; */
-}
-/* 
-input[type="range"]:hover {
-  background: #3b82f6;
-} */
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -315,7 +278,7 @@ input[type="range"]:hover::-moz-range-thumb {
 /* ***************************** */
 .w-full{
 font-size: 2px;
-width: 400px;
+width: 100%;
 
 }
 input[type="text"],
@@ -388,7 +351,7 @@ input[type="radio"]:checked::after {
 /* *************************************** */
 input[type="range"] {
   -webkit-appearance: none;
-  width: 100%;
+  width: 50%;
   height: 10px;
   background:  #f3cd74;
   border-radius: 5px;

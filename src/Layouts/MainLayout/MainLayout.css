@@ -1,6 +1,6 @@
 main {
     min-height: fit-content;
-    background-color: #fafbff;
+    background-color: #fffef4;
     padding: 24px;
     width: 81%;
     float: right;
@@ -10,6 +10,7 @@ main {
   display: flex;
   justify-content: center;
   min-width: 100%;
+  background-color: #fffef4;
 }
 
   @media (max-width: 860px) {

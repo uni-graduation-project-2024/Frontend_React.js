@@ -17,7 +17,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUserStats = async () => {
       try {
-        const response = await axios.get(`${linkhost}/api/User/user-profile?userId=${user.nameid}`);
+        const response = await axios.get(`${linkhost}/api/User/user-navbar-info?userId=${user.nameid}`);
         setStreak(response.data.streakScore || 0);
         setCoins(response.data.coins || 0);
         setGenerationPower(response.data.generationPower || 0);

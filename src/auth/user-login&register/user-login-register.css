@@ -111,6 +111,7 @@ input:-webkit-autofill {
     display: grid;
     grid-template-columns: 15% 85%;
     padding: 0 0.4rem;
+    position: relative;
 }
 .loginRegister .input-field i{
     text-align: center;
@@ -253,9 +254,9 @@ input:-webkit-autofill {
 }
 
 .eye-icon {
-  position: relative;
-  right: -318px;
-  top: -157%;
+  position: absolute;
+  right: 20px;
+  top: 16px;
   cursor: pointer;
   color: #acacac;
 }
@@ -305,28 +306,28 @@ input:-webkit-autofill {
 
 
 @media (max-width: 870px) {
-    .container {
+    .loginRegister .container {
       min-height: 800px;
       height: 100vh;
     }
-    .signin-signup {
+    .loginRegister .signin-signup {
       width: 100%;
       top: 95%;
       transform: translate(-50%, -100%);
       transition: 1s 0.8s ease-in-out;
     }
   
-    .signin-signup,
+    .loginRegister .signin-signup,
     .container.sign-up-mode .signin-signup {
       left: 50%;
     }
   
-    .panels-container {
+    .loginRegister .panels-container {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 2fr 1fr;
     }
   
-    .panel {
+    .loginRegister .panel {
       flex-direction: row;
       justify-content: space-around;
       align-items: center;
@@ -334,42 +335,42 @@ input:-webkit-autofill {
       grid-column: 1 / 2;
     }
   
-    .right-panel {
+    .loginRegister .right-panel {
       grid-row: 3 / 4;
     }
   
-    .left-panel {
+    .loginRegister .left-panel {
       grid-row: 1 / 2;
     }
   
-    .image {
+    .loginRegister .image {
       width: 200px;
       transition: transform 0.9s ease-in-out;
       transition-delay: 0.6s;
     }
   
-    .panel .content {
+    .loginRegister .panel .content {
       padding-right: 15%;
       transition: transform 0.9s ease-in-out;
       transition-delay: 0.8s;
     }
   
-    .panel h3 {
+    .loginRegister .panel h3 {
       font-size: 1.2rem;
     }
   
-    .panel p {
+    .loginRegister .panel p {
       font-size: 0.7rem;
       padding: 0.5rem 0;
     }
   
-    .btn.transparent {
+    .loginRegister .btn.transparent {
       width: 110px;
       height: 35px;
       font-size: 0.7rem;
     }
   
-    .container:before {
+    .loginRegister .container:before {
       width: 1500px;
       height: 1500px;
       transform: translateX(-50%);
@@ -380,53 +381,53 @@ input:-webkit-autofill {
       transition: 2s ease-in-out;
     }
   
-    .container.sign-up-mode:before {
+    .loginRegister .container.sign-up-mode:before {
       transform: translate(-50%, 100%);
       bottom: 32%;
       right: initial;
     }
   
-    .container.sign-up-mode .left-panel .image,
-    .container.sign-up-mode .left-panel .content {
+    .loginRegister .container.sign-up-mode .left-panel .image,
+    .loginRegister .container.sign-up-mode .left-panel .content {
       transform: translateY(-300px);
     }
   
-    .container.sign-up-mode .right-panel .image,
-    .container.sign-up-mode .right-panel .content {
+    .loginRegister .container.sign-up-mode .right-panel .image,
+    .loginRegister .container.sign-up-mode .right-panel .content {
       transform: translateY(0px);
     }
   
-    .right-panel .image,
-    .right-panel .content {
+    .loginRegister .right-panel .image,
+    .loginRegister .right-panel .content {
       transform: translateY(300px);
     }
   
-    .container.sign-up-mode .signin-signup {
+    .loginRegister .container.sign-up-mode .signin-signup {
       top: 5%;
       transform: translate(-50%, 0);
     }
   }
   @media (max-width: 570px) {
-    form {
+    .loginRegister form {
       padding: 0 1.5rem;
     }
   
-    .image {
+    .loginRegister .image {
       display: none;
     }
-    .panel .content {
+    .loginRegister .panel .content {
       padding: 0.5rem 1rem;
     }
-    .container {
+    .loginRegister .container {
       padding: 1.5rem;
     }
   
-    .container:before {
+    .loginRegister .container:before {
       bottom: 72%;
       left: 50%;
     }
   
-    .container.sign-up-mode:before {
+    .loginRegister .container.sign-up-mode:before {
       bottom: 28%;
       left: 50%;
     }

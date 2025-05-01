@@ -157,7 +157,7 @@ const PracticeMode = () => {
       </div>
 
       <div className="progress-text">
-        {currentQuestionIndex } / {questions.length}
+        {currentQuestionIndex + 1 } / {questions.length}
       </div>
     </div>
 

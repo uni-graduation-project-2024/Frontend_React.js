@@ -1,9 +1,10 @@
 .quiz-container {
-    max-width: 620px;
+    /* max-width: 620px;
     margin: auto;
-    padding: 20px;
+    padding: 20px; */
     text-align: center;
-    margin-top: 50px;
+    /* margin-top: 50px; */
+    height: 100dvh;
   }
   
   .quiz-card {
@@ -11,35 +12,37 @@
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0px 6px #bbc0f1;
-
+    height: 100dvh;
   }
   
   .question {
-    font-size: 20px;
+    font-size: 25.6px;
     margin-bottom: 15px;
     font-weight: bold;
-    justify-content: left;
-    text-align: left;
+    text-align: center;
     padding-left: 5px;
-    margin-top: 30px;
+    margin-top: 10%;
   }
   .answers {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
+    flex-wrap: wrap;
+    margin: 5% 7%;
   }
   .answer-btn {
     display: flex;
     justify-content: space-between; 
     align-items: center; 
-    padding: 10px;
+    padding: 20px;
     padding-left: 20px;
     padding-right: 20px;
     background: #f1f1f1;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
+    width: 49%;
   }
   
   .answer-btn:hover {

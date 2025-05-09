@@ -8,7 +8,7 @@ import linkhost from "../..";
 import { getAuthToken } from "../../services/auth"; 
 import "./Navbar.css";  
 
-const Navbar = () => {
+const Navbar = ( {refreshNavbar} ) => {
   const [streak, setStreak] = useState(0);
   const [coins, setCoins] = useState(0);
   const [generationPower, setGenerationPower] = useState(0);
@@ -27,7 +27,7 @@ const Navbar = () => {
     };
 
     if (user.nameid) fetchUserStats();
-  }, [user.nameid]);
+  }, [user.nameid, refreshNavbar]);
 
   return (
     <nav className="navbar">

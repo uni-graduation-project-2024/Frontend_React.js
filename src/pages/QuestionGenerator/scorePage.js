@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./scorePage.css";
+import ManCelebration from "../../assets/svg/ManCelebration";
 
 const ScorePage = () => {
   const location = useLocation();
@@ -13,7 +14,7 @@ const ScorePage = () => {
     celebrationSound.current.preload = "auto";
 
     celebrationSound.current.currentTime = 0; // Reset sound if already playing
-    // celebrationSound.current.play();
+    celebrationSound.current.play();
   }, [])
 
   const homeHandle = () =>{
@@ -26,7 +27,8 @@ const ScorePage = () => {
     <div className="celebration-img">
   {
     totalScore >= 90 ? (
-      <img src="/images/good degree.png" alt="Superstar" /> 
+      // <img src="/images/good degree.png" alt="Superstar" /> 
+      <ManCelebration/>
     ) : totalScore >= 70 ? (
       <img src="/images/p.png" alt="Challenge" /> 
     ) : totalScore >= 50 ? (

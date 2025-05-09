@@ -1,5 +1,5 @@
 .uploads-container {
-  max-width: 800px;
+  min-width: 70%;
   margin: 40px auto;
   padding: 20px;
   background: #f9f9f9;

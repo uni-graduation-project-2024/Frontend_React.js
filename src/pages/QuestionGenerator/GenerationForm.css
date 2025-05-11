@@ -411,4 +411,6 @@ input[type="checkbox"]::after {
 input[type="checkbox"]:checked::after {
   display: block;
 }
-
+.gen-mess-error{
+  margin-top: 50px;
+}

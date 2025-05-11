@@ -153,3 +153,6 @@
       grid-template-columns: 1fr;
   }
 }
+.view-mode{
+  cursor: pointer;
+}

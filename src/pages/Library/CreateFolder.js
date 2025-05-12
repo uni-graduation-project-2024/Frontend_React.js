@@ -37,26 +37,30 @@ const CreateFolder = ({ updateRefresh, onClose }) => {
     <div className="create-folder-container">
       <h1 className="create-folder-title">Create New Folder</h1>
       <div className="create-folder-box">
-          <input
-            id="folder-name"
-            type="text"
-            className="create-folder-input"
-            placeholder='New Folder Name'
-            value={folderName}
-            onChange={(e) => setFolderName(e.target.value)}
-            disabled={isSubmitting}
-          />
-        <button
-          onClick={handleFolderSubmit}
-          className="create-folder-button"
+        <input
+          id="folder-name"
+          type="text"
+          className="create-folder-input"
+          placeholder='New Folder Name'
+          value={folderName}
+          onChange={(e) => setFolderName(e.target.value)}
           disabled={isSubmitting}
-        >
-          {isSubmitting ? 'Creating...' : 'Create'}
-        </button>
-        <button className="cancel-btn" onClick={onClose}>Cancel</button>
+        />
+        
+        <div className="create-folder-buttons">
+          <button
+            onClick={handleFolderSubmit}
+            className="create-folder-button"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Creating...' : 'Create'}
+          </button>
+          <button className="create-folder-button" onClick={onClose}>Cancel</button>
+        </div>
       </div>
     </div>
   );
+  
 };
 
 export default CreateFolder;

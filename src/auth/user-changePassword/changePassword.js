@@ -73,9 +73,9 @@ export const ChangePassword = () => {
   };
 
   const loadingSpinner = () => (
-    <div className="container h-100">
-      <div className="row h-100 justify-content-center align-items-center">
-        <div className="spinner-border" role="status">
+    <div className="spinner-container">
+      <div className="spinner-row">
+        <div className="spinner" role="status">
           <span className="sr-only">Loading...</span>
         </div>
       </div>
@@ -83,20 +83,20 @@ export const ChangePassword = () => {
   );
 
   const errorMessage = () => (
-    <div className="container">
-      <div className="row">
+    <div className="error-container">
+      <div className="error-row">
         {formState.err &&
           formState.err.map((err, index) => (
             <div
               key={index}
-              className="col-sm-12 alert alert-danger"
+              className="error-alert"
               role="alert"
             >
               {err.msg}
             </div>
           ))}
         {formErrors && (
-          <div className="col-sm-12 alert alert-danger" role="alert">
+          <div className="error-alert" role="alert">
             {formErrors}
           </div>
         )}
@@ -111,20 +111,20 @@ export const ChangePassword = () => {
       {formState.loading ? (
         loadingSpinner()
       ) : (
-        <div className="overlay body">
-          <form onSubmit={submit} className="questionGeneration">
-            <div className="f6">
+        <div className="form-container">
+          <form onSubmit={submit} className="form-content">
+            <div className="form-header">
               <header>
                 <h2>Change Password</h2>
                 <p>Update your account password</p>
               </header>
-              <div className="field-set">
+              <div className="form-fields">
                 <label htmlFor="oldPassword">
                   <FaKey /> Old Password
                 </label>
-                <div className="input-item">
+                <div className="input-container">
                   <input
-                    className="form-input"
+                    className="input-field"
                     type={passwordVisibility.old ? "text" : "password"}
                     placeholder="Old Password"
                     value={oldPassword}
@@ -132,7 +132,7 @@ export const ChangePassword = () => {
                     required
                   />
                   <span
-                    className="eye-icon"
+                    className="visibility-icon"
                     onClick={() => togglePasswordVisibility("old")}
                   >
                     {passwordVisibility.old ? <FaEyeSlash /> : <FaEye />}
@@ -142,9 +142,9 @@ export const ChangePassword = () => {
                 <label htmlFor="newPassword">
                   <FaKey /> New Password
                 </label>
-                <div className="input-item">
+                <div className="input-container">
                   <input
-                    className="form-input"
+                    className="input-field"
                     type={passwordVisibility.new ? "text" : "password"}
                     placeholder="New Password"
                     value={newPassword}
@@ -152,7 +152,7 @@ export const ChangePassword = () => {
                     required
                   />
                   <span
-                    className="eye-icon"
+                    className="visibility-icon"
                     onClick={() => togglePasswordVisibility("new")}
                   >
                     {passwordVisibility.new ? <FaEyeSlash /> : <FaEye />}
@@ -162,9 +162,9 @@ export const ChangePassword = () => {
                 <label htmlFor="confirmPassword">
                   <FaKey /> Confirm Password
                 </label>
-                <div className="input-item">
+                <div className="input-container">
                   <input
-                    className="form-input"
+                    className="input-field"
                     type={passwordVisibility.confirm ? "text" : "password"}
                     placeholder="Confirm Password"
                     value={confirmPassword}
@@ -172,17 +172,17 @@ export const ChangePassword = () => {
                     required
                   />
                   <span
-                    className="eye-icon"
+                    className="visibility-icon"
                     onClick={() => togglePasswordVisibility("confirm")}
                   >
                     {passwordVisibility.confirm ? <FaEyeSlash /> : <FaEye />}
                   </span>
                 </div>
 
-                <button className="log-in" type="submit">
+                <button className="submit-btn" type="submit">
                   Change Password
                 </button>
-                <button onClick={()=> navigate("/user-profile")} className="log-in">
+                <button onClick={()=> navigate("/user-profile")} className="cancel-btn">
                   Cancel
                 </button>
               </div>

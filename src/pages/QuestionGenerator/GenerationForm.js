@@ -146,7 +146,7 @@ const GenerationForm = () => {
                 fileInput.onchange = handleFileChange;
                 fileInput.click();
               }}
-              className="p-2 bg-blue-500 text-white rounded-md">
+              className="p-2 bg-blue-500 text-white rounded-md nup-button">
               {(file)? "Change" : "  Upload Your File  "}
             </button>
             <span style={{marginLeft: "2%"}}>{(file)? file.name : ""}</span>

@@ -6,11 +6,14 @@ import "./Market.css";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
 
-const Market = ( ) => {
+const Market = () => {
   const [loading, setLoading] = useState(false);
   const [freezeStreak, setFreezeStreak] = useState(0);
   const { updateNavbar } = useOutletContext();
   const { user } = getAuthToken();
+
+  const [typedText, setTypedText] = useState("");
+  const fullText = "Education is the most powerful weapon you can use to change the world.";
 
   useEffect(() => {
     const fetchUserStats = async () => {
@@ -24,6 +27,17 @@ const Market = ( ) => {
 
     if (user.nameid) fetchUserStats();
   }, [user.nameid, loading]);
+
+  // Typing effect
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setTypedText((prev) => prev + fullText[index]);
+      index++;
+      if (index === fullText.length) clearInterval(interval);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
 
   const handlePurchase = async () => {
     setLoading(true);
@@ -64,8 +78,20 @@ const Market = ( ) => {
           <>Buy <FaCoins className="coin-icon" /> 200</>
         </button>
       </div>
+      {/* Motivational Section */}
+      <div className="motivational-box">
+        <img
+          src="/images/note.png"
+          alt="Character"
+          className="char-img"
+        />
+        <div className="speech-bubble">
+          <p>{typedText}</p>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Market;
+

@@ -52,7 +52,13 @@ const UserProfile = () => {
               <h2>{userInfo.username} <FiEdit className="edit-icon" /></h2>
             }
             <p className="pemail">{userInfo.email}</p>
-            <p className="pdate">Joined Date: {userInfo.joinedDate}</p>
+            <p className="pdate">
+              Joined Date: {new Date(userInfo.joinedDate).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric"
+            })}
+            </p>
           </div>
         </div>
     
@@ -92,23 +98,25 @@ const UserProfile = () => {
     
         {(userId === user.nameid) &&
           <div className="profile-actions">
-            <button onClick={() => navigate("/change-password")} className="button-base changeboutton">
+            <button onClick={() => navigate("/change-password")} className="button-base change-password-button">
               <RiLockPasswordFill className="icon" /> Change Password
             </button>
-            <button onClick={handleLogOutClick} className="button-base profile-login-button">
+            <button onClick={handleLogOutClick} className="button-base logout-button">
               <FaSignInAlt /> LogOut
             </button>
-            <button onClick={() => navigate("/change-password")} className="button-base deletacc">
+            <button 
+            // onClick={() => navigate("/change-password")} 
+            className="button-base delete-account-button">
               Delete Account
             </button>
           </div>
         }
       </div>
         <div className="thinking-section">
-        <div class="thinking-bubble">
-        Look At this! You have made an amazing progress
-  <div class="tiny-dot"></div>
-</div>
+        <div className="thinking-bubble">
+          Look At this! You have made an amazing progress
+          <div className="tiny-dot"></div>
+        </div>
           <img src="/images/logo 2.png" alt="Thinking" className="thinking-image" />
         </div>
       </div>

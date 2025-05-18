@@ -17,7 +17,7 @@
   /* align-items: left; */
   text-align: left;
   background: #22D7DA;
-  background: linear-gradient(to bottom, #148f91, #22D7DA);
+  background: linear-gradient(to bottom, rgba(18, 114, 116, 0.57), var(--primary-blue));
   padding: 15px;
   border-radius: 20px;
   color: white;
@@ -27,27 +27,29 @@
 .profile-info h2 {
   margin: 0;
   margin: 5px 0;
-  font-size: 22px;
+  font-size: 1.9rem;
   text-align: left;
   margin-left: 10px;
+  color: #333;
 }
 .pdate{
   /* margin-bottom: 50px; */
   margin-top: 20px;
-  color: #8d8b8b;
+  color: #606060;
+  font-size: 16px;
 }
 .pemail{
-  color: black;
+  color: rgb(32, 32, 32);
+  font-size: 17px;
 }
 
 .profile-info p {
   /* margin: 5px 0; */
-  font-size: 14px;
   margin-left: 10px;
 }
 
 .edit-icon {
-  font-size: 18px;
+  font-size: 1.2rem;
   margin-left: 5px;
   cursor: pointer;
 }
@@ -60,10 +62,10 @@
 }
 
 .stat-box {
-  background: #fafbfc;
+  /* background: #fafbfc; */
   /* color: white; */
   padding: 15px;
-  border-radius: 20px ;
+  border-radius: 25px ;
   border: solid 3px #FF68AC;
   text-align: center;
   height: 85px;        /* ***************سيبى الخط دة كمان متمسحيهوش ******************************************* */
@@ -93,7 +95,7 @@
 .profile-actions .logout {
   grid-column: span 2; 
 }
-.button-base {
+.profile-all .button-base {
   color: white;
   padding: 12px 24px;
   font-size: 1.125rem;
@@ -111,28 +113,33 @@
 }
 
 
-.button-base:active {
+.profile-all .button-base:active {
   top: 4px;
 }
 
 
-.profile-login-button {
-  background-color: #22D7DA;
+.profile-all .logout-button {
+  background-color: var(--primary-blue);
   box-shadow: 0 6px #1baeb1;
 }
-.profile-login-button:active {
+.profile-all .logout-button:active {
   box-shadow: 0 2px #1baeb1;
 }
-.changeboutton {
-  background-color: #FF68AC;
+.profile-all .change-password-button {
+  background-color: var(--secondary-pink);
   box-shadow: 0 6px #d94b8b;
 }
-.changeboutton:active {
+.profile-all .change-password-button:active {
   box-shadow: 0 2px #d94b8b;
 }
 
-.deletacc{
-  background-color: rgb(233, 64, 64); 
+.profile-all .delete-account-button{
+  background-color: rgb(233, 64, 64);
+  box-shadow: 0 6px #d22323; 
+}
+
+.profile-all .delete-account-button:active {
+  box-shadow: 0 2px #d22323;
 }
 
 .thinking-section {

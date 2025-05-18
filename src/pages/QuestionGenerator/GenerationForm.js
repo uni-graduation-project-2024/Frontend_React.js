@@ -114,7 +114,7 @@ const GenerationForm = () => {
   };
 // fff
   return (
-    <div className="p-4 body">
+    <div className="p-4">
       <form className="md-questionGeneration" onSubmit={handleSubmit}>
         <div className="upload-mode-buttons">
         <button 
@@ -145,6 +145,7 @@ const GenerationForm = () => {
                 fileInput.accept = ".txt, .pdf, .docx, .pptx";
                 fileInput.onchange = handleFileChange;
                 fileInput.click();
+                fileInput.required = true;
               }}
               className="p-2 bg-blue-500 text-white rounded-md">
               {(file)? "Change" : "  Upload Your File  "}

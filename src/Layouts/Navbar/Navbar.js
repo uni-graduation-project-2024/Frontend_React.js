@@ -39,7 +39,7 @@ const Navbar = ( {refreshNavbar} ) => {
         </div>
         
         <div className="stat-item items-center gap-2">
-          <TbCoin className="coins" />
+          <TbCoin className="coin" />
           <span className="font-medium">{coins}</span>
         </div>
 

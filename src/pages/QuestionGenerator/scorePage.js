@@ -28,7 +28,7 @@ const ScorePage = () => {
   {
     totalScore >= 90 ? (
       // <img src="/images/good degree.png" alt="Superstar" /> 
-      <ManCelebration/>
+      <ManCelebration showDecoration={true} heightDimmension={250} scaleValue={1.2}/>
     ) : totalScore >= 70 ? (
       <img src="/images/p.png" alt="Challenge" /> 
     ) : totalScore >= 50 ? (

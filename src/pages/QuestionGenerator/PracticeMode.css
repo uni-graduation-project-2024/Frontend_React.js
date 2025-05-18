@@ -47,6 +47,7 @@
   
   .answer-btn:hover {
     background: #ddd;
+    transform: scale(1.01);
   }
   
   .answer-btn.selected {

@@ -43,68 +43,77 @@ const UserProfile = () => {
       navigate("/loginregister"); 
     };
 
-  return (
-    <div className="profile-container">
-      <div className="profile-header">
-        <div className="profile-info">
-          {(userId === user.nameid) &&
-          <h2>{userInfo.username} <FiEdit className="edit-icon" /></h2>
-          }
-          <p className="pemail">{userInfo.email}</p>
-          <p className="pdate">Joined Date: {userInfo.joinedDate}</p>
+    return (
+      <div className="profile-all">
+      <div className="profile-container">
+        <div className="profile-header">
+          <div className="profile-info">
+            {(userId === user.nameid) &&
+              <h2>{userInfo.username} <FiEdit className="edit-icon" /></h2>
+            }
+            <p className="pemail">{userInfo.email}</p>
+            <p className="pdate">Joined Date: {userInfo.joinedDate}</p>
+          </div>
+        </div>
+    
+        {/* Stats Section */}
+        <div className="profile-stats">
+    
+          <div className="stat-box">
+            <h3>Total XP</h3>
+            <p>{userInfo.totalXp ?? 0}</p>
+          </div>
+    
+          <div className="stat-box">
+            <h3>Current Streak</h3>
+            <p>{userInfo.streakScore ?? 0}</p>
+          </div>
+    
+          <div className="stat-box">
+            <h3>Exams Created</h3>
+            <p>{userInfo.examsCreated ?? 0}</p>
+          </div>
+    
+          <div className="stat-box">
+            <h3>Questions Solved</h3>
+            <p>{userInfo.totalQuestion ?? 0}</p>
+          </div>
+    
+          <div className="stat-box">
+            <h3>Finished Top 3</h3>
+            <p>{userInfo.finishedTop3 ?? 0}</p>
+          </div>
+    
+          <div className="stat-box">
+            <h3>Current League</h3>
+            <p>{userInfo.currentLeague ?? 0}</p>
+          </div>
+        </div>
+    
+        {(userId === user.nameid) &&
+          <div className="profile-actions">
+            <button onClick={() => navigate("/change-password")} className="button-base changeboutton">
+              <RiLockPasswordFill className="icon" /> Change Password
+            </button>
+            <button onClick={handleLogOutClick} className="button-base profile-login-button">
+              <FaSignInAlt /> LogOut
+            </button>
+            <button onClick={() => navigate("/change-password")} className="button-base deletacc">
+              Delete Account
+            </button>
+          </div>
+        }
+      </div>
+        <div className="thinking-section">
+        <div class="thinking-bubble">
+        Look At this! You have made an amazing progress
+  <div class="tiny-dot"></div>
+</div>
+          <img src="/images/logo 2.png" alt="Thinking" className="thinking-image" />
         </div>
       </div>
-
-      {/* Stats Section */}
-      <div className="profile-stats">
-
-        <div className="stat-box">
-          <h3>Total XP</h3>
-          <p>{userInfo.totalXp ?? 0}</p>
-        </div>
-
-        <div className="stat-box">
-          <h3>Current Streak</h3>
-          <p>{userInfo.streakScore  ?? 0}</p> {/*Max Streak Score Need Backend*/}
-        </div>
-
-        <div className="stat-box">
-          <h3>Exams Created</h3>
-          <p>{userInfo.examsCreated  ?? 0}</p> {/*Need backend*/}
-        </div>
-
-        <div className="stat-box">
-          <h3>Questions Solved</h3>
-          <p>{userInfo.totalQuestion  ?? 0}</p>
-        </div>
-
-        <div className="stat-box">
-          <h3>Finished Top 3</h3>
-          <p>{userInfo.finishedTop3  ?? 0}</p> {/*Need backend*/}
-        </div>
-
-        <div className="stat-box">
-          <h3>Current League</h3>
-          <p>{userInfo.currentLeague  ?? 0}</p>
-        </div>
-      </div>
-
-      {(userId === user.nameid) &&
-      <div className="profile-actions">
-        <button onClick={() => navigate("/change-password")} className="profile-login-button">
-          <RiLockPasswordFill className="icon" /> Change Password
-        </button>
-        <button onClick={handleLogOutClick} className="profile-login-button">
-            <FaSignInAlt /> LogOut
-          </button>
-        <button onClick={() => navigate("/change-password")} className="deletacc">
-          Delete Account
-        </button>
-        
-      </div>
-      }
-    </div>
-  );
+    );
+    
 };
 
 export default UserProfile;

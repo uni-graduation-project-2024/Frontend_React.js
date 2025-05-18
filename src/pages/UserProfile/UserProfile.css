@@ -1,3 +1,7 @@
+.profile-all{
+  display: flex;
+  gap: 100px;
+}
 .profile-container {
   max-width: 600px;
   margin: auto;
@@ -12,10 +16,12 @@
   justify-content: space-between;
   /* align-items: left; */
   text-align: left;
-  background: #d7d8d9;
+  background: #22D7DA;
+  background: linear-gradient(to bottom, #148f91, #22D7DA);
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 20px;
   color: white;
+  height: 140px;    /* *******ياسمين سيبى الخط دة متمسحيهوش انا معلمه بيه حاجه ******************************************** */
 }
 
 .profile-info h2 {
@@ -54,22 +60,26 @@
 }
 
 .stat-box {
-  background: #d7d8d9;
+  background: #fafbfc;
   /* color: white; */
   padding: 15px;
-  border-radius: 30px ;
+  border-radius: 20px ;
+  border: solid 3px #FF68AC;
   text-align: center;
-  /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+  height: 85px;        /* ***************سيبى الخط دة كمان متمسحيهوش ******************************************* */
 }
 
 .stat-box h3 {
   font-size: 16px;
   margin-bottom: 5px;
+  font-style: normal;
 }
 
 .stat-box p {
   font-size: 18px;
   font-weight: bold;
+  font-style: normal;
+
 }
 
 /* Buttons */
@@ -83,37 +93,110 @@
 .profile-actions .logout {
   grid-column: span 2; 
 }
-
-.profile-login-button{
-  background-color: #e1c442; /* Blue-500 */
+.button-base {
+  color: white;
   padding: 12px 24px;
-  font-size: 1.125rem; /* text-lg */
-  display: inline-block;
+  font-size: 1.125rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  border-radius: 8px;
-  color: white;
+  border-radius: 200px;
   cursor: pointer;
-  transition: background 0.3s ease;
   margin-left: 1rem;
   border: none;
   outline: none;
-
+  transition: all 0.2s ease;
+  position: relative;
 }
+
+
+.button-base:active {
+  top: 4px;
+}
+
+
+.profile-login-button {
+  background-color: #22D7DA;
+  box-shadow: 0 6px #1baeb1;
+}
+.profile-login-button:active {
+  box-shadow: 0 2px #1baeb1;
+}
+.changeboutton {
+  background-color: #FF68AC;
+  box-shadow: 0 6px #d94b8b;
+}
+.changeboutton:active {
+  box-shadow: 0 2px #d94b8b;
+}
+
 .deletacc{
-  background-color: rgb(233, 64, 64); /* Blue-500 */
-  padding: 12px 24px;
-  font-size: 1.125rem; /* text-lg */
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-left: 1rem;
-  border: none;
-  outline: none;
+  background-color: rgb(233, 64, 64); 
+}
+
+.thinking-section {
+  direction: rtl;
+  width: fit-content;
+  margin: 30px 0 30px auto;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 65px;
+}
+
+.thinking-image {
+  width: 250px; 
+  border-radius: 12px;
+  margin-top: 50px;
+}
+
+.thinking-bubble {
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  padding: 15px;
+  width: 240px;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  direction: ltr;
+  margin: 20px;
+}
+
+
+.thinking-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 40px;
+  width: 20px;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.thinking-bubble::before {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: 25px;
+  width: 14px;
+  height: 14px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.thinking-bubble .tiny-dot {
+  position: absolute;
+  bottom: -55px;
+  left: 15px;
+  width: 8px;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }

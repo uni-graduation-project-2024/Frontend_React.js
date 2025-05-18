@@ -1,4 +1,5 @@
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import "./user-login-register.css";
 import loginImage from "../../assets/images/login.png";
@@ -8,6 +9,14 @@ import Register from "./register";
 
 const LoginRegisterUser = () => {
     const [mode, setMode] = useState("container");
+
+    const location = useLocation();
+    const toMode = location.state?.toMode || {};
+
+    useEffect(()=>{
+        if(toMode == "signUp")
+            setMode("container sign-up-mode");
+    }, []);
 
     const handleSignUpMode = () => {
         setMode("container sign-up-mode");

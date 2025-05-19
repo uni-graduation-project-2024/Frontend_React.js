@@ -13,7 +13,6 @@ nav {
 .nav-items{
   display: flex;
   justify-content: center;
-  text-align: center;
   margin-left: 200px;
 }
 /* Streak, Coins, User Section */

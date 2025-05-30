@@ -4,6 +4,7 @@
 .create-folder-container {
   color: white;
   padding: 24px;
+  font-family: 'ADLaM Display';
 }
 
 /* Title Styling */
@@ -40,15 +41,35 @@
 /* Input Field */
 .create-folder-input {
   padding: 12px;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  font-family: 'ADLaM Display';
   background-color: #f6f6f6;
-  color: rgb(0, 0, 0);
-  border-radius: 6px;
-  border: none;
+  color: var(--text-darker-color);
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid  #989898;
   outline: none;
-  margin-bottom: 16px;
+  margin-bottom: 21px;
   width: 100%;
   box-sizing: border-box;
+}
+
+.subject-colors-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.color-picker{
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  background: #5db3ff;
+}
+
+.color-picker-active {
+  border : solid blue;
 }
 
 /* Buttons Wrapper */
@@ -61,14 +82,14 @@
 
 /* Button */
 .create-folder-button {
-  background: linear-gradient(to right, #e68900, #ffb300);
   padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 6px;
-  color: linear-gradient(to right, #e68900, #ffb300);
+  font-size: 1.3rem;
+  font-family: 'ADLaM Display';
   cursor: pointer;
   transition: background 0.3s ease;
   border: none;
+  background: transparent;
+  color: var(--text-darker-color)
 }
 
 /* .create-folder-button:hover {

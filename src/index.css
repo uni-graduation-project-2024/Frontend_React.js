@@ -1,6 +1,6 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 :root {
     --primary-blue: #22D7DA;
@@ -8,6 +8,9 @@
     
     --primary-background-color : #F8F7F6;
 
+
+    --text-dark-color : #535353;
+    --text-darker-color : #3a3a3a;
 }
 
 /* adlam-display-regular - latin */

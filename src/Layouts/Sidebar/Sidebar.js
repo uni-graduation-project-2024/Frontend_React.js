@@ -14,33 +14,38 @@ const Sidebar = ({ children }) => {
   return (
     <div className="sidebar">
       <div className="logo">
-        <img src="/images/Learntendo.png" alt="Learntendo Logo"/>
+        <img src="/images/Learntendo.png" alt="Learntendo Logo" width="100%"/>
       </div>
-      <div className="menu">               
+             
         {user && (
           <>
             {user.role === "User" && (
               <>
                 <NavLink to="/GenerationForm" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
-                  <RiAiGenerate className="icon" style={{ strokeWidth: 1.6 ,fill: "#1226D7", stroke: "#1226D7"}}/> Generate
+                  <RiAiGenerate className="sidebar-icon" style={{ strokeWidth: 1.6 ,fill: "#1226D7", stroke: "#1226D7"}}/>
+                  <p className="sidebar-text">Generate</p>
                 </NavLink>
                 <NavLink to="/library" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
-                  <FaBook className="icon" style={{fill:"#E7494C"}} /> My Library
+                  <FaBook className="sidebar-icon" style={{fill:"#E7494C"}} />
+                  <p className="sidebar-text">My Library</p>
                 </NavLink>
                 <NavLink to="/leaderboard" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
-                  <MdLeaderboard className="icon" style={{fill:"#E89E00"}}/> Leaderboard
+                  <MdLeaderboard className="sidebar-icon" style={{fill:"#E89E00"}}/>
+                  <p className="sidebar-text">Leaderboard</p>
                 </NavLink>
                 <NavLink to="/challenges" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
-                  <FaTrophy className="icon" style={{fill:"#EFDC00"}}/> Challenges
+                  <FaTrophy className="sidebar-icon" style={{fill:"#EFDC00"}}/>
+                  <p className="sidebar-text">Challenges</p>
                 </NavLink>
                 <NavLink to="/market" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
-                  <FaShoppingCart className="icon" style={{fill:"#C22AFF"}}/> Market
+                  <FaShoppingCart className="sidebar-icon" style={{fill:"#C22AFF"}}/> 
+                  <p className="sidebar-text">Market</p>
                 </NavLink>
               </>
             )}
           </>
         )}
-      </div>
+
 
       {user && (
         <NavLink
@@ -49,7 +54,7 @@ const Sidebar = ({ children }) => {
             isActive ? "user-info active-sidebar" : "user-info"
           }
         >
-          <FaUser className="icon" style={{ fill: "#21D7DA" }} />
+          <FaUser className="sidebar-icon" style={{ fill: "#21D7DA" }} />
           <div className="profile-link">{user.unique_name}</div>
         </NavLink>
       )}

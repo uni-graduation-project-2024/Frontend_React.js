@@ -3,7 +3,7 @@ main {
     padding: 24px;
     width: 81%;
     float: right;
-    margin-top: 4%;
+    margin-top: 60px;
   }
 
 .main-container {
@@ -12,7 +12,7 @@ main {
   min-width: 100%;
 }
 
-  @media (max-width: 860px) {
+  @media (max-width: 900px) {
     main{
       width: 100%;
     }

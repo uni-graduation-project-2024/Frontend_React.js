@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     color: #fff;
+    width: 100%;
     /* margin-top: 60px; */
   }
   
@@ -18,7 +19,7 @@
     text-align: center;
     box-shadow: 0px 4px 8px rgba(95, 95, 95, 0.2);
     transition: transform 0.3s ease;
-    width: 50rem;
+    width: 60%;
     /* margin-top: 60px; */
   }
   

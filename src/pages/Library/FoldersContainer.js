@@ -19,7 +19,7 @@ export const FoldersContainer = ({updateRefresh, refresh }) => {
         <div className="library-folders">
         <div className="library-folder-grid">
           {folders.length === 0 ? (
-            <p>No folders created yet.</p>
+            <p style={{width: "300px"}}>Click on + to create new subject.</p>
           ) : (
             folders.map((folder) => (
               <FolderCard key={folder.subjectId} folder={folder} updateRefresh={updateRefresh}/>

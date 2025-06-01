@@ -151,7 +151,10 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .library-container {
+  .library-folder {
+    height: 5rem;
+  }
+  /* .library-container {
       width: 100%;
       float: none;
   }
@@ -163,11 +166,10 @@
 
   .library-buttons {
       margin-top: 10px;
-  }
+  } */
 
   .library-folder-grid, .library-exam-grid {
-      /* grid-template-columns: 1fr; */
-      gap: 25px
+      grid-template-columns: repeat(auto-fill, 174px);
   }
 }
 .view-mode{

@@ -28,8 +28,10 @@ const Home = () => {
 
   return (
     <div className="home-container" style={{backgroundImage: "url(/images/Background-effect.png)", backgroundRepeat: "no-repeat"}}>
-      <LearntendoLogo playAnimation={true} setLineVisible={true} className="home-logo"></LearntendoLogo>
-        <ManCelebration showDecoration={false} heightDimmension={200} scaleValue={1.5}/>
+      <div style={{marginTop:"30px"}}>
+      <LearntendoLogo playAnimation={true} setLineVisible={true}></LearntendoLogo>
+      </div>
+      <ManCelebration showDecoration={false} heightDimmension={200} scaleValue={1.5}/>
       <div className="home-auth-buttons-container">
         {!user ? (
           <>

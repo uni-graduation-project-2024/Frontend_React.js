@@ -1,28 +1,28 @@
 /* NavBar Styles */
 nav {
-  color: rgb(68, 64, 64);
+  color: var(--text-darker-color);
   padding: 16px;
   box-shadow: 0px 1px 6px rgba(81, 81, 81, 0.22);
-  float: right;
-  width: 100%;
+  width: 81%;
   background-color: var(--primary-background-color);
   position: fixed;
   z-index: 2;
+  right: 0;
 }
   
 .nav-items{
   display: flex;
   justify-content: center;
-  margin-left: 200px;
+  gap: 5%;
 }
 /* Streak, Coins, User Section */
 .navbar .stat-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   font-weight: 500;
   font-size: 1.2rem;
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
 }
 
 /* Icons Styling */
@@ -32,8 +32,13 @@ nav {
 }
 
 /* Streak Icon */
-.streak {
+.streak-active {
   color: #fa4015;
+  stroke-width: 3px;
+}
+
+.streak-not-active {
+  color: var(--text-dark-color);
 }
 
 /* Coins Icon */
@@ -44,6 +49,15 @@ nav {
 /* GenerationPower Icon */
 .power {
   color: #e68835;;
+}
+
+@media (max-width :900px) {
+  .nav-items{
+    justify-content: space-evenly;
+  }
+  .navbar{
+    width: 100%;
+  }
 }
   
   

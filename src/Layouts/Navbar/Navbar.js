@@ -10,6 +10,7 @@ import "./Navbar.css";
 
 const Navbar = ( {refreshNavbar} ) => {
   const [streak, setStreak] = useState(0);
+  const [streakActive, setStreakActive ] = useState(false);
   const [coins, setCoins] = useState(0);
   const [generationPower, setGenerationPower] = useState(0);
   const { user } = getAuthToken(); 
@@ -19,6 +20,7 @@ const Navbar = ( {refreshNavbar} ) => {
       try {
         const response = await axios.get(`${linkhost}/api/User/user-navbar-info?userId=${user.nameid}`);
         setStreak(response.data.streakScore || 0);
+        setStreakActive(response.data.ifStreakActive || false);
         setCoins(response.data.coins || 0);
         setGenerationPower(response.data.generationPower || 0);
       } catch (error) {
@@ -33,17 +35,17 @@ const Navbar = ( {refreshNavbar} ) => {
     <nav className="navbar">
 
       <div className="nav-items"> {/*gap-6 -> gap-3*/}
-        <div className="stat-item items-center gap-2">
-          <Flame className="streak" />
+        <div className="stat-item">
+          <Flame className={ streakActive? "streak-active": "streak-not-active"} />
           <span className="font-medium">{streak}</span>
         </div>
         
-        <div className="stat-item items-center gap-2">
+        <div className="stat-item">
           <TbCoin className="coin" />
           <span className="font-medium">{coins}</span>
         </div>
 
-        <div className="stat-item items-center gap-2">
+        <div className="stat-item">
           <BsLightningFill className="power" />
           <span className="font-medium">{generationPower}</span>
         </div>

@@ -2,29 +2,21 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import './CreateFolder.css';
-import linkhost from "../../" 
+import linkhost from "../../";
+import SubjectColors from './SubjectColors';
 import { getAuthToken } from '../../services/auth';
 
 const CreateFolder = ({ updateRefresh, onClose }) => {
   const [folderName, setFolderName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {user} = getAuthToken();
-  const folderColors = {
-    "red": "rgba(229, 77, 77, 0.79)",
-    "blue": "rgba(34, 215, 218, 0.62)",
-    "green": "rgba(63, 222, 90, 0.64)",
-    "yellow": "rgba(239, 244, 100, 0.63)",
-    "purple": "rgba(82, 77, 229, 0.59)",
-    "gray": "rgba(177, 177, 177, 0.63)",
-    "pink": "rgba(255, 70, 184, 0.6)"
-  };
   const [activeColor, setActiveColor] = useState("red");
 
   const handleFolderSubmit = async () => {
     if (!folderName.trim()) return;
     setIsSubmitting(true);
     
-    const newFolder = { subjectName: folderName, subjectColor: folderColors[activeColor] };
+    const newFolder = { subjectName: folderName, subjectColor: SubjectColors[activeColor] };
 
     try {
       const response = await axios.post(linkhost +`/api/Subject/${user.nameid}`, newFolder);
@@ -58,7 +50,7 @@ const CreateFolder = ({ updateRefresh, onClose }) => {
         />
 
         <div className='subject-colors-container'>
-        {Object.entries(folderColors).map(([colorName, colorValue])=>(
+        {Object.entries(SubjectColors).map(([colorName, colorValue])=>(
           <div className="color-picker"
           key={colorName}
           onClick={()=> setActiveColor(colorName)}
@@ -67,7 +59,7 @@ const CreateFolder = ({ updateRefresh, onClose }) => {
             border: activeColor === colorName ? '3px solid #b8b8b8' : '2px solid transparent',
           }}>
             { (activeColor === colorName) &&
-            <svg width="13" height="12" viewBox="0 0 13 12" fill="none" style={{"marginBottom": "2px"}}>
+            <svg width="13" height="12" viewBox="0 0 13 12" fill="none">
             <path d="M1 6.14286L5.30435 10L12 1" stroke="#FFFFFF" strokeWidth="3"/>
             </svg>}
           </div>

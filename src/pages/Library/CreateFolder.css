@@ -65,7 +65,9 @@
   width: 30px;
   height: 30px;
   border-radius: 100%;
-  background: #5db3ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .color-picker-active {

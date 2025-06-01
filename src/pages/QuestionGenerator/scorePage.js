@@ -10,12 +10,19 @@ const ScorePage = () => {
   const celebrationSound = useRef(null);
 
   useEffect(()=>{
-    celebrationSound.current = new Audio("/assets/soundEffects/celebration.mp3");
-    celebrationSound.current.preload = "auto";
+    if(totalScore >= 90){
+      celebrationSound.current = new Audio("/assets/soundEffects/best-celebration.mp3");
+      celebrationSound.current.preload = "auto";
+    }
+    else{
+      celebrationSound.current = new Audio("/assets/soundEffects/celebration.mp3");
+      celebrationSound.current.preload = "auto";
+    }
+    
 
     celebrationSound.current.currentTime = 0; // Reset sound if already playing
     celebrationSound.current.play();
-  }, [])
+  }, [totalScore])
 
   const homeHandle = () =>{
     navigate("/library");

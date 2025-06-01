@@ -144,7 +144,6 @@ const PracticeMode = () => {
   };
 
   return (
-<div className="quiz-container">
   <div className="quiz-card">
     <div className="top-bar">
       <img src="/images/logo1.png" alt="Quiz Icon" className="quiz-icon" />
@@ -197,9 +196,11 @@ const PracticeMode = () => {
     {checked && (
       <>
         <div className={`feedback ${submitedAnswer === questionData.correctAnswer ? "correct-feedback" : "incorrect-feedback"}`}>
-          <p>{submitedAnswer === questionData.correctAnswer ? "✅ Correct" : "❌ Incorrect"}</p>
-          <p>{questionData.explanation || "No explanation provided."}</p>
-
+          <div className="feedback-text">
+          <p className="feedback-title">{submitedAnswer === questionData.correctAnswer ? "✅ Correct" : "❌ Incorrect"}</p>
+          <p style={{maxWidth: "1100px", width: "fit-content"}}>{questionData.explanation || "No explanation provided."}</p>
+          </div>
+          
           <button className="continue-btn" onClick={handleNextQuestion}>
             {currentQuestionIndex < questions.length - 1 ? "Continue" : "Finish"}
           </button>
@@ -207,7 +208,6 @@ const PracticeMode = () => {
       </>
     )}
   </div>
-</div>
 
   );
 };

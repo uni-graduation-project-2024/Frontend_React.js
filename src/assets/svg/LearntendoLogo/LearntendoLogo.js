@@ -39,13 +39,13 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             </g>
             { setLineVisible &&
             <g id="line">
-            <path d="M72.3821 184.219C117.715 157.424 247.382 120.609 403.382 187.714" stroke="url(#paint0_linear_57_65)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M72.3821 184.219C117.715 157.424 247.382 120.609 403.382 187.714" stroke="url(#paint0_linear_57_65)" strokeWidth="2" strokeLinecap="round"/>
             </g>
             }
             </g>
             <defs>
-            <filter id="filter0_dn_57_65" x="434.987" y="119.048" width="61.3467" height="64.2678" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <filter id="filter0_dn_57_65" x="434.987" y="119.048" width="61.3467" height="64.2678" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
             <feOffset dy="2"/>
             <feGaussianBlur stdDeviation="1"/>
@@ -70,8 +70,8 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             </feMerge>
             <feBlend mode="normal" in="effect2_noise_57_65" in2="effect1_dropShadow_57_65" result="effect2_noise_57_65"/>
             </filter>
-            <filter id="filter1_dn_57_65" x="386.063" y="80.7616" width="72.6607" height="85.4121" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <filter id="filter1_dn_57_65" x="386.063" y="80.7616" width="72.6607" height="85.4121" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
             <feOffset dy="2"/>
             <feGaussianBlur stdDeviation="1"/>
@@ -96,8 +96,8 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             </feMerge>
             <feBlend mode="normal" in="effect2_noise_57_65" in2="effect1_dropShadow_57_65" result="effect2_noise_57_65"/>
             </filter>
-            <filter id="filter2_dn_57_65" x="332.926" y="74.3313" width="65.1955" height="72.9413" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <filter id="filter2_dn_57_65" x="332.926" y="74.3313" width="65.1955" height="72.9413" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
             <feOffset dy="2"/>
             <feGaussianBlur stdDeviation="1"/>
@@ -122,8 +122,8 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             </feMerge>
             <feBlend mode="normal" in="effect2_noise_57_65" in2="effect1_dropShadow_57_65" result="effect2_noise_57_65"/>
             </filter>
-            <filter id="filter3_dn_57_65" x="287.048" y="67.088" width="56.2744" height="64.2064" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <filter id="filter3_dn_57_65" x="287.048" y="67.088" width="56.2744" height="64.2064" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
             <feOffset dy="2"/>
             <feGaussianBlur stdDeviation="1"/>
@@ -148,8 +148,8 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             </feMerge>
             <feBlend mode="normal" in="effect2_noise_57_65" in2="effect1_dropShadow_57_65" result="effect2_noise_57_65"/>
             </filter>
-            <filter id="filter4_dn_57_65" x="257.038" y="50" width="41.6138" height="75.615" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <filter id="filter4_dn_57_65" x="257.038" y="50" width="41.6138" height="75.615" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
             <feOffset dy="2"/>
             <feGaussianBlur stdDeviation="1"/>
@@ -174,8 +174,8 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             </feMerge>
             <feBlend mode="normal" in="effect2_noise_57_65" in2="effect1_dropShadow_57_65" result="effect2_noise_57_65"/>
             </filter>
-            <filter id="filter5_dn_57_65" x="200" y="62" width="68.9694" height="64.7183" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <filter id="filter5_dn_57_65" x="200" y="62" width="68.9694" height="64.7183" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
             <feOffset dy="2"/>
             <feGaussianBlur stdDeviation="1"/>
@@ -200,8 +200,8 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             </feMerge>
             <feBlend mode="normal" in="effect2_noise_57_65" in2="effect1_dropShadow_57_65" result="effect2_noise_57_65"/>
             </filter>
-            <filter id="filter6_dn_57_65" x="155.931" y="60.5188" width="52.0437" height="66.4066" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <filter id="filter6_dn_57_65" x="155.931" y="60.5188" width="52.0437" height="66.4066" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
             <feOffset dy="2"/>
             <feGaussianBlur stdDeviation="1"/>
@@ -226,8 +226,8 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             </feMerge>
             <feBlend mode="normal" in="effect2_noise_57_65" in2="effect1_dropShadow_57_65" result="effect2_noise_57_65"/>
             </filter>
-            <filter id="filter7_dn_57_65" x="109.681" y="68.998" width="65.3965" height="66.2175" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <filter id="filter7_dn_57_65" x="109.681" y="68.998" width="65.3965" height="66.2175" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
             <feOffset dy="2"/>
             <feGaussianBlur stdDeviation="1"/>
@@ -252,8 +252,8 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             </feMerge>
             <feBlend mode="normal" in="effect2_noise_57_65" in2="effect1_dropShadow_57_65" result="effect2_noise_57_65"/>
             </filter>
-            <filter id="filter8_dn_57_65" x="65.2429" y="79.3663" width="59.0463" height="65.1085" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <filter id="filter8_dn_57_65" x="65.2429" y="79.3663" width="59.0463" height="65.1085" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
             <feOffset dy="2"/>
             <feGaussianBlur stdDeviation="1"/>
@@ -278,8 +278,8 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             </feMerge>
             <feBlend mode="normal" in="effect2_noise_57_65" in2="effect1_dropShadow_57_65" result="effect2_noise_57_65"/>
             </filter>
-            <filter id="filter9_dn_57_65" x="5" y="81.6505" width="79.7215" height="82.02" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <filter id="filter9_dn_57_65" x="5" y="81.6505" width="79.7215" height="82.02" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
             <feOffset dy="0.5"/>
             <feGaussianBlur stdDeviation="1"/>
@@ -304,8 +304,8 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             </feMerge>
             <feBlend mode="normal" in="effect2_noise_57_65" in2="effect1_dropShadow_57_65" result="effect2_noise_57_65"/>
             </filter>
-            <filter id="filter10_d_57_65" x="65.3819" y="143.714" width="345" height="52.0002" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <filter id="filter10_d_57_65" x="65.3819" y="143.714" width="345" height="52.0002" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
             <feOffset dy="1"/>
             <feGaussianBlur stdDeviation="3"/>
@@ -315,8 +315,8 @@ const LearntendoLogo = ( {playAnimation, setLineVisible} ) => {
             <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_57_65" result="shape"/>
             </filter>
             <linearGradient id="paint0_linear_57_65" x1="72.3821" y1="168.714" x2="403.382" y2="168.714" gradientUnits="userSpaceOnUse">
-            <stop offset="0.0480769" stop-color="#FF68AC"/>
-            <stop offset="1" stop-color="#22D7DA"/>
+            <stop offset="0.0480769" stopColor="#FF68AC"/>
+            <stop offset="1" stopColor="#22D7DA"/>
             </linearGradient>
             </defs>
         </svg>

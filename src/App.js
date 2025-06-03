@@ -25,6 +25,7 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import Market from "./pages/Market/Market";
 import Badge from "./pages/Badges/Badge";
 import UserUploads from "./pages/Library/UserUploads/UserUploads";
+import Chat from "./pages/chatbot/chat";
 
 function App() {
   return (
@@ -58,6 +59,9 @@ function App() {
               <Route path="/folder/:folderName" element={<FolderView />} />
               <Route path="/Review-Mode" element={<ReviewMode />} /> 
               <Route path="/my-uploads" element={<UserUploads />} /> 
+              <Route path="/chat" element={<Chat />} /> 
+
+
 
               
            </Route>

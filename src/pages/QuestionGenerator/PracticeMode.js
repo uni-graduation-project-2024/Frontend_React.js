@@ -5,7 +5,6 @@ import axios from "axios";
 import "./PracticeMode.css";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
-import correctSound from "../../assets/soundEffects/correct.mp3";
 
 const PracticeMode = () => {
   const navigate = useNavigate();

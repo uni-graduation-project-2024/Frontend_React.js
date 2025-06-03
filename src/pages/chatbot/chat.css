@@ -1,0 +1,91 @@
+/* Overall container */
+.learntendo-chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 500px;
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1rem;
+}
+
+/* Chat display box */
+.learntendo-chat-box {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Message bubbles */
+.learntendo-user-message,
+.learntendo-bot-message {
+  max-width: 75%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  border-radius: 18px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* User message */
+.learntendo-user-message {
+  background-color: #0d47a1;
+  align-self: flex-end;
+  margin-left: auto;
+  color: #fff;
+}
+
+/* Bot message */
+.learntendo-bot-message {
+  background-color: #333;
+  align-self: flex-start;
+  margin-right: auto;
+  color: #e0e0e0;
+}
+
+/* Input area */
+.learntendo-input-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+/* Input field */
+.learntendo-input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2c2c2c;
+  color: #f5f5f5;
+  font-size: 1rem;
+}
+
+/* Button */
+.learntendo-send-button {
+  padding: 12px 20px;
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.learntendo-send-button:hover {
+  background-color: #1976d2;
+}
+
+/* Loading text */
+.learntendo-loading {
+  color: #aaa;
+  font-style: italic;
+  margin-top: 10px;
+}

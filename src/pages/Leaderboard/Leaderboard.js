@@ -8,45 +8,40 @@ const Leaderboard = () => {
   const [users, setUsers] = useState([]);
   const { user } = getAuthToken();
 
-  useEffect(() => {
-    axios.get(`${linkhost}/api/Group?userId=${user.nameid}`)
-      .then(response => {
-        setUsers(response.data);
-      })
-      .catch(error => {
-        console.error("Error fetching leaderboard data:", error);
-      });
-  }, [user.nameid]);
-
   // useEffect(() => {
-  //   setUsers([
-  //     {id: 1,
-  //       username: "Rola",
-  //       rank: 1,
-  //       weeklyXP: 1000,
-  //     },
-  //     {id: 1,
-  //       username: "Maha",
-  //       rank: 1,
-  //       weeklyXP: 500,
-  //     },
-  //     {id: 1,
-  //       username: "Nancy",
-  //       rank: 1,
-  //       weeklyXP: 200,
-  //     },
-  //     {id: 1,
-  //       username: "Radwa",
-  //       rank: 1,
-  //       weeklyXP: 100,
-  //     },
-  //     {id: 1,
-  //       username: "Yasmin",
-  //       rank: 1,
-  //       weeklyXP: 50,
-  //     },
-  //   ])
-  // },[])
+  //   axios.get(`${linkhost}/api/Group?userId=${user.nameid}`)
+  //     .then(response => {
+  //       setUsers(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error("Error fetching leaderboard data:", error);
+  //     });
+  // }, [user.nameid]);
+
+  useEffect(() => {
+    setUsers([
+      {id: 1,
+        username: "Nancy",
+        weeklyXp: 1000,
+      },
+      {id: 2,
+        username: "Maha",
+        weeklyXp: 500,
+      },
+      {id: 3,
+        username: "Rola",
+        weeklyXp: 200,
+      },
+      {id: 4,
+        username: "Radwa",
+        weeklyXp: 100,
+      },
+      {id: 5,
+        username: "Yasmin",
+        weeklyXp: 50,
+      },
+    ])
+  },[])
   
 
   return (

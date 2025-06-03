@@ -33,14 +33,20 @@ const FolderCard = ({ folder, updateRefresh}) => {
   };
 
   return (
+    <>
+
     <div
       ref={drop}
       className={`library-folder ${isOver ? "folder-highlight" : ""}`}
       onClick={handleClick}
+      style={{background: (folder.subjectColor)? folder.subjectColor: "rgba(34, 215, 218, 0.62)"}}
     >
+    <div className="folder-tab"
+    style={{background: (folder.subjectColor)? folder.subjectColor.replace(/rgba\(([^)]+),\s*[\d.]+\)/, 'rgba($1, 1)'): "rgba(34, 215, 218, 1)"}}></div>
       <p className="folder-name">{folder.subjectName}</p>
-      <p className="folder-exams-number">{folder.numExams || 0}</p>
+      <div className="folder-exams-number">{folder.numExams || 0}</div>
     </div>
+    </>
   );
 };
 

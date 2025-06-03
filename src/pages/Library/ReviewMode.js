@@ -25,14 +25,14 @@ const ReviewMode = () => {
   }, [examId]);
 
   return (
-    <div className="questions-container">
-      <h2>Exam Questions</h2>
+    <div className="review-mode-page questions-container">
+      <h2 className="review-header" >Exam Questions</h2>
       {questions.length === 0 ? (
         <p>No questions available.</p>
       ) : (
         questions.map((q, index) => (
           <div key={q.id} className="question-box">
-            <h3>
+            <h3 className="review-question">
               {index + 1}. {q.text}
             </h3>
             <div className="options-container">

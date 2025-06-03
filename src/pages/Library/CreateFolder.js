@@ -2,19 +2,21 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import './CreateFolder.css';
-import linkhost from "../../" 
+import linkhost from "../../";
+import SubjectColors from './SubjectColors';
 import { getAuthToken } from '../../services/auth';
 
 const CreateFolder = ({ updateRefresh, onClose }) => {
   const [folderName, setFolderName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {user} = getAuthToken();
+  const [activeColor, setActiveColor] = useState("red");
 
   const handleFolderSubmit = async () => {
     if (!folderName.trim()) return;
     setIsSubmitting(true);
     
-    const newFolder = { subjectName: folderName };
+    const newFolder = { subjectName: folderName, subjectColor: SubjectColors[activeColor] };
 
     try {
       const response = await axios.post(linkhost +`/api/Subject/${user.nameid}`, newFolder);
@@ -34,29 +36,52 @@ const CreateFolder = ({ updateRefresh, onClose }) => {
   };
 
   return (
-    <div className="create-folder-container">
-      <h1 className="create-folder-title">Create New Folder</h1>
       <div className="create-folder-box">
-          <input
-            id="folder-name"
-            type="text"
-            className="create-folder-input"
-            placeholder='New Folder Name'
-            value={folderName}
-            onChange={(e) => setFolderName(e.target.value)}
-            disabled={isSubmitting}
-          />
-        <button
-          onClick={handleFolderSubmit}
-          className="create-folder-button"
+        <input
+          id="folder-name"
+          type="text"
+          className="create-folder-input"
+          placeholder='Subject Name'
+          value={folderName}
+          onChange={(e) => setFolderName(e.target.value)}
           disabled={isSubmitting}
-        >
-          {isSubmitting ? 'Creating...' : 'Create'}
-        </button>
-        <button className="cancel-btn" onClick={onClose}>Cancel</button>
+          maxLength={20}
+          autoFocus
+        />
+
+        <div className='subject-colors-container'>
+        {Object.entries(SubjectColors).map(([colorName, colorValue])=>(
+          <div className="color-picker"
+          key={colorName}
+          onClick={()=> setActiveColor(colorName)}
+          style={{
+            background: colorValue,
+            border: activeColor === colorName ? '3px solid #b8b8b8' : '2px solid transparent',
+          }}>
+            { (activeColor === colorName) &&
+            <svg width="13" height="12" viewBox="0 0 13 12" fill="none">
+            <path d="M1 6.14286L5.30435 10L12 1" stroke="#FFFFFF" strokeWidth="3"/>
+            </svg>}
+          </div>
+          ))}
+        </div>
+        
+        <div className="create-folder-buttons">
+          <button className="create-folder-button"
+          style={{opacity: 0.9}}
+          onClick={onClose}>Cancel</button>
+          <button
+            onClick={handleFolderSubmit}
+            className="create-folder-button"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Creating...' : 'Create'}
+          </button>
+
+        </div>
       </div>
-    </div>
   );
+  
 };
 
 export default CreateFolder;

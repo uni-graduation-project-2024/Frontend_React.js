@@ -9,12 +9,17 @@ import FullWindowModal from "../OverlayModal/OverlayModal";
 const MainLayout = () => {
     const [ showModal, setShowModal ] = useState(false);
     const [modalContent, setModalContent] = useState(null);
+    const [refreshNavbar, setRefreshNavbar] = useState(false);
 
     const openModal = (content) => {
         setModalContent(content);
         setShowModal(!!content);
     };
 
+    const refreshNavbarfun = () => {
+    setRefreshNavbar(prev => !prev);
+    };
+    
     return (
         <>
             {/* Render modal if showModal is true */}
@@ -25,10 +30,10 @@ const MainLayout = () => {
             )}
 
             <Sidebar/>
-            <Navbar/>
+            <Navbar refreshNavbar={{refreshNavbar}}/>
             <main>
                 <div className="main-container">
-                    <Outlet context={{openModal}}/>
+                    <Outlet context={{ openModal, updateNavbar: refreshNavbarfun }}/>
                 </div>
             </main>
             

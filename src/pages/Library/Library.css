@@ -6,14 +6,17 @@
 /* Header Styling */
 .library-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  gap: 15px;
 }
 
-.library-title {
-  font-size: 1.875rem; /* text-3xl */
+.subject-title {
+  font-size: 1.5rem; /* text-3xl */
   font-weight: bold;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  color: var(--text-darker-color);
 }
 
 /* Button Group */
@@ -24,9 +27,9 @@
 
 /* General Button Styling */
 .library-button {
-  background-color: #007bff; /* Blue */
-  padding: 8px 16px;
-  border-radius: 6px;
+  background-color: var(--primary-blue); /* Blue */
+  padding: 7px;
+  border-radius: 100%;
   color: white;
   display: flex;
   align-items: center;
@@ -36,7 +39,7 @@
 }
 
 .library-button:hover {
-  background-color: #0056b3; /* Darker Blue */
+  filter: brightness(0.9);
 }
 
 .library-button-gray {
@@ -58,7 +61,6 @@
 
 /* Create Menu */
 .library-create-menu {
-  background-color: #2d3748; /* Gray-800 */
   padding: 16px;
   border-radius: 8px;
   margin-bottom: 16px;
@@ -76,40 +78,54 @@
 
 .library-folder-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, 180px);
+  gap: 29px 11px;
 }
+
+.folder-tab {
+  width: 73%;
+  height: 34%;
+  clip-path: path("M64.9568 0C51.5851 5.45365e-07 21.5994 2.62555e-07 7.93824 9.48015e-08C4.05714 4.71432e-08 0.934431 3.15762 0.955865 7.03866L1.02745 20H99.5C76.6858 18.1724 82.5678 -7.18262e-07 64.9568 0Z");
+  position: absolute;
+  top: -19px;
+  left: -1px;
+  z-index: -1;
+}
+
 
 /* Folder Item */
 .library-folder {
-  background-color: #01186f;
-  padding: 16px;
-  border-radius: 8px;
+  border-radius: 0 24px 24px 24px;
   text-align: center;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s;
-  color: aliceblue;
+  color: var(--text-darker-color);
   height: 5.2rem;
-  padding-left: 0px;
-  padding-right: 45px;
   position: relative;
 }
 
 .folder-highlight {
-  background-color: #d1e7ff; /* Light blue */
   border: 2px dashed #0056b3;
   color: #0056b3;
 }
 
+.folder-name {
+  position: absolute;
+  top: 16%;
+  left: 6%;
+}
+
 .folder-exams-number {
   position: absolute;
-  top: 60%;
-  left: 90%;
+  bottom: 15%;
+  right: 5%;
+  background: var(--primary-background-color);
+  width: 12%;
+  border-radius: 100%;
 }
 
 .library-folder:hover {
-  background-color: #292929; /* Slightly lighter */
-  transform: translateY(-3px);
+  transform: scale(1.02) translateY(-1px);
 }
 
 .bottom-div {
@@ -135,7 +151,10 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .library-container {
+  .library-folder {
+    height: 5rem;
+  }
+  /* .library-container {
       width: 100%;
       float: none;
   }
@@ -147,9 +166,12 @@
 
   .library-buttons {
       margin-top: 10px;
-  }
+  } */
 
   .library-folder-grid, .library-exam-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fill, 174px);
   }
+}
+.view-mode{
+  cursor: pointer;
 }

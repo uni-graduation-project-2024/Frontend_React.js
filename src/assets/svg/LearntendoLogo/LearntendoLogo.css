@@ -1,0 +1,66 @@
+#Learntendo g {
+  transform-origin: center;
+  transform-box: fill-box;
+  opacity: 0;
+  animation:
+    dropIn 100ms ease-in-out forwards,
+    bounce 300ms ease-in-out forwards,
+    bounceInfinite 3s ease-in-out infinite;
+  animation-delay: calc(var(--order) * 70ms), calc(var(--order) * 40ms + 1s), calc(var(--order) * 40ms + 3s);
+}
+
+@keyframes dropIn {
+  0% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceInfinite {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-5px);
+  }
+  20% {
+    transform: translateY(2px);
+  }
+  30%, 100% {
+    transform: translateY(0);
+  }
+}
+
+
+
+#line {
+    stroke-dasharray: 342px; /* Adjust based on the path length */
+    stroke-dashoffset: 342px;
+    animation: lineDraw 1s 1s ease-in-out forwards;
+}
+
+@keyframes lineDraw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+

@@ -4,8 +4,8 @@
 .home-container {
     display: flex;
     min-height: 100vh;
-    color: rgb(23, 96, 129);
     flex-direction: column;
+    align-items: center;
   }
   
 /* Main Content Styling */
@@ -17,36 +17,73 @@
   padding: 24px;
 }
 
+.home-auth-buttons-container {
+  float:right;
+  margin: 1% 
+}
+
 /* Centered Text */
 .home-text {
   text-align: center;
 }
 
+.home-svg {
+  scale: 1.5;
+  position: relative;
+  top: 9%;
+  left: 53%;
+}
+
 /* Title */
-.home-title {
-  font-size: 1.875rem; /* text-3xl */
-  font-weight: bold;
-  margin-bottom: 16px;
+.home-logo {
+  scale: 2.5;
+  margin-top: 5%;
+  margin-left: 2%;
+}
+
+.home-video-section {
+  display: flex;
+  justify-content: center;
+  height: 500px;
+  width: 100%;
+  margin-top: 8.9%;
+  border-radius: 4%;
+}
+.home-video {
+  margin-left: 8%;
+  width: 50%;
+  height: auto;
 }
 
 /* Login Button */
-.home-login-button {
-  background-color: #4299e1; /* Blue-500 */
-  padding: 12px 24px;
-  font-size: 1.125rem; /* text-lg */
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border-radius: 8px;
-  color: white;
+.home-auth-button {
+  width: 150px;
+  height: 49px;
+  border: none;
+  outline: none;
+  border-radius: 49px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  transition: 0.5s;
   margin-left: 1rem;
 }
 
-.home-login-button:hover {
-  background-color: #3182ce; /* Darker Blue */
+.home-login-button {
+  background-color: #f8f7f6;
+  color: #FF68AC;
+  border: solid;
+}
+
+.home-signup-button {
+  background-color: #FF68AC;
+  color: #fff;
+}
+
+.home-auth-button:hover {
+  scale: 1.1;
+  filter: brightness(1.1);
 }
 .features-container {
   display: flex;

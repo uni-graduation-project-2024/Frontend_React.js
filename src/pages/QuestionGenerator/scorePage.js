@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./scorePage.css";
+import ManCelebration from "../../assets/svg/ManCelebration";
 
 const ScorePage = () => {
   const location = useLocation();
@@ -9,12 +10,19 @@ const ScorePage = () => {
   const celebrationSound = useRef(null);
 
   useEffect(()=>{
-    celebrationSound.current = new Audio("/assets/soundEffects/celebration.mp3");
-    celebrationSound.current.preload = "auto";
+    if(totalScore >= 90){
+      celebrationSound.current = new Audio("/assets/soundEffects/best-celebration.mp3");
+      celebrationSound.current.preload = "auto";
+    }
+    else{
+      celebrationSound.current = new Audio("/assets/soundEffects/celebration.mp3");
+      celebrationSound.current.preload = "auto";
+    }
+    
 
     celebrationSound.current.currentTime = 0; // Reset sound if already playing
-    // celebrationSound.current.play();
-  }, [])
+    celebrationSound.current.play();
+  }, [totalScore])
 
   const homeHandle = () =>{
     navigate("/library");
@@ -26,7 +34,8 @@ const ScorePage = () => {
     <div className="celebration-img">
   {
     totalScore >= 90 ? (
-      <img src="/images/good degree.png" alt="Superstar" /> 
+      // <img src="/images/good degree.png" alt="Superstar" /> 
+      <ManCelebration showDecoration={true} heightDimmension={250} scaleValue={1.2}/>
     ) : totalScore >= 70 ? (
       <img src="/images/p.png" alt="Challenge" /> 
     ) : totalScore >= 50 ? (

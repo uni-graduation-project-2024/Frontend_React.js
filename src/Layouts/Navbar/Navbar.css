@@ -1,30 +1,28 @@
 /* NavBar Styles */
 nav {
-  color: rgb(68, 64, 64);
+  color: var(--text-darker-color);
   padding: 16px;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 -1.5px 6px rgba(255, 217, 135, 0.22) inset;;
-  float: right;
-  width: 100%;
-  border-width: 1px;
-  border-bottom-style: solid;
-  background-color: #fffef4;
-  border-color: #deb6608a;
+  box-shadow: 0px 1px 6px rgba(81, 81, 81, 0.22);
+  width: 81%;
+  background-color: var(--primary-background-color);
+  position: fixed;
+  z-index: 2;
+  right: 0;
 }
   
 .nav-items{
   display: flex;
   justify-content: center;
+  gap: 5%;
 }
 /* Streak, Coins, User Section */
 .navbar .stat-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   font-weight: 500;
   font-size: 1.2rem;
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
 }
 
 /* Icons Styling */
@@ -34,18 +32,32 @@ nav {
 }
 
 /* Streak Icon */
-.navbar .streak {
+.streak-active {
   color: #fa4015;
+  stroke-width: 3px;
+}
+
+.streak-not-active {
+  color: var(--text-dark-color);
 }
 
 /* Coins Icon */
-.navbar .coins {
+.coin {
   color: #fbbf24;
 }
 
 /* GenerationPower Icon */
-.navbar .power {
+.power {
   color: #e68835;;
+}
+
+@media (max-width :900px) {
+  .nav-items{
+    justify-content: space-evenly;
+  }
+  .navbar{
+    width: 100%;
+  }
 }
   
   

@@ -1,6 +1,43 @@
 .folder-view-container {
   flex: 1;
   }
+
+.edit-subject-name{
+  width:370px;
+  font-family: 'ADLaM Display';
+  background-color: var(--primary-background-color);
+  font-size: 36px;
+  height: 50px;
+  padding: 0;
+  outline: none;
+  border: 0.5px solid rgb(155, 155, 155);
+}
+
+.subject-color {
+  width: 25px;
+  height: 25px;
+  margin-left: 12px;
+  border-radius: 25%;
+  position: relative;
+}
+
+.change-color-overlay {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  width: 340px;
+  height: 70px;
+  background: white;
+  top: 30px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 20px;
+  border-radius: 31px;
+  left: -33px;
+  border: 1px solid beige;
+  box-shadow: 0 2px 2px #00000017;
+}
   
   .folder-buttons {
     margin-top: 20px;
@@ -64,8 +101,8 @@
 
 /* Rename Icon (Right after folder name) */
 .rename-icon {
-  width: 20px;
-  height: 20px;
+  width: 34px;
+  height: 23px;
   cursor: pointer;
   color: #28a745;
   transition: color 0.2s ease;
@@ -82,7 +119,7 @@
   cursor: pointer;
   color: #dc3545;
   transition: color 0.2s ease;
-  margin-top: 5.7px;
+  /* margin-top: 5.7px; */
 }
 
 .delete-icon:hover {

@@ -8,8 +8,9 @@ import linkhost from "../..";
 import { getAuthToken } from "../../services/auth"; 
 import "./Navbar.css";  
 
-const Navbar = () => {
+const Navbar = ( {refreshNavbar} ) => {
   const [streak, setStreak] = useState(0);
+  const [streakActive, setStreakActive ] = useState(false);
   const [coins, setCoins] = useState(0);
   const [generationPower, setGenerationPower] = useState(0);
   const { user } = getAuthToken(); 
@@ -19,6 +20,7 @@ const Navbar = () => {
       try {
         const response = await axios.get(`${linkhost}/api/User/user-navbar-info?userId=${user.nameid}`);
         setStreak(response.data.streakScore || 0);
+        setStreakActive(response.data.ifStreakActive || false);
         setCoins(response.data.coins || 0);
         setGenerationPower(response.data.generationPower || 0);
       } catch (error) {
@@ -27,23 +29,23 @@ const Navbar = () => {
     };
 
     if (user.nameid) fetchUserStats();
-  }, [user.nameid]);
+  }, [user.nameid, refreshNavbar]);
 
   return (
     <nav className="navbar">
 
       <div className="nav-items"> {/*gap-6 -> gap-3*/}
-        <div className="stat-item items-center gap-2">
-          <Flame className="streak" />
+        <div className="stat-item">
+          <Flame className={ streakActive? "streak-active": "streak-not-active"} />
           <span className="font-medium">{streak}</span>
         </div>
         
-        <div className="stat-item items-center gap-2">
-          <TbCoin className="coins" />
+        <div className="stat-item">
+          <TbCoin className="coin" />
           <span className="font-medium">{coins}</span>
         </div>
 
-        <div className="stat-item items-center gap-2">
+        <div className="stat-item">
           <BsLightningFill className="power" />
           <span className="font-medium">{generationPower}</span>
         </div>

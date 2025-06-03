@@ -46,7 +46,6 @@ export const ExamCard = ({
           <p className="exam-time">
           {<TimeAgo dateString={exam.createdDate}/>} • {exam.numQuestions} questions
           </p>
-          {exam.folder && <p className="exam-folder">📂 {exam.folder}</p>}
           <h3>{exam.title}</h3>
         </div>
         <div className="exam-content">

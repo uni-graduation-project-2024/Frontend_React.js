@@ -71,7 +71,6 @@ button:hover {
   align-items: flex-start; 
   border-radius: 5px;
   padding: 30px;
-  margin-top: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 5%;
 }
@@ -114,7 +113,6 @@ input[type="file"]::file-selector-button {
 label {
   font-size: 25px; /* Slightly larger font for labels */
   font-weight: bold;
-  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,10 +141,6 @@ color: #1a202c;
   margin-bottom: 12px;
   color: #5BC7C9;
   width: fit-content;
-}
-.qg1{
-  margin-left: -145px;
-  color: #ffb300;
 }
 
 .flex {
@@ -203,15 +197,16 @@ button[type="button"].bg-blue-500 {
 }
 
 /* Submit button */
-button[type="submit"] {
+.generate-button {
   padding: 12px 25px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   border-radius: 8px;
   background: linear-gradient(to right, var(--primary-blue), var(--secondary-pink));
   color: white;
   border: none;
   margin-top: 30px;
+  width: 40%;
 }
 
 
@@ -221,7 +216,7 @@ button[type="submit"].bg-gray-500 {
   background-color: #6b7280;
 }
 
-button[type="submit"]:disabled {
+button[type="submit"].generate-button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -360,7 +355,39 @@ input[type="checkbox"]:checked::after {
 }
 .gen-mess-error{
   margin-top: 50px;
+  color: rgb(195, 56, 56);
 }
 .nup-button{
   padding: 1% 13% !important;
+}
+
+.power-generate {
+  font-size: 1rem;
+  padding-top: 2px;
+}
+
+@media (max-width: 900px) {
+  .p-4 {
+    width: 100%;
+  }
+  .qg {
+    font-size: 23px;
+  }
+  .mb-44 {
+    margin-top: 7%;
+  }
+  .flex2 {
+    flex-direction: column;
+    align-items: start;
+    gap: 15px;
+  }
+  input[type="range"] {
+    width: 80%;
+  }
+  .text-center {
+    text-align: right;
+  }
+  .generate-button {
+    width: 90%;
+  }
 }

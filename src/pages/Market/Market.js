@@ -11,7 +11,8 @@ import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
 
 const Market = () => {
-  const [loading, setLoading] = useState(false);
+  const [loadingBuyFreezeStreak, setLoadingBuyFreezeStreak] = useState(false);
+  const [loadingBuyGenerationPower, setLoadingBuyGenerationPower] = useState(false);
   const [freezeStreak, setFreezeStreak] = useState(0);
   const { updateNavbar } = useOutletContext();
   const { user } = getAuthToken();
@@ -30,21 +31,22 @@ const Market = () => {
     };
 
     if (user.nameid) fetchUserStats();
-  }, [user.nameid, loading]);
+  }, [user.nameid]);
 
   // Typing effect
   useEffect(() => {
-    let index = 0;
+    let index = 1;
+    setTypedText(fullText[0])
     const interval = setInterval(() => {
-      setTypedText((prev) => prev + fullText[index]);
+      setTypedText(prev => (prev + fullText[index]));
       index++;
       if (index === fullText.length) clearInterval(interval);
     }, 50);
     return () => clearInterval(interval);
   }, []);
 
-  const handlePurchase = async () => {
-    setLoading(true);
+  const handlePurchaseFreezeStreak = async () => {
+    setLoadingBuyFreezeStreak(true);
     try {
       await axios.post(`${linkhost}/api/User/buy-freeze-streak/${user.nameid}`);
       alert("Freeze Streak has been successfully purchased!"); // Show success message
@@ -53,9 +55,23 @@ const Market = () => {
       console.error("Purchase failed:", error);
       alert(error.response?.data || "Purchase failed! Try again.");
     } finally {
-      setLoading(false);
+      setLoadingBuyFreezeStreak(false);
     }
   };
+
+  const handlePurchaseGenerationPower = async() => {
+    setLoadingBuyGenerationPower(true);
+    try {
+      await axios.post(`${linkhost}/api/User/PurchaseGenerationPower/${user.nameid}`);
+      alert("Generation power has been successfully purchased!"); // Show success message
+      updateNavbar();
+    } catch (error) {
+      console.error("Purchase failed:", error);
+      alert(error.response?.data || "Purchase failed! Try again.");
+    } finally {
+      setLoadingBuyGenerationPower(false);
+    }
+  }
 
   return (
     <div className="market-items">
@@ -65,10 +81,10 @@ const Market = () => {
         <h3>🛡️ Streak shield</h3>
         <button
           className="buy-btn"
-          onClick={() => handlePurchase()}
-          disabled={loading}
+          onClick={() => handlePurchaseFreezeStreak()}
+          disabled={loadingBuyFreezeStreak}
         >
-          {loading ? "Processing..." : <><TbCoin className="coin-icon coin" /> 100</>}
+          {loadingBuyFreezeStreak ? "Processing..." : <><TbCoin className="coin-icon coin" /> 100</>}
         </button>
       </div>
 
@@ -76,9 +92,10 @@ const Market = () => {
         <h3><BsLightningFill className="power"/> Generation Power</h3>
         <button
           className="buy-btn"
-          // onClick={() => handlePurchase("Generation Power", 200)}
+          onClick={() => handlePurchaseGenerationPower()}
+          disabled={loadingBuyGenerationPower}
         >
-          <><TbCoin className="coin-icon coin" /> 200</>
+          {loadingBuyGenerationPower ? "Processing..." :<><TbCoin className="coin-icon coin" /> 100</>}
         </button>
       </div>
       {/* Motivational Section */}

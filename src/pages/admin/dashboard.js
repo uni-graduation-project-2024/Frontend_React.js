@@ -32,7 +32,11 @@ const Dashboard = () => {
   const handleDeleteUser = (userId, userEmail, e) =>{
     e.stopPropagation();
     if (window.confirm(`Are you sure you want to delete this user ${userEmail}?`)) {
-      axios.delete(`${linkhost}/api/Admin/delete-user/${userId}`)
+      axios.delete(`${linkhost}/api/Admin/delete-user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
         .then(() => {
           setUsers(users.filter((user) => user.userId !== userId));
         })

@@ -60,6 +60,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 15px;
+  margin-bottom: 20px;
 }
 .color-picker{
   width: 30px;
@@ -101,4 +102,8 @@
 .create-folder-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.error-sub-Name-required {
+    border-bottom: 1px solid  red;
 }

@@ -11,9 +11,13 @@ const CreateFolder = ({ updateRefresh, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {user} = getAuthToken();
   const [activeColor, setActiveColor] = useState("red");
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleFolderSubmit = async () => {
-    if (!folderName.trim()) return;
+    if (!folderName.trim()) {
+      setErrorMessage('Subject name cannot be empty');
+      return
+    };
     setIsSubmitting(true);
     
     const newFolder = { subjectName: folderName, subjectColor: SubjectColors[activeColor] };
@@ -40,7 +44,7 @@ const CreateFolder = ({ updateRefresh, onClose }) => {
         <input
           id="folder-name"
           type="text"
-          className="create-folder-input"
+          className={ errorMessage? "create-folder-input error-sub-Name-required":"create-folder-input"}
           placeholder='Subject Name'
           value={folderName}
           onChange={(e) => setFolderName(e.target.value)}
@@ -65,6 +69,7 @@ const CreateFolder = ({ updateRefresh, onClose }) => {
           </div>
           ))}
         </div>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
         
         <div className="create-folder-buttons">
           <button className="create-folder-button"

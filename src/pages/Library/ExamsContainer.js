@@ -8,6 +8,7 @@ import "./ExamCard.css";
 import linkhost from "../..";
 import { useExamsStore } from "../../hooks/useExams";
 import { ExamCard } from "./ExamCard";
+import ManCying from "../../assets/svg/ManCrying/ManCrying";
 
 const ExamsContainer = ({ subjectId, openDropdown, updateDropdown, refresh}) => {
   const { allExams, loading, fetchExams } = useExamsStore();
@@ -87,32 +88,23 @@ const ExamsContainer = ({ subjectId, openDropdown, updateDropdown, refresh}) => 
   };
   
 
-  const handleReviewMode = (examId) => {
-    navigate("/Review-Mode", { state: { examId } });
-  };
-
-  const handleMoveToFolder = (examId, subId) => {
-    navigate("/move-exam", {
-      state: { examId, subId },
-    });
-  };
-
   return (
     <DndProvider backend={HTML5Backend}>
       {loading ? 
       <p>Loading Exams...</p> :
       <div className="library-exam-grid">
-        {exams.length === 0 ? (
-          <p>No exams available.</p>
+        {allExams.length === 0 ? (
+          <div className="no-exams-found">
+          <p style={{color: "#202020", "margin-bottom": "20px", "font-size": "clamp(25px, 1vw, 30px)"}}>No exams generated yet.</p>
+          <ManCying width={207} height={213}/>
+          </div>
         ) : (
           exams.map((exam) => (
             <ExamCard
               key={exam.examId}
               exam={exam}
-              handleReviewMode={handleReviewMode}
               handleRetry={handleRetry}
               handleDelete={handleDelete}
-              handleMoveToFolder={handleMoveToFolder}
               openMenu={openMenu}
               toggleMenu={toggleMenu}
               openDropdown={openDropdown}

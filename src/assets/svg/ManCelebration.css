@@ -9,29 +9,29 @@
     transform-box: fill-box;
 }
 
-#right-arm {
+#man-celebration #right-arm {
     animation: waving-right-arm 1s ease-in-out infinite forwards alternate;
     transform-origin: bottom;
     transform-box: fill-box;
 }
 
-#left-arm {
+#man-celebration #left-arm {
     animation: waving-left-arm 1s ease-in-out infinite forwards alternate;
     transform-origin: bottom;
     transform-box: fill-box;
 }
 
-#left-eye, #right-eye{
+#man-celebration #left-eye,#man-celebration #right-eye{
     animation: blinking 3s ease infinite;
     transform-origin: center;
     transform-box: fill-box;
 }
 
-#left-eye{
+/* #left-eye{
     animation: blinking 3s ease infinite;
     transform-origin: center;
     transform-box: fill-box;
-}
+} */
 
 @keyframes waving-right-arm {
     100%{

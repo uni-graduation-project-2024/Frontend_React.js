@@ -1,0 +1,17 @@
+#tears {
+    stroke-dasharray: 35; /* Adjust based on the path length */
+    stroke-dashoffset: 80;
+    animation: lineDraw 3s ease infinite;
+}
+
+#arm-with-tissue {
+  transform-origin: bottom;
+  transform-box: fill-box;
+  animation: tearsWiping 1s 1s ease-out infinite alternate;
+}
+
+@keyframes tearsWiping {
+  to{
+    transform: translateY(-3px) rotateZ(7deg);
+  }
+}

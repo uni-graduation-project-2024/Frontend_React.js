@@ -149,6 +149,13 @@
   border-radius: 7.3px;
 }
 
+.no-exams-found {
+  width: 100%;
+  text-align: center;
+  background: #f4f4f4;
+  padding: 10%;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .library-folder {

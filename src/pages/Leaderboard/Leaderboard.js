@@ -1,65 +1,94 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "./Leaderboard.css";
-import linkhost from "../..";
-import { getAuthToken } from "../../services/auth";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);
-  const { user } = getAuthToken();
-
-  // useEffect(() => {
-  //   axios.get(`${linkhost}/api/Group?userId=${user.nameid}`)
-  //     .then(response => {
-  //       setUsers(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.error("Error fetching leaderboard data:", error);
-  //     });
-  // }, [user.nameid]);
 
   useEffect(() => {
     setUsers([
-      {id: 1,
-        username: "Nancy",
-        weeklyXp: 1000,
+      {
+        id: 1,
+        username: "Amr",
+        xp: 260,
+        level: "Expert",
+        avatar: "https://i.pravatar.cc/40?img=1",
       },
-      {id: 2,
-        username: "Maha",
-        weeklyXp: 500,
-      },
-      {id: 3,
-        username: "Rola",
-        weeklyXp: 200,
-      },
-      {id: 4,
-        username: "Radwa",
-        weeklyXp: 100,
-      },
-      {id: 5,
+      {
+        id: 2,
         username: "Yasmin",
-        weeklyXp: 50,
+        xp: 123,
+        level: "Newbie",
+        avatar: "https://i.pravatar.cc/40?img=2",
       },
-    ])
-  },[])
+      {
+        id: 3,
+        username: "Bird",
+        xp: 105,
+        level: "Professional",
+        avatar: "https://i.pravatar.cc/40?img=3",
+      },
+      {
+        id: 4,
+        username: "Cat",
+        xp: 97,
+        level: "Master",
+        avatar: "https://i.pravatar.cc/40?img=4",
+      },
+    ]);
+  }, []);
+
+  const getMedal = (index) => {
+  if (index === 0) return <span className="medal">🥇</span>;
+  if (index === 1) return <span className="medal">🥈</span>;
+  if (index === 2) return <span className="medal">🥉</span>;
+  return (
+    <div className="rank-circle">
+      {index + 1}
+    </div>
+  );
+};
+
   
+
+  const levels = [
+    { name: "Newbie", color: "gray", icon: "🛡️" },
+    { name: "Beginner", color: "green", icon: "🛡️" },
+    { name: "Professional", color: "goldenrod", icon: "🛡️" },
+    { name: "Expert", color: "#1e90ff", icon: "🛡️" },
+    { name: "Master", color: "purple", icon: "🛡️" },
+  ];
 
   return (
     <div className="leaderboard-container">
+      <div className="level-bar">
+        {levels.map((level, index) => (
+          <div key={index} className="level-column">
+            <div className="level-icon" style={{ color: level.color }}>
+              {level.icon}
+            </div>
+            <div className="level-name" style={{ color: level.color }}>
+              {level.name}
+            </div>
+          </div>
+        ))}
+        <span className="ends-in">Ends In: 3 days</span>
+      </div>
+
       <div className="leaderboard-card">
-        <h2 className="leaderboard-title">Leaderboard</h2>
         <ul>
-          {users.map((user, index) => (
-            <li key={user.userId} className="leaderboard-item">
-              <div className="leaderboard-rank">
-                <span className="rank-number">{index + 1}.</span>
-                <span className="username">{user.username}</span>
-              </div>
-              <div className="leaderboard-stats">
-                <p className="xp-text">XP: {user.weeklyXp}</p>
-              </div>
-            </li>
-          ))}
+          {users
+            .sort((a, b) => b.xp - a.xp)
+            .map((user, index) => (
+              <li key={user.id} className={`leaderboard-item rank-${index + 1}`}>
+                <div className="leaderboard-rank">
+                  <span className="medal">{getMedal(index)}</span>
+                  <img src={user.avatar} alt="avatar" className="avatar" />
+                  <span className="username">{user.username}</span>
+                  <span className="user-level">({user.level})</span>
+                </div>
+                <div className="xp">{user.xp} XP</div>
+              </li>
+            ))}
         </ul>
       </div>
     </div>

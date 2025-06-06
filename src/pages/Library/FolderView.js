@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Trash2, Pencil } from "lucide-react";
@@ -8,18 +8,43 @@ import "./FolderView.css";
 import linkhost from "../..";
 import SubjectColors from "./SubjectColors";
 import ExamsContainer from "./ExamsContainer";
+import { useFoldersStore } from "../../hooks/useFolders";
 
 const FolderView = () => {
   const { folderName } = useParams();
   const [searchParams] = useSearchParams();
   const subjectId = searchParams.get("subjectId");
+  const getFolderBySubjectId = useFoldersStore((state) => state.getFolderBySubjectId);
+  const folder = getFolderBySubjectId(subjectId);
+  const SubjectColorName = Object.entries(SubjectColors).find(
+    ([key, value]) => value === folder?.subjectColor
+  )?.[0];
   const [folderNameHolder, setFolderNameHolder] = useState(folderName);
   const [editSubjectName, setEditSubjectName] = useState(false);
-  const [activeColor, setActiveColor] = useState("red");
+  const [activeColor, setActiveColor] = useState(SubjectColorName || "blue");
   const [showColorOverlay, setShowColorOverlay ] = useState(false);
   const tempName = useRef(folderNameHolder);
   const [openDropdown, setOpenDropdown] = useState(true);
   const navigate = useNavigate();
+  const overlayRef = useRef(null);
+  
+
+  /// For closing colors overlay when clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = async(event) => {
+      if (overlayRef.current && !overlayRef.current.contains(event.target)) {
+        setShowColorOverlay(false);
+      }
+    };
+
+    if (showColorOverlay) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showColorOverlay]);
 
   const handleDeleteFolder = async () => {
     if (window.confirm("Are you sure you want to delete this folder?")) {
@@ -39,7 +64,7 @@ const FolderView = () => {
   const handleBlur = () => {
     const newName = tempName.current.trim();
     if( newName && newName !== folderNameHolder){
-      axios.put(`${linkhost}/api/Subject/${subjectId}?subjectName=${newName}`)
+      axios.put(`${linkhost}/api/Subject/updateSubjectName?id=${subjectId}&subjectNewName=${newName}`)
       .then(()=>{
         setFolderNameHolder(newName);
       })
@@ -59,15 +84,18 @@ const FolderView = () => {
       <div className="folder-view-container" onClick={()=> setOpenDropdown(false)}>
         <div className="folder-header">
           <ArrowLeft className="back-icon" onClick={handleBackClick} />
-          <div className="subject-color" style={{background: "#000000"}}
+          <div className="subject-color" style={{background: SubjectColors[activeColor] || SubjectColors.blue}}
           onClick={()=> setShowColorOverlay(true)}
           >
             {showColorOverlay &&
-            <div className="change-color-overlay" onBlur={()=> showColorOverlay(false)}>
+            <div ref={overlayRef} className="change-color-overlay">
               {Object.entries(SubjectColors).map(([colorName, colorValue])=>(
               <div className="color-picker"
               key={colorName}
-              onClick={()=> setActiveColor(colorName)}
+              onClick={async()=> {
+                setActiveColor(colorName)
+                await axios.put(`${linkhost}/api/Subject/updateSubjectColor?id=${subjectId}&subjectNewColor=${colorValue}`);
+              }}
               style={{
                 background: colorValue,
                 border: activeColor === colorName ? '3px solid #b8b8b8' : '2px solid transparent',

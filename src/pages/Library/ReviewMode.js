@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ArrowLeft } from "lucide-react";
+
 import linkhost from "../..";
 import "./ReviewMode.css";
 
@@ -8,6 +10,7 @@ const ReviewMode = () => {
   const location = useLocation();
   const { examId } = location.state || {};
   const [questions, setQuestions] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -24,8 +27,13 @@ const ReviewMode = () => {
     if (examId) fetchQuestions();
   }, [examId]);
 
+  const handleBackClick = () => {
+  navigate("/library");
+  };
+
   return (
     <div className="review-mode-page questions-container">
+      <ArrowLeft className="back-icon" onClick={handleBackClick} />
       <h2 className="review-header" >Exam Questions</h2>
       {questions.length === 0 ? (
         <p>No questions available.</p>

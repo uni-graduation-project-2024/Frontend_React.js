@@ -26,6 +26,8 @@ import Market from "./pages/Market/Market";
 import Badge from "./pages/Badges/Badge";
 import UserUploads from "./pages/Library/UserUploads/UserUploads";
 import Chat from "./pages/chatbot/chat";
+import CommChat from "./pages/communication/commChat";
+
 
 function App() {
   return (
@@ -60,10 +62,7 @@ function App() {
               <Route path="/Review-Mode" element={<ReviewMode />} /> 
               <Route path="/my-uploads" element={<UserUploads />} /> 
               <Route path="/chat" element={<Chat />} /> 
-
-
-
-              
+              <Route path="/communication" element={<CommChat />} />
            </Route>
           </Route>
 

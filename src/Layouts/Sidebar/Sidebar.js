@@ -45,7 +45,7 @@ const Sidebar = ({ children }) => {
 
               <NavLink to="/chat" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
                 <FaComments className="sidebar-icon" style={{ fill: "#4DC3FF" }} />
-                <p className="sidebar-text">Chat</p>
+                <p className="sidebar-text">Chatbot</p>
               </NavLink>
 
 

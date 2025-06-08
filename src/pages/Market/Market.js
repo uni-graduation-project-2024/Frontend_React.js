@@ -51,6 +51,7 @@ const Market = () => {
       await axios.post(`${linkhost}/api/User/buy-freeze-streak/${user.nameid}`);
       alert("Freeze Streak has been successfully purchased!"); // Show success message
       updateNavbar();
+      setFreezeStreak(prev => prev + 1); // Update freeze streak count
     } catch (error) {
       console.error("Purchase failed:", error);
       alert(error.response?.data || "Purchase failed! Try again.");
@@ -75,8 +76,8 @@ const Market = () => {
 
   return (
     <div className="market-items">
-      <p style={{color: "black"}}>You currently have : {freezeStreak} streak shield</p>
-      {freezeStreak >= 5? <p style={{color: "#979393"}}>You can have at maximum 5 streak shields</p> : <p></p>}
+      <p style={{color: "black"}}>You currently have : {freezeStreak} freeze streak</p>
+      {freezeStreak >= 5? <p style={{color: "#979393"}}>You can have at maximum 5 freeze streak</p> : <p></p>}
       <div className="item">
         <h3>🛡️ Streak shield</h3>
         <button

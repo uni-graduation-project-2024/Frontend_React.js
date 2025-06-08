@@ -62,12 +62,13 @@ const Sidebar = ({ children }) => {
             isActive ? "user-info active-sidebar" : "user-info"
           }
         >
-          <img
-          src={user.photoUrl || "/images/default-profile.png"}
+        <div className="sidebar-avatar-container">
+        <img
+          src={user.photoUrl || "/images/default-profile-avatar.jpg"}
           alt="profile"
-          className="profile-photo"
+          className="sidebar-avatar"
         />
-
+        </div>
           <div className="profile-link">{user.unique_name}</div>
         </NavLink>
       )}

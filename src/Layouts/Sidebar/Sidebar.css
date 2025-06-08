@@ -57,7 +57,6 @@
   display: flex;
   align-items: center;
   margin-top: auto;
-  margin-left: 6%;
   padding: 5%;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -117,12 +116,17 @@
     margin: 0;
   }
 }
-.sidebar-avatar {
-  width: 35px;
-  height: 35px;
+.sidebar-avatar-container {
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
+  border: 3px solid #ccc;
 }
 
+.sidebar-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
 

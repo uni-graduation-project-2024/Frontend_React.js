@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
 
-import { FaBook, FaTrophy, FaShoppingCart, FaUser } from 'react-icons/fa';
+import { FaBook, FaTrophy, FaShoppingCart, FaUser,FaComments } from 'react-icons/fa';
 import { RiAiGenerate } from "react-icons/ri";
 import { MdLeaderboard } from "react-icons/md";
+
 
 
 import { getAuthToken } from '../../services/auth';
@@ -38,9 +39,16 @@ const Sidebar = ({ children }) => {
                   <p className="sidebar-text">Challenges</p>
                 </NavLink>
                 <NavLink to="/market" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
-                  <FaShoppingCart className="sidebar-icon" style={{fill:"#C22AFF"}}/> 
-                  <p className="sidebar-text">Market</p>
-                </NavLink>
+                <FaShoppingCart className="sidebar-icon" style={{ fill: "#C22AFF" }} /> 
+                <p className="sidebar-text">Market</p>
+              </NavLink>
+
+              <NavLink to="/chat" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
+                <FaComments className="sidebar-icon" style={{ fill: "#4DC3FF" }} />
+                <p className="sidebar-text">Chat</p>
+              </NavLink>
+
+
               </>
             )}
           </>

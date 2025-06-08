@@ -22,12 +22,10 @@
 .level-bar::before {
   content: "";
   position: absolute;
-  top: 32px; 
-  left: 0;
-  right: 0;
-  margin-left: 50px;
+  top: 39px; 
+  left: 72px;
   height: 4px;
-  width: 70%; 
+  width: 65%; 
   background-color: #aaa;
   z-index: 0;
 }
@@ -44,18 +42,13 @@
 
 .level-icon {
   font-size: 50px;
-  background-color: white;
-  padding: 10px;
-  border-radius: 50%;
-  border: 3px solid #ccc;
 }
 
 
 
 .level-name {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: bold;
-  margin-top: 8px;
   font-family: 'ADLaM Display', sans-serif;
   letter-spacing: 1px;
 }

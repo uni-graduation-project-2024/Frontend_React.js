@@ -54,7 +54,12 @@ const Sidebar = ({ children }) => {
             isActive ? "user-info active-sidebar" : "user-info"
           }
         >
-          <FaUser className="sidebar-icon" style={{ fill: "#21D7DA" }} />
+          <img
+          src={user.photoUrl || "/images/default-profile.png"}
+          alt="profile"
+          className="profile-photo"
+        />
+
           <div className="profile-link">{user.unique_name}</div>
         </NavLink>
       )}
@@ -65,14 +70,4 @@ const Sidebar = ({ children }) => {
 };
 
 export default Sidebar;
-
-
-
-
-
-
-
-
-
-
 

@@ -9,7 +9,7 @@ import { ExamCard } from "./ExamCard";
 import ManCying from "../../assets/svg/ManCrying/ManCrying";
 
 const ExamsContainer = ({ subjectId, openDropdown, updateDropdown}) => {
-  const { allExams, loadingExams, fetchExams } = useExamsStore();
+  const { allExams, loadingExams, fetchExams, deleteExam } = useExamsStore();
   const [openMenu, setOpenMenu] = useState(null);
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const ExamsContainer = ({ subjectId, openDropdown, updateDropdown}) => {
     if (window.confirm("Are you sure you want to delete this exam?")) {
       try {
         await axios.delete(`${linkhost}/api/Exam/${examId}`);
-        fetchExams();
+        deleteExam(examId); // Update the store after deletion
         //setFetchedExams(exams.filter((exam) => exam.examId !== examId));
       } catch (error) {
         console.error("Error deleting exam:", error);

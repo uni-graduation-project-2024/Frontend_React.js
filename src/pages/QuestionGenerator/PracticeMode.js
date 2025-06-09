@@ -5,6 +5,7 @@ import axios from "axios";
 import "./PracticeMode.css";
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
+import { useExamsStore } from "../../hooks/useExams";
 
 const PracticeMode = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const PracticeMode = () => {
   const [checked, setChecked] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
   const [startTime] = useState(Date.now());
+  const { refreshExams } = useExamsStore();
 
   const correctBeep = useRef(null);
   const incorrectBeep = useRef(null);
@@ -121,6 +123,7 @@ const PracticeMode = () => {
     try {
       const endpoint = linkhost + "/api/Exam";
       await (options.retry ? axios.put(endpoint, payload) : axios.post(endpoint, payload));
+      refreshExams();
       navigate("/score", { state: { totalScore, timeTaken, xpCollected } });
     } catch (error) {
       console.error("Failed to submit data:", error);

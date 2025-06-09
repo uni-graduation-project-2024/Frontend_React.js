@@ -35,7 +35,6 @@ export const ExamCard = ({
   };
   
     return (
-      <>
       <div
         ref={drag}
         className="library-exam"
@@ -72,7 +71,5 @@ export const ExamCard = ({
           </div>
         </div>
       </div>
-      
-      </>
     );
   };

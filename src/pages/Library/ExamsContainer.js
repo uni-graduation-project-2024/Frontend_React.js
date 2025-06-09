@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 
 import "./ExamCard.css";
 import linkhost from "../..";
@@ -10,21 +8,16 @@ import { useExamsStore } from "../../hooks/useExams";
 import { ExamCard } from "./ExamCard";
 import ManCying from "../../assets/svg/ManCrying/ManCrying";
 
-const ExamsContainer = ({ subjectId, openDropdown, updateDropdown, refresh}) => {
-  const { allExams, loading, fetchExams } = useExamsStore();
-  //const [fetchedExams, setFetchedExams] = useState(exams);
+const ExamsContainer = ({ subjectId, openDropdown, updateDropdown}) => {
+  const { allExams, loadingExams, fetchExams } = useExamsStore();
   const [openMenu, setOpenMenu] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchExams(); // Fetch exams when component mounts
-  }, [refresh]);
+  }, []);
 
   const exams = subjectId === -1 ? allExams : allExams.filter(exam => exam.subjectId == subjectId);
-
-  // useEffect(() => {
-  //   setFetchedExams(exams);
-  // }, [exams]);
 
   // useEffect(() => {
   //   setOpenMenu(null);
@@ -89,8 +82,8 @@ const ExamsContainer = ({ subjectId, openDropdown, updateDropdown, refresh}) => 
   
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      {loading ? 
+    <>
+      {loadingExams ? 
       <p>Loading Exams...</p> :
       <div className="library-exam-grid">
         {allExams.length === 0 ? (
@@ -113,7 +106,7 @@ const ExamsContainer = ({ subjectId, openDropdown, updateDropdown, refresh}) => 
         )}
       </div>
       }
-    </DndProvider>
+    </>
   );
 };
 

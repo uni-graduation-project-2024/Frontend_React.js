@@ -14,7 +14,7 @@ const FolderView = () => {
   const { folderName } = useParams();
   const [searchParams] = useSearchParams();
   const subjectId = searchParams.get("subjectId");
-  const getFolderBySubjectId = useFoldersStore((state) => state.getFolderBySubjectId);
+  const {getFolderBySubjectId, deleteFolder , updateFolderName, updateFolderColor} = useFoldersStore();
   const folder = getFolderBySubjectId(subjectId);
   const SubjectColorName = Object.entries(SubjectColors).find(
     ([key, value]) => value === folder?.subjectColor
@@ -50,6 +50,7 @@ const FolderView = () => {
     if (window.confirm("Are you sure you want to delete this folder?")) {
       try {
         await axios.delete(`${linkhost}/api/Subject/${subjectId}`);
+        deleteFolder(subjectId); // Update the store after deletion
         navigate("/library"); 
       } catch (error) {
         console.error("Error deleting folder:", error);
@@ -66,6 +67,7 @@ const FolderView = () => {
     if( newName && newName !== folderNameHolder){
       axios.put(`${linkhost}/api/Subject/updateSubjectName?id=${subjectId}&subjectNewName=${newName}`)
       .then(()=>{
+        updateFolderName(subjectId, newName); // Update the store with the new name
         setFolderNameHolder(newName);
       })
       .catch((error)=>{
@@ -93,8 +95,11 @@ const FolderView = () => {
               <div className="color-picker"
               key={colorName}
               onClick={async()=> {
-                setActiveColor(colorName)
-                await axios.put(`${linkhost}/api/Subject/updateSubjectColor?id=${subjectId}&subjectNewColor=${colorValue}`);
+                setActiveColor(colorName);
+                await axios.put(`${linkhost}/api/Subject/updateSubjectColor?id=${subjectId}&subjectNewColor=${colorValue}`)
+                .then(()=>{
+                  updateFolderColor(subjectId, colorValue); // Update the store with the new color
+                });
               }}
               style={{
                 background: colorValue,

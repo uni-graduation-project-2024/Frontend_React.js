@@ -314,6 +314,8 @@ const GenerationForm = () => {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    setIsDisabled(false);
+    setError(null);
     setText("");
   };
 

@@ -15,10 +15,15 @@
 .library-exam {
   /* position: relative; */
   padding: 15px;  
-  border-radius: 8px;
   transition: transform 0.2s, box-shadow 0.2s; /* Delays z-index change */
-  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
-  border: 1px solid #08f;
+  box-shadow: 0px 4px 8px rgba(0, 243, 255, 0.2), 0px 4px 8px rgba(0, 243, 255, 0.14) inset;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 18px;
+  border-left: 4px solid #0AB2D0;
+  border-top: 1px solid #0AB2D0;
+  border-bottom: 1px solid #0AB2D0;
+  border-right: 4px solid #0AB2D0
 }
 
 .library-exam:hover {
@@ -28,12 +33,13 @@
 }
 
 .exam-info {
-  margin-bottom: 10px;
+  width: 60%;
 }
 
 .exam-time {
-  font-size: 11px;
-  color: #ff7979;
+  font-size: 14px;
+  color: #0ab2d0;
+  margin-bottom: 5px;
 }
 
 .exam-folder {
@@ -42,12 +48,57 @@
 }
 
 .exam-title {
-  font-size: 24px;
+  font-size: clamp(23px, 2vw, 28px);
   font-weight: bold;
   color: #444;
   margin: 0;
   flex-grow: 1;
+  margin-bottom: 10px;
 }
+
+.exam-details-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.exam-type, .exam-difficulty-level, .exam-score {
+  font-size: clamp(12px, 2vw, 17px);
+  background-color: #0AB2D0;
+  padding: 5px 13px;
+  border-radius: 11px;
+}
+
+.easy {
+  background-color: #31b801;
+}
+.medium {
+  background-color: #f0ad4e;
+}
+.hard {
+  background-color: #d9534f;
+}
+
+.score-100 { /* Perfect score */
+  background-color: #5ba600;
+}
+
+.score-above-90 { /* Excellent score */
+  background-color: #31b801;
+}
+
+.score-above-80 { /* Good score */
+  background-color: #f0ad4e;
+}
+
+.score-above-50 { /* Average score */
+  background-color: #d9534f;
+}
+
+.score-below-50 { /* Poor score */
+  background-color: #d9534f;
+}
+
 
 .exam-content {
   display: flex;
@@ -57,7 +108,7 @@
 
 .exam-actions {
   display: flex;
-  gap: 10px;
+  /* gap: 10px; */
 }
 
 .delete-button {
@@ -70,11 +121,13 @@
 }
 
 .retry-button {
-  background-color: #28a745;
   color: white;
   border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
+  background-color: #0AB2D0;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: clamp(12px,1.2vw, 21px);
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -82,19 +135,17 @@
   background-color: #c9302c;
 }
 
-.retry-button:hover {
-  background-color: #218838;
-}
 
 .exam-menu-icon {
   cursor: pointer;
-  font-size: 20px;
   color: black;
+  width: 39px;
+  height: 40px;
 }
 
 .exam-dropdown {
   position: relative;
-  display: inline-block;
+  /* display: inline-block; */
   z-index: 2;
 }
 

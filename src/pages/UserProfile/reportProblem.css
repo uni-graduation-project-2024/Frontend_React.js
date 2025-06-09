@@ -1,0 +1,70 @@
+/* reportProblem.css */
+
+.rp-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+}
+
+.rp-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+  color: #070707;
+}
+
+.rp-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.rp-textarea {
+  resize: vertical;
+  min-height: 120px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1.8px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+  color: #333;
+}
+
+.rp-textarea:focus {
+  outline: none;
+  border-color: #e194b6;
+  box-shadow: 0 0 6px rgba(233, 125, 203, 0.4);
+}
+
+.rp-submit-btn {
+  margin-top: 18px;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  background-color: #d94b8b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.rp-submit-btn:hover {
+  background-color: #da88ad;
+}
+
+.rp-status-message {
+  margin-top: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: #2e7d32; /* green for success */
+}
+
+.rp-status-message.error {
+  color: #b00020; /* red for error */
+}

@@ -251,9 +251,13 @@ const UserProfile = () => {
             <button onClick={handleDeleteAccount} className="button-base delete-account-button">
               Delete Account
             </button>
+            <button onClick={() => navigate("/report-problem")} className="button-base  report-button">
+              Report Problem
+            </button>
           </div>
         )}
       </div>
+            
 
       <div className="thinking-section">
         <div className="thinking-bubble">

@@ -265,3 +265,11 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.profile-all .report-button{
+  background-color: rgb(46, 125, 204);
+  box-shadow: 0 6px #3e3ed7; 
+}
+.profile-all.report-button:active{
+  box-shadow: 0 2px #4943eb;
+}

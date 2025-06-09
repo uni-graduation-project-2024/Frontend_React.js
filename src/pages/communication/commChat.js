@@ -1,123 +1,329 @@
-import React, { useEffect, useState, useRef } from 'react';
-import * as signalR from '@microsoft/signalr';
-import axios from 'axios';
-import './commChat.css';
+// // commChat.js
+// import "./commChat.css";
+// import { useEffect, useRef, useState } from "react";
+// import * as signalR from "@microsoft/signalr";
+// import { getAuthToken } from '../../services/auth';
 
-const CommChat = () => {
-  const [connection, setConnection] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [user, setUser] = useState(`User${Math.floor(Math.random() * 1000)}`);
-  const [message, setMessage] = useState('');
-  const fileId = 2023; // Adjust as needed (e.g., from route or props)
-  const chatEndRef = useRef(null);
 
-  // Scroll to bottom
-  const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
 
-  // Load chat history
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/comments?fileId=${fileId}`) // Update if needed
-      .then((res) => {
-        const formatted = res.data.map((c) => ({
-          user: c.userName,
-          message: c.text,
-          timestamp: c.timestamp,
-        }));
-        setMessages(formatted);
-      })
-      .catch((err) => console.error('Loading messages failed:', err));
-  }, []);
+// export default function CommChat() {
+//     const [connection, setConnection] = useState(null);
+//     const [messages, setMessages] = useState([]);
+//     const [content, setContent] = useState("");
+//     const messagesEndRef = useRef(null);
+//     const [senderId, setSenderId] = useState(null);
+//     const { user, token } = getAuthToken();
+//     const [receiverId, setReceiverId] = useState(""); // receiverId as string
 
-  // Setup SignalR connection
-  useEffect(() => {
-    const newConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:5000/chatHub')
-      .withAutomaticReconnect()
-      .build();
-    setConnection(newConnection);
-  }, []);
+//     useEffect(() => {
+//         if (!token) return;
+//         // Example: set receiverId to a string value (replace with actual logic)
+//         setReceiverId("1");
+//         setSenderId("2");
 
-  useEffect(() => {
-    if (connection) {
-      connection
-        .start()
-        .then(() => {
-          console.log('Connected to SignalR hub');
-          connection.on('ReceiveMessage', (userName, text) => {
-            setMessages((prev) => [
-              ...prev,
-              { user: userName, message: text, timestamp: new Date().toISOString() },
-            ]);
-          });
-        })
-        .catch((err) => console.error('SignalR error:', err));
-    }
-  }, [connection]);
 
-  useEffect(scrollToBottom, [messages]);
 
-  // Send chat message
-  const sendMessage = async () => {
-    if (message.trim() && connection) {
-      try {
-        // SignalR send
-        await connection.invoke('SendMessage', user, message);
+//         console.log("TOKEN: ", token);
+//         console.log("Sender ID: ", senderId);
+//         console.log("Receiver ID: ", receiverId);
 
-        // Axios post to DB
-        await axios.post('http://localhost:5000/api/comments/add', {
-          fileId: fileId,
-          userId: user.toLowerCase(),
-          userName: user,
-          text: message,
-          timestamp: new Date().toISOString(),
+
+//         const connect = new signalR.HubConnectionBuilder()
+//             .withUrl("https://localhost:7078/ChatHub", {
+//                 accessTokenFactory: () => token
+//             })
+//             .configureLogging(signalR.LogLevel.Information)
+//             .build();
+
+//         connect.on("ReceiveMessage", (message) => {
+//             setMessages(prev => [...prev, message]);
+//         });
+
+//         connect.start()
+//             .then(() => {
+//                 const payload = JSON.parse(atob(token.split('.')[1]));
+//                 const id = payload.nameid || payload.sub;
+//                 setSenderId(id);
+//                 console.log("Connected to ChatHub");
+//             })
+//             .catch(err => {
+//                 console.error("SignalR Connection Failed", err);
+//             });
+
+//         setConnection(connect);
+
+//         return () => {
+//             connect.stop();
+//         }
+//     }, [token]);
+
+//     useEffect(() => {
+//         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+//     }, [messages]);
+
+//     const handleSend = async () => {
+//         if (!content.trim()) return;
+//         try {
+//             const res = await fetch("https://localhost:7078/api/Chat/send", {
+//                 method: "POST",
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     "Authorization": `Bearer ${token}`
+//                 },
+//                 body: JSON.stringify({
+//                     senderId,
+//                     receiverId,
+//                     content
+//                 })
+//             });
+
+//             if (!res.ok) {
+//                 const errorText = await res.text();
+//                 console.error("Failed to send message:", res.status, errorText);
+//                 return;
+//             }
+
+//             setContent("");
+//         } catch (err) {
+//             console.error("Fetch error:", err);
+//         }
+//     };
+
+//     return (
+//         <div className="chat-container">
+//             <div className="chat-box">
+//                 {messages.map((msg, i) => (
+//                     <div key={i} className={`message ${msg.senderId === senderId ? "sent" : "received"}`}>
+//                         <strong>{msg.senderId === senderId ? "You" : "Them"}:</strong> {msg.content}
+//                     </div>
+//                 ))}
+//                 <div ref={messagesEndRef} />
+//             </div>
+//             <div className="chat-input">
+//                 <input
+//                     type="text"
+//                     placeholder="Type a message..."
+//                     value={content}
+//                     onChange={(e) => setContent(e.target.value)}
+//                 />
+//                 <button onClick={handleSend}>Send</button>
+//             </div>
+//         </div>
+//     );
+// }
+
+// CommChat.js
+// import "./commChat.css";
+// import { useEffect, useRef, useState } from "react";
+// import * as signalR from "@microsoft/signalr";
+// import { getAuthToken } from '../../services/auth';
+
+// export default function CommChat() {
+//     const [connection, setConnection] = useState(null);
+//     const [messages, setMessages] = useState([]);
+//     const [content, setContent] = useState("");
+//     const messagesEndRef = useRef(null);
+//     const [receiverId, setReceiverId] = useState("");
+//     const { token } = getAuthToken();
+
+//     const [senderId, setSenderId] = useState(null);
+
+//     useEffect(() => {
+//         if (!token) return;
+
+//         const payload = JSON.parse(atob(token.split('.')[1]));
+//         const currentUserId = payload.nameid || payload.sub;
+//         setSenderId(currentUserId);
+
+//         // Optional: Set receiverId based on selected chat or default for testing
+//         // Here assuming a temporary fixed receiver just for demonstration
+//         setReceiverId("some-other-user-id");
+
+//         const connect = new signalR.HubConnectionBuilder()
+//             .withUrl("https://localhost:7078/ChatHub", {
+//                 accessTokenFactory: () => token
+//             })
+//             .configureLogging(signalR.LogLevel.Information)
+//             .build();
+
+//         connect.on("ReceiveMessage", (message) => {
+//             setMessages(prev => [...prev, message]);
+//         });
+
+//         connect.start()
+//             .then(() => {
+//                 console.log("Connected to ChatHub");
+//             })
+//             .catch(err => {
+//                 console.error("SignalR Connection Failed", err);
+//             });
+
+//         setConnection(connect);
+
+//         return () => {
+//             connect.stop();
+//         }
+//     }, [token]);
+
+//     useEffect(() => {
+//         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+//     }, [messages]);
+
+//     const handleSend = async () => {
+//         if (!content.trim() || !senderId || !receiverId) return;
+
+//         try {
+//             const res = await fetch("https://localhost:7078/api/Chat/send", {
+//                 method: "POST",
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     "Authorization": `Bearer ${token}`
+//                 },
+//                 body: JSON.stringify({ senderId, receiverId, content })
+//             });
+
+//             if (!res.ok) {
+//                 const errorText = await res.text();
+//                 console.error("Failed to send message:", res.status, errorText);
+//                 return;
+//             }
+
+//             setContent("");
+//         } catch (err) {
+//             console.error("Fetch error:", err);
+//         }
+//     };
+
+//     return (
+//         <div className="chat-container">
+//             <div className="chat-box">
+//                 {messages.map((msg, i) => (
+//                     <div key={i} className={`message ${msg.senderId === senderId ? "sent" : "received"}`}>
+//                         <strong>{msg.senderId === senderId ? "You" : "Them"}:</strong> {msg.content}
+//                     </div>
+//                 ))}
+//                 <div ref={messagesEndRef} />
+//             </div>
+//             <div className="chat-input">
+//                 <input
+//                     type="text"
+//                     placeholder="Type a message..."
+//                     value={content}
+//                     onChange={(e) => setContent(e.target.value)}
+//                 />
+//                 <button onClick={handleSend}>Send</button>
+//             </div>
+//         </div>
+//     );
+// }
+
+
+import "./commChat.css";
+import { useEffect, useRef, useState } from "react";
+import * as signalR from "@microsoft/signalr";
+import { getAuthToken } from '../../services/auth';
+
+export default function CommChat() {
+    const [connection, setConnection] = useState(null);
+    const [messages, setMessages] = useState([]);
+    const [content, setContent] = useState("");
+    const messagesEndRef = useRef(null);
+    const { token, user } = getAuthToken();
+    const [senderId, setSenderId] = useState(null);
+    const [receiverId, setReceiverId] = useState("");
+
+    useEffect(() => {
+        if (!token) return;
+
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const currentUserId = payload.nameid || payload.sub;
+        setSenderId(currentUserId);
+
+        // Simulate selecting a chat receiver (you can later replace this with actual UI logic)
+        // For example, receiver is "user2" if I'm "user1"
+        const simulatedReceiverId = currentUserId === "user1" ? "user2" : "user1";
+        setReceiverId(simulatedReceiverId);
+
+        const connect = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:7078/ChatHub", {
+                accessTokenFactory: () => token
+            })
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        connect.on("ReceiveMessage", (message) => {
+            setMessages(prev => [...prev, message]);
         });
 
-        setMessage('');
-      } catch (err) {
-        console.error('Send message failed:', err);
-      }
-    }
-  };
+        connect.start()
+            .then(() => {
+                console.log("✅ Connected to ChatHub");
+            })
+            .catch(err => {
+                console.error("❌ SignalR Connection Failed", err);
+            });
 
-  return (
-    <div className="chat-container">
-      <h2 className="chat-title">CommChat</h2>
-      <div className="chat-box">
-        {messages.map((msg, index) => (
-          <div
-            key={index}
-            className={`chat-message ${msg.user === user ? 'self' : 'other'}`}
-          >
-            <span className="chat-user">{msg.user}:</span>
-            <span className="chat-text">{msg.message}</span>
-            <span className="chat-time">
-              {new Date(msg.timestamp).toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            </span>
-          </div>
-        ))}
-        <div ref={chatEndRef} />
-      </div>
-      <div className="chat-input-container">
-        <input
-          type="text"
-          placeholder="Type a message..."
-          className="chat-input"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-        />
-        <button className="chat-send-btn" onClick={sendMessage}>
-          Send
-        </button>
-      </div>
-    </div>
-  );
-};
+        setConnection(connect);
 
-export default CommChat;
+        return () => {
+            connect.stop();
+        };
+    }, [token]);
+
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
+
+    const handleSend = async () => {
+        if (!content.trim() || !senderId || !receiverId) return;
+
+        try {
+            const res = await fetch("https://localhost:7078/api/Chat/send", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({ senderId, receiverId, content })
+            });
+
+            if (!res.ok) {
+                const errorText = await res.text();
+                console.error("❌ Failed to send message:", res.status, errorText);
+                return;
+            }
+
+            setContent("");
+        } catch (err) {
+            console.error("❌ Fetch error:", err);
+        }
+    };
+
+    return (
+        <div className="chat-container">
+            <div className="chat-box">
+                {messages
+                    .filter(msg =>
+                        (msg.senderId === senderId && msg.receiverId === receiverId) ||
+                        (msg.senderId === receiverId && msg.receiverId === senderId)
+                    )
+                    .map((msg, i) => (
+                        <div key={i} className={`message ${msg.senderId === senderId ? "sent" : "received"}`}>
+                            <strong>{msg.senderId === senderId ? "You" : "Them"}:</strong> {msg.content}
+                        </div>
+                    ))}
+                <div ref={messagesEndRef} />
+            </div>
+            <div className="chat-input">
+                <input
+                    type="text"
+                    placeholder="Type a message..."
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                />
+                <button onClick={handleSend}>Send</button>
+            </div>
+        </div>
+    );
+}
+

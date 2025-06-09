@@ -27,6 +27,10 @@ import Badge from "./pages/Badges/Badge";
 import UserUploads from "./pages/Library/UserUploads/UserUploads";
 import Chat from "./pages/chatbot/chat";
 import CommChat from "./pages/communication/commChat";
+import CommChatWrapper from "./pages/communication/commChatWrapper";
+import ReportProblem from "./pages/UserProfile/reportProblem";
+import ViewReport from "./pages/admin/viewReports";
+import SearchUser from "./pages/admin/searchUser";
 
 
 function App() {
@@ -62,7 +66,10 @@ function App() {
               <Route path="/Review-Mode" element={<ReviewMode />} /> 
               <Route path="/my-uploads" element={<UserUploads />} /> 
               <Route path="/chat" element={<Chat />} /> 
+             <Route path="/chat/:receiverId" element={<CommChatWrapper />} />
               <Route path="/communication" element={<CommChat />} />
+              <Route path="/report-problem" element={<ReportProblem />} />
+
            </Route>
           </Route>
 
@@ -73,6 +80,11 @@ function App() {
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/show-user/:id" element={<ShowUser />} />
             <Route path="/user-profile/:userId" element={<UserProfile />} />
+            <Route path="/admin/view-delete-reports" element={<ViewReport />} />
+            <Route path="/admin/search-user" element={<SearchUser />} />
+
+
+
           </Route>
 
           <Route element={<AuthGuard roles={["User", "Admin"]} />}>

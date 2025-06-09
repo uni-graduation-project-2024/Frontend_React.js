@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { FaBook, FaTrophy, FaShoppingCart, FaUser,FaComments } from 'react-icons/fa';
 import { RiAiGenerate } from "react-icons/ri";
@@ -14,15 +14,20 @@ import { useEffect } from 'react';
 const Sidebar = ({ children }) => {
   const { user } = getAuthToken();
   const { userInformation, fetchUserInfo } = useUserInfoStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUserInfo();
   }, []);
+
+  const handNavigate = () => {
+    navigate("/");
+  };
   
   return (
     <div className="sidebar">
       <div className="logo">
-        <img src="/images/Learntendo.png" alt="Learntendo Logo" width="100%"/>
+        <img onClick={handNavigate} src="/images/Learntendo.png" alt="Learntendo Logo" width="100%"/>
       </div>
              
         {user && (

@@ -27,7 +27,7 @@ export const useUserInfoStore = create((set) => ({
       set({ userInformation: response.data, loadingUserInfo: false });
     } catch (error) {
       console.error("Failed to fetch user info:", error);
-      set({ userInformation: null, loadingUserInfo: false });
+      set({ loadingUserInfo: false });
     }
   },
 

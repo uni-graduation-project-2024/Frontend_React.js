@@ -26,7 +26,7 @@ export const TimeAgo = ({dateString}) => {
   }
 
 export const TimeUntil = ({ dateString }) => {
-  if (!dateString) return "Invalid date is undefined";
+  if (!dateString) return "Invalid date";
 
   const targetDate = new Date(dateString);
   if (isNaN(targetDate)) return "Invalid date";

@@ -8,9 +8,16 @@ import { MdLeaderboard } from "react-icons/md";
 
 import { getAuthToken } from '../../services/auth';
 import './Sidebar.css'; 
+import { useUserInfoStore } from '../../hooks/useUserInfo';
+import { useEffect } from 'react';
 
 const Sidebar = ({ children }) => {
   const { user } = getAuthToken();
+  const { userInformation, fetchUserInfo } = useUserInfoStore();
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
   
   return (
     <div className="sidebar">
@@ -64,7 +71,7 @@ const Sidebar = ({ children }) => {
         >
         <div className="sidebar-avatar-container">
         <img
-          src={user.photoUrl || "/images/default-profile-avatar.jpg"}
+          src={userInformation.profileImage || "/images/default-profile-avatar.jpg"}
           alt="profile"
           className="sidebar-avatar"
         />

@@ -135,6 +135,8 @@ import { FiEdit } from "react-icons/fi";
 import "./UserProfile.css";
 import { useUserInfoStore } from "../../hooks/useUserInfo";
 import { getAuthToken, removeAuthToken } from '../../services/auth';
+import axios from "axios";
+import linkhost from "../..";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -169,6 +171,20 @@ const UserProfile = () => {
   const handleLogOutClick = () => {
     removeAuthToken();
     navigate("/loginregister");
+  };
+
+  const handleDeleteAccount = async () => {
+    if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+      await axios.delete(`${linkhost}/api/User/delete-account/${user.nameid}`)
+        .then(() => {
+          removeAuthToken();
+          navigate("/loginregister");
+        })
+        .catch((error) => {
+          console.error("Error deleting account:", error);
+          alert("Failed to delete account. Please try again later.");
+        } );
+    }
   };
 
   return (
@@ -232,7 +248,7 @@ const UserProfile = () => {
             <button onClick={handleLogOutClick} className="button-base logout-button">
               <FaSignInAlt /> LogOut
             </button>
-            <button className="button-base delete-account-button">
+            <button onClick={handleDeleteAccount} className="button-base delete-account-button">
               Delete Account
             </button>
           </div>

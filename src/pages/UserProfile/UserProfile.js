@@ -170,7 +170,7 @@ const UserProfile = () => {
 
   const handleLogOutClick = () => {
     removeAuthToken();
-    navigate("/loginregister");
+    window.location.href = "/loginregister";
   };
 
   const handleDeleteAccount = async () => {
@@ -178,7 +178,7 @@ const UserProfile = () => {
       await axios.delete(`${linkhost}/api/User/delete-account/${user.nameid}`)
         .then(() => {
           removeAuthToken();
-          navigate("/loginregister");
+          window.location.href = "/loginregister";
         })
         .catch((error) => {
           console.error("Error deleting account:", error);

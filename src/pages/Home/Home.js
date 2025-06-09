@@ -23,7 +23,7 @@ const Home = () => {
 
   const handleLogOutClick = () => {
     removeAuthToken();
-    navigate("/loginregister");
+    window.location.href = "/loginregister"; // Redirect to login page
   };
 
   return (

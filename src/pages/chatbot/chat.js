@@ -85,10 +85,8 @@
 //     if (!recognition) return;
 
 //     if (!listening) {
-//       // First click: Start recording
 //       recognition.start();
 //     } else {
-//       // Second click: Stop and send
 //       recognition.stop();
 //       const finalTranscript = transcriptRef.current.trim();
 //       if (finalTranscript) {
@@ -165,7 +163,11 @@
 //               >
 //                 {audioLoadingIndex === index ? (
 //                   <span className="spinner"></span>
-//                 ) : playingIndex === index ? 'Pause' : 'Play'}
+//                 ) : playingIndex === index ? (
+//                   '⏸️'
+//                 ) : (
+//                   '🔊'
+//                 )}
 //               </button>
 //             )}
 //           </div>
@@ -221,14 +223,37 @@
 
 // export default LearntendoChat;
 
-
 import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './chat.css';
+import { Navigate, Outlet } from 'react-router-dom';
+import { getAuthToken } from '../../services/auth';
+import Sidebar from './side-bar';
 
 const LearntendoChat = () => {
+  const { token, user } = getAuthToken();
+  const username = user?.email || 'guest';
+
   const [userInput, setUserInput] = useState('');
-  const [chatHistory, setChatHistory] = useState([]);
+  const [chatSessions, setChatSessions] = useState(() => {
+    const saved = localStorage.getItem(`learntendo_chat_sessions_${username}`);
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  const getToday = () => new Date().toISOString().split('T')[0];
+
+  const [currentDate, setCurrentDate] = useState(() => {
+    const today = getToday();
+    const sessionKey = Object.keys(chatSessions).find(k => k.startsWith(today)) || `${today} - untitled`;
+    return sessionKey;
+  });
+
+  const [chatHistory, setChatHistory] = useState(() => {
+    const saved = localStorage.getItem(`learntendo_chat_sessions_${username}`);
+    const sessions = saved ? JSON.parse(saved) : {};
+    return sessions[currentDate] || [];
+  });
+
   const [loading, setLoading] = useState(false);
   const [listening, setListening] = useState(false);
   const [playingIndex, setPlayingIndex] = useState(null);
@@ -237,6 +262,20 @@ const LearntendoChat = () => {
   const recognitionRef = useRef(null);
   const audioRef = useRef(null);
   const transcriptRef = useRef('');
+
+  const saveSessions = (updatedSessions) => {
+    localStorage.setItem(`learntendo_chat_sessions_${username}`, JSON.stringify(updatedSessions));
+  };
+
+  const updateChatHistory = (newMessage) => {
+    setChatHistory((prev) => {
+      const updated = [...prev, newMessage];
+      const updatedSessions = { ...chatSessions, [currentDate]: updated };
+      setChatSessions(updatedSessions);
+      saveSessions(updatedSessions);
+      return updated;
+    });
+  };
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -274,27 +313,30 @@ const LearntendoChat = () => {
     if (!trimmedInput) return;
 
     const newUserMessage = { sender: 'You', message: trimmedInput };
-    setChatHistory((prev) => [...prev, newUserMessage]);
+    updateChatHistory(newUserMessage);
     setUserInput('');
     setLoading(true);
 
     try {
       const response = await fetch('http://localhost:8003/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ user_input: trimmedInput }),
       });
 
       const data = await response.json();
       const botMessage = { sender: 'Bot', message: data.message };
-      setChatHistory((prev) => [...prev, botMessage]);
+      updateChatHistory(botMessage);
     } catch (error) {
       console.error('❌ Error:', error);
       const errorMessage = {
         sender: 'Bot',
         message: 'Sorry, something went wrong while getting a response.',
       };
-      setChatHistory((prev) => [...prev, errorMessage]);
+      updateChatHistory(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -319,6 +361,7 @@ const LearntendoChat = () => {
       }
     }
   };
+  
 
   const playAudio = async (text, index) => {
     try {
@@ -341,7 +384,10 @@ const LearntendoChat = () => {
 
       const response = await fetch('http://localhost:8003/tts', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ user_input: text }),
       });
 
@@ -367,82 +413,101 @@ const LearntendoChat = () => {
   };
 
   return (
-    <div className="learntendo-chat-container">
-      <div className="learntendo-chat-box">
-        {chatHistory.map((chat, index) => (
-          <div
-            key={index}
-            className={
-              chat.sender === 'You'
-                ? 'learntendo-user-message'
-                : 'learntendo-bot-message'
-            }
-          >
-            <ReactMarkdown>{chat.message}</ReactMarkdown>
-            {chat.sender === 'Bot' && (
-              <button
-                className="learntendo-audio-button"
-                onClick={() => playAudio(chat.message, index)}
-                disabled={audioLoadingIndex === index}
+    <div className="chatgpt-layout">
+      <Sidebar
+        chatSessions={chatSessions}
+        setChatSessions={setChatSessions}
+        currentDate={currentDate}
+        setCurrentDate={setCurrentDate}
+        setChatHistory={setChatHistory}
+        saveSessions={saveSessions}
+      />
+        
+
+      <main className="chat-main">
+        <div className="learntendo-chat-container">
+          <div className="learntendo-chat-box">
+            {chatHistory.map((chat, index) => (
+              <div
+                key={index}
+                className={
+                  chat.sender === 'You'
+                    ? 'learntendo-user-message'
+                    : 'learntendo-bot-message'
+                }
               >
-                {audioLoadingIndex === index ? (
-                  <span className="spinner"></span>
-                ) : playingIndex === index ? (
-                  '⏸️'
-                ) : (
-                  '🔊'
+                <ReactMarkdown>{chat.message}</ReactMarkdown>
+                {chat.sender === 'Bot' && (
+                  <button
+                    className="learntendo-audio-button"
+                    onClick={() => playAudio(chat.message, index)}
+                    disabled={audioLoadingIndex === index}
+                  >
+                    {audioLoadingIndex === index ? (
+                      <span className="spinner"></span>
+                    ) : playingIndex === index ? (
+                      '⏸️'
+                    ) : (
+                      '🔊'
+                    )}
+                  </button>
                 )}
-              </button>
-            )}
+              </div>
+            ))}
+            {loading && <p className="learntendo-loading">Typing...</p>}
           </div>
-        ))}
-        {loading && <p className="learntendo-loading">Typing...</p>}
-      </div>
 
-      <div className="learntendo-input-container">
-        <input
-          type="text"
-          className="learntendo-input"
-          placeholder="Ask anything"
-          value={userInput}
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
-          disabled={loading}
-        />
+          <div className="learntendo-input-container">
+            <input
+              type="text"
+              className="learntendo-input"
+              placeholder="Ask anything"
+              value={userInput}
+              onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
+              disabled={loading}
+            />
 
-        <button
-          className="learntendo-send-button"
-          onClick={() => handleSendMessage()}
-          disabled={loading}
-          title="Send message"
-        >
-          Send
-        </button>
+            <button
+              className="learntendo-send-button"
+              onClick={() => handleSendMessage()}
+              disabled={loading}
+              title="Send message"
+            >
+              Send
+            </button>
 
-        <button
-          className={`learntendo-mic-button ${listening ? 'listening' : ''}`}
-          onClick={toggleListening}
-          title={listening ? 'Stop & Send' : 'Speak your question'}
-          disabled={loading}
-          aria-label="Toggle microphone"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill={listening ? '#10B981' : 'currentColor'}
-            stroke="none"
-          >
-            <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z" />
-            <path d="M19 10v1a7 7 0 0 1-14 0v-1" />
-            <line x1="12" y1="19" x2="12" y2="23" stroke="currentColor" strokeWidth="2" />
-            <line x1="8" y1="23" x2="16" y2="23" stroke="currentColor" strokeWidth="2" />
-          </svg>
-        </button>
-      </div>
+            <button
+              className={`learntendo-mic-button ${listening ? 'listening' : ''}`}
+              onClick={toggleListening}
+              title={listening ? 'Stop & Send' : 'Speak your question'}
+              disabled={loading}
+              aria-label="Toggle microphone"
+            >
+              🎤
+            </button>
+          </div>
+        </div>
+      </main>
     </div>
   );
 };
 
 export default LearntendoChat;
+
+export const AuthGuard = ({ roles }) => {
+  const { token, user } = getAuthToken();
+  if (!token) {
+    return <> {roles.length === 0 ? <Outlet /> : <Navigate to="/login" />} </>;
+  } else {
+    return (
+      <>
+        {roles.find((role) => user.role.includes(role)) ? (
+          <Outlet />
+        ) : (
+          <Navigate to={`/${user.role.toLowerCase()}-home`} />
+        )}
+      </>
+    );
+  }
+};

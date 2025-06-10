@@ -226,9 +226,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './chat.css';
-import { Navigate, Outlet } from 'react-router-dom';
 import { getAuthToken } from '../../services/auth';
-import Sidebar from './side-bar';
+import Sidebar from './side-bar'; // Adjust import path if needed
+import { MicIcon } from './icons';
 
 const LearntendoChat = () => {
   const { token, user } = getAuthToken();
@@ -249,9 +249,7 @@ const LearntendoChat = () => {
   });
 
   const [chatHistory, setChatHistory] = useState(() => {
-    const saved = localStorage.getItem(`learntendo_chat_sessions_${username}`);
-    const sessions = saved ? JSON.parse(saved) : {};
-    return sessions[currentDate] || [];
+    return chatSessions[currentDate] || [];
   });
 
   const [loading, setLoading] = useState(false);
@@ -263,20 +261,29 @@ const LearntendoChat = () => {
   const audioRef = useRef(null);
   const transcriptRef = useRef('');
 
+  // Save sessions to state and localStorage
   const saveSessions = (updatedSessions) => {
-    localStorage.setItem(`learntendo_chat_sessions_${username}`, JSON.stringify(updatedSessions));
-  };
+  localStorage.setItem(`learntendo_chat_sessions_${username}`, JSON.stringify(updatedSessions));
+  setChatSessions(updatedSessions);
+};
 
+
+
+  // Update chat history for current session
   const updateChatHistory = (newMessage) => {
     setChatHistory((prev) => {
       const updated = [...prev, newMessage];
       const updatedSessions = { ...chatSessions, [currentDate]: updated };
-      setChatSessions(updatedSessions);
       saveSessions(updatedSessions);
       return updated;
     });
   };
 
+  useEffect(() => {
+  setChatHistory(chatSessions[currentDate] || []);
+}, [currentDate, chatSessions]);
+
+  // Speech recognition setup
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -332,11 +339,7 @@ const LearntendoChat = () => {
       updateChatHistory(botMessage);
     } catch (error) {
       console.error('❌ Error:', error);
-      const errorMessage = {
-        sender: 'Bot',
-        message: 'Sorry, something went wrong while getting a response.',
-      };
-      updateChatHistory(errorMessage);
+      updateChatHistory({ sender: 'Bot', message: 'Sorry, something went wrong while getting a response.' });
     } finally {
       setLoading(false);
     }
@@ -361,7 +364,6 @@ const LearntendoChat = () => {
       }
     }
   };
-  
 
   const playAudio = async (text, index) => {
     try {
@@ -420,9 +422,9 @@ const LearntendoChat = () => {
         currentDate={currentDate}
         setCurrentDate={setCurrentDate}
         setChatHistory={setChatHistory}
-        saveSessions={saveSessions}
+        saveSessions={saveSessions} // ✅ This enables Sidebar to persist changes
+        getToday={getToday}
       />
-        
 
       <main className="chat-main">
         <div className="learntendo-chat-container">
@@ -431,9 +433,7 @@ const LearntendoChat = () => {
               <div
                 key={index}
                 className={
-                  chat.sender === 'You'
-                    ? 'learntendo-user-message'
-                    : 'learntendo-bot-message'
+                  chat.sender === 'You' ? 'learntendo-user-message' : 'learntendo-bot-message'
                 }
               >
                 <ReactMarkdown>{chat.message}</ReactMarkdown>
@@ -464,7 +464,7 @@ const LearntendoChat = () => {
               placeholder="Ask anything"
               value={userInput}
               onChange={handleInputChange}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyPress}
               disabled={loading}
             />
 
@@ -484,7 +484,7 @@ const LearntendoChat = () => {
               disabled={loading}
               aria-label="Toggle microphone"
             >
-              🎤
+              <MicIcon size={20} color="white" />
             </button>
           </div>
         </div>
@@ -494,20 +494,3 @@ const LearntendoChat = () => {
 };
 
 export default LearntendoChat;
-
-export const AuthGuard = ({ roles }) => {
-  const { token, user } = getAuthToken();
-  if (!token) {
-    return <> {roles.length === 0 ? <Outlet /> : <Navigate to="/login" />} </>;
-  } else {
-    return (
-      <>
-        {roles.find((role) => user.role.includes(role)) ? (
-          <Outlet />
-        ) : (
-          <Navigate to={`/${user.role.toLowerCase()}-home`} />
-        )}
-      </>
-    );
-  }
-};

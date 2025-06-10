@@ -1,21 +1,26 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({
   chatSessions,
+  setChatSessions,
   currentDate,
   setCurrentDate,
   setChatHistory,
-  saveSessions,
+  saveSessions, // ✅ Added
 }) => {
   const [sortBy, setSortBy] = useState('newest');
   const [menuOpen, setMenuOpen] = useState(null);
+  const navigate = useNavigate();
 
   const sortKeys = (a, b) => {
     const [dateA, nameA = ''] = a.split(' - ');
     const [dateB, nameB = ''] = b.split(' - ');
+
     if (sortBy === 'newest') return new Date(dateB) - new Date(dateA);
     if (sortBy === 'oldest') return new Date(dateA) - new Date(dateB);
-    return nameA.localeCompare(nameB);
+    if (sortBy === 'title') return nameA.localeCompare(nameB);
+    return 0;
   };
 
   const renameChat = (oldKey) => {
@@ -33,7 +38,7 @@ const Sidebar = ({
     updated[newKey] = updated[oldKey];
     delete updated[oldKey];
 
-    saveSessions(updated);
+    saveSessions(updated); // ✅ Persist to localStorage
     setCurrentDate(newKey);
     setChatHistory(updated[newKey]);
   };
@@ -43,7 +48,8 @@ const Sidebar = ({
 
     const updated = { ...chatSessions };
     delete updated[key];
-    saveSessions(updated);
+
+    saveSessions(updated); // ✅ Persist to localStorage
 
     if (key === currentDate) {
       const remainingKeys = Object.keys(updated).sort(sortKeys);
@@ -55,7 +61,11 @@ const Sidebar = ({
 
   return (
     <aside className="sidebar">
-      <h2>Chats</h2>
+      <div className="sidebar-header">
+        <button className="back-btn" onClick={() => navigate('/')}>← Back</button>
+        <h2>Chats</h2>
+      </div>
+
       <div className="sort-options">
         <label>Sort by:</label>
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
@@ -104,7 +114,7 @@ const Sidebar = ({
             ? `${today} - ${Date.now()}`
             : today;
           const updated = { ...chatSessions, [uniqueKey]: [] };
-          saveSessions(updated);
+          saveSessions(updated); // ✅ Persist to localStorage
           setCurrentDate(uniqueKey);
           setChatHistory([]);
         }}

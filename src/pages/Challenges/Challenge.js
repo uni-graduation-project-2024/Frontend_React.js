@@ -185,32 +185,57 @@ const Challenge = () => {
 
           {/* Year 2025 */}
           <div className="year-title">2025</div>
-          <div className="months-grid">
-            {["🥇", "🥇", "🥉", "🥈", "🥉", "", "", "", "", "", "", ""].map((badge, index) => (
-              <div className="month" key={index}>
-                {badge ? (
-                  <div className="badge-emoji">{badge}</div>
-                ) : (
-                  <SlBadge className="badge-icon empty" />
-                )}
-                <div className="month-name">
-                  {["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][index]}
-                </div>
-              </div>
-            ))}
-          </div>
+<div className="months-grid">
+  {["🥇", "🥇", "🥉", "🥈", "🥉", "", "", "", "", "", "", ""].map((badge, index) => {
+    const badgeColors = {
+      "🥇": "#FFD700", 
+      "🥈": "#C0C0C0", 
+      "🥉": "#CD7F32"  
+    };
 
-          {/* Year 2024 */}
+    const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][index];
+
+    return (
+      <div className="month" key={index}>
+        {badge ? (
+          <div className="badge-emoji">{badge}</div>
+        ) : (
+          <SlBadge className="badge-icon empty" />
+        )}
+        <div
+          className="month-name"
+          style={{ color: badgeColors[badge] || "#EAEAEA" }} 
+        >
+          {month}
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+
           <div className="year-title">2024</div>
-          <div className="months-grid">
-            {["🥉", "🥈", "🥈", "🥇", "🥇", "🥉"].map((badge, index) => (
-              <div className="month" key={index}>
-                <div className="badge-emoji">{badge}</div>
-                <div className="month-name">
-                  {["Jan", "Feb", "Mar", "Apr", "May", "Jun"][index]}
-                </div>
-              </div>
-            ))}
+<div className="months-grid">
+  {["🥉", "🥈", "🥈", "🥇", "🥇", "🥉"].map((badge, index) => {
+    const badgeColors = {
+      "🥇": "#FFD700", 
+      "🥈": "#C0C0C0", 
+      "🥉": "#CD7F32"  
+    };
+
+    const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"][index];
+
+    return (
+      <div className="month" key={index}>
+        <div className="badge-emoji">{badge}</div>
+        <div className="month-name" style={{ color: badgeColors[badge] }}>
+          {month}
+        </div>
+      </div>
+    );
+  })}
+
+
           </div>
         </div>
       </div>

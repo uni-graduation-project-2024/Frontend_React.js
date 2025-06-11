@@ -14,14 +14,14 @@
 }
 
 .sidebar .logo {
-  margin: 3% 0;
+  margin: 1% 0;
 }
 
 .sidebar-item {
   display: flex;
   align-items: center;
-  padding: 6% 7%;
-  margin-bottom: 10px;
+  padding: 5% 7%;
+  margin-bottom: 7px;
 
   text-decoration: none;
 
@@ -57,7 +57,6 @@
   display: flex;
   align-items: center;
   margin-top: auto;
-  margin-left: 6%;
   padding: 5%;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -113,16 +112,21 @@
   }
 
   .sidebar-item, .user-info{
-    padding: 4% 5%;
+    padding: 3%;
     margin: 0;
   }
 }
-.sidebar-avatar {
-  width: 35px;
-  height: 35px;
+.sidebar-avatar-container {
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
+  border: 2px solid #ccc;
 }
 
+.sidebar-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
 

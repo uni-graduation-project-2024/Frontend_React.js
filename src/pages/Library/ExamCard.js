@@ -33,9 +33,16 @@ export const ExamCard = ({
   const handleMoveToFolder = (examId, subId) => {
     openModal(<MoveExam examId={examId} subId={subId} onClose={() => openModal(null)}/>);
   };
+
+  function getScoreClass(score) {
+    if (score === 100) return "exam-score score-100";
+    if (score >= 90) return "exam-score score-above-90";
+    if (score >= 80) return "exam-score score-above-80";
+    if (score >= 50) return "exam-score score-above-50";
+    return "exam-score score-below-50";
+  }
   
     return (
-      <>
       <div
         ref={drag}
         className="library-exam"
@@ -46,10 +53,15 @@ export const ExamCard = ({
           <p className="exam-time">
           {<TimeAgo dateString={exam.createdDate}/>} • {exam.numQuestions} questions
           </p>
-          <h3>{exam.title}</h3>
+          <p className="exam-title" >{exam.examName}</p>
+          <div className="exam-details-container">
+            <div className="exam-type"><p>{exam.questionType}</p></div>
+            <div className={ exam.difficultyLevel == "EASY" ? "exam-difficulty-level easy" : exam.difficultyLevel == "MEDIUM" ? "exam-difficulty-level medium" : "exam-difficulty-level hard" }
+            ><p>{exam.difficultyLevel}</p></div>
+            <div className={getScoreClass(exam.totalScore)}><p>Score : {exam.totalScore}</p></div>
+          </div>
         </div>
         <div className="exam-content">
-          <p className="exam-title">{exam.examName}</p>
           <div className="exam-actions">
             <button onClick={() => handleRetry(exam)} className="retry-button">
               Practice Again
@@ -72,7 +84,5 @@ export const ExamCard = ({
           </div>
         </div>
       </div>
-      
-      </>
     );
   };

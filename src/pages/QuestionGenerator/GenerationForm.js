@@ -314,6 +314,8 @@ const GenerationForm = () => {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    setIsDisabled(false);
+    setError(null);
     setText("");
   };
 
@@ -464,6 +466,7 @@ const GenerationForm = () => {
                 onChange={handleTextChange}
                 placeholder="Enter the text to generate from..."
                 className="block w-full border rounded-md p-2 bg-gray-700 text-white"
+                required
               />
             )}
           </div>

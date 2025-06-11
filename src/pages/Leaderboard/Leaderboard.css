@@ -14,7 +14,6 @@
   justify-content: space-between;
   margin-bottom: 40px;
   position: relative;
-  padding: 0 20px;
   gap: 10px;
 }
 
@@ -22,12 +21,10 @@
 .level-bar::before {
   content: "";
   position: absolute;
-  top: 32px; 
-  left: 0;
-  right: 0;
-  margin-left: 50px;
+  top: 39px; 
+  left: 72px;
   height: 4px;
-  width: 70%; 
+  width: 65%; 
   background-color: #aaa;
   z-index: 0;
 }
@@ -44,18 +41,13 @@
 
 .level-icon {
   font-size: 50px;
-  background-color: white;
-  padding: 10px;
-  border-radius: 50%;
-  border: 3px solid #ccc;
 }
 
 
 
 .level-name {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: bold;
-  margin-top: 8px;
   font-family: 'ADLaM Display', sans-serif;
   letter-spacing: 1px;
 }
@@ -67,6 +59,7 @@
   font-size: 16px;
   color: #f39c12;
   font-weight: bold;
+  margin-bottom: auto;
 }
 
 .leaderboard-card {
@@ -85,11 +78,10 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  width: 700px;
-  margin: 0 auto;
-  margin-left: 90px;
+  padding: 25px 30px;
+  width: 90%;
   font-family: 'ADLaM Display', sans-serif;
+  border-radius: 27px;
 }
 
 .leaderboard-rank {
@@ -129,11 +121,11 @@ ul {
 }
 
 .xp {
-  font-size: 22px;
+  font-size: 30px;
   font-weight: bold;
-  color: #2ecc71;
   text-align: right;
 }
+
 .rank-circle {
   width: 40px;
   height: 40px;
@@ -152,5 +144,29 @@ ul {
   border-radius: 50%;
   object-fit: cover;
   margin: 0 10px;
+}
+
+.current-user-first {
+  background-color: #94ff856b;
+}
+
+.current-user-last {
+  background-color: #ffcccc; /* light red */
+}
+
+.current-user-middle {
+  background-color: #e2e2e2; /* light gray */
+}
+
+.xp-first {
+  color: #00a300; /* gold */
+}
+
+.xp-last {
+  color: #e74c3c; /* red */
+}
+
+.xp-middle {
+  color: #2c3e50; /* dark blue */
 }
 

@@ -1,0 +1,95 @@
+/* searchUser.css */
+
+.su-search-user-container {
+  max-width: 600px;
+  margin: 25px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.su-search-user-container h2 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.su-search-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.su-search-user-input {
+  flex-grow: 1;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.su-search-user-input:focus {
+  outline: none;
+  border-color: #d94b8b;
+  box-shadow: 0 0 5px rgba(245, 138, 220, 0.5);
+}
+
+.su-search-input-group button {
+  padding: 10px 22px;
+  background-color: #d94b8b;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.su-search-input-group button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.su-search-input-group button:not(:disabled):hover {
+  background-color: #d94b8b;
+}
+
+.su-search-error {
+  color: #b00020;
+  background-color: #fdecea;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #b00020;
+  font-weight: 600;
+  text-align: center;
+}
+
+.su-search-user-results {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.su-user-item {
+  border: 1px solid #ddd;
+  padding: 14px 18px;
+  border-radius: 7px;
+  margin-bottom: 12px;
+  background-color: #fafafa;
+  word-wrap: break-word;
+  line-height: 1.4;
+  color: #333;
+}
+
+.su-user-item p {
+  margin: 4px 0;
+}
+
+.su-user-item strong {
+  color: #555;
+}

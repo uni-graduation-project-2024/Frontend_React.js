@@ -1,6 +1,7 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { FaBook, FaTrophy, FaShoppingCart, FaUser,FaComments } from 'react-icons/fa';
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { RiAiGenerate } from "react-icons/ri";
 import { MdLeaderboard } from "react-icons/md";
 
@@ -8,14 +9,26 @@ import { MdLeaderboard } from "react-icons/md";
 
 import { getAuthToken } from '../../services/auth';
 import './Sidebar.css'; 
+import { useUserInfoStore } from '../../hooks/useUserInfo';
+import { useEffect } from 'react';
 
 const Sidebar = ({ children }) => {
   const { user } = getAuthToken();
+  const { userInformation, fetchUserInfo } = useUserInfoStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
+
+  const handNavigate = () => {
+    navigate("/");
+  };
   
   return (
     <div className="sidebar">
       <div className="logo">
-        <img src="/images/Learntendo.png" alt="Learntendo Logo" width="100%"/>
+        <img onClick={handNavigate} src="/images/Learntendo.png" alt="Learntendo Logo" width="100%"/>
       </div>
              
         {user && (
@@ -44,8 +57,13 @@ const Sidebar = ({ children }) => {
               </NavLink>
 
               <NavLink to="/chat" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
+                <IoChatboxEllipsesOutline className="sidebar-icon" style={{ fill: "#4DC3FF" }} />
+                <p className="sidebar-text">Chatbot</p>
+              </NavLink>
+
+              <NavLink to="/communication" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
                 <FaComments className="sidebar-icon" style={{ fill: "#4DC3FF" }} />
-                <p className="sidebar-text">Chat</p>
+                <p className="sidebar-text">Disscuss</p>
               </NavLink>
 
 
@@ -62,12 +80,13 @@ const Sidebar = ({ children }) => {
             isActive ? "user-info active-sidebar" : "user-info"
           }
         >
-          <img
-          src={user.photoUrl || "/images/default-profile.png"}
+        <div className="sidebar-avatar-container">
+        <img
+          src={userInformation.profileImage || "/images/default-profile-avatar.jpg"}
           alt="profile"
-          className="profile-photo"
+          className="sidebar-avatar"
         />
-
+        </div>
           <div className="profile-link">{user.unique_name}</div>
         </NavLink>
       )}

@@ -1,0 +1,74 @@
+/* viewReport.css */
+
+.vr-report-container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vr-report-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.vr-error {
+  color: #b00020;
+  background-color: #fdecea;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border: 1px solid #b00020;
+  font-weight: 600;
+}
+
+.vr-success {
+  color: #2e7d32;
+  background-color: #e6f4ea;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border: 1px solid #2e7d32;
+  font-weight: 600;
+}
+
+.vr-report-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.vr-report-item {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  word-break: break-word;
+}
+
+.vr-report-item div strong {
+  color: #444;
+}
+
+.vr-delete-btn {
+  background-color: #d32f2f;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.vr-delete-btn:hover {
+  background-color: #9a0007;
+}

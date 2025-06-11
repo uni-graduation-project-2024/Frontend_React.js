@@ -1,93 +1,4 @@
-// import React, { useState } from 'react';
-// import ReactMarkdown from 'react-markdown';
-// import './chat.css'; // Make sure your CSS file is named this or update the path
-
-// const LearntendoChat = () => {
-//   const [userInput, setUserInput] = useState('');
-//   const [chatHistory, setChatHistory] = useState([]);
-//   const [loading, setLoading] = useState(false);
-
-//   const handleInputChange = (e) => {
-//     setUserInput(e.target.value);
-//   };
-
-//   const handleSendMessage = async () => {
-//     const trimmedInput = userInput.trim();
-//     if (!trimmedInput) return;
-
-//     const newUserMessage = { sender: 'You', message: trimmedInput };
-//     setChatHistory([...chatHistory, newUserMessage]);
-//     setUserInput('');
-//     setLoading(true);
-
-//     try {
-//       const response = await fetch('http://localhost:8003/chat', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ user_input: trimmedInput }),
-//       });
-
-//       const data = await response.json();
-//       const botMessage = { sender: 'Bot', message: data.message };
-//       setChatHistory((prev) => [...prev, botMessage]);
-//     } catch (error) {
-//       console.error('❌ Error:', error);
-//       const errorMessage = {
-//         sender: 'Bot',
-//         message: 'Sorry, something went wrong while getting a response.',
-//       };
-//       setChatHistory((prev) => [...prev, errorMessage]);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   const handleKeyPress = (e) => {
-//     if (e.key === 'Enter') {
-//       handleSendMessage();
-//     }
-//   };
-
-//   return (
-//     <div className="learntendo-chat-container">
-//       <div className="learntendo-chat-box">
-//         {chatHistory.map((chat, index) => (
-//           <div
-//             key={index}
-//             className={
-//               chat.sender === 'You'
-//                 ? 'learntendo-user-message'
-//                 : 'learntendo-bot-message'
-//             }
-//           >
-//             <ReactMarkdown>{chat.message}</ReactMarkdown>
-//           </div>
-//         ))}
-//         {loading && <p className="learntendo-loading">Typing...</p>}
-//       </div>
-
-//       <div className="learntendo-input-container">
-//         <input
-//           type="text"
-//           className="learntendo-input"
-//           placeholder="Ask me anything!"
-//           value={userInput}
-//           onChange={handleInputChange}
-//           onKeyPress={handleKeyPress}
-//         />
-//         <button className="learntendo-send-button" onClick={handleSendMessage}>
-//           Send
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default LearntendoChat;
-
-
-
-// import React, { useState, useRef } from 'react';
+// import React, { useState, useRef, useEffect } from 'react';
 // import ReactMarkdown from 'react-markdown';
 // import './chat.css';
 
@@ -95,20 +6,51 @@
 //   const [userInput, setUserInput] = useState('');
 //   const [chatHistory, setChatHistory] = useState([]);
 //   const [loading, setLoading] = useState(false);
-//   // Keep track of currently playing audio and its message index
-//   const audioRef = useRef(null);
+//   const [listening, setListening] = useState(false);
 //   const [playingIndex, setPlayingIndex] = useState(null);
+//   const [audioLoadingIndex, setAudioLoadingIndex] = useState(null);
 
-//   const handleInputChange = (e) => {
-//     setUserInput(e.target.value);
-//   };
+//   const recognitionRef = useRef(null);
+//   const audioRef = useRef(null);
+//   const transcriptRef = useRef('');
 
-//   const handleSendMessage = async () => {
-//     const trimmedInput = userInput.trim();
+//   useEffect(() => {
+//     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+//     if (!SpeechRecognition) {
+//       alert('Speech Recognition API not supported in this browser.');
+//       return;
+//     }
+
+//     const recognition = new SpeechRecognition();
+//     recognition.lang = 'ar-SA';
+//     recognition.interimResults = false;
+//     recognition.maxAlternatives = 1;
+
+//     recognition.onstart = () => {
+//       setListening(true);
+//       transcriptRef.current = '';
+//     };
+
+//     recognition.onresult = (event) => {
+//       transcriptRef.current = event.results[0][0].transcript;
+//       setUserInput(transcriptRef.current);
+//     };
+
+//     recognition.onend = () => {
+//       setListening(false);
+//     };
+
+//     recognitionRef.current = recognition;
+//   }, []);
+
+//   const handleInputChange = (e) => setUserInput(e.target.value);
+
+//   const handleSendMessage = async (inputText) => {
+//     const trimmedInput = (inputText ?? userInput).trim();
 //     if (!trimmedInput) return;
 
 //     const newUserMessage = { sender: 'You', message: trimmedInput };
-//     setChatHistory([...chatHistory, newUserMessage]);
+//     setChatHistory((prev) => [...prev, newUserMessage]);
 //     setUserInput('');
 //     setLoading(true);
 
@@ -135,28 +77,43 @@
 //   };
 
 //   const handleKeyPress = (e) => {
-//     if (e.key === 'Enter') {
-//       handleSendMessage();
+//     if (e.key === 'Enter') handleSendMessage();
+//   };
+
+//   const toggleListening = () => {
+//     const recognition = recognitionRef.current;
+//     if (!recognition) return;
+
+//     if (!listening) {
+//       recognition.start();
+//     } else {
+//       recognition.stop();
+//       const finalTranscript = transcriptRef.current.trim();
+//       if (finalTranscript) {
+//         handleSendMessage(finalTranscript);
+//         transcriptRef.current = '';
+//       }
 //     }
 //   };
 
 //   const playAudio = async (text, index) => {
 //     try {
-//       // If clicked the currently playing message: toggle pause/play
-//       if (playingIndex === index) {
+//       if (playingIndex === index && audioRef.current) {
 //         if (audioRef.current.paused) {
-//           audioRef.current.play();
+//           await audioRef.current.play();
 //         } else {
 //           audioRef.current.pause();
 //         }
 //         return;
 //       }
 
-//       // If a different message clicked, stop previous audio
 //       if (audioRef.current) {
 //         audioRef.current.pause();
 //         audioRef.current = null;
+//         setPlayingIndex(null);
 //       }
+
+//       setAudioLoadingIndex(index);
 
 //       const response = await fetch('http://localhost:8003/tts', {
 //         method: 'POST',
@@ -171,7 +128,6 @@
 //       const audio = new Audio(audioUrl);
 //       audioRef.current = audio;
 
-//       // When audio ends, reset playing index
 //       audio.onended = () => {
 //         setPlayingIndex(null);
 //         audioRef.current = null;
@@ -181,6 +137,8 @@
 //       setPlayingIndex(index);
 //     } catch (error) {
 //       console.error('🎧 Audio error:', error);
+//     } finally {
+//       setAudioLoadingIndex(null);
 //     }
 //   };
 
@@ -201,9 +159,15 @@
 //               <button
 //                 className="learntendo-audio-button"
 //                 onClick={() => playAudio(chat.message, index)}
-//                 title={playingIndex === index ? "Pause audio" : "Play audio"}
+//                 disabled={audioLoadingIndex === index}
 //               >
-//                 {playingIndex === index ? '⏸️' : '🔊'}
+//                 {audioLoadingIndex === index ? (
+//                   <span className="spinner"></span>
+//                 ) : playingIndex === index ? (
+//                   '⏸️'
+//                 ) : (
+//                   '🔊'
+//                 )}
 //               </button>
 //             )}
 //           </div>
@@ -215,13 +179,42 @@
 //         <input
 //           type="text"
 //           className="learntendo-input"
-//           placeholder="Ask me anything!"
+//           placeholder="Ask anything"
 //           value={userInput}
 //           onChange={handleInputChange}
 //           onKeyPress={handleKeyPress}
+//           disabled={loading}
 //         />
-//         <button className="learntendo-send-button" onClick={handleSendMessage}>
+
+//         <button
+//           className="learntendo-send-button"
+//           onClick={() => handleSendMessage()}
+//           disabled={loading}
+//           title="Send message"
+//         >
 //           Send
+//         </button>
+
+//         <button
+//           className={`learntendo-mic-button ${listening ? 'listening' : ''}`}
+//           onClick={toggleListening}
+//           title={listening ? 'Stop & Send' : 'Speak your question'}
+//           disabled={loading}
+//           aria-label="Toggle microphone"
+//         >
+//           <svg
+//             xmlns="http://www.w3.org/2000/svg"
+//             width="20"
+//             height="20"
+//             viewBox="0 0 24 24"
+//             fill={listening ? '#10B981' : 'currentColor'}
+//             stroke="none"
+//           >
+//             <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z" />
+//             <path d="M19 10v1a7 7 0 0 1-14 0v-1" />
+//             <line x1="12" y1="19" x2="12" y2="23" stroke="currentColor" strokeWidth="2" />
+//             <line x1="8" y1="23" x2="16" y2="23" stroke="currentColor" strokeWidth="2" />
+//           </svg>
 //         </button>
 //       </div>
 //     </div>
@@ -230,99 +223,151 @@
 
 // export default LearntendoChat;
 
-
 import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './chat.css';
+import { getAuthToken } from '../../services/auth';
+import Sidebar from './side-bar'; // Adjust import path if needed
+import { MicIcon } from './icons';
 
 const LearntendoChat = () => {
+  const { token, user } = getAuthToken();
+  const username = user?.email || 'guest';
+
   const [userInput, setUserInput] = useState('');
-  const [chatHistory, setChatHistory] = useState([]);
+  const [chatSessions, setChatSessions] = useState(() => {
+    const saved = localStorage.getItem(`learntendo_chat_sessions_${username}`);
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  const getToday = () => new Date().toISOString().split('T')[0];
+
+  const [currentDate, setCurrentDate] = useState(() => {
+    const today = getToday();
+    const sessionKey = Object.keys(chatSessions).find(k => k.startsWith(today)) || `${today} - untitled`;
+    return sessionKey;
+  });
+
+  const [chatHistory, setChatHistory] = useState(() => {
+    return chatSessions[currentDate] || [];
+  });
+
   const [loading, setLoading] = useState(false);
   const [listening, setListening] = useState(false);
+  const [playingIndex, setPlayingIndex] = useState(null);
+  const [audioLoadingIndex, setAudioLoadingIndex] = useState(null);
+
   const recognitionRef = useRef(null);
   const audioRef = useRef(null);
-  const [playingIndex, setPlayingIndex] = useState(null);
+  const transcriptRef = useRef('');
+
+  // Save sessions to state and localStorage
+  const saveSessions = (updatedSessions) => {
+  localStorage.setItem(`learntendo_chat_sessions_${username}`, JSON.stringify(updatedSessions));
+  setChatSessions(updatedSessions);
+};
+
+
+
+  // Update chat history for current session
+  const updateChatHistory = (newMessage) => {
+    setChatHistory((prev) => {
+      const updated = [...prev, newMessage];
+      const updatedSessions = { ...chatSessions, [currentDate]: updated };
+      saveSessions(updatedSessions);
+      return updated;
+    });
+  };
 
   useEffect(() => {
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
+  setChatHistory(chatSessions[currentDate] || []);
+}, [currentDate, chatSessions]);
+
+  // Speech recognition setup
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
       alert('Speech Recognition API not supported in this browser.');
       return;
     }
 
     const recognition = new SpeechRecognition();
-    recognition.lang = 'ar-SA'; // Arabic Saudi dialect
+    recognition.lang = 'ar-SA';
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
-    recognition.onstart = () => setListening(true);
-    recognition.onend = () => setListening(false);
+    recognition.onstart = () => {
+      setListening(true);
+      transcriptRef.current = '';
+    };
 
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      setUserInput(transcript);
-      handleSendMessage(transcript);
+      transcriptRef.current = event.results[0][0].transcript;
+      setUserInput(transcriptRef.current);
+    };
+
+    recognition.onend = () => {
+      setListening(false);
     };
 
     recognitionRef.current = recognition;
   }, []);
 
-  const handleInputChange = (e) => {
-    setUserInput(e.target.value);
-  };
+  const handleInputChange = (e) => setUserInput(e.target.value);
 
   const handleSendMessage = async (inputText) => {
     const trimmedInput = (inputText ?? userInput).trim();
     if (!trimmedInput) return;
 
     const newUserMessage = { sender: 'You', message: trimmedInput };
-    setChatHistory((prev) => [...prev, newUserMessage]);
+    updateChatHistory(newUserMessage);
     setUserInput('');
     setLoading(true);
 
     try {
       const response = await fetch('http://localhost:8003/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ user_input: trimmedInput }),
       });
 
       const data = await response.json();
       const botMessage = { sender: 'Bot', message: data.message };
-      setChatHistory((prev) => [...prev, botMessage]);
+      updateChatHistory(botMessage);
     } catch (error) {
       console.error('❌ Error:', error);
-      const errorMessage = {
-        sender: 'Bot',
-        message: 'Sorry, something went wrong while getting a response.',
-      };
-      setChatHistory((prev) => [...prev, errorMessage]);
+      updateChatHistory({ sender: 'Bot', message: 'Sorry, something went wrong while getting a response.' });
     } finally {
       setLoading(false);
     }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSendMessage();
-    }
+    if (e.key === 'Enter') handleSendMessage();
   };
 
   const toggleListening = () => {
-    if (!recognitionRef.current) return;
+    const recognition = recognitionRef.current;
+    if (!recognition) return;
 
-    if (listening) {
-      recognitionRef.current.stop();
+    if (!listening) {
+      recognition.start();
     } else {
-      recognitionRef.current.start();
+      recognition.stop();
+      const finalTranscript = transcriptRef.current.trim();
+      if (finalTranscript) {
+        handleSendMessage(finalTranscript);
+        transcriptRef.current = '';
+      }
     }
   };
 
   const playAudio = async (text, index) => {
     try {
-      if (playingIndex === index) {
+      if (playingIndex === index && audioRef.current) {
         if (audioRef.current.paused) {
           await audioRef.current.play();
         } else {
@@ -334,11 +379,17 @@ const LearntendoChat = () => {
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
+        setPlayingIndex(null);
       }
+
+      setAudioLoadingIndex(index);
 
       const response = await fetch('http://localhost:8003/tts', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ user_input: text }),
       });
 
@@ -358,92 +409,86 @@ const LearntendoChat = () => {
       setPlayingIndex(index);
     } catch (error) {
       console.error('🎧 Audio error:', error);
+    } finally {
+      setAudioLoadingIndex(null);
     }
   };
 
   return (
-    <div className="learntendo-chat-container">
-      <div className="learntendo-chat-box">
-        {chatHistory.map((chat, index) => (
-          <div
-            key={index}
-            className={
-              chat.sender === 'You'
-                ? 'learntendo-user-message'
-                : 'learntendo-bot-message'
-            }
-          >
-            <ReactMarkdown>{chat.message}</ReactMarkdown>
-            {chat.sender === 'Bot' && (
-              <button
-                className="learntendo-audio-button"
-                onClick={() => playAudio(chat.message, index)}
-                title={playingIndex === index ? 'Pause audio' : 'Play audio'}
+    <div className="chatgpt-layout">
+      <Sidebar
+        chatSessions={chatSessions}
+        setChatSessions={setChatSessions}
+        currentDate={currentDate}
+        setCurrentDate={setCurrentDate}
+        setChatHistory={setChatHistory}
+        saveSessions={saveSessions} // ✅ This enables Sidebar to persist changes
+        getToday={getToday}
+      />
+
+      <main className="chat-main">
+        <div className="learntendo-chat-container">
+          <div className="learntendo-chat-box">
+            {chatHistory.map((chat, index) => (
+              <div
+                key={index}
+                className={
+                  chat.sender === 'You' ? 'learntendo-user-message' : 'learntendo-bot-message'
+                }
               >
-                {playingIndex === index ? '⏸️' : '🔊'}
-              </button>
-            )}
+                <ReactMarkdown>{chat.message}</ReactMarkdown>
+                {chat.sender === 'Bot' && (
+                  <button
+                    className="learntendo-audio-button"
+                    onClick={() => playAudio(chat.message, index)}
+                    disabled={audioLoadingIndex === index}
+                  >
+                    {audioLoadingIndex === index ? (
+                      <span className="spinner"></span>
+                    ) : playingIndex === index ? (
+                      '⏸️'
+                    ) : (
+                      '🔊'
+                    )}
+                  </button>
+                )}
+              </div>
+            ))}
+            {loading && <p className="learntendo-loading">Typing...</p>}
           </div>
-        ))}
-        {loading && <p className="learntendo-loading">Typing...</p>}
-      </div>
 
-      <div className="learntendo-input-container">
-        <input
-          type="text"
-          className="learntendo-input"
-          placeholder="Ask anything"
-          value={userInput}
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
-          disabled={loading}
-        />
-
-        <button
-          className="learntendo-send-button"
-          onClick={() => handleSendMessage()}
-          disabled={loading}
-          title="Send message"
-        >
-          Send
-        </button>
-
-        <button
-          className={`learntendo-mic-button ${listening ? 'listening' : ''}`}
-          onClick={toggleListening}
-          title={listening ? 'Stop listening' : 'Speak your question'}
-          disabled={loading}
-          aria-label="Toggle microphone"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill={listening ? '#10B981' : 'currentColor'}
-            stroke="none"
-          >
-            <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z" />
-            <path d="M19 10v1a7 7 0 0 1-14 0v-1" />
-            <line
-              x1="12"
-              y1="19"
-              x2="12"
-              y2="23"
-              stroke="currentColor"
-              strokeWidth="2"
+          <div className="learntendo-input-container">
+            <input
+              type="text"
+              className="learntendo-input"
+              placeholder="Ask anything"
+              value={userInput}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyPress}
+              disabled={loading}
             />
-            <line
-              x1="8"
-              y1="23"
-              x2="16"
-              y2="23"
-              stroke="currentColor"
-              strokeWidth="2"
-            />
-          </svg>
-        </button>
-      </div>
+
+            <button
+              className="learntendo-send-button"
+              onClick={() => handleSendMessage()}
+              disabled={loading}
+              title="Send message"
+            >
+              Send
+            </button>
+
+            <button
+              className={`learntendo-mic-button ${listening ? 'listening' : ''}`}
+              onClick={toggleListening}
+              title={listening ? 'Stop & Send' : 'Speak your question'}
+              disabled={loading}
+              aria-label="Toggle microphone"
+            >
+              <MicIcon size={20} color="white" />
+            </button>
+          </div>
+        </div>
+      </main>
     </div>
   );
 };

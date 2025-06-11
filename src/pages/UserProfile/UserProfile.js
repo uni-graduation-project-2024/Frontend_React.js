@@ -126,31 +126,23 @@
 
 // export default UserProfile;
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaSignInAlt } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
-import axios from "axios";
 
 import "./UserProfile.css";
+import { useUserInfoStore } from "../../hooks/useUserInfo";
 import { getAuthToken, removeAuthToken } from '../../services/auth';
+import axios from "axios";
 import linkhost from "../..";
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState({
-    username: "UserName",
-    email: "user@gmail.com",
-    joinedDate: "22-2-2025",
-    totalXp: 3412,
-    totalQuestion: 1000,
-    finishedTop3: 10,
-    examsCreated: 116,
-    currentLeague: "Gold",
-    streakScore: 82,
-    photoUrl: "", // user image
-  });
+  const { userInformation , setProfileImage} = useUserInfoStore();
+
+  const levels = ["Newbie", "Beginner", "Professional", "Expert", "Master"];
 
   const [previewUrl, setPreviewUrl] = useState("");
   const [isUploading, setIsUploading] = useState(false);
@@ -158,15 +150,6 @@ const UserProfile = () => {
   const { user } = getAuthToken();
   const { userId } = useParams();
 
-  useEffect(() => {
-    axios.get(`${linkhost}/api/User/user-profile?userId=${userId}`)
-      .then((response) => {
-        setUserInfo(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching user profile:", error);
-      });
-  }, [userId]);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -175,19 +158,9 @@ const UserProfile = () => {
     setPreviewUrl(URL.createObjectURL(file));
     setIsUploading(true);
 
-    const formData = new FormData();
-    formData.append("image", file);
-    formData.append("userId", userId);
 
     try {
-      const response = await axios.post(`${linkhost}/api/User/upload-photo`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      setUserInfo((prev) => ({ ...prev, photoUrl: response.data.photoUrl }));
-
-      // update localStorage for sidebar
-      const updatedUser = { ...user, photoUrl: response.data.photoUrl };
-      localStorage.setItem("user", JSON.stringify(updatedUser));
+      setProfileImage(file);
     } catch (error) {
       console.error("Error uploading photo:", error);
     } finally {
@@ -197,7 +170,21 @@ const UserProfile = () => {
 
   const handleLogOutClick = () => {
     removeAuthToken();
-    navigate("/loginregister");
+    window.location.href = "/loginregister";
+  };
+
+  const handleDeleteAccount = async () => {
+    if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+      await axios.delete(`${linkhost}/api/User/delete-account/${user.nameid}`)
+        .then(() => {
+          removeAuthToken();
+          window.location.href = "/loginregister";
+        })
+        .catch((error) => {
+          console.error("Error deleting account:", error);
+          alert("Failed to delete account. Please try again later.");
+        } );
+    }
   };
 
   return (
@@ -208,11 +195,11 @@ const UserProfile = () => {
             <label htmlFor="profile-upload">
               <div className="profile-photo-wrapper">
                 <img
-                  src={previewUrl || userInfo.photoUrl || "/images/default-profile.png"}
+                  src={previewUrl || userInformation.profileImage || "/images/default-profile-avatar.jpg"}
                   alt="Profile"
                   className="profile-photo"
                 />
-                {!(previewUrl || userInfo.photoUrl) && (
+                {!(previewUrl || userInformation.profileImage) && (
                   <div className="profile-placeholder">📷<br />Upload your photo</div>
                 )}
                 {isUploading && <div className="photo-loader" />}
@@ -230,10 +217,12 @@ const UserProfile = () => {
           </div>
 
           <div className="profile-info">
-            <h2>{userInfo.username} <FiEdit className="edit-icon" /></h2>
-            <p className="pemail">{userInfo.email}</p>
+            <h2>{userInformation.username} 
+              {/* <FiEdit className="edit-icon" /> */}
+              </h2>
+            <p className="pemail">{userInformation.email}</p>
             <p className="pdate">
-              Joined Date: {new Date(userInfo.joinedDate).toLocaleDateString("en-GB", {
+              Joined Date: {new Date(userInformation.joinedDate).toLocaleDateString("en-GB", {
                 day: "numeric",
                 month: "long",
                 year: "numeric"
@@ -243,12 +232,12 @@ const UserProfile = () => {
         </div>
 
         <div className="profile-stats">
-          <div className="stat-box"><h3>Total XP</h3><p>{userInfo.totalXp}</p></div>
-          <div className="stat-box"><h3>Current Streak</h3><p>{userInfo.streakScore}</p></div>
-          <div className="stat-box"><h3>Exams Created</h3><p>{userInfo.examsCreated}</p></div>
-          <div className="stat-box"><h3>Questions Solved</h3><p>{userInfo.totalQuestion}</p></div>
-          <div className="stat-box"><h3>Finished Top 3</h3><p>{userInfo.finishedTop3}</p></div>
-          <div className="stat-box"><h3>Current League</h3><p>{userInfo.currentLeague}</p></div>
+          <div className="stat-box"><h3>Total XP</h3><p>{userInformation.totalXp}</p></div>
+          <div className="stat-box"><h3>Current Streak</h3><p>{userInformation.maxStreakScore}</p></div>
+          <div className="stat-box"><h3>Exams Created</h3><p>{userInformation.examsCreated}</p></div>
+          <div className="stat-box"><h3>Questions Solved</h3><p>{userInformation.totalQuestion}</p></div>
+          <div className="stat-box"><h3>Finished Top 3</h3><p>{userInformation.finishTop}</p></div>
+          <div className="stat-box"><h3>Current League</h3><p>{levels[userInformation.level]}</p></div>
         </div>
 
         {(userId === user.nameid) && (
@@ -259,12 +248,16 @@ const UserProfile = () => {
             <button onClick={handleLogOutClick} className="button-base logout-button">
               <FaSignInAlt /> LogOut
             </button>
-            <button className="button-base delete-account-button">
+            <button onClick={handleDeleteAccount} className="button-base delete-account-button">
               Delete Account
+            </button>
+            <button onClick={() => navigate("/report-problem")} className="button-base  report-button">
+              Report Problem
             </button>
           </div>
         )}
       </div>
+            
 
       <div className="thinking-section">
         <div className="thinking-bubble">

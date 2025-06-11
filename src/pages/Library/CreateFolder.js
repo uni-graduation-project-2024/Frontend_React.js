@@ -5,13 +5,15 @@ import './CreateFolder.css';
 import linkhost from "../../";
 import SubjectColors from './SubjectColors';
 import { getAuthToken } from '../../services/auth';
+import { useFoldersStore } from '../../hooks/useFolders';
 
-const CreateFolder = ({ updateRefresh, onClose }) => {
+const CreateFolder = ({ onClose }) => {
   const [folderName, setFolderName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {user} = getAuthToken();
   const [activeColor, setActiveColor] = useState("red");
   const [errorMessage, setErrorMessage] = useState('');
+  const { addFolder } = useFoldersStore();
 
   const handleFolderSubmit = async () => {
     if (!folderName.trim()) {
@@ -26,8 +28,8 @@ const CreateFolder = ({ updateRefresh, onClose }) => {
       const response = await axios.post(linkhost +`/api/Subject/${user.nameid}`, newFolder);
 
       if (response.status === 201 || response.status === 200) {
+        addFolder(response.data);
         console.log('Folder created successfully:', response.data);
-        updateRefresh();
         onClose();
       } else {
         console.error('Failed to create folder:', response.statusText);
@@ -47,7 +49,7 @@ const CreateFolder = ({ updateRefresh, onClose }) => {
           className={ errorMessage? "create-folder-input error-sub-Name-required":"create-folder-input"}
           placeholder='Subject Name'
           value={folderName}
-          onChange={(e) => setFolderName(e.target.value)}
+          onChange={(e) => {setFolderName(e.target.value); setErrorMessage('');}}
           disabled={isSubmitting}
           maxLength={20}
           autoFocus

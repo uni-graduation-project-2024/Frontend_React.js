@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import "./MainLayout.css";
 import Sidebar from "../Sidebar/Sidebar";
@@ -32,9 +34,11 @@ const MainLayout = () => {
             <Sidebar/>
             <Navbar refreshNavbar={{refreshNavbar}}/>
             <main>
+                <DndProvider backend={HTML5Backend}>
                 <div className="main-container">
                     <Outlet context={{ openModal, updateNavbar: refreshNavbarfun }}/>
                 </div>
+                </DndProvider>
             </main>
             
         </>

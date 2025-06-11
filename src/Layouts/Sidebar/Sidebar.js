@@ -35,7 +35,7 @@ const Sidebar = ({ children }) => {
           <>
             {user.role === "User" && (
               <>
-                <NavLink to="/GenerationForm" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
+                <NavLink to="/generationForm" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
                   <RiAiGenerate className="sidebar-icon" style={{ strokeWidth: 1.6 ,fill: "#1226D7", stroke: "#1226D7"}}/>
                   <p className="sidebar-text">Generate</p>
                 </NavLink>
@@ -56,7 +56,7 @@ const Sidebar = ({ children }) => {
                 <p className="sidebar-text">Market</p>
               </NavLink>
 
-              <NavLink to="/chat" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
+              <NavLink to="/chatbot" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
                 <IoChatboxEllipsesOutline className="sidebar-icon" style={{ fill: "#4DC3FF" }} />
                 <p className="sidebar-text">Chatbot</p>
               </NavLink>

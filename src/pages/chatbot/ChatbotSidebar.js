@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './ChatbotSidebar.css';
 
-const Sidebar = ({
+const ChatbotSidebar = ({
   chatSessions,
   setChatSessions,
   currentDate,
@@ -60,9 +61,9 @@ const Sidebar = ({
   };
 
   return (
-    <aside className="sidebar">
+    <aside className="chatbot-sidebar">
       <div className="sidebar-header">
-        <button className="back-btn" onClick={() => navigate('/')}>← Back</button>
+        <button className="back-btn" onClick={() => navigate('/library')}>← Back</button>
         <h2>Chats</h2>
       </div>
 
@@ -125,4 +126,4 @@ const Sidebar = ({
   );
 };
 
-export default Sidebar;
+export default ChatbotSidebar;

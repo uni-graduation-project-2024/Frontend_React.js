@@ -25,7 +25,7 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import Market from "./pages/Market/Market";
 import Badge from "./pages/Badges/Badge";
 import UserUploads from "./pages/Library/UserUploads/UserUploads";
-import Chat from "./pages/chatbot/chat";
+import Chatbot from "./pages/Chatbot/Chatbot";
 import CommChat from "./pages/communication/commChat";
 import CommChatWrapper from "./pages/communication/commChatWrapper";
 import ReportProblem from "./pages/UserProfile/reportProblem";
@@ -52,11 +52,12 @@ function App() {
           <Route element={<AuthGuard roles={["User"]}/>}>
             <Route path="/PracticeMode" element={<PracticeMode/>}/>
             <Route path="/score" element={<ScorePage />} />
+            <Route path="/chatbot" element={<Chatbot />} />
 
             <Route element={<MainLayout/>}>
               <Route path="/library" element={<Library />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/GenerationForm" element={<GenerationForm />} />
+              <Route path="/generationForm" element={<GenerationForm />} />
               <Route path="/challenges" element={<Challenge />} /> 
               <Route path="/market" element={<Market />} /> 
               <Route path="/user-profile/:userId" element={<UserProfile />} />
@@ -64,8 +65,7 @@ function App() {
 
               <Route path="/folder/:folderName" element={<FolderView />} />
               <Route path="/Review-Mode" element={<ReviewMode />} /> 
-              <Route path="/my-uploads" element={<UserUploads />} /> 
-              <Route path="/chat" element={<Chat />} /> 
+              <Route path="/my-uploads" element={<UserUploads />} />  
              <Route path="/chat/:receiverId" element={<CommChatWrapper />} />
               <Route path="/communication" element={<CommChat />} />
               <Route path="/report-problem" element={<ReportProblem />} />

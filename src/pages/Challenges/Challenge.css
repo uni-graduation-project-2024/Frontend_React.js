@@ -1,82 +1,153 @@
+/* ============================
+   Challenge Container Styles
+============================= */
 .challenge-container {
-  min-width: 75%;
+  width: 600px;
   padding: 20px;
-  background: linear-gradient(135deg, #1e293b, #334155);
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   color: #f8fafc;
 }
 
-.challenge-title {
-  font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.challenge-container-all {
+  display: flex;
+  align-items: flex-start; 
+  gap: 30px;
 }
 
-.challenge-card {
-  background: #475569;
+/* ============================
+   Challenge Cards
+============================= */
+.monthly-card {
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 30px;
   margin: 15px 0;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  height: 300px;
 }
 
-.challenge-card h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #facc15; /* Gold color for headings */
+.daily-card {
+  border-radius: 30px;
+  margin: 15px 0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  padding: 20px 20px;
+  border: solid 1px rgb(152, 148, 148);
+  height: 130px; 
+  flex-grow: 0;
+  flex-shrink: 0;
+  
+}
+.daily-card-inner{
+  justify-content: center;
+  text-align: center;
+  padding-left: 20px;
 }
 
-.challenge-progress-bar-container{
-  position: relative;
+.monthly-card h2 {
+  font-size: 30px;
+  margin-top: 28px;
+  margin-left: -200px;
+  color: #facc15;
 }
-
-.badge-fill{
+.monthly-card-inner p {
+  margin-top: 70px;
+  margin-left: 410px;
   position: absolute;
-  top: -32%;
-  color: #1e293b;
-  z-index: 2;
-}
-
-.badge-shape{
-  position: absolute;
-  top: -32%;
-  font-size: 1.46rem;
-  background: #475569;
-  color: #1e293b;
+  border: solid #22D7DA;
   border-radius: 20px;
+  padding: 2px 5px;
+}
+/* ============================
+   Progress Bar & Badges
+============================= */
+.challenge-progress-bar-container {
+  position: relative;
+  margin-left: 20px;
+  justify-content: center;
 }
 
-.bronze-badge-active{
-  color:#ba822b !important
-}
-
-.silver-badge-active{
-  color:silver !important
-}
-
-.gold-badge-active{
-  color: gold !important
-}
-
-.challenge-progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #1e293b;
-  border-radius: 5px;
+.monthbar {
+  position: relative;
+  width: 95%;
+  height: 15px;
+  background: #EAEAEA;
+  border-radius: 7px;
   overflow: hidden;
+  margin-top: 120px;
+}
+.dailybar{
+
+  width: 95%;
+  height: 15px;
+  background: #EAEAEA;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.H2-NUM-DAILY{
+  display: flex;
+  gap: 280px;
+  margin-bottom: 15px;
   margin-top: 10px;
+
+}
+.daily-card h2 {
+  font-size: 20px;
+  color: #FF68AC; 
+ justify-content: first baseline;
+ text-align: left;
+
+}
+.num-daily{
+  color: #FF68AC;
 }
 
 .challenge-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #facc15, #f97316);
   transition: width 0.5s ease-in-out;
 }
 
+.badge-fill {
+  position: absolute;
+  top: -12px;
+  font-size: 16px;
+  color: transparent;
+  z-index: 2;
+
+}
+
+.badge-shape {
+  position: absolute;
+  top: -6px;
+  font-size: 24px;
+  color: #1e293b;
+  border-radius: 20px;
+  margin-left: -34px;
+  z-index: 2;
+}
+
+/* Active Badge Colors */
+.badge-active {
+  color: #fdd835 !important;
+}
+
+.bronze.badge-active,
+.bronze-badge-active {
+  color: #cd7f32 !important;
+}
+
+.silver.badge-active,
+.silver-badge-active {
+  color: silver !important;
+}
+
+.gold.badge-active,
+.gold-badge-active {
+  color: gold !important;
+}
+
+/* ============================
+   Level Styles
+============================= */
 .level {
   font-size: 18px;
   font-weight: bold;
@@ -86,8 +157,6 @@
   color: white;
   text-transform: uppercase;
 }
-
-/* Specific Level Colors */
 .level:contains("Gold") {
   background: linear-gradient(135deg, #ffd700, #ffb300);
   color: #1e1e1e;
@@ -108,49 +177,144 @@
   color: white;
 }
 
-/* Button Styling */
-.badge-btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 20px;
-  font-size: 16px;
+/* ============================
+   Badges Section
+============================= */
+.badge-section {
+  margin-top: 30px;
+  width: 300px;
+  margin-right: 50px;
+  height: 50px;
+}
+
+.year {
   font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #f97316, #facc15);
-  color: #1e1e1e;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
-.badge-btn:hover {
-  background: linear-gradient(90deg, #facc15, #f97316);
-  transform: scale(1.05);
+.badge-grid {
+  text-align: center;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-  .challenge-container {
-    padding: 15px;
-  }
-
-  .challenge-title {
-    font-size: 22px;
-  }
-
-  .challenge-card {
-    padding: 15px;
-  }
-
-  .badge-btn {
-    padding: 10px 15px;
-    font-size: 14px;
-  }
+.badges-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.badge-icon.silver {
+  background: silver;
+  color: #333;
 }
 
+.badge-icon.bronze {
+  background: #cd7f32;
+  color: #fff;
+}
 
+.badge-icon.empty {
+  background: #e0e0e0;
+  color: #aaa;
+}
 
+/* ============================
+   Badges Container
+============================= */
+.badges-container {
+  border: 2px solid #22D7DA;
+  border-radius: 20px;
+  padding: 20px 40px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  max-height: 450px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+.badges-container::-webkit-scrollbar {
+  display: none; 
+}
+
+.badges-title {
+  text-align: center;
+  color: #22D7DA;
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-decoration: underline;
+}
+
+.year-title {
+  text-align: center;
+  color: #22D7DA;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+
+.months-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  margin-bottom: 20px;
+}
+
+.month {
+  text-align: center;
+  font-size: 16px;
+}
+
+/* ============================
+   Badge Colors
+============================= */
+.gold {
+  color: #FFD700;
+}
+
+.silver {
+  color: #C0C0C0;
+}
+
+.bronze {
+  color: #CD7F32;
+}
+
+.empty {
+  color: #ccc;
+  opacity: 0.3;
+}
+
+.badge-label-ch {
+  position: absolute;
+  top: 20px; 
+  font-size: 12px;
+  color: #eeeded;
+  font-weight: 500;
+  margin-left: -35px;
+}
+
+.monthly-card.beginner {
+  background-color: #f3f3f3;
+}
+
+.monthly-card.bronze {
+  background-color: #cd7f32; 
+  color: white;
+}
+
+.monthly-card.silver {
+  background-color: #c0c0c0; 
+  color: black;
+}
+
+.monthly-card.gold {
+  background-color: #ffd700;  
+  color: black;
+}
 
 
 

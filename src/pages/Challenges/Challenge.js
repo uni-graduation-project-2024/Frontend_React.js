@@ -20,19 +20,20 @@ const Challenge = () => {
   const [monthlyProgress, setMonthlyProgress] = useState(0);
   const [currentLevel, setCurrentLevel] = useState("Bronze");
   const { user } = getAuthToken();
-
   useEffect(() => {
+    if (!user?.nameid) return;
+  
     axios
       .get(`${linkhost}/api/User/get-challenge-status/${user.nameid}`)
       .then((response) => {
         setChallenges(response.data);
-
+  
         const daily = (response.data.dailyXp / response.data.targetdaily) * 100;
         const monthly = (response.data.monthlyXp / response.data.monthtarget[2]) * 100;
-
+  
         setDailyProgress(daily);
         setMonthlyProgress(monthly);
-
+  
         const xp = response.data.monthlyXp;
         if (xp >= response.data.monthtarget[2]) {
           setCurrentLevel("Gold 🏆");
@@ -45,28 +46,28 @@ const Challenge = () => {
       .catch((error) => {
         console.error("Error fetching challenges:", error);
       });
-  }, [user.nameid]);
+  }, [user.nameid]);  
 
   const getMonthlyCardStyle = () => {
     const xp = challenges.monthlyXp;
     if (xp >= 300) {
       return {
-        background: "linear-gradient(135deg, #FFE86A, #FFD94F, #F8F8F8)",
+        background: "linear-gradient(135deg, #FFE86A, #F8F8F8)",
         color: "#000"
       };
     } else if (xp >= 200) {
       return {
-        background: "linear-gradient(135deg, #E0ECF5, #A3B9C9, #EEEEEE)",
+        background: "linear-gradient(135deg, #B3C7D9, #EEEEEE)",
         color: "#000"
       };
     } else if (xp >= 100) {
       return {
-        background: "linear-gradient(135deg, #F9C9A1, #C48B5A, #F4F4F4)",
+        background: "linear-gradient(135deg, #F9C9A1, #F4F4F4)",
         color: "#000"
       };
     } else {
       return {
-        background: "linear-gradient(135deg, #E5FFFE, #F9F9F9)",
+        background: "linear-gradient(135deg, #F9F9F9, #E5FFFE)",
         color: "#000"
       };
     }
@@ -76,17 +77,17 @@ const Challenge = () => {
     const xp = challenges.monthlyXp;
     if (xp >= 300) {
       return {
-        color: "#FFE86A",
+        color: "#FFD700",
         barColor: "#FFD700"
       };
     } else if (xp >= 200) {
       return {
-        color: "#E0ECF5",
-        barColor: "#C0C0C0"
+        color: "#507999",
+        barColor: "#507999"
       };
     } else if (xp >= 100) {
       return {
-        color: "#F9C9A1",
+        color: "#C48B5A",
         barColor: "#CD7F32"
       };
     } else {
@@ -108,16 +109,13 @@ const Challenge = () => {
             <h2 style={{ color: levelTheme.color }}>
               Monthly Challenge
             </h2>
-            <p style={{ color: levelTheme.color }}>
+            <p style={{ color: levelTheme.color }} class="text-white border-2 border-current px-4 py-2 rounded-full">
               {challenges.monthlyXp} / {challenges.monthtarget[2]}
             </p>
 
             <div className="challenge-progress-bar-container">
               {/* Bronze Badge */}
-              <IoCheckmarkCircle
-                className={`badge-fill ${monthlyProgress >= 25 ? "bronze-badge-active" : ""}`}
-                style={{ left: "30.6301%" }}
-              />
+             
               <SlBadge
                 className={`badge-shape ${monthlyProgress >= 25 ? "bronze-badge-active" : ""}`}
                 style={{ left: "30%" }}
@@ -125,10 +123,7 @@ const Challenge = () => {
               <div className="badge-label-ch" style={{ left: "30%" , color: levelTheme.color }}>100</div>
 
               {/* Silver Badge */}
-              <IoCheckmarkCircle
-                className={`badge-fill ${monthlyProgress >= 60 ? "silver-badge-active" : ""}`}
-                style={{ left: "60.6301%" }}
-              />
+            
               <SlBadge
                 className={`badge-shape silver-badge ${monthlyProgress >= 60 ? "silver-badge-active" : ""}`}
                 style={{ left: "60%" }}
@@ -136,10 +131,7 @@ const Challenge = () => {
               <div className="badge-label-ch" style={{ left: "60%" , color: levelTheme.color }}>200</div>
 
               {/* Gold Badge */}
-              <IoCheckmarkCircle
-                className={`badge-fill ${monthlyProgress >= 100 ? "gold-badge-active" : ""}`}
-                style={{ left: "97.6301%" }}
-              />
+             
               <SlBadge
                 className={`badge-shape gold-badge ${monthlyProgress >= 100 ? "gold-badge-active" : ""}`}
                 style={{ left: "97%" }}

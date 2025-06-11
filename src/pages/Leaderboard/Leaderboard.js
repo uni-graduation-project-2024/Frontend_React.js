@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import * as signalR from '@microsoft/signalr';
 import linkhost from "../..";
 import { getAuthToken } from "../../services/auth";
 import { NewbieBadge, BeginnerBadge, ProfessionalBadge, ExpertBadge, MasterBadge } from "../../assets/svg/LeaderboardBadges/LeaderboardBadges";
@@ -14,16 +15,52 @@ const Leaderboard = () => {
   const { user } = getAuthToken();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const connection = new signalR.HubConnectionBuilder()
+      .configureLogging(signalR.LogLevel.Debug)  // add this for diagnostic clues
+      .withUrl(`${linkhost}/leaderboardHub`, {
+        skipNegotiation: true,  // skipNegotiation as we specify WebSockets
+        transport: signalR.HttpTransportType.WebSockets  // force WebSocket transport
+      })
+      .withAutomaticReconnect()
+      .build();
+
+    connection.start()
+      .then(() => {
+        console.log("Connected to LeaderboardHub");
+
+        // Listen for updates
+        connection.on("ReceiveLeaderboardUpdate", () => {
+          console.log("Received leaderboard update!");
+          
+          axios.get(`${linkhost}/api/Group?userId=${user.nameid}`)
+          .then(response => {
+            setUsers(response.data.leaderboard);
+            setEndDate(response.data.endDate);
+          })
+          .catch(error => {
+            console.error("Error fetching leaderboard data:", error);
+          });
+
+        });
+      })
+      .catch(error => console.error("Connection failed: ", error));
+
+    return () => {
+      connection.stop();
+    };
+  }, [user.nameid]);
+
 
   useEffect(() => {
     axios.get(`${linkhost}/api/Group?userId=${user.nameid}`)
-      .then(response => {
-        setUsers(response.data.leaderboard);
-        setEndDate(response.data.endDate);
-      })
-      .catch(error => {
-        console.error("Error fetching leaderboard data:", error);
-      });
+    .then(response => {
+      setUsers(response.data.leaderboard);
+      setEndDate(response.data.endDate);
+    })
+    .catch(error => {
+      console.error("Error fetching leaderboard data:", error);
+    });
   }, [user.nameid]);
 
 

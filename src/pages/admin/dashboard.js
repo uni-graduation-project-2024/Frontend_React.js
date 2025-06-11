@@ -83,23 +83,24 @@ const Dashboard = () => {
           <tbody>
             {users.map((user) => (
               <tr
-                key={user.userId}
-                onClick={() => navigate(`/user-profile/${user.userId}`)}
-              >
-                <td>{user.userId}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>
-                  <button
-                    onClick={(e) =>
-                      handleDeleteUser(user.userId, user.email, e)
-                    }
-                    className="admin-btn"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
+                  key={user.userId}
+                  onClick={() => navigate(`/user-profile/${user.userId}`)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <td>{user.userId}</td>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                  <td>
+                    <button
+                      onClick={(e) => handleDeleteUser(user.userId, user.email, e)}
+                      className="admin-btn"
+                      onMouseDown={(e) => e.stopPropagation()} // prevent row click on button press
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+
             ))}
           </tbody>
         </table>

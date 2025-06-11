@@ -62,8 +62,8 @@ const Sidebar = ({ children }) => {
               </NavLink>
 
               <NavLink to="/colleges" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
-                <FaUsers className="sidebar-icon" style={{ fill: "rgb(15, 176, 23)" }} />
-                <p className="sidebar-text">Colleges</p>
+                <FaComments className="sidebar-icon" style={{ fill: "rgb(77, 195, 255)" }} />
+                <p className="sidebar-text">Disscuss</p>
               </NavLink>
 
 

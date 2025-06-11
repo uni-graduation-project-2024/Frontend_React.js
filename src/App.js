@@ -31,6 +31,7 @@ import CommChatWrapper from "./pages/communication/commChatWrapper";
 import ReportProblem from "./pages/UserProfile/reportProblem";
 import ViewReport from "./pages/admin/viewReports";
 import SearchUser from "./pages/admin/searchUser";
+import AdminLayout from "./pages/admin/AdminLayout";
 
 
 function App() {
@@ -69,7 +70,6 @@ function App() {
              <Route path="/chat/:receiverId" element={<CommChatWrapper />} />
               <Route path="/communication" element={<CommChat />} />
               <Route path="/report-problem" element={<ReportProblem />} />
-
            </Route>
           </Route>
 
@@ -77,12 +77,12 @@ function App() {
 
           {/* Admin-protected routes */}
           <Route element={<AuthGuard roles={["Admin"]} />}>
+            <Route path="/admin/layout" element={<AdminLayout />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/show-user/:id" element={<ShowUser />} />
             <Route path="/user-profile/:userId" element={<UserProfile />} />
             <Route path="/admin/view-delete-reports" element={<ViewReport />} />
             <Route path="/admin/search-user" element={<SearchUser />} />
-
 
 
           </Route>

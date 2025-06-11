@@ -1,0 +1,104 @@
+/* Layout container */
+.lt-admin__layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f4f4fc;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Header */
+.lt-admin__header {
+  background: linear-gradient(to right, #5BC7C9, #33c0c2);
+  color: white;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Header Title */
+.lt-admin__title {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+/* Navigation Bar */
+.lt-admin__nav {
+  background: #fff;
+  padding: 1rem 2rem;
+  margin-top: 1.5rem;
+  border-radius: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: center;
+  width: 100%; /* Use parent width, not viewport width */
+}
+
+
+
+/* List */
+.lt-admin__list {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* List Item */
+.lt-admin__item {
+  display: flex;
+}
+
+/* Navigation Links */
+.lt-admin__link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #c7206b;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 0 1px rgba(224, 43, 161, 0.1);
+}
+
+.lt-admin__link:hover {
+  background: rgba(224, 43, 161, 0.1);
+  color: #d13f81;
+}
+
+/* Logout Button */
+.logout-btn {
+  background: rgba(255, 100, 100, 0.2);
+  color: #e64848;
+  font-weight: 600;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 100, 100, 0.35);
+  color: #cc2c2c;
+}
+
+/* Main Content */
+.lt-admin__main {
+  flex: 1;
+  padding: 2rem;
+  background: #f9f9ff;
+}
+
+/* Empty State Placeholder */
+.empty {
+  text-align: center;
+  color: #aaa;
+  font-size: 1.1rem;
+  margin-top: 4rem;
+  font-style: italic;
+}

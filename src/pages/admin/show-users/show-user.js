@@ -1,13 +1,11 @@
-
 import { useEffect, useState } from "react";
 import axios from "axios";
-//import { getAuthToken } from "../../../services/auth";
 import { useParams } from "react-router-dom";
 import linkhost from "../../..";
+import "./show-user.css";
 
 const ShowUser = () => {
   const { id } = useParams();
-  //const { token, user } = getAuthToken();
 
   const [specificUser, setSpecificUser] = useState({
     loading: true,
@@ -17,61 +15,42 @@ const ShowUser = () => {
 
   useEffect(() => {
     axios
-      .get(`${linkhost}/api/User/user-profile?userId=${id}`, {
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
-      })
+      .get(`${linkhost}/api/User/user-profile?userId=${id}`)
       .then((response) => {
-        setSpecificUser({ ...specificUser, result: response.data, loading: false, err: null });
-      })
-      .catch((error) => {
         setSpecificUser({
-          ...specificUser,
-          result: {
-            Username: "",
-            Password: "",
-            Email: "",
-          },
           loading: false,
-          err: [{ msg: `Something went wrong` }],
+          result: response.data,
+          err: null,
+        });
+      })
+      .catch((err) => {
+        const message =
+          err?.response?.status === 404 ? "User not found" : "Something went wrong";
+        setSpecificUser({
+          loading: false,
+          result: {},
+          err: [{ msg: message }],
         });
       });
-      // eslint-disable-next-line
   }, [id]);
 
   const loadingSpinner = () => {
     return (
-      <div className="container h-100">
-        <div className="row h-100 justify-content-center align-items-center">
-          <div className="spinner-border" role="status">
-            <span className="sr-only">Loading...</span>
+      <div className="show-user-container">
+        <div className="container h-100">
+          <div className="row h-100 justify-content-center align-items-center">
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
           </div>
         </div>
       </div>
     );
   };
 
-  const error = () => {
-    return (
-      <div className="container">
-        <div className="row">
-          {specificUser.err.map((err, index) => {
-            return (
-              <div key={index} className="col-sm-12 alert alert-danger" role="alert">
-                {err.msg}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
-
   return (
-    <>
-      {specificUser.err !== null && error()}
-      {specificUser.loading === true ? (
+    <div className="show-user-container">
+      {specificUser.loading ? (
         loadingSpinner()
       ) : (
         <div className="container h-100">
@@ -80,23 +59,39 @@ const ShowUser = () => {
               <div className="card mb-4">
                 <div className="card-header">Account Info</div>
                 <div className="card-body">
-                  <div className="mb-3">
-                    <label className="small mb-1">UserName </label>
-                    <input className="form-control" type="text" readOnly value={specificUser.result.username} />
-                  </div>
-                  <div className="mb-3">
-                    <label className="small mb-1">Email address</label>
-                    <input className="form-control" type="email" readOnly value={specificUser.result.email} />
-
-                  </div>
-
+                  {specificUser.err ? (
+                    <div className="text-center text-danger fw-bold">
+                      {specificUser.err[0].msg}
+                    </div>
+                  ) : (
+                    <>
+                      <div className="input-wrapper">
+                        <label>User Name</label>
+                        <input
+                          className="form-control"
+                          type="text"
+                          readOnly
+                          value={specificUser.result.username || ""}
+                        />
+                      </div>
+                      <div className="input-wrapper">
+                        <label>Email Address</label>
+                        <input
+                          className="form-control"
+                          type="email"
+                          readOnly
+                          value={specificUser.result.email || ""}
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

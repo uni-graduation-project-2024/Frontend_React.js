@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { FaBook, FaTrophy, FaShoppingCart, FaUser,FaComments } from 'react-icons/fa';
+import { FaBook, FaTrophy, FaShoppingCart, FaUsers,FaComments } from 'react-icons/fa';
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { RiAiGenerate } from "react-icons/ri";
 import { MdLeaderboard } from "react-icons/md";
@@ -61,9 +61,9 @@ const Sidebar = ({ children }) => {
                 <p className="sidebar-text">Chatbot</p>
               </NavLink>
 
-              <NavLink to="/communication" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
-                <FaComments className="sidebar-icon" style={{ fill: "#4DC3FF" }} />
-                <p className="sidebar-text">Disscuss</p>
+              <NavLink to="/colleges" className={({ isActive }) => isActive ? "active-sidebar sidebar-item" : "sidebar-item"}>
+                <FaUsers className="sidebar-icon" style={{ fill: "rgb(15, 176, 23)" }} />
+                <p className="sidebar-text">Colleges</p>
               </NavLink>
 
 

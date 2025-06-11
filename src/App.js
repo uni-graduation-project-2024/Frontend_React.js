@@ -32,12 +32,16 @@ import ReportProblem from "./pages/UserProfile/reportProblem";
 import ViewReport from "./pages/admin/viewReports";
 import SearchUser from "./pages/admin/searchUser";
 import AdminLayout from "./pages/admin/AdminLayout";
+import { ToastContainer } from "react-toastify";
+import Colleges from "./pages/Colleges/Colleges";
+import UserChat from "./pages/Colleges/UserChat";
 
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <ToastContainer/>
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
@@ -67,9 +71,11 @@ function App() {
               <Route path="/folder/:folderName" element={<FolderView />} />
               <Route path="/Review-Mode" element={<ReviewMode />} /> 
               <Route path="/my-uploads" element={<UserUploads />} />  
-             <Route path="/chat/:receiverId" element={<CommChatWrapper />} />
+              <Route path="/chat/:receiverId" element={<CommChatWrapper />} />
               <Route path="/communication" element={<CommChat />} />
               <Route path="/report-problem" element={<ReportProblem />} />
+              <Route path="/Colleges" element={<Colleges />} />
+              <Route path="/user-chat/:userId" element={<UserChat />} />
            </Route>
           </Route>
 

@@ -1,0 +1,65 @@
+.show-user-container {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.show-user-container .card {
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(91, 199, 201, 0.3);
+  border: none;
+  overflow: hidden;
+}
+
+.show-user-container .card-header {
+  background-color: #5BC7C9;
+  color: #f8fdfd;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1.25rem 2rem;
+}
+
+.show-user-container .card-body {
+  background-color: white;
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+.show-user-container .input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.show-user-container label {
+  font-weight: 600;
+  color: #1e5e60;
+  margin-bottom: 0.5rem;
+}
+
+.show-user-container .form-control[readonly] {
+  background-color: #eef6f6;
+  border: 2px solid #c7e9ea;
+  border-radius: 16px;
+  padding: 0.75rem 1rem;
+  color: #0f4345;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+}
+
+.show-user-container .form-control[readonly]:hover {
+  background-color: #e2f1f1;
+}
+
+.show-user-container .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: #FF68AC;
+}
+
+.show-user-container .alert {
+  margin-top: 1rem;
+}

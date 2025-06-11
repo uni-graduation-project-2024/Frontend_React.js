@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getAuthToken } from "../../services/auth";
 import linkhost from "../..";
+import { FaArrowLeft } from "react-icons/fa"; // Back icon
 import "./dashboard.css";
 
 const Dashboard = () => {
@@ -23,34 +24,46 @@ const Dashboard = () => {
         setUsers(response.data);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Failed to load users.");
         setLoading(false);
       });
   }, [token]);
 
   const handleDeleteUser = (userId, userEmail, e) => {
-  e.stopPropagation();
-  if (window.confirm(`Are you sure you want to delete this user ${userEmail}?`)) {
-    axios.delete(`${linkhost}/api/Admin/delete-user/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then(() => {
-      setUsers(users.filter((user) => user.userId !== userId));
-      setError(null); // clear any previous error
-    })
-    .catch((error) => {
-      console.error("Delete error:", error);
-      setError(error.response?.data?.message || "Failed to delete user.");
-    });
-  }
-};
+    e.stopPropagation();
+    if (
+      window.confirm(`Are you sure you want to delete this user ${userEmail}?`)
+    ) {
+      axios
+        .delete(`${linkhost}/api/Admin/delete-user/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(() => {
+          setUsers(users.filter((user) => user.userId !== userId));
+          setError(null);
+        })
+        .catch((error) => {
+          console.error("Delete error:", error);
+          setError(error.response?.data?.message || "Failed to delete user.");
+        });
+    }
+  };
 
   return (
     <div className="admin-dashboard-container">
+      <button
+        className="admin-back-btn"
+        onClick={() => navigate("/admin/layout")}
+      >
+        <FaArrowLeft style={{ marginRight: "8px" }} />
+        Back to Admin Panel
+      </button>
+
       <h2 className="admin-table-header">Admin Dashboard - User Management</h2>
+
       {loading ? (
         <div className="spinner-border" role="status">
           <span className="sr-only">Loading...</span>
@@ -69,12 +82,20 @@ const Dashboard = () => {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.userId} onClick={() => navigate(`/user-profile/${user.userId}`)}>
+              <tr
+                key={user.userId}
+                onClick={() => navigate(`/user-profile/${user.userId}`)}
+              >
                 <td>{user.userId}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
                 <td>
-                  <button onClick={(e) =>handleDeleteUser(user.userId, user.email, e)} className="admin-btn">
+                  <button
+                    onClick={(e) =>
+                      handleDeleteUser(user.userId, user.email, e)
+                    }
+                    className="admin-btn"
+                  >
                     Delete
                   </button>
                 </td>

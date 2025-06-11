@@ -231,7 +231,7 @@ const ScorePage = () => {
     } else if (totalScore >= 50) {
       soundSrc = "/assets/soundEffects/celebration.mp3";
     } else {
-      soundSrc = "/assets/soundEffects/game_over_sad_sound_v3.mp3";
+      soundSrc = "/assets/soundEffects/fail-cartoon.mp3";
     }
 
     audioRef.current = new Audio(soundSrc);

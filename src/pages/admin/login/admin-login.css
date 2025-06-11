@@ -1,0 +1,102 @@
+/* login-admin.css */
+
+.admin-login {
+  background-color: #f4f5f8;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+}
+
+.admin-login .login-box {
+  background-color:  #5BC7C9;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 420px;
+}
+
+.admin-login .login-box h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-login .login-box p {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #e4e6ed;
+  margin-bottom: 2rem;
+}
+
+.admin-login .field-set {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-login .input-item {
+  position: relative;
+}
+
+.admin-login .form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-right: 3rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #5BC7C9;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.admin-login .form-input::placeholder {
+  color: #151515;
+}
+
+.admin-login label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #cbd0e1;
+  font-size: 0.9rem;
+}
+
+.admin-login .eye-icon {
+  position: absolute;
+  top: 70%;
+  right: 0.9rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #9ca2bd;
+}
+
+.admin-login .log-in {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background-color:#FF68AC;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.admin-login .log-in:hover {
+  background-color: #ef8bb8;
+}
+
+.admin-login .alert {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: #f52a2a;
+  color: #fff;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  text-align: center;
+}

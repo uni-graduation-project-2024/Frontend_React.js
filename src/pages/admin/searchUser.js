@@ -51,7 +51,7 @@ const SearchUser = () => {
         <div className="su-search-input-group">
             <input
             type="text"
-            placeholder="Enter userId, username or email"
+            placeholder="Enter username or email"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyPress={handleKeyPress}
@@ -71,7 +71,6 @@ const SearchUser = () => {
             )}
             {users.map((user) => (
             <li key={user.userId || user.id || user.email} className="su-user-item">
-                <p><strong>ID:</strong> {user.userId || user.id}</p>
                 <p><strong>Username:</strong> {user.username || user.userName || 'N/A'}</p>
                 <p><strong>Email:</strong> {user.email || user.userEmail || 'N/A'}</p>
             </li>

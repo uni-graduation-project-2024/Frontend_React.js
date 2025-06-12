@@ -255,7 +255,7 @@ const ShowUser = () => {
                           value={specificUser.result.level || 0}
                         />
                       </div>
-                      {/* <div className="input-wrapper text-center mt-4">
+                      <div className="input-wrapper text-center mt-4">
                         <label className="d-block">Profile Image</label>
                         <img
                           src={specificUser.result.profileImage}
@@ -263,7 +263,7 @@ const ShowUser = () => {
                           className="img-thumbnail"
                           style={{ maxWidth: "200px", height: "auto" }}
                         />
-                      </div> */}
+                      </div>
                     </>
                   )}
                 </div>

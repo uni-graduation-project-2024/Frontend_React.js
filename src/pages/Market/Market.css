@@ -33,6 +33,18 @@
     margin-bottom: 10px;
     float: left;
   }
+  .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.item-header h3 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
   
   /* Buy button styles */
   .buy-btn {
@@ -50,6 +62,7 @@
     justify-content: center;
     gap: 8px;
     float: right;
+    
   }
   
   .buy-btn:hover {
@@ -121,4 +134,11 @@
     border-right-color: #fffbe8;
   }
   
-  
+  .item-description {
+  color:  #555;           /* Light font color */
+  font-size: 0.7rem;
+  margin: 4px 0 10px;    /* space above and below */
+  line-height: 2;
+  margin-right:190px;
+}
+

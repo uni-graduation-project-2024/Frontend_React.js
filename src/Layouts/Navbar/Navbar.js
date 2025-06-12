@@ -34,23 +34,36 @@ const Navbar = ( {refreshNavbar} ) => {
   return (
     <nav className="navbar">
 
-      <div className="nav-items"> {/*gap-6 -> gap-3*/}
-        <div className="stat-item">
-          <Flame className={ streakActive? "streak-active": "streak-not-active"} />
-          <span className="font-medium">{streak}</span>
-        </div>
-        
-        <div className="stat-item">
-          <TbCoin className="coin" />
-          <span className="font-medium">{coins}</span>
-        </div>
+      <div className="nav-items">
+          <div className="stat-item tooltip-container">
+            <Flame className={streakActive ? "streak-active" : "streak-not-active"} />
+            <span className="font-medium">{streak}</span>
+            <span className="tooltip-text">
+              <strong>Streak Score</strong><br />
+              Each day you complete a quiz, it increases by one.<br />
+              If you miss a day, your streak resets.
+            </span>
+          </div>
 
-        <div className="stat-item">
-          <BsLightningFill className="power" />
-          <span className="font-medium">{generationPower}</span>
-        </div>
+          <div className="stat-item tooltip-container">
+            <TbCoin className="coin" />
+            <span className="font-medium">{coins}</span>
+            <span className="tooltip-text">
+              <strong>Coins</strong><br />
+              You can use coins to buy items in the market.
+            </span>
+          </div>
 
-      </div>
+          <div className="stat-item tooltip-container">
+            <BsLightningFill className="power" />
+            <span className="font-medium">{generationPower}</span>
+            <span className="tooltip-text">
+              <strong>Generation Power</strong><br />
+              You can use this power to create new quizzes.
+            </span>
+          </div>
+</div>
+
     </nav>
   );
 };

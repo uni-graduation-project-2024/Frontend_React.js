@@ -84,7 +84,7 @@ const Dashboard = () => {
             {users.map((user) => (
               <tr
                   key={user.userId}
-                  onClick={() => navigate(`/user-profile/${user.userId}`)}
+                  onClick={() => navigate(`/show-user/${user.userId}`)}
                   style={{ cursor: "pointer" }}
                 >
                   <td>{user.userId}</td>

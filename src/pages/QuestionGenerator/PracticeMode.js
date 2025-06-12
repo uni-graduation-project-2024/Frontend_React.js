@@ -490,9 +490,9 @@ const PracticeMode = () => {
                 : "❌ Incorrect"}
             </p>
 
-            <p
-              style={{
-                maxWidth: "1100px",
+            <p 
+              style={{ 
+                maxWidth: "1000px",
                 width: "fit-content",
                 direction: options.language === "Arabic" ? "rtl" : "ltr",
                 textAlign: options.language === "Arabic" ? "right" : "left",

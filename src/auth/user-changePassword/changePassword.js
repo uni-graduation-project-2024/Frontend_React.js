@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { FaKey, FaEye, FaEyeSlash } from "react-icons/fa";
 import "./changePassword.css";
-import { getAuthToken } from "../../services/auth";
-import linkHost from "../../";
+import {getAuthToken} from "../../services/auth"
+import linkHost from "../../"
 
 export const ChangePassword = () => {
   const navigate = useNavigate();
@@ -43,20 +43,20 @@ export const ChangePassword = () => {
     if (!validateForm()) return;
 
     setFormState({ ...formState, loading: true });
-    const { user } = getAuthToken();
+    const {user} = getAuthToken();
     const userId = user.nameid;
-    const post = linkHost + ((user.role === "Admin") ? "/api/Admin/change-password" : "/api/User/change-password");
-
-    axios.post(post, {
-      userId,
-      oldPassword,
-      newPassword,
-    })
+    const post = linkHost + ((user.role === "Admin")? "/api/Admin/change-password" : "/api/User/change-password");
+    axios
+      .post(post, {
+        userId,
+        oldPassword,
+        newPassword,
+      })
       .then((response) => {
         setFormState({ ...formState, loading: false });
         alert("Password changed successfully!");
       })
-      .catch(() => {
+      .catch((error) => {
         setFormState({
           ...formState,
           loading: false,
@@ -73,89 +73,119 @@ export const ChangePassword = () => {
   };
 
   const loadingSpinner = () => (
-    <div className="cp-spinner-container">
-      <div className="cp-spinner" role="status" />
+    <div className="spinner-container">
+      <div className="spinner-row">
+        <div className="spinner" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
     </div>
   );
 
   const errorMessage = () => (
-    <div className="cp-error-container">
-      {formState.err &&
-        formState.err.map((err, index) => (
-          <div key={index} className="cp-error-alert" role="alert">
-            {err.msg}
+    <div className="error-container">
+      <div className="error-row">
+        {formState.err &&
+          formState.err.map((err, index) => (
+            <div
+              key={index}
+              className="error-alert"
+              role="alert"
+            >
+              {err.msg}
+            </div>
+          ))}
+        {formErrors && (
+          <div className="error-alert" role="alert">
+            {formErrors}
           </div>
-        ))}
-      {formErrors && (
-        <div className="cp-error-alert" role="alert">
-          {formErrors}
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 
   return (
     <>
       {formState.err !== null && errorMessage()}
-      {formErrors && <div className="cp-error-message">{formErrors}</div>}
+      {formErrors && <div className="error-message">{formErrors}</div>}
       {formState.loading ? (
         loadingSpinner()
       ) : (
-        <div className="cp-form-container">
-          <form onSubmit={submit} className="cp-form-content">
-            <div className="cp-form-header">
-              <h2>Change Password</h2>
-              <p>Update your account password</p>
-            </div>
+        <div className="form-container">
+          <form onSubmit={submit} className="form-content">
+            <div className="form-header">
+              <header>
+                <h2>Change Password</h2>
+                <p>Update your account password</p>
+              </header>
+              <div className="form-fields">
+                <label htmlFor="oldPassword">
+                  <FaKey /> Old Password
+                </label>
+                <div className="input-container">
+                  <input
+                    className="input-field"
+                    type={passwordVisibility.old ? "text" : "password"}
+                    placeholder="Old Password"
+                    value={oldPassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
+                    required
+                  />
+                  <span
+                    className="visibility-icon"
+                    onClick={() => togglePasswordVisibility("old")}
+                  >
+                    {passwordVisibility.old ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                </div>
 
-            <div className="cp-form-fields">
-              <label htmlFor="oldPassword"><FaKey /> Old Password</label>
-              <div className="cp-input-container">
-                <input
-                  className="cp-input-field"
-                  type={passwordVisibility.old ? "text" : "password"}
-                  placeholder="Old Password"
-                  value={oldPassword}
-                  onChange={(e) => setOldPassword(e.target.value)}
-                  required
-                />
-                <span className="cp-visibility-icon" onClick={() => togglePasswordVisibility("old")}>
-                  {passwordVisibility.old ? <FaEyeSlash /> : <FaEye />}
-                </span>
+                <label htmlFor="newPassword">
+                  <FaKey /> New Password
+                </label>
+                <div className="input-container">
+                  <input
+                    className="input-field"
+                    type={passwordVisibility.new ? "text" : "password"}
+                    placeholder="New Password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    required
+                  />
+                  <span
+                    className="visibility-icon"
+                    onClick={() => togglePasswordVisibility("new")}
+                  >
+                    {passwordVisibility.new ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                </div>
+
+                <label htmlFor="confirmPassword">
+                  <FaKey /> Confirm Password
+                </label>
+                <div className="input-container">
+                  <input
+                    className="input-field"
+                    type={passwordVisibility.confirm ? "text" : "password"}
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                  <span
+                    className="visibility-icon"
+                    onClick={() => togglePasswordVisibility("confirm")}
+                  >
+                    {passwordVisibility.confirm ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                </div>
+
+                <button className="submit-btn" type="submit">
+                  Change Password
+                </button>
+                <button onClick={()=> navigate("/user-profile")} className="cancel-btn">
+                  Cancel
+                </button>
               </div>
-
-              <label htmlFor="newPassword"><FaKey /> New Password</label>
-              <div className="cp-input-container">
-                <input
-                  className="cp-input-field"
-                  type={passwordVisibility.new ? "text" : "password"}
-                  placeholder="New Password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  required
-                />
-                <span className="cp-visibility-icon" onClick={() => togglePasswordVisibility("new")}>
-                  {passwordVisibility.new ? <FaEyeSlash /> : <FaEye />}
-                </span>
-              </div>
-
-              <label htmlFor="confirmPassword"><FaKey /> Confirm Password</label>
-              <div className="cp-input-container">
-                <input
-                  className="cp-input-field"
-                  type={passwordVisibility.confirm ? "text" : "password"}
-                  placeholder="Confirm Password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                />
-                <span className="cp-visibility-icon" onClick={() => togglePasswordVisibility("confirm")}>
-                  {passwordVisibility.confirm ? <FaEyeSlash /> : <FaEye />}
-                </span>
-              </div>
-
-              <button className="cp-submit-btn" type="submit">Change Password</button>
-              <button onClick={() => navigate("/user-profile")} type="button" className="cp-cancel-btn">Cancel</button>
             </div>
           </form>
         </div>

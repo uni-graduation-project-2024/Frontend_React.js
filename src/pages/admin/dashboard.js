@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+
 import { getAuthToken } from "../../services/auth";
 import linkhost from "../..";
 import { FaArrowLeft } from "react-icons/fa"; // Back icon
@@ -8,9 +10,14 @@ import "./dashboard.css";
 
 const Dashboard = () => {
   const { token } = getAuthToken();
-  const [users, setUsers] = useState([]);
+  const [usersData, setUsersData] = useState({
+    totalUsers: 0,
+    totalExams: 0,
+    users: [],
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [refresh, setRefresh] = useState(false); // State to trigger re-fetching
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,14 +28,14 @@ const Dashboard = () => {
         },
       })
       .then((response) => {
-        setUsers(response.data);
+        setUsersData(response.data);
         setLoading(false);
       })
       .catch(() => {
         setError("Failed to load users.");
         setLoading(false);
       });
-  }, [token]);
+  }, [token, refresh]);
 
   const handleDeleteUser = (userId, userEmail, e) => {
     e.stopPropagation();
@@ -42,7 +49,15 @@ const Dashboard = () => {
           },
         })
         .then(() => {
-          setUsers(users.filter((user) => user.userId !== userId));
+          setRefresh(!refresh); // Trigger re-fetching of users
+          toast.success('User deleted successfully!', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
           setError(null);
         })
         .catch((error) => {
@@ -64,6 +79,17 @@ const Dashboard = () => {
 
       <h2 className="admin-table-header">Admin Dashboard - User Management</h2>
 
+      <div className="stats-container">
+      <div className="total-users-info">
+        <p className="total-text">Total Users Registered:</p>
+        <p className="total-number"> {usersData.totalUsers || 0} Users</p>
+      </div>
+      <div className="total-exams-info">
+        <p className="total-text">Total Exams Generated:</p>
+        <p className="total-number"> {usersData.totalExams || 0} Exams</p>
+      </div>
+      </div>
+
       {loading ? (
         <div className="spinner-border" role="status">
           <span className="sr-only">Loading...</span>
@@ -81,7 +107,7 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {usersData.users.map((user) => (
               <tr
                   key={user.userId}
                   onClick={() => navigate(`/show-user/${user.userId}`)}

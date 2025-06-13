@@ -64,35 +64,36 @@ const Leaderboard = () => {
   }, [user.nameid]);
 
 
+  ///Dont remove this useEffect, it is used to set the initial users data for testing purposes
   // useEffect(() => {
   //   setUsers([
   //     {
-  //       id: 1,
+  //       userId: 1,
   //       username: "Amr",
-  //       xp: 260,
-  //       level: "Expert",
-  //       avatar: "https://i.pravatar.cc/40?img=1",
+  //       weeklyXp: 260,
+  //       level: 4,
+  //       avatar: "",
   //     },
   //     {
-  //       id: 2,
-  //       username: "Yasmin",
-  //       xp: 123,
-  //       level: "Newbie",
-  //       avatar: "https://i.pravatar.cc/40?img=2",
+  //       userId: 23,
+  //       username: "Mohamed",
+  //       weeklyXp: 123,
+  //       level: 2,
+  //       avatar: "",
   //     },
   //     {
-  //       id: 3,
-  //       username: "Bird",
-  //       xp: 105,
-  //       level: "Professional",
-  //       avatar: "https://i.pravatar.cc/40?img=3",
+  //       userId: 3,
+  //       username: "Ali",
+  //       weeklyXp: 105,
+  //       level: 2,
+  //       avatar: "",
   //     },
   //     {
-  //       id: 4,
-  //       username: "Cat",
-  //       xp: 97,
-  //       level: "Master",
-  //       avatar: "https://i.pravatar.cc/40?img=4",
+  //       userId: 4,
+  //       username: "Sara",
+  //       weeklyXp: 97,
+  //       level: 1,
+  //       avatar: "",
   //     },
   //   ]);
   // }, []);

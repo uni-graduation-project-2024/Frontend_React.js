@@ -92,4 +92,14 @@ nav {
   visibility: visible;
   opacity: 1;
 }
+
+.tool-tip-header {
+  font-size: 1rem;
+
+}
+
+.tool-tip-description {
+  color: #3d3d3d;
+  font-size: 0.75rem;
+}
  

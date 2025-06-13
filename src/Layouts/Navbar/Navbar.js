@@ -39,9 +39,9 @@ const Navbar = ( {refreshNavbar} ) => {
             <Flame className={streakActive ? "streak-active" : "streak-not-active"} />
             <span className="font-medium">{streak}</span>
             <span className="tooltip-text">
-              <strong>Streak Score</strong><br />
-              Each day you complete a quiz, it increases by one.<br />
-              If you miss a day, your streak resets.
+              <p className="tool-tip-header">Streak Score</p>
+              <p className="tool-tip-description">Each day you complete a quiz, it increases by one.
+              If you miss a day, your streak resets.</p>
             </span>
           </div>
 
@@ -49,18 +49,18 @@ const Navbar = ( {refreshNavbar} ) => {
             <TbCoin className="coin" />
             <span className="font-medium">{coins}</span>
             <span className="tooltip-text">
-              <strong>Coins</strong><br />
-              You can use coins to buy items in the market.
+              <p className="tool-tip-header">Coins</p>
+              <p className="tool-tip-description">You can use coins to buy items in the market.</p>
             </span>
           </div>
 
           <div className="stat-item tooltip-container">
             <BsLightningFill className="power" />
             <span className="font-medium">{generationPower}</span>
-            <span className="tooltip-text">
-              <strong>Generation Power</strong><br />
-              You can use this power to create new quizzes.
-            </span>
+            <div className="tooltip-text">
+              <p className="tool-tip-header">Generation Power</p>
+              <p className="tool-tip-description">You can use this power to create new quizzes.</p>
+            </div>
           </div>
 </div>
 

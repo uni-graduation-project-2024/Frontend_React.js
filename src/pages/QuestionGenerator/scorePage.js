@@ -227,7 +227,8 @@ const ScorePage = () => {
   useEffect(() => {
     let soundSrc = "";
     if (totalScore >= 90) {
-      soundSrc = "/assets/soundEffects/best-celebration.mp3";
+      soundSrc = "/assets/soundEffects/celebration.mp3";
+      //soundSrc = "/assets/soundEffects/best-celebration.mp3";
     } else if (totalScore >= 50) {
       soundSrc = "/assets/soundEffects/celebration.mp3";
     } else {

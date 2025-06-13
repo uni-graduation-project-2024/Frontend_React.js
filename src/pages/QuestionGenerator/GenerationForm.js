@@ -78,21 +78,29 @@ const GenerationForm = () => {
       return;
     }
 
-    try {
-      await axios.post(`${linkhost}/api/Files/Upload`, formData2, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          accept: "*/*",
-        },
-      });
-    } catch (error) {
-      const message =
-        error.response?.data?.message ||
-        "Please upload a file (pdf, docx, pptx or txt) not larger than 50MB";
-      setError(message);
+    if (uploadMode === "FILE" && file && file.size > 50 * 1024 * 1024) {
+      setError("Please upload a file not larger than 50MB");
       setIsDisabled(true);
       setLoading(false);
       return;
+    }
+    if(uploadMode === "FILE"){
+      try {
+        await axios.post(`${linkhost}/api/Files/Upload`, formData2, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            accept: "*/*",
+          },
+        });
+      } catch (error) {
+        const message =
+          error.response?.data?.message ||
+          "Please upload a file (pdf, docx, pptx or txt) not larger than 50MB";
+        setError(message);
+        setIsDisabled(true);
+        setLoading(false);
+        return;
+      }
     }
 
     try {

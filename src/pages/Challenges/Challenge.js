@@ -50,17 +50,17 @@ const Challenge = () => {
 
   const getMonthlyCardStyle = () => {
     const xp = challenges.monthlyXp;
-    if (xp >= 300) {
+    if (xp >= challenges.monthtarget[2]) {
       return {
         background: "linear-gradient(135deg, #FFE86A, #F8F8F8)",
         color: "#000"
       };
-    } else if (xp >= 200) {
+    } else if (xp >= challenges.monthtarget[1]) {
       return {
         background: "linear-gradient(135deg, #B3C7D9, #EEEEEE)",
         color: "#000"
       };
-    } else if (xp >= 100) {
+    } else if (xp >= challenges.monthtarget[0]) {
       return {
         background: "linear-gradient(135deg, #F9C9A1, #F4F4F4)",
         color: "#000"
@@ -75,17 +75,17 @@ const Challenge = () => {
 
   const getLevelTheme = () => {
     const xp = challenges.monthlyXp;
-    if (xp >= 300) {
+    if (xp >= challenges.monthtarget[2]) {
       return {
         color: "#FFD700",
         barColor: "#FFD700"
       };
-    } else if (xp >= 200) {
+    } else if (xp >= challenges.monthtarget[1]) {
       return {
         color: "#507999",
         barColor: "#507999"
       };
-    } else if (xp >= 100) {
+    } else if (xp >= challenges.monthtarget[0]) {
       return {
         color: "#C48B5A",
         barColor: "#CD7F32"
@@ -120,7 +120,7 @@ const Challenge = () => {
                 className={`badge-shape ${monthlyProgress >= 25 ? "bronze-badge-active" : ""}`}
                 style={{ left: "30%" }}
               />
-              <div className="badge-label-ch" style={{ left: "30%" , color: levelTheme.color }}>100</div>
+              <div className="badge-label-ch" style={{ left: "30%" , color: levelTheme.color }}>{challenges.monthtarget[0]}</div>
 
               {/* Silver Badge */}
             
@@ -128,7 +128,7 @@ const Challenge = () => {
                 className={`badge-shape silver-badge ${monthlyProgress >= 60 ? "silver-badge-active" : ""}`}
                 style={{ left: "60%" }}
               />
-              <div className="badge-label-ch" style={{ left: "60%" , color: levelTheme.color }}>200</div>
+              <div className="badge-label-ch" style={{ left: "60%" , color: levelTheme.color }}>{challenges.monthtarget[1]}</div>
 
               {/* Gold Badge */}
              
@@ -136,7 +136,7 @@ const Challenge = () => {
                 className={`badge-shape gold-badge ${monthlyProgress >= 100 ? "gold-badge-active" : ""}`}
                 style={{ left: "97%" }}
               />
-              <div className="badge-label-ch" style={{ left: "97%" , color: levelTheme.color }}>300</div>
+              <div className="badge-label-ch" style={{ left: "97%" , color: levelTheme.color }}>{challenges.monthtarget[2]}</div>
 
               <div className="monthbar">
                 <div
